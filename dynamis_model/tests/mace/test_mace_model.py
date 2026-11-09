@@ -755,6 +755,23 @@ def edge_distance_bands(
     }
 
 
+def nonperiodic_outside_cell_diagnostics(
+    positions: torch.Tensor, cell: torch.Tensor, pbc: torch.Tensor,
+) -> Dict[str, Any]:
+    """Locate atoms an unconditional cell-wrap would move on open axes."""
+    fractional = positions.detach().double().cpu() @ torch.linalg.inv(
+        cell.detach().reshape(3, 3).double().cpu()
+    )
+    open_axes = ~pbc.detach().reshape(3).bool().cpu()
+    outside = ((fractional < 0.0) | (fractional >= 1.0)) & open_axes
+    return {
+        "atom_count": int(outside.any(dim=1).sum()),
+        "atom_count_by_axis": outside.sum(dim=0).tolist(),
+        "fractional_min": fractional.min(dim=0).values.tolist(),
+        "fractional_max": fractional.max(dim=0).values.tolist(),
+    }
+
+
 def build_owned_graph_audit(
     prepared: PreparedExperiment, records: List[Dict[str, Any]],
     explicit_reference: Dict[str, Any], artifact: Dict[str, Any],
@@ -777,6 +794,9 @@ def build_owned_graph_audit(
     comparison: Dict[str, Any] = {
         "boundary_band_angstrom": 1e-4,
         "assembled_owned_edge_count": int(rows.shape[0]),
+        "nonperiodic_outside_cell": nonperiodic_outside_cell_diagnostics(
+            positions, cell, prepared.sim.pbc
+        ),
     }
     assembled_bands = edge_distance_bands(rows, positions, cell, cutoff)
     comparison["assembled_owned_edge_counts_by_band"] = {
@@ -1280,6 +1300,11 @@ def build_summary(
             prepared.sim.cell, float(prepared.adapter.cutoff),
         ) if calculator_edge_rows is not None else None
     )
+    if edge_comparison is not None and any(
+        edge_comparison[side]["inside_cutoff_by_more_than_1e_4_angstrom"]
+        for side in ("explicit_only", "core_only")
+    ):
+        classification = "native_graph_interior_mismatch"
     summary = {
         "system": prepared.raw["name"],
         "source_path": prepared.raw.get(
@@ -1540,6 +1565,9 @@ def build_summary(
     if args.graph_edge_test:
         graph_audit = build_owned_graph_audit(prepared, records, explicit_reference, artifact)
         summary["owned_graph_audit"] = graph_audit
+        interior = graph_audit["assembled_vs_native_core_by_band"]["interior"]
+        if interior["explicit_only"]["count"] or interior["core_only"]["count"]:
+            summary["mismatch_classification"] = "native_graph_interior_mismatch"
         groups["graph_diagnostics"]["assembled_owned_edges"] = {
             key: value for key, value in graph_audit.items() if key != "node_parity"
         }
@@ -1563,6 +1591,22 @@ def print_summary(summary: Dict[str, Any]) -> None:
             continue
         print("\n" + "-" * 60 + f"\n{title.replace('_', ' ').title()}\n" + "-" * 60)
         for key, value in values.items():
+            if key == "assembled_owned_edges":
+                print(f"assembled_owned_edge_count: {value['assembled_owned_edge_count']}")
+                print(f"nonperiodic_outside_cell: {value['nonperiodic_outside_cell']}")
+                for source in ("native_core", "public_calculator", "explicit_dynamis"):
+                    bands = value.get(f"assembled_vs_{source}_by_band")
+                    if bands is None:
+                        continue
+                    for band, comparison in bands.items():
+                        print(
+                            f"assembled_vs_{source}.{band}: "
+                            f"owned={comparison['explicit_raw_count']}, "
+                            f"reference={comparison['core_raw_count']}, "
+                            f"owned_only={comparison['explicit_only']['count']}, "
+                            f"reference_only={comparison['core_only']['count']}"
+                        )
+                continue
             print(f"{key}: {value}")
     print("\n" + "-" * 60 + "\nPer-rank contributions\n" + "-" * 60)
     for record in summary["ranks"]:
@@ -1699,8 +1743,14 @@ def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
     if args.strict_graph_interior:
         bands = summary["owned_graph_audit"]["assembled_vs_native_core_by_band"]
         interior = bands["interior"]
-        assert interior["explicit_only"]["count"] == 0, interior
-        assert interior["core_only"]["count"] == 0, interior
+        extra = interior["explicit_only"]["count"]
+        missing = interior["core_only"]["count"]
+        if extra or missing:
+            raise AssertionError(
+                f"Assembled owned graph has {missing} missing and {extra} extra "
+                "strictly interior directed edges versus native MACE; "
+                "inspect owned_graph_audit in the output JSON."
+            )
     return summary
 
 
@@ -1920,6 +1970,38 @@ def test_edge_distance_bands_include_exact_cutoff() -> None:
     assert bands["interior"].shape[0] == 1
     assert bands["boundary"].shape[0] == 1
     assert bands["exterior"].shape[0] == 1
+
+
+def test_nonperiodic_outside_cell_diagnostic_detects_wrap_risk() -> None:
+    positions = torch.tensor([[-1.0, 2.0, 2.0], [2.0, 2.0, 2.0]])
+    result = nonperiodic_outside_cell_diagnostics(
+        positions, torch.eye(3) * 10.0, torch.tensor([False, False, False])
+    )
+    assert result["atom_count"] == 1
+    assert result["atom_count_by_axis"] == [1, 0, 0]
+    periodic_result = nonperiodic_outside_cell_diagnostics(
+        positions, torch.eye(3) * 10.0, torch.tensor([True, False, False])
+    )
+    assert periodic_result["atom_count"] == 0
+
+
+def test_nonperiodic_graph_preserves_edges_across_coordinate_origin() -> None:
+    import pytest
+
+    if not torch.cuda.is_available():
+        pytest.skip("CUDA radius-graph regression requires a GPU.")
+    device = torch.device("cuda")
+    sim = SimulationConfig()
+    sim.cell = torch.eye(3, device=device) * 30.0
+    positions = torch.tensor(
+        [[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]], device=device
+    )
+    expected = {(0, 1, 0, 0, 0), (1, 0, 0, 0, 0)}
+    for pbc in ((False, False, False), (False, True, False)):
+        sim.pbc = torch.tensor(pbc, dtype=torch.bool, device=device)
+        for shifted in (positions, positions + 5.0):
+            edges, shifts = radius_graph(shifted, sim, cutoff=3.0)
+            assert edge_records(edges, shifts) == expected
 
 
 def test_mace_loader_uses_family_default_and_preserves_explicit_name(monkeypatch) -> None:

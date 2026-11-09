@@ -1,0 +1,17 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+Traceback (most recent call last):
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/jitter_mace_xyz.py", line 57, in <module>
+    print(jitter_xyz(args.input, args.output, args.seed, args.amplitude))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/jitter_mace_xyz.py", line 40, in jitter_xyz
+    raise ValueError("Could not clear the cutoff band in 20 deterministic attempts.")
+ValueError: Could not clear the cutoff band in 20 deterministic attempts.
