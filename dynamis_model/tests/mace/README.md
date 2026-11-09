@@ -248,8 +248,9 @@ python dynamis_model/tests/mace/jitter_mace_xyz.py \
   --output tmp/off_jittered_15000.xyz --seed 2026 --amplitude 0.01
 ```
 
-The generator checks float32 coordinates and retries deterministically until
-no pair is within `1e-4` Angstrom of 5 Angstrom. It preserves atom species and
+The generator checks float32 coordinates and resamples only atoms involved in
+cutoff-boundary pairs until no pair is within `1e-3` Angstrom of 5 Angstrom.
+It preserves atom species and
 the XYZ cell/PBC comment; it is intended for nonperiodic input. Run the same
 static reference and distributed audit with `--model-family off --model
 small`, `medium`, and `large`; pass `--enable-cueq` to both commands for the
