@@ -692,6 +692,7 @@ class MACEModel(DynamisModel):
 
     def __call__(self, state: DynamisState, *args: Any, **kwargs: Any):
         return_energy_components = bool(kwargs.pop("return_energy_components", False))
+        return_owned_node_energy = bool(kwargs.pop("return_owned_node_energy", False))
         view = self._build_structural_view(state)
         graph = self._build_owned_graph(view, state)
         self.runtime.begin_forward(state, self.exchange_enabled)
@@ -711,7 +712,17 @@ class MACEModel(DynamisModel):
                 for key in ("owned_baseline_energy", "owned_interaction_energy")
                 if key in outputs
             }
+            if return_owned_node_energy:
+                node_energy = (
+                    outputs["owned_node_energy"] * EV_PER_A_TO_AMU_A_PER_FS2
+                ).detach()
+                return owned_energy.detach(), owned_forces.detach(), components, node_energy
             return owned_energy.detach(), owned_forces.detach(), components
+        if return_owned_node_energy:
+            node_energy = (
+                outputs["owned_node_energy"] * EV_PER_A_TO_AMU_A_PER_FS2
+            ).detach()
+            return owned_energy.detach(), owned_forces.detach(), node_energy
         return owned_energy.detach(), owned_forces.detach()
 
 

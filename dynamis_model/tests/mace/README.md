@@ -223,6 +223,38 @@ absolute MD-energy tolerance set by `--stable-energy-atol` (default `1e-3`).
 The runtime still computes features and forces in float32; only scalar energy
 accumulation is widened. `--energy-mode legacy` remains the default.
 
+## OFF graph edge audit
+
+Use `--graph-edge-test` on the distributed static driver to reconstruct each
+rank's owned-destination graph with global atom IDs. The report compares the
+assembled directed edges and integer cell shifts with the core, calculator,
+and explicit Dynamis graphs. Each comparison separates edges more than
+`1e-4` Angstrom inside the checkpoint cutoff, near the cutoff, and outside.
+`--strict-graph-interior` asserts that the assembled graph and native core
+agree for strictly interior edges. The audit also compares owned per-atom
+energies against all three references; existing force parity remains in the
+same report. The extra graph build and ID exchange occur outside benchmark
+timing. Generate a fresh standalone artifact for every XYZ, checkpoint, and
+backend selection.
+
+`data/off_cutoff_boundary.xyz` has isolated probe pairs at 4.999, 5.000, and
+5.001 Angstrom. `data/off_organic_irregular.xyz` contains two nonperiodic
+ethanol conformers. For the large synthetic lattice, create a deterministic
+nonperiodic jittered XYZ before generating either reference:
+
+```bash
+python dynamis_model/tests/mace/jitter_mace_xyz.py \
+  --input mace_data/benchmark_scaling_molecular_15000.xyz \
+  --output tmp/off_jittered_15000.xyz --seed 2026 --amplitude 0.01
+```
+
+The generator checks float32 coordinates and retries deterministically until
+no pair is within `1e-4` Angstrom of 5 Angstrom. It preserves atom species and
+the XYZ cell/PBC comment; it is intended for nonperiodic input. Run the same
+static reference and distributed audit with `--model-family off --model
+small`, `medium`, and `large`; pass `--enable-cueq` to both commands for the
+CuEq variant.
+
 ## Distributed trajectory
 
 Run the two-rank MACEModel trajectory, then compare it with a one-rank public

@@ -26,6 +26,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import torch
 import torch.distributed as dist
 
+from dynamis_model.comm.feature_push import FeaturePushToExchange
 from dynamis_model.nnp.mace import (
     COMPUTE_DTYPE,
     MACEModel,
@@ -162,6 +163,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Absolute MD-energy tolerance for the controlled float64 total.",
     )
     distributed_parser.add_argument("--strict-parity", action="store_true")
+    distributed_parser.add_argument(
+        "--graph-edge-test", action="store_true",
+        help="Audit assembled owned directed edges and owned per-atom energies against standalone graphs.",
+    )
+    distributed_parser.add_argument(
+        "--strict-graph-interior", action="store_true",
+        help="Fail if assembled owned edges differ from native MACE more than 1e-4 Angstrom inside the cutoff.",
+    )
     distributed_parser.add_argument("--output-json", type=Path)
     return parser
 
@@ -678,13 +687,151 @@ def assemble_forces(records: List[Dict[str, Any]], num_atoms: int) -> torch.Tens
     return forces
 
 
+def assemble_owned_node_energies(records: List[Dict[str, Any]], num_atoms: int) -> torch.Tensor:
+    """Place each rank's owned atom energies in global atom order (MD units)."""
+    values = torch.empty(num_atoms, dtype=torch.float64)
+    visited = torch.zeros(num_atoms, dtype=torch.bool)
+    for record in records:
+        indices = torch.tensor(record["local_global_indices"], dtype=torch.long)
+        energies = torch.tensor(record["owned_node_energy"], dtype=torch.float64)
+        if (energies.numel() != indices.numel()
+                or indices.unique().numel() != indices.numel()
+                or visited[indices].any()):
+            raise ValueError("Owned atom energy records are incomplete or overlapping.")
+        values[indices] = energies
+        visited[indices] = True
+    if not visited.all():
+        raise ValueError("Owned atom energy records omit global atoms.")
+    return values
+
+
+def owned_edge_audit_rows(prepared: PreparedExperiment) -> torch.Tensor:
+    """Map the rank's owned-destination graph into global directed edge IDs."""
+    state = prepared.state
+    adapter = prepared.adapter
+    local_ids = state.local_partition_info.partition_indices.long().to(prepared.device)
+    if len(prepared.raw["atomic_numbers"]) > 2**24:
+        raise ValueError("Float32 halo ID exchange cannot represent this many atoms exactly.")
+    view = adapter._build_structural_view(state)
+    graph = adapter._build_owned_graph(view, state)
+    with torch.no_grad():
+        if adapter.exchange_enabled:
+            global_ids_float = FeaturePushToExchange.apply(
+                local_ids.to(dtype=COMPUTE_DTYPE).unsqueeze(1),
+                state, adapter.atom_type_exchanger,
+            ).squeeze(1)
+        else:
+            global_ids_float = local_ids.to(dtype=COMPUTE_DTYPE)
+    global_ids = global_ids_float.long()
+    if (global_ids_float != global_ids).any() or global_ids.numel() != view.num_total:
+        raise ValueError("Halo ID exchange produced invalid graph row IDs.")
+    if not torch.equal(global_ids[:view.num_local], local_ids):
+        raise ValueError("Owned graph rows do not match local partition indices.")
+    if ((global_ids < 0) | (global_ids >= len(prepared.raw["atomic_numbers"]))).any():
+        raise ValueError("Halo ID exchange produced an out-of-range atom ID.")
+    global_edges = global_ids[graph.edge_index]
+    return edge_record_rows(global_edges, graph.unit_shifts)
+
+
+def edge_distance_bands(
+    rows: torch.Tensor, positions: torch.Tensor, cell: torch.Tensor,
+    cutoff: float, margin: float = 1e-4,
+) -> Dict[str, torch.Tensor]:
+    """Split directed edges into safely interior, cutoff-boundary, and exterior."""
+    rows = rows.long().cpu()
+    if rows.numel() == 0:
+        empty = torch.empty((0, 5), dtype=torch.int32)
+        return {"interior": empty, "boundary": empty, "exterior": empty}
+    positions = positions.double().cpu()
+    cell = cell.reshape(3, 3).double().cpu()
+    offsets = rows[:, 2:].double() @ cell
+    distances = torch.linalg.vector_norm(
+        positions[rows[:, 1]] - positions[rows[:, 0]] + offsets, dim=1
+    )
+    return {
+        "interior": rows[distances < cutoff - margin].int(),
+        "boundary": rows[(distances >= cutoff - margin) & (distances <= cutoff + margin)].int(),
+        "exterior": rows[distances > cutoff + margin].int(),
+    }
+
+
+def build_owned_graph_audit(
+    prepared: PreparedExperiment, records: List[Dict[str, Any]],
+    explicit_reference: Dict[str, Any], artifact: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Compare assembled distributed graph and node outputs with native references."""
+    rows = torch.tensor(
+        [row for record in records for row in record["owned_edge_rows"]],
+        dtype=torch.int32,
+    ).reshape(-1, 5)
+    native_rows = artifact["reference"].get("core_model_edge_rows")
+    calculator_rows = artifact["reference"].get("calculator_graph_edge_rows")
+    if native_rows is None or calculator_rows is None:
+        raise ValueError(
+            "Graph edge audit requires a freshly generated reference with core "
+            "and calculator edge rows."
+        )
+    positions = prepared.state.global_molecular_info.atom_positions
+    cell = prepared.sim.cell
+    cutoff = float(prepared.adapter.cutoff)
+    comparison: Dict[str, Any] = {
+        "boundary_band_angstrom": 1e-4,
+        "assembled_owned_edge_count": int(rows.shape[0]),
+    }
+    assembled_bands = edge_distance_bands(rows, positions, cell, cutoff)
+    comparison["assembled_owned_edge_counts_by_band"] = {
+        key: int(value.shape[0]) for key, value in assembled_bands.items()
+    }
+    for name, other in (
+        ("native_core", native_rows),
+        ("public_calculator", calculator_rows),
+        ("explicit_dynamis", explicit_reference["edge_rows"]),
+    ):
+        if other is None:
+            continue
+        comparison[f"assembled_vs_{name}"] = compare_graph_edges(
+            rows, other, positions, cell, cutoff
+        )
+        other_bands = edge_distance_bands(other, positions, cell, cutoff)
+        comparison[f"assembled_vs_{name}_by_band"] = {
+            band: compare_graph_edges(rows_in_band, other_bands[band], positions, cell, cutoff)
+            for band, rows_in_band in assembled_bands.items()
+        }
+    owned_values = assemble_owned_node_energies(records, len(prepared.raw["atomic_numbers"]))
+    node_parity: Dict[str, Any] = {
+        "assembled_owned_node_energy_sum_md": float(owned_values.sum()),
+    }
+    for name, reference in (
+        ("native_core", artifact["reference"].get("core_model_node_energy_values")),
+        ("public_calculator", artifact["reference"].get("calculator_node_energy_values")),
+        ("explicit_dynamis", explicit_reference["node_energy_values"]),
+    ):
+        if reference is None:
+            continue
+        other = torch.as_tensor(reference).double().reshape(-1) * EV_TO_MD
+        if other.shape != owned_values.shape:
+            raise ValueError(f"{name} node energies do not match global atom count.")
+        delta = owned_values - other
+        node_parity[f"assembled_minus_{name}_node_sum_md"] = float(delta.sum())
+        node_parity[f"assembled_vs_{name}_node_mae_md"] = float(delta.abs().mean())
+        node_parity[f"assembled_vs_{name}_node_max_abs_md"] = float(delta.abs().max())
+    comparison["node_parity"] = node_parity
+    return comparison
+
+
 def run_distributed_adapter_step(
     prepared: PreparedExperiment,
+    graph_edge_test: bool = False,
 ) -> Tuple[float, torch.Tensor, List[Dict[str, Any]]]:
     try:
-        energy, forces, components = prepared.adapter(
-            prepared.state, return_energy_components=True
+        result = prepared.adapter(
+            prepared.state, return_energy_components=True,
+            return_owned_node_energy=graph_edge_test,
         )
+        if graph_edge_test:
+            energy, forces, components, node_energies = result
+        else:
+            energy, forces, components = result
         record = {
             "rank": dist.get_rank(),
             "local_global_indices": prepared.state.local_partition_info.partition_indices.long()
@@ -699,6 +846,9 @@ def run_distributed_adapter_step(
         }
         for key, value in components.items():
             record[key] = float(value.cpu())
+        if graph_edge_test:
+            record["owned_node_energy"] = node_energies.double().cpu().tolist()
+            record["owned_edge_rows"] = owned_edge_audit_rows(prepared).tolist()
         records = gather_records(record)
         dist.barrier()
         return float(energy.cpu()), forces, records
@@ -1263,7 +1413,11 @@ def build_summary(
             )
             * EV_TO_MD,
         },
-        "ranks": records,
+        "ranks": [
+            {key: value for key, value in record.items()
+             if key not in {"owned_edge_rows", "owned_node_energy"}}
+            for record in records
+        ],
     }
     if args.energy_mode == "stable":
         distributed_baseline = sum(
@@ -1383,6 +1537,13 @@ def build_summary(
         groups[target][f"reference.{key}"] = value
     groups["graph_diagnostics"]["explicit_vs_core"] = edge_comparison
     groups["graph_diagnostics"]["explicit_vs_calculator"] = calculator_edge_comparison
+    if args.graph_edge_test:
+        graph_audit = build_owned_graph_audit(prepared, records, explicit_reference, artifact)
+        summary["owned_graph_audit"] = graph_audit
+        groups["graph_diagnostics"]["assembled_owned_edges"] = {
+            key: value for key, value in graph_audit.items() if key != "node_parity"
+        }
+        groups["per_atom_and_force_parity"].update(graph_audit["node_parity"])
     groups["reduction_decomposition"]["float64_diagnostic_ev"] = (
         artifact.get("diagnostics", {}).get("float64")
     )
@@ -1480,6 +1641,8 @@ def print_summary(summary: Dict[str, Any]) -> None:
 
 
 def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
+    if args.strict_graph_interior and not args.graph_edge_test:
+        raise ValueError("--strict-graph-interior requires --graph-edge-test.")
     prepared = prepare_distributed(args)
     check_off_medium_fixture = (
         args.model_family == "off"
@@ -1504,7 +1667,7 @@ def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
         require_standalone_benchmark=args.benchmark,
         expected_head_name=prepared.adapter.head_name,
     )
-    _, _, records = run_distributed_adapter_step(prepared)
+    _, _, records = run_distributed_adapter_step(prepared, graph_edge_test=args.graph_edge_test)
     if check_off_medium_fixture:
         num_atoms = len(prepared.raw["atomic_numbers"])
         assert all(
@@ -1527,6 +1690,11 @@ def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
         assert summary["mismatch_classification"] == "parity_ok", summary[
             "mismatch_classification"
         ]
+    if args.strict_graph_interior:
+        bands = summary["owned_graph_audit"]["assembled_vs_native_core_by_band"]
+        interior = bands["interior"]
+        assert interior["explicit_only"]["count"] == 0, interior
+        assert interior["core_only"]["count"] == 0, interior
     return summary
 
 
@@ -1718,6 +1886,28 @@ def test_stable_energy_mode_is_opt_in() -> None:
         parser.parse_args(["run-distributed", "--energy-mode", "stable"]).energy_mode
         == "stable"
     )
+
+
+def test_graph_edge_audit_flags_are_opt_in() -> None:
+    args = build_parser().parse_args(["run-distributed"])
+    assert not args.graph_edge_test
+    assert not args.strict_graph_interior
+    args = build_parser().parse_args(
+        ["run-distributed", "--graph-edge-test", "--strict-graph-interior"]
+    )
+    assert args.graph_edge_test and args.strict_graph_interior
+
+
+def test_edge_distance_bands_include_exact_cutoff() -> None:
+    positions = torch.tensor(
+        [[0, 0, 0], [4.999, 0, 0], [5.0, 0, 0], [5.001, 0, 0]],
+        dtype=torch.float64,
+    )
+    rows = torch.tensor([[0, i, 0, 0, 0] for i in (1, 2, 3)], dtype=torch.int32)
+    bands = edge_distance_bands(rows, positions, torch.eye(3), 5.0)
+    assert bands["interior"].shape[0] == 1
+    assert bands["boundary"].shape[0] == 1
+    assert bands["exterior"].shape[0] == 1
 
 
 def test_mace_loader_uses_family_default_and_preserves_explicit_name(monkeypatch) -> None:
