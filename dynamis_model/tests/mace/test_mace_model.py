@@ -169,7 +169,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     distributed_parser.add_argument(
         "--strict-graph-interior", action="store_true",
-        help="Fail if assembled owned edges differ from native MACE more than 1e-4 Angstrom inside the cutoff.",
+        help="Enable the graph audit and fail if assembled owned edges differ from native MACE more than 1e-4 Angstrom inside the cutoff.",
     )
     distributed_parser.add_argument("--output-json", type=Path)
     return parser
@@ -1640,9 +1640,15 @@ def print_summary(summary: Dict[str, Any]) -> None:
             )
 
 
+def graph_edge_test_requested(args: argparse.Namespace) -> bool:
+    return bool(args.graph_edge_test or args.strict_graph_interior)
+
+
 def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
-    if args.strict_graph_interior and not args.graph_edge_test:
-        raise ValueError("--strict-graph-interior requires --graph-edge-test.")
+    # A strict edge check necessarily performs the graph audit. Accept the
+    # strict flag on its own so diagnostic shell scripts cannot fail before
+    # model execution merely because the companion flag was omitted.
+    args.graph_edge_test = graph_edge_test_requested(args)
     prepared = prepare_distributed(args)
     check_off_medium_fixture = (
         args.model_family == "off"
@@ -1896,6 +1902,12 @@ def test_graph_edge_audit_flags_are_opt_in() -> None:
         ["run-distributed", "--graph-edge-test", "--strict-graph-interior"]
     )
     assert args.graph_edge_test and args.strict_graph_interior
+
+
+def test_strict_graph_interior_implies_graph_audit() -> None:
+    args = build_parser().parse_args(["run-distributed", "--strict-graph-interior"])
+    assert args.strict_graph_interior and not args.graph_edge_test
+    assert graph_edge_test_requested(args)
 
 
 def test_edge_distance_bands_include_exact_cutoff() -> None:

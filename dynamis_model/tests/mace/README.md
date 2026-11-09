@@ -230,15 +230,16 @@ rank's owned-destination graph with global atom IDs. The report compares the
 assembled directed edges and integer cell shifts with the core, calculator,
 and explicit Dynamis graphs. Each comparison separates edges more than
 `1e-4` Angstrom inside the checkpoint cutoff, near the cutoff, and outside.
-`--strict-graph-interior` asserts that the assembled graph and native core
-agree for strictly interior edges. The audit also compares owned per-atom
+`--strict-graph-interior` enables the audit and asserts that the assembled
+graph and native core agree for strictly interior edges. The audit also compares owned per-atom
 energies against all three references; existing force parity remains in the
 same report. The extra graph build and ID exchange occur outside benchmark
 timing. Generate a fresh standalone artifact for every XYZ, checkpoint, and
 backend selection.
 
-`data/off_cutoff_boundary.xyz` has isolated probe pairs at 4.999, 5.000, and
-5.001 Angstrom. `data/off_organic_irregular.xyz` contains two nonperiodic
+`data/off_cutoff_boundary.xyz` has probe pairs at 4.999, 5.000, and
+5.001 Angstrom plus a bonded fragment that produces nonzero interactions and
+forces. `data/off_organic_irregular.xyz` contains two nonperiodic
 ethanol conformers. For the large synthetic lattice, create a deterministic
 nonperiodic jittered XYZ before generating either reference:
 
