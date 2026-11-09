@@ -17,16 +17,17 @@ import torch
 
 from dynamis import Simulator
 from dynamis_integrator import Verlet
+from dynamis_model.nnp.mace import resolve_mace_model_name
 
 if __package__:
     from .md_test_common import (
         SEED,
-        N_STEPS,
         REBALANCE_INTERVAL,
         build_monolithic_mace_model,
         build_mace_model,
         compare_trajectories,
         ensure_test_structure,
+        get_test_system_spec,
         install_trajectory_simulator_import_compatibility,
         make_config,
         real_singleton_torch_dist_env,
@@ -37,12 +38,12 @@ if __package__:
 else:
     from md_test_common import (
         SEED,
-        N_STEPS,
         REBALANCE_INTERVAL,
         build_monolithic_mace_model,
         build_mace_model,
         compare_trajectories,
         ensure_test_structure,
+        get_test_system_spec,
         install_trajectory_simulator_import_compatibility,
         make_config,
         real_singleton_torch_dist_env,
@@ -55,7 +56,10 @@ else:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--path", required=True)
-    parser.add_argument("--model", default="medium-mpa-0")
+    parser.add_argument("--model", default=None)
+    parser.add_argument(
+        "--system", default="silicon", choices=["silicon", "helium", "organic"]
+    )
     parser.add_argument("--head-name", default="")
     parser.add_argument(
         "--model-family", default="mp", choices=["mp", "off", "omol", "polar"]
@@ -79,12 +83,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
+    args.model = resolve_mace_model_name(args.model_family, args.model)
+    spec = get_test_system_spec(args.system)
     install_trajectory_simulator_import_compatibility()
-    structure = Path(args.path) / "silicon_supercell.xyz"
+    structure = Path(args.path) / spec["filename"]
     output_dir = Path(args.path) / "ref_out"
     dist_dump = Path(args.path) / "dist_traj.pt"
 
-    ensure_test_structure(structure)
+    ensure_test_structure(structure, system=args.system)
 
     try:
         torch_dist_env = real_singleton_torch_dist_env()
@@ -102,23 +108,26 @@ def main() -> None:
             model=args.model,
             head_name=args.head_name or None,
             model_family=args.model_family,
-            system="silicon",
+            system=args.system,
             enable_cueq=args.enable_cueq,
         )
         print(
-            f"Running {args.reference_mode} singleton MACE reference trajectory for silicon."
+            f"Running {args.reference_mode} singleton MACE reference trajectory for {args.system}."
         )
-        integrator = Verlet(dt=0.5)
+        integrator = Verlet(dt=spec["timestep_fs"])
         config = make_config(
             str(output_dir),
             model.cutoff,
             rebalance_interval=REBALANCE_INTERVAL,
+            timestep_fs=spec["timestep_fs"],
+            side_length_angstrom=spec["side_length_angstrom"],
+            total_steps=spec["step_count"],
         )
 
         sim = Simulator(model, integrator, dist_env, config, torch_dist_env.device)
         sim.setup(str(structure))
 
-        ref_traj = run_md_loop(sim, config)
+        ref_traj = run_md_loop(sim, config, steps=spec["step_count"])
         assert (
             dist_dump.exists()
         ), f"Distributed trajectory artifact not found: {dist_dump}"
@@ -131,11 +140,12 @@ def main() -> None:
             "artifact_version": 2,
             "model": args.model,
             "model_family": args.model_family,
+            "system": args.system,
             "head_name": args.head_name,
             "enable_cueq": args.enable_cueq,
             "structure_sha256": structure_sha256(structure),
             "timestep_fs": config.timestep_fs,
-            "step_count": N_STEPS,
+            "step_count": spec["step_count"],
             "rebalance_interval": REBALANCE_INTERVAL,
             "world_size": 2,
             "adapter_identity": "MACEModel",
@@ -150,6 +160,9 @@ def main() -> None:
             ref_traj,
             artifact["frames"],
             report_path=str(output_dir / "comparison_report.csv"),
+            side_length_angstrom=spec["side_length_angstrom"],
+            expected_steps=spec["step_count"],
+            periodic=spec["pbc"],
         )
     except AssertionError as exc:
         print(f"FAILED: {exc}")

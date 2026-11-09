@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "artifact_version": 3,
+    "system_name": "benchmark_scaling_molecular_7500",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz",
+    "num_atoms": 7500,
+    "model_family": "off",
+    "model_name": "medium",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 5.0,
+    "signature": "679f2256f8aa9fe7a855b6281b20d78337d93aa3ce2f2a773899cc0329478c08"
+  },
+  "reference": {
+    "calculator_energy": -4929590.5,
+    "calculator_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_energy": -4929590.5,
+    "core_model_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_edge_count": 85466,
+    "calculator_minus_core_model_energy": 0.0,
+    "calculator_minus_core_model_force_mae": 1.961908822067926e-07,
+    "calculator_minus_core_model_force_max_abs": 3.6098062992095947e-06
+  },
+  "calculator_benchmark": {
+    "scope": "single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        134.4134193204809,
+        134.43507515941747,
+        134.2542881204281,
+        134.24003137974069,
+        134.2041323997546,
+        134.09574641962536,
+        134.0288478997536
+      ],
+      "median_ms_per_step": 134.24003137974069,
+      "mean_ms_per_step": 134.23879152845726,
+      "min_ms_per_step": 134.0288478997536,
+      "p95_ms_per_step": 134.43507515941747,
+      "stdev_ms_per_step": 0.15000183150009974,
+      "coefficient_of_variation_percent": 0.11174253715499285,
+      "atoms_per_second": 55870.070372554226
+    }
+  },
+  "core_model_benchmark": {
+    "scope": "single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        105.89400153956376,
+        105.82892982056364,
+        105.78482648008503,
+        105.80953068099916,
+        105.81467972020619,
+        105.75845581945032,
+        105.83094805944711
+      ],
+      "median_ms_per_step": 105.81467972020619,
+      "mean_ms_per_step": 105.81733887433074,
+      "min_ms_per_step": 105.75845581945032,
+      "p95_ms_per_step": 105.89400153956376,
+      "stdev_ms_per_step": 0.04240486039386034,
+      "coefficient_of_variation_percent": 0.04007364090323665,
+      "atoms_per_second": 70878.63441850794
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "artifact_version": 4,
+    "system_name": "natural_chain12",
+    "source_path": "builtin://natural_chain12",
+    "num_atoms": 12,
+    "model_family": "off",
+    "model_name": "medium",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 5.0,
+    "signature": "12a17ad8dac7a66c2b96383c97113dfe9c7ad2fac21487dfb9076e090e1d89b2"
+  },
+  "precision": {
+    "calculator": {
+      "requested_dtype": "float32",
+      "model_parameter_dtype": "torch.float32",
+      "energy_result_type": "float",
+      "energy_float32_roundtrip_delta_ev": 0.0,
+      "force_result_dtype": "float32",
+      "full_node_energy_result_dtype": "float64",
+      "interaction_node_energy_result_dtype": "float64"
+    },
+    "core_model": {
+      "model_parameter_dtype": "torch.float32",
+      "input_position_dtype": "torch.float32",
+      "energy_tensor_dtype": "torch.float32",
+      "node_energy_tensor_dtype": "torch.float64",
+      "interaction_energy_tensor_dtype": "torch.float32",
+      "force_tensor_dtype": "torch.float32",
+      "energy_float32_roundtrip_delta_ev": 0.0
+    }
+  },
+  "reference": {
+    "calculator_energy": -4269.9609375,
+    "calculator_node_energy_sum_float64": -4269.962673306465,
+    "calculator_interaction_node_energy_sum_float64": -39.11839687824249,
+    "calculator_baseline_node_energy_sum_float64": -4230.844276428223,
+    "calculator_node_energy_values": "tensor([-1035.6299, -1034.4234, -1034.5670, -1036.0888,   -16.4757,   -16.4945,\n          -16.0753,   -15.5255,   -15.7934,   -15.9441,   -16.4858,   -16.4593],\n       dtype=torch.float64)",
+    "calculator_interaction_node_energy_values": "tensor([-5.0627, -3.8563, -3.9999, -5.5216, -2.9037, -2.9225, -2.5034, -1.9535,\n        -2.2214, -2.3721, -2.9139, -2.8873], dtype=torch.float64)",
+    "calculator_graph_edge_count": 116,
+    "calculator_graph_edge_rows": "tensor([[ 0,  1,  0,  0,  0],\n        [ 0,  2,  0,  0,  0],\n        [ 0,  4,  0,  0,  0],\n        [ 0,  5,  0,  0,  0],\n        [ 0,  6,  0,  0,  0],\n        [ 0,  7,  0,  0,  0],\n        [ 0,  8,  0,  0,  0],\n        [ 0,  3,  0,  0,  0],\n        [ 0,  9,  0,  0,  0],\n        [ 1,  0,  0,  0,  0],\n        [ 1,  2,  0,  0,  0],\n        [ 1,  4,  0,  0,  0],\n        [ 1,  5,  0,  0,  0],\n        [ 1,  6,  0,  0,  0],\n        [ 1,  7,  0,  0,  0],\n        [ 1,  8,  0,  0,  0],\n        [ 1,  3,  0,  0,  0],\n        [ 1,  9,  0,  0,  0],\n        [ 1, 10,  0,  0,  0],\n        [ 1, 11,  0,  0,  0],\n        [ 2,  0,  0,  0,  0],\n        [ 2,  1,  0,  0,  0],\n        [ 2,  4,  0,  0,  0],\n        [ 2,  5,  0,  0,  0],\n        [ 2,  6,  0,  0,  0],\n        [ 2,  7,  0,  0,  0],\n        [ 2,  8,  0,  0,  0],\n        [ 2,  3,  0,  0,  0],\n        [ 2,  9,  0,  0,  0],\n        [ 2, 10,  0,  0,  0],\n        [ 2, 11,  0,  0,  0],\n        [ 3,  0,  0,  0,  0],\n        [ 3,  1,  0,  0,  0],\n        [ 3,  2,  0,  0,  0],\n        [ 3,  6,  0,  0,  0],\n        [ 3,  7,  0,  0,  0],\n        [ 3,  8,  0,  0,  0],\n        [ 3,  9,  0,  0,  0],\n        [ 3, 10,  0,  0,  0],\n        [ 3, 11,  0,  0,  0],\n        [ 4,  0,  0,  0,  0],\n        [ 4,  1,  0,  0,  0],\n        [ 4,  2,  0,  0,  0],\n        [ 4,  5,  0,  0,  0],\n        [ 4,  6,  0,  0,  0],\n        [ 4,  7,  0,  0,  0],\n        [ 4,  8,  0,  0,  0],\n        [ 4,  9,  0,  0,  0],\n        [ 5,  0,  0,  0,  0],\n        [ 5,  1,  0,  0,  0],\n        [ 5,  2,  0,  0,  0],\n        [ 5,  4,  0,  0,  0],\n        [ 5,  6,  0,  0,  0],\n        [ 5,  7,  0,  0,  0],\n        [ 5,  8,  0,  0,  0],\n        [ 5,  9,  0,  0,  0],\n        [ 6,  0,  0,  0,  0],\n        [ 6,  1,  0,  0,  0],\n        [ 6,  2,  0,  0,  0],\n        [ 6,  4,  0,  0,  0],\n        [ 6,  5,  0,  0,  0],\n        [ 6,  7,  0,  0,  0],\n        [ 6,  8,  0,  0,  0],\n        [ 6,  3,  0,  0,  0],\n        [ 6,  9,  0,  0,  0],\n        [ 6, 10,  0,  0,  0],\n        [ 6, 11,  0,  0,  0],\n        [ 7,  0,  0,  0,  0],\n        [ 7,  1,  0,  0,  0],\n        [ 7,  2,  0,  0,  0],\n        [ 7,  4,  0,  0,  0],\n        [ 7,  5,  0,  0,  0],\n        [ 7,  6,  0,  0,  0],\n        [ 7,  8,  0,  0,  0],\n        [ 7,  3,  0,  0,  0],\n        [ 7,  9,  0,  0,  0],\n        [ 7, 10,  0,  0,  0],\n        [ 7, 11,  0,  0,  0],\n        [ 8,  0,  0,  0,  0],\n        [ 8,  1,  0,  0,  0],\n        [ 8,  2,  0,  0,  0],\n        [ 8,  4,  0,  0,  0],\n        [ 8,  5,  0,  0,  0],\n        [ 8,  6,  0,  0,  0],\n        [ 8,  7,  0,  0,  0],\n        [ 8,  3,  0,  0,  0],\n        [ 8,  9,  0,  0,  0],\n        [ 8, 10,  0,  0,  0],\n        [ 8, 11,  0,  0,  0],\n        [ 9,  0,  0,  0,  0],\n        [ 9,  1,  0,  0,  0],\n        [ 9,  2,  0,  0,  0],\n        [ 9,  4,  0,  0,  0],\n        [ 9,  5,  0,  0,  0],\n        [ 9,  6,  0,  0,  0],\n        [ 9,  7,  0,  0,  0],\n        [ 9,  8,  0,  0,  0],\n        [ 9,  3,  0,  0,  0],\n        [ 9, 10,  0,  0,  0],\n        [ 9, 11,  0,  0,  0],\n        [10,  1,  0,  0,  0],\n        [10,  2,  0,  0,  0],\n        [10,  6,  0,  0,  0],\n        [10,  7,  0,  0,  0],\n        [10,  8,  0,  0,  0],\n        [10,  3,  0,  0,  0],\n        [10,  9,  0,  0,  0],\n        [10, 11,  0,  0,  0],\n        [11,  1,  0,  0,  0],\n        [11,  2,  0,  0,  0],\n        [11,  6,  0,  0,  0],\n        [11,  7,  0,  0,  0],\n        [11,  8,  0,  0,  0],\n        [11,  3,  0,  0,  0],\n        [11,  9,  0,  0,  0],\n        [11, 10,  0,  0,  0]], dtype=torch.int32)",
+    "calculator_forces": "tensor([[ 4.8951,  0.6362, -0.2815],\n        [-8.8686,  1.1142, -2.4794],\n        [10.4011, -0.7029, -2.7785],\n        [-5.8698, -0.8026,  0.4597],\n        [-0.0984, -0.1995, -1.3039],\n        [-0.6209, -1.1438,  1.4235],\n        [-0.2558,  1.6381,  1.5850],\n        [-2.3642, -0.9927,  0.6845],\n        [ 1.2291,  0.7883,  1.3769],\n        [ 0.4824, -0.8703,  1.3138],\n        [ 0.5098,  0.7519,  0.8194],\n        [ 0.5603, -0.2169, -0.8195]])",
+    "core_model_energy": -4269.9609375,
+    "core_model_node_energy_sum_float64": -4269.962673783302,
+    "core_model_stable_energy": -4269.962673783302,
+    "core_model_stable_baseline_energy": -4230.844276428223,
+    "core_model_stable_interaction_energy": -39.11839735507965,
+    "core_model_node_energy_sum_float32": -4269.96240234375,
+    "core_model_forces": "tensor([[ 4.8951,  0.6362, -0.2815],\n        [-8.8686,  1.1142, -2.4794],\n        [10.4011, -0.7029, -2.7785],\n        [-5.8698, -0.8026,  0.4597],\n        [-0.0984, -0.1995, -1.3039],\n        [-0.6209, -1.1438,  1.4235],\n        [-0.2558,  1.6381,  1.5850],\n        [-2.3642, -0.9927,  0.6845],\n        [ 1.2291,  0.7883,  1.3769],\n        [ 0.4824, -0.8703,  1.3138],\n        [ 0.5098,  0.7519,  0.8194],\n        [ 0.5603, -0.2169, -0.8195]])",
+    "core_model_edge_count": 116,
+    "core_model_edge_rows": "tensor([[ 0,  1,  0,  0,  0],\n        [ 0,  2,  0,  0,  0],\n        [ 0,  4,  0,  0,  0],\n        [ 0,  5,  0,  0,  0],\n        [ 0,  6,  0,  0,  0],\n        [ 0,  7,  0,  0,  0],\n        [ 0,  8,  0,  0,  0],\n        [ 0,  3,  0,  0,  0],\n        [ 0,  9,  0,  0,  0],\n        [ 1,  0,  0,  0,  0],\n        [ 1,  2,  0,  0,  0],\n        [ 1,  4,  0,  0,  0],\n        [ 1,  5,  0,  0,  0],\n        [ 1,  6,  0,  0,  0],\n        [ 1,  7,  0,  0,  0],\n        [ 1,  8,  0,  0,  0],\n        [ 1,  3,  0,  0,  0],\n        [ 1,  9,  0,  0,  0],\n        [ 1, 10,  0,  0,  0],\n        [ 1, 11,  0,  0,  0],\n        [ 2,  0,  0,  0,  0],\n        [ 2,  1,  0,  0,  0],\n        [ 2,  4,  0,  0,  0],\n        [ 2,  5,  0,  0,  0],\n        [ 2,  6,  0,  0,  0],\n        [ 2,  7,  0,  0,  0],\n        [ 2,  8,  0,  0,  0],\n        [ 2,  3,  0,  0,  0],\n        [ 2,  9,  0,  0,  0],\n        [ 2, 10,  0,  0,  0],\n        [ 2, 11,  0,  0,  0],\n        [ 3,  0,  0,  0,  0],\n        [ 3,  1,  0,  0,  0],\n        [ 3,  2,  0,  0,  0],\n        [ 3,  6,  0,  0,  0],\n        [ 3,  7,  0,  0,  0],\n        [ 3,  8,  0,  0,  0],\n        [ 3,  9,  0,  0,  0],\n        [ 3, 10,  0,  0,  0],\n        [ 3, 11,  0,  0,  0],\n        [ 4,  0,  0,  0,  0],\n        [ 4,  1,  0,  0,  0],\n        [ 4,  2,  0,  0,  0],\n        [ 4,  5,  0,  0,  0],\n        [ 4,  6,  0,  0,  0],\n        [ 4,  7,  0,  0,  0],\n        [ 4,  8,  0,  0,  0],\n        [ 4,  9,  0,  0,  0],\n        [ 5,  0,  0,  0,  0],\n        [ 5,  1,  0,  0,  0],\n        [ 5,  2,  0,  0,  0],\n        [ 5,  4,  0,  0,  0],\n        [ 5,  6,  0,  0,  0],\n        [ 5,  7,  0,  0,  0],\n        [ 5,  8,  0,  0,  0],\n        [ 5,  9,  0,  0,  0],\n        [ 6,  0,  0,  0,  0],\n        [ 6,  1,  0,  0,  0],\n        [ 6,  2,  0,  0,  0],\n        [ 6,  4,  0,  0,  0],\n        [ 6,  5,  0,  0,  0],\n        [ 6,  7,  0,  0,  0],\n        [ 6,  8,  0,  0,  0],\n        [ 6,  3,  0,  0,  0],\n        [ 6,  9,  0,  0,  0],\n        [ 6, 10,  0,  0,  0],\n        [ 6, 11,  0,  0,  0],\n        [ 7,  0,  0,  0,  0],\n        [ 7,  1,  0,  0,  0],\n        [ 7,  2,  0,  0,  0],\n        [ 7,  4,  0,  0,  0],\n        [ 7,  5,  0,  0,  0],\n        [ 7,  6,  0,  0,  0],\n        [ 7,  8,  0,  0,  0],\n        [ 7,  3,  0,  0,  0],\n        [ 7,  9,  0,  0,  0],\n        [ 7, 10,  0,  0,  0],\n        [ 7, 11,  0,  0,  0],\n        [ 8,  0,  0,  0,  0],\n        [ 8,  1,  0,  0,  0],\n        [ 8,  2,  0,  0,  0],\n        [ 8,  4,  0,  0,  0],\n        [ 8,  5,  0,  0,  0],\n        [ 8,  6,  0,  0,  0],\n        [ 8,  7,  0,  0,  0],\n        [ 8,  3,  0,  0,  0],\n        [ 8,  9,  0,  0,  0],\n        [ 8, 10,  0,  0,  0],\n        [ 8, 11,  0,  0,  0],\n        [ 9,  0,  0,  0,  0],\n        [ 9,  1,  0,  0,  0],\n        [ 9,  2,  0,  0,  0],\n        [ 9,  4,  0,  0,  0],\n        [ 9,  5,  0,  0,  0],\n        [ 9,  6,  0,  0,  0],\n        [ 9,  7,  0,  0,  0],\n        [ 9,  8,  0,  0,  0],\n        [ 9,  3,  0,  0,  0],\n        [ 9, 10,  0,  0,  0],\n        [ 9, 11,  0,  0,  0],\n        [10,  1,  0,  0,  0],\n        [10,  2,  0,  0,  0],\n        [10,  6,  0,  0,  0],\n        [10,  7,  0,  0,  0],\n        [10,  8,  0,  0,  0],\n        [10,  3,  0,  0,  0],\n        [10,  9,  0,  0,  0],\n        [10, 11,  0,  0,  0],\n        [11,  1,  0,  0,  0],\n        [11,  2,  0,  0,  0],\n        [11,  6,  0,  0,  0],\n        [11,  7,  0,  0,  0],\n        [11,  8,  0,  0,  0],\n        [11,  3,  0,  0,  0],\n        [11,  9,  0,  0,  0],\n        [11, 10,  0,  0,  0]], dtype=torch.int32)",
+    "core_model_node_energy_values": "tensor([-1035.6299, -1034.4234, -1034.5670, -1036.0888,   -16.4757,   -16.4945,\n          -16.0753,   -15.5255,   -15.7934,   -15.9441,   -16.4858,   -16.4593],\n       dtype=torch.float64)",
+    "calculator_minus_core_model_energy": 0.0,
+    "calculator_minus_core_model_force_mae": 4.1392115690541686e-07,
+    "calculator_minus_core_model_force_max_abs": 1.9073486328125e-06
+  },
+  "diagnostics": {
+    "calculator_core": {
+      "calculator_minus_core_legacy_energy_ev": 0.0,
+      "calculator_minus_core_controlled_energy_ev": 4.76837158203125e-07,
+      "calculator_minus_core_node_energy_sum_ev": 4.76837158203125e-07,
+      "calculator_vs_core_node_energy_mae_ev": 7.947285970052083e-08,
+      "calculator_vs_core_node_energy_max_abs_ev": 2.384185791015625e-07,
+      "calculator_vs_core_force_mae_ev_per_angstrom": 4.13921144273546e-07,
+      "calculator_vs_core_force_max_abs_ev_per_angstrom": 1.9073486328125e-06,
+      "calculator_graph_edge_count": 116,
+      "core_graph_edge_count": 116,
+      "calculator_only_edge_count": 0,
+      "core_only_edge_count": 0
+    },
+    "float64": {
+      "backend": "e3nn (CuEq disabled for float64 diagnostic)",
+      "calculator": {
+        "legacy_energy_ev": -4269.962768223268,
+        "controlled_energy_ev": -4269.962768223264,
+        "legacy_minus_controlled_ev": -3.637978807091713e-12,
+        "precision": {
+          "requested_dtype": "float64",
+          "model_parameter_dtype": "torch.float64",
+          "energy_result_type": "float",
+          "energy_float32_roundtrip_delta_ev": 0.00012240173236932606,
+          "force_result_dtype": "float64",
+          "full_node_energy_result_dtype": "float64",
+          "interaction_node_energy_result_dtype": "float64"
+        }
+      },
+      "core": {
+        "legacy_energy_ev": -4269.962768223268,
+        "controlled_energy_ev": -4269.962768223263,
+        "legacy_minus_controlled_ev": -4.547473508864641e-12,
+        "precision": {
+          "model_parameter_dtype": "torch.float64",
+          "input_position_dtype": "torch.float64",
+          "energy_tensor_dtype": "torch.float64",
+          "node_energy_tensor_dtype": "torch.float64",
+          "interaction_energy_tensor_dtype": "torch.float64",
+          "force_tensor_dtype": "torch.float64",
+          "energy_float32_roundtrip_delta_ev": 0.00012240173236932606
+        }
+      },
+      "calculator_core": {
+        "calculator_minus_core_legacy_energy_ev": 0.0,
+        "calculator_minus_core_controlled_energy_ev": -9.094947017729282e-13,
+        "calculator_minus_core_node_energy_sum_ev": 0.0,
+        "calculator_vs_core_node_energy_mae_ev": 0.0,
+        "calculator_vs_core_node_energy_max_abs_ev": 0.0,
+        "calculator_vs_core_force_mae_ev_per_angstrom": 4.6041179121143594e-08,
+        "calculator_vs_core_force_max_abs_ev_per_angstrom": 4.098108199457329e-07,
+        "calculator_graph_edge_count": 116,
+        "core_graph_edge_count": 116,
+        "calculator_only_edge_count": 0,
+        "core_only_edge_count": 0
+      }
+    },
+    "calculator_repeatability": {
+      "runs": [
+        {
+          "run": 1,
+          "calculator_legacy_energy_ev": -4269.9609375,
+          "calculator_controlled_energy_ev": -4269.962673306465,
+          "calculator_force_max_abs_ev_per_angstrom": 10.401069641113281,
+          "force_vs_first_mae_ev_per_angstrom": 0.0,
+          "force_vs_first_max_abs_ev_per_angstrom": 0.0
+        },
+        {
+          "run": 2,
+          "calculator_legacy_energy_ev": -4269.9609375,
+          "calculator_controlled_energy_ev": -4269.962673306465,
+          "calculator_force_max_abs_ev_per_angstrom": 10.401067733764648,
+          "force_vs_first_mae_ev_per_angstrom": 3.7439167499542236e-07,
+          "force_vs_first_max_abs_ev_per_angstrom": 1.9073486328125e-06
+        },
+        {
+          "run": 3,
+          "calculator_legacy_energy_ev": -4269.9609375,
+          "calculator_controlled_energy_ev": -4269.962673783302,
+          "calculator_force_max_abs_ev_per_angstrom": 10.401067733764648,
+          "force_vs_first_mae_ev_per_angstrom": 4.803554879294502e-07,
+          "force_vs_first_max_abs_ev_per_angstrom": 1.9073486328125e-06
+        },
+        {
+          "run": 4,
+          "calculator_legacy_energy_ev": -4269.9609375,
+          "calculator_controlled_energy_ev": -4269.962673306465,
+          "calculator_force_max_abs_ev_per_angstrom": 10.401069641113281,
+          "force_vs_first_mae_ev_per_angstrom": 3.9012067847781714e-07,
+          "force_vs_first_max_abs_ev_per_angstrom": 1.6689300537109375e-06
+        },
+        {
+          "run": 5,
+          "calculator_legacy_energy_ev": -4269.9609375,
+          "calculator_controlled_energy_ev": -4269.962673068047,
+          "calculator_force_max_abs_ev_per_angstrom": 10.401067733764648,
+          "force_vs_first_mae_ev_per_angstrom": 3.6901070011986627e-07,
+          "force_vs_first_max_abs_ev_per_angstrom": 1.9073486328125e-06
+        }
+      ],
+      "calculator_legacy_energy_spread_ev": 0.0,
+      "calculator_controlled_energy_spread_ev": 7.152557373046875e-07,
+      "calculator_force_max_abs_spread_ev_per_angstrom": 1.9073486328125e-06
+    }
+  },
+  "calculator_benchmark": null,
+  "core_model_benchmark": null
+}

@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "artifact_version": 3,
+    "system_name": "benchmark_scaling_molecular_7500",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz",
+    "num_atoms": 7500,
+    "model_family": "off",
+    "model_name": "medium",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 5.0,
+    "signature": "679f2256f8aa9fe7a855b6281b20d78337d93aa3ce2f2a773899cc0329478c08"
+  },
+  "precision": {
+    "calculator": {
+      "requested_dtype": "float32",
+      "model_parameter_dtype": "torch.float32",
+      "energy_result_type": "float",
+      "energy_float32_roundtrip_delta_ev": 0.0,
+      "force_result_dtype": "float32"
+    },
+    "core_model": {
+      "model_parameter_dtype": "torch.float32",
+      "input_position_dtype": "torch.float32",
+      "energy_tensor_dtype": "torch.float32",
+      "node_energy_tensor_dtype": "torch.float64",
+      "interaction_energy_tensor_dtype": "torch.float32",
+      "force_tensor_dtype": "torch.float32",
+      "energy_float32_roundtrip_delta_ev": 0.0
+    }
+  },
+  "reference": {
+    "calculator_energy": -4929591.0,
+    "calculator_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_energy": -4929592.5,
+    "core_model_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_edge_count": 85466,
+    "calculator_minus_core_model_energy": 1.5,
+    "calculator_minus_core_model_force_mae": 1.9793930050582276e-07,
+    "calculator_minus_core_model_force_max_abs": 3.7923455238342285e-06
+  },
+  "calculator_benchmark": {
+    "scope": "single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        134.82575948000886,
+        135.09996173903346,
+        134.8107749596238,
+        134.80570440064184,
+        135.01263257930987,
+        134.71127828001045,
+        134.81395287904888
+      ],
+      "median_ms_per_step": 134.81395287904888,
+      "mean_ms_per_step": 134.86858061681104,
+      "min_ms_per_step": 134.71127828001045,
+      "p95_ms_per_step": 135.09996173903346,
+      "stdev_ms_per_step": 0.13610349544632308,
+      "coefficient_of_variation_percent": 0.10091564308296584,
+      "atoms_per_second": 55632.223815355224
+    }
+  },
+  "core_model_benchmark": {
+    "scope": "single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        106.50094960001297,
+        106.3233927602414,
+        106.42077793949284,
+        106.42927688080817,
+        106.56536350026727,
+        106.30263015977107,
+        106.25723538105376
+      ],
+      "median_ms_per_step": 106.42077793949284,
+      "mean_ms_per_step": 106.3999466030925,
+      "min_ms_per_step": 106.25723538105376,
+      "p95_ms_per_step": 106.56536350026727,
+      "stdev_ms_per_step": 0.11147199866389541,
+      "coefficient_of_variation_percent": 0.10476696861486536,
+      "atoms_per_second": 70474.95935675493
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "artifact_version": 3,
+    "system_name": "benchmark_scaling_molecular_15000",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_15000.xyz",
+    "num_atoms": 15000,
+    "model_family": "off",
+    "model_name": "medium",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 5.0,
+    "signature": "48254a2daabb2ea72c8fafafb0c76b32ce7ad41f7a34114c4667e254f4f906d5"
+  },
+  "precision": {
+    "calculator": {
+      "requested_dtype": "float32",
+      "model_parameter_dtype": "torch.float32",
+      "energy_result_type": "float",
+      "energy_float32_roundtrip_delta_ev": 0.0,
+      "force_result_dtype": "float32"
+    },
+    "core_model": {
+      "model_parameter_dtype": "torch.float32",
+      "input_position_dtype": "torch.float32",
+      "energy_tensor_dtype": "torch.float32",
+      "node_energy_tensor_dtype": "torch.float64",
+      "interaction_energy_tensor_dtype": "torch.float32",
+      "force_tensor_dtype": "torch.float32",
+      "energy_float32_roundtrip_delta_ev": 0.0
+    }
+  },
+  "reference": {
+    "calculator_energy": -9859769.0,
+    "calculator_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_energy": -9859770.0,
+    "core_model_node_energy_sum_float64": -9859368.318428278,
+    "core_model_stable_energy": -9859368.318428278,
+    "core_model_stable_baseline_energy": -9801458.111763,
+    "core_model_stable_interaction_energy": -57910.20666527748,
+    "core_model_node_energy_sum_float32": -9859368.0,
+    "core_model_forces": "tensor([[ 0.0093, -0.0617,  0.0114],\n        [ 0.0964,  0.0347, -0.0126],\n        [-0.0993,  0.0405, -0.0032],\n        ...,\n        [ 0.0556,  0.0479, -0.0395],\n        [ 0.0601, -0.0617,  0.0375],\n        [-0.0557,  0.0599,  0.0337]])",
+    "core_model_edge_count": 170582,
+    "core_model_edge_rows": "tensor([[    0,     1,     0,     0,     0],\n        [    0,     2,     0,     0,     0],\n        [    0,     5,     0,     0,     0],\n        ...,\n        [14999, 14996,     0,     0,     0],\n        [14999, 14997,     0,     0,     0],\n        [14999, 14998,     0,     0,     0]], dtype=torch.int32)",
+    "core_model_node_energy_values": "tensor([-2048.0466,   -16.5366,   -16.5382,  ...,   -16.4107,   -16.4107,\n          -16.4105], dtype=torch.float64)",
+    "calculator_minus_core_model_energy": 1.0,
+    "calculator_minus_core_model_force_mae": 2.0149809643044136e-07,
+    "calculator_minus_core_model_force_max_abs": 5.632638931274414e-06
+  },
+  "calculator_benchmark": {
+    "scope": "single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        519.2928925994784,
+        519.8011680017225,
+        519.6513711591251,
+        519.5105621404946,
+        519.6365307387896,
+        519.6809578011744,
+        519.7168807615526
+      ],
+      "median_ms_per_step": 519.6513711591251,
+      "mean_ms_per_step": 519.6129090289053,
+      "min_ms_per_step": 519.2928925994784,
+      "p95_ms_per_step": 519.8011680017225,
+      "stdev_ms_per_step": 0.16623523430798562,
+      "coefficient_of_variation_percent": 0.03199212941392458,
+      "atoms_per_second": 28865.506438559507
+    }
+  },
+  "core_model_benchmark": {
+    "scope": "single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        465.1257147383876,
+        465.05279978038743,
+        464.81167514109984,
+        464.96829566080123,
+        464.56964483950287,
+        464.5895175798796,
+        464.9247676599771
+      ],
+      "median_ms_per_step": 464.9247676599771,
+      "mean_ms_per_step": 464.8632022000051,
+      "min_ms_per_step": 464.56964483950287,
+      "p95_ms_per_step": 465.1257147383876,
+      "stdev_ms_per_step": 0.21734352595842296,
+      "coefficient_of_variation_percent": 0.046754297808436124,
+      "atoms_per_second": 32263.284392218604
+    }
+  }
+}

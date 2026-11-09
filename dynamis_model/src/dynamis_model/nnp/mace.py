@@ -33,6 +33,7 @@ from dynamis_state import (
 )
 
 COMPUTE_DTYPE = torch.float32
+DEFAULT_MACE_MODELS = {"mp": "medium-mpa-0", "off": "medium"}
 
 try:
     from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
@@ -62,9 +63,21 @@ def _require_mace() -> None:
         ) from _MACE_IMPORT_ERROR
 
 
+def resolve_mace_model_name(model_family: str, model: Optional[str] = None) -> str:
+    """Resolve family-specific defaults without changing explicit checkpoint names."""
+    if model:
+        return model
+    try:
+        return DEFAULT_MACE_MODELS[model_family]
+    except KeyError as exc:
+        raise ValueError(
+            f"Pass an explicit model for MACE family {model_family!r}."
+        ) from exc
+
+
 def load_raw_mace_model(
     model_family: str = "mp",
-    model: str = "medium-mpa-0",
+    model: Optional[str] = None,
     device: str = "cuda",
     enable_cueq: bool = False,
 ):
@@ -73,6 +86,7 @@ def load_raw_mace_model(
     loaders = {"mp": mace_mp, "off": mace_off, "omol": mace_omol, "polar": mace_polar}
     if model_family not in loaders:
         raise ValueError(f"Unsupported MACE model family: {model_family}")
+    model = resolve_mace_model_name(model_family, model)
     loaded_model = loaders[model_family](
         model=model,
         device=device,
@@ -281,6 +295,19 @@ class MACEScaleShiftRuntime(torch.nn.Module):
         )
         return exchanged.to(dtype=node_feats.dtype)
 
+    def _reduce_owned_energy(
+        self,
+        node_e0: torch.Tensor,
+        node_inter_es: torch.Tensor,
+        num_local: int,
+    ) -> Dict[str, torch.Tensor]:
+        node_energy = node_e0 + node_inter_es
+        owned_node_energy = node_energy.reshape(-1)[:num_local]
+        return {
+            "owned_node_energy": owned_node_energy,
+            "owned_local_energy": owned_node_energy.sum(),
+        }
+
     def forward(self, data: Dict[str, torch.Tensor]) -> Dict[str, torch.Tensor]:
         _require_mace()
         ctx = prepare_graph(
@@ -352,28 +379,45 @@ class MACEScaleShiftRuntime(torch.nn.Module):
             torch.sum(torch.stack(node_es_list), dim=0),
             node_heads,
         )
-        node_energy = node_e0 + node_inter_es
         state = self._state
         if state is None:
             raise RuntimeError("The MACE runtime requires an active DynamisState.")
         num_local = int(state.local_molecular_info.num_atoms)
-        owned_node_energy = node_energy.reshape(-1)[:num_local]
-        return {
-            "owned_node_energy": owned_node_energy,
-            "owned_local_energy": owned_node_energy.sum(),
-        }
+        return self._reduce_owned_energy(node_e0, node_inter_es, num_local)
         # removed the force recovery logic performed by MACE beyond this point
         # can experiment with this enabled to verify if speedup caused by this removal?
 
 
+class MACEStableEnergyRuntime(MACEScaleShiftRuntime):
+    """Accumulate owned baseline and interaction contributions in float64."""
+
+    def _reduce_owned_energy(
+        self,
+        node_e0: torch.Tensor,
+        node_inter_es: torch.Tensor,
+        num_local: int,
+    ) -> Dict[str, torch.Tensor]:
+        owned_e0 = node_e0.reshape(-1)[:num_local].double()
+        owned_inter = node_inter_es.reshape(-1)[:num_local].double()
+        baseline_energy = owned_e0.sum()
+        interaction_energy = owned_inter.sum()
+        return {
+            "owned_node_energy": owned_e0 + owned_inter,
+            "owned_baseline_energy": baseline_energy,
+            "owned_interaction_energy": interaction_energy,
+            "owned_local_energy": baseline_energy + interaction_energy,
+        }
+
+
 class MACEModel(DynamisModel):
-    """MP/MPA-oriented explicit-graph MACE model."""
+    """Explicit-graph adapter for ordinary ScaleShiftMACE checkpoints."""
 
     def __init__(
         self,
         model: torch.nn.Module,
         atomic_number_map: Optional[Mapping[int, int]] = None,
         head_name: Optional[str] = None,
+        energy_mode: str = "legacy",
     ) -> None:
         super().__init__()
         _require_mace()
@@ -382,7 +426,13 @@ class MACEModel(DynamisModel):
         self.head_name = resolve_model_head_name(self.model, head_name)
         self.atomic_number_map = dict(atomic_number_map or {})
         self.cutoff = float(self.model.r_max.detach().cpu().item())
-        self.runtime = MACEScaleShiftRuntime(self.model)
+        if energy_mode not in ("legacy", "stable"):
+            raise ValueError("MACE energy_mode must be 'legacy' or 'stable'.")
+        self.energy_mode = energy_mode
+        runtime_cls = (
+            MACEStableEnergyRuntime if energy_mode == "stable" else MACEScaleShiftRuntime
+        )
+        self.runtime = runtime_cls(self.model)
         self.position_exchanger = GPUDirectExchanger()
         self.atom_type_exchanger = GPUDirectExchanger()
         self.exchange_enabled = False
@@ -395,6 +445,11 @@ class MACEModel(DynamisModel):
 
     @staticmethod
     def _validate_model_contract(model: Any) -> None:
+        if ScaleShiftMACE is not None and type(model) is not ScaleShiftMACE:
+            raise TypeError(
+                "MACEModel supports ordinary ScaleShiftMACE checkpoints only; "
+                f"specialized model class {type(model).__name__} is unsupported."
+            )
         required_attrs: Sequence[str] = (
             "r_max",
             "atomic_numbers",
@@ -410,12 +465,8 @@ class MACEModel(DynamisModel):
         missing = [name for name in required_attrs if not hasattr(model, name)]
         if missing:
             raise TypeError(
-                "MACEModel targets MP/MPA-style ScaleShiftMACE-compatible "
+                "MACEModel targets ordinary ScaleShiftMACE "
                 f"models. Missing required attributes: {', '.join(missing)}."
-            )
-        if ScaleShiftMACE is not None and not isinstance(model, ScaleShiftMACE):
-            raise TypeError(
-                "MACEModel currently supports ScaleShiftMACE-compatible checkpoints."
             )
         num_layers = len(getattr(model, "interactions"))
         if num_layers != len(getattr(model, "products")):
@@ -425,7 +476,7 @@ class MACEModel(DynamisModel):
         num_readouts = len(getattr(model, "readouts"))
         if num_readouts not in (1, num_layers):
             raise TypeError(
-                "MP/MPA checkpoints must expose either one final readout or one readout per "
+                "ScaleShiftMACE checkpoints must expose either one final readout or one readout per "
                 f"interaction layer; got num_readouts={num_readouts}, num_layers={num_layers}."
             )
 
@@ -640,6 +691,7 @@ class MACEModel(DynamisModel):
         return -local_grad
 
     def __call__(self, state: DynamisState, *args: Any, **kwargs: Any):
+        return_energy_components = bool(kwargs.pop("return_energy_components", False))
         view = self._build_structural_view(state)
         graph = self._build_owned_graph(view, state)
         self.runtime.begin_forward(state, self.exchange_enabled)
@@ -653,14 +705,24 @@ class MACEModel(DynamisModel):
             owned_forces = self._recover_forces(owned_energy, view)
         finally:
             self.runtime.end_forward()
+        if return_energy_components:
+            components = {
+                key: (outputs[key] * EV_PER_A_TO_AMU_A_PER_FS2).detach()
+                for key in ("owned_baseline_energy", "owned_interaction_energy")
+                if key in outputs
+            }
+            return owned_energy.detach(), owned_forces.detach(), components
         return owned_energy.detach(), owned_forces.detach()
 
 
 __all__ = [
     "COMPUTE_DTYPE",
+    "DEFAULT_MACE_MODELS",
     "MACEModel",
     "MACEScaleShiftRuntime",
+    "MACEStableEnergyRuntime",
     "load_raw_mace_model",
+    "resolve_mace_model_name",
     "resolve_model_head_index",
     "resolve_model_head_name",
     "validate_partition_info",

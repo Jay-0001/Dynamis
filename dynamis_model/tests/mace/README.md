@@ -4,6 +4,72 @@
 commands below from the `Dynamis` repository root in an environment where the
 project packages and the optional MACE dependency are installed.
 
+MPA remains the default model family and checkpoint. A Bash benchmark script
+can pass the same model arguments to the standalone reference and distributed
+driver:
+
+```bash
+MODEL_FAMILY="${MODEL_FAMILY:-mp}"
+MODEL_ARGS=(--model-family "${MODEL_FAMILY}")
+if [[ -n "${MODEL_NAME:-}" ]]; then
+    MODEL_ARGS+=(--model "${MODEL_NAME}")
+fi
+```
+
+Leave both variables unset for MPA. Set `MODEL_FAMILY=off` to select OFF23
+medium. `MODEL_NAME` overrides the family-specific default when set; use
+`MODEL_NAME=small` or `MODEL_NAME=large` for the other OFF23 checkpoints, and
+give each model a separate reference artifact and JSON output path. Keep
+`CUEQ_ARGS` identical in the reference and distributed commands: either an
+empty array or `(--enable-cueq)`.
+
+## OFF23 float32 validation
+
+The adapter accepts ordinary `ScaleShiftMACE` checkpoints from `mace_off` and
+uses the checkpoint's interaction blocks, readouts, atomic-number table, and
+cutoff. Omitting `--model` selects `medium` for `--model-family off` and
+`medium-mpa-0` for `--model-family mp`. The Dynamis graph and GPU Direct exchange
+currently require float32; the public calculator reference is configured to
+float32 as well. OFF23 medium has two interactions and one inter-layer feature
+exchange. Specialized subclasses such as `PolarMACE` are rejected.
+
+From PowerShell, generate an independent OFF23 medium reference and compare
+distributed energy and forces for the nonperiodic C/H fixture:
+
+```powershell
+New-Item -ItemType Directory -Force .\tmp\mace_off_medium | Out-Null
+python dynamis_model/tests/mace/mace_standalone_reference.py `
+  --builtin-system natural_chain12 --model-family off `
+  --output .\tmp\mace_off_medium\reference.pt
+torchrun --standalone --nproc_per_node=2 `
+  dynamis_model/tests/mace/test_mace_model.py run-distributed `
+  --builtin-system natural_chain12 --model-family off `
+  --reference-artifact .\tmp\mace_off_medium\reference.pt --strict-parity
+```
+
+The OFF strict-parity check requires both the explicit Dynamis-graph reference
+and the independent public MACE calculator to match. Repeat the two commands
+with `--model small` and `--model large`, keeping a separate reference artifact
+for each checkpoint. The medium fixture also checks that two ranks own atoms,
+both receive halo atoms, and the two-layer runtime has one feature exchange.
+
+For a nonperiodic molecular trajectory, compare the two-rank adapter with a
+one-rank public calculator run using the same 12-atom C/H fixture. This run uses
+20 steps at 0.1 fs and does not apply the periodic RDF check:
+
+```powershell
+torchrun --standalone --nproc_per_node=2 `
+  dynamis_model/tests/mace/run_distributed_trajectory.py `
+  --path .\tmp\mace_off_trajectory --system organic `
+  --model-family off
+python dynamis_model/tests/mace/test_md.py `
+  --path .\tmp\mace_off_trajectory --system organic `
+  --model-family off --reference-mode monolithic
+```
+
+The existing MP/MPA static and trajectory commands below remain regression
+checks for the shared runtime.
+
 ## Static parity
 
 Generate an independent public-MACE reference artifact, then require the
@@ -43,6 +109,47 @@ The reference artifact signature includes positions, cell, PBC flags, and
 model identity. Both commands in a reference/distributed pair must therefore
 use the same structure and model arguments. Nonperiodic XYZ/extxyz inputs must
 provide a valid cell containing their coordinates.
+
+## Calculator/core reduction diagnostics
+
+Regenerate the reference artifact with the current driver (artifact version 4).
+It now stores the calculator's full per-atom `results["energies"]` and its
+baseline-removed `results["node_energy"]`, their dtypes and float64 sums,
+calculator/core per-atom errors, and directed calculator/core edge counts and
+identities. The calculator graph is reconstructed through its own batch builder
+outside the timed forward. The printed report groups configuration and
+precision, energy definitions, matched parity, reduction decomposition,
+per-atom and force parity, graph diagnostics, repeatability, and performance.
+The JSON retains the original `parity` fields and adds `report_sections` with
+named, unit-bearing metrics.
+
+For a small molecular structure, add `--float64-diagnostic` to the standalone
+reference command. It loads the original checkpoint in float64 through the
+public MACE loader and compares calculator/core legacy scalars with float64
+per-atom sums. It uses e3nn even when the main float32 reference uses CuEq.
+The default limit is 1000 atoms; `--float64-max-atoms` can raise it explicitly.
+Add `--repeatability-runs 5` to collect five untimed calculator evaluations of
+the same structure, including scalar and controlled energy spreads and force
+differences. These diagnostic evaluations do not enter benchmark timing.
+
+```bash
+python dynamis_model/tests/mace/mace_standalone_reference.py \
+  --builtin-system natural_chain12 --model-family off --model medium \
+  --enable-cueq --float64-diagnostic --repeatability-runs 5 \
+  --output ./tmp/mace_off_diagnostics/reference.pt \
+  --output-json ./tmp/mace_off_diagnostics/reference.json
+
+torchrun --standalone --nproc-per-node=2 \
+  dynamis_model/tests/mace/test_mace_model.py run-distributed \
+  --builtin-system natural_chain12 --model-family off --model medium \
+  --enable-cueq --energy-mode stable \
+  --reference-artifact ./tmp/mace_off_diagnostics/reference.pt \
+  --output-json ./tmp/mace_off_diagnostics/distributed.json
+```
+
+For the 15,000-atom structure, omit `--float64-diagnostic` or explicitly raise
+its atom limit if resources permit. Use the same structure, family, model, head,
+and CuEq settings in both commands.
 
 ## cuEquivariance
 
@@ -92,6 +199,29 @@ when comparing rank counts. The 7,500-atom fixture is preferred over the
 3,750-atom fixture for two-versus-four-GPU scaling because the smaller system
 does not provide enough per-rank compute to amortize halo and synchronization
 costs.
+
+The distributed parity report also compares the explicit Dynamis graph with
+the MACE-native core graph. `edge_comparison` preserves directed edge identities,
+periodic shifts, and duplicate counts. Its `explicit_only` and `core_only`
+sections report unmatched-edge distances, including how many lie within
+1e-4 Angstrom of the checkpoint cutoff. `explicit_vs_core_node_energy_mae`
+and `explicit_vs_core_node_energy_max_abs` measure the effect on individual
+atomic predictions without comparing the two different total-energy reductions.
+Regenerate the standalone reference artifact to populate these fields; older
+artifacts remain readable but do not include the edge comparison.
+
+To test the opt-in stable energy reduction, generate a fresh standalone
+reference with the same family/model/XYZ arguments, then pass `--energy-mode
+stable` to `test_mace_model.py run-distributed`. The original MACE scalar
+remains `explicit_dynamis_graph_energy`; `explicit_stable_energy` separately
+reduces the same forward's atomic baseline and interaction contributions in
+float64. Compare `distributed_minus_explicit_stable_energy` and
+`explicit_stable_minus_node_sum` with the legacy
+`distributed_minus_explicit_energy` and `explicit_node_sum_minus_model_energy`.
+`--strict-parity` uses the controlled reference in stable mode, with an
+absolute MD-energy tolerance set by `--stable-energy-atol` (default `1e-3`).
+The runtime still computes features and forces in float32; only scalar energy
+accumulation is widened. `--energy-mode legacy` remains the default.
 
 ## Distributed trajectory
 

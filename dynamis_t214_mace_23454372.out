@@ -1,0 +1,954 @@
+
+Currently Loaded Modules:
+  1) libfabric/2.3.1      6) craype-accel-nvidia80  11) gcc-native/14
+  2) craype-network-ofi   7) cue-login-env/1.1      12) cray-mpich/9.1.0
+  3) PrgEnv-gnu/8.7.0     8) default-rh96           13) cray-libsci/26.03.0
+  4) cray-dsmml/0.3.1     9) miniforge3-python      14) cudatoolkit/26.5_13.2
+  5) craype-x86-milan    10) craype/2.7.36          15) slurm-env/0.1
+
+ 
+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2026 NVIDIA Corporation
+Built on Thu_Mar_19_11:12:51_PM_PDT_2026
+Cuda compilation tools, release 13.2, V13.2.78
+Build cuda_13.2.r13.2/compiler.37668154_0
+Mon Nov  2 17:47:22 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:46:00.0 Off |                    0 |
+| N/A   31C    P0             56W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100-SXM4-40GB          On  |   00000000:C7:00.0 Off |                    0 |
+| N/A   34C    P0             57W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Retrieving notices: - done
+Channels:
+ - conda-forge
+Platform: linux-64
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+
+
+==> WARNING: A newer version of conda exists. <==
+    current version: 25.7.0
+    latest version: 26.9.4
+
+Please update conda by running
+
+    $ conda update -n base -c conda-forge conda
+
+
+
+## Package Plan ##
+
+  environment location: /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091
+
+  added / updated specs:
+    - pip
+    - python=3.12
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    pip-26.2.2                 |     pyh8b19718_2         1.0 MB  conda-forge
+    ------------------------------------------------------------
+                                           Total:         1.0 MB
+
+The following NEW packages will be INSTALLED:
+
+  _openmp_mutex      conda-forge/linux-64::_openmp_mutex-4.5-20_gnu 
+  bzip2              conda-forge/linux-64::bzip2-1.0.8-hda65f42_10 
+  ca-certificates    conda-forge/noarch::ca-certificates-2026.10.23-hbd8a1cb_0 
+  ld_impl_linux-64   conda-forge/linux-64::ld_impl_linux-64-2.46.1-default_hbd61a6d_103 
+  libexpat           conda-forge/linux-64::libexpat-2.9.0-hd2095e1_0 
+  libffi             conda-forge/linux-64::libffi-3.7.0-h81df57d_1 
+  libgcc             conda-forge/linux-64::libgcc-16.2.0-ha9f2e26_7 
+  libgomp            conda-forge/linux-64::libgomp-16.2.0-he0feb66_7 
+  liblzma            conda-forge/linux-64::liblzma-5.8.3-hb03c661_1 
+  libnsl             conda-forge/linux-64::libnsl-2.0.1-hb9d3cd8_1 
+  libpython          conda-forge/linux-64::libpython-3.12.16-ha57cdbe_0_cpython 
+  libsqlite          conda-forge/linux-64::libsqlite-3.54.1-h0737f62_101 
+  libuuid            conda-forge/linux-64::libuuid-2.42.4-hcfc3c73_0 
+  libxcrypt          conda-forge/linux-64::libxcrypt-4.4.38-h280c20c_0 
+  libzlib            conda-forge/linux-64::libzlib-1.3.2-h25fd6f3_3 
+  ncurses            conda-forge/linux-64::ncurses-6.6-hdb14827_1 
+  openssl            conda-forge/linux-64::openssl-3.6.5-h781a0a9_0 
+  packaging          conda-forge/noarch::packaging-26.3-pyhc364b38_0 
+  pip                conda-forge/noarch::pip-26.2.2-pyh8b19718_2 
+  python             conda-forge/linux-64::python-3.12.16-h5f976f7_0_cpython 
+  readline           conda-forge/linux-64::readline-8.3-hd6e31c0_1 
+  setuptools         conda-forge/noarch::setuptools-84.2.1-pyhe730653_0 
+  tk                 conda-forge/linux-64::tk-8.6.13-noxft_h1df4ec4_4 
+  tzdata             conda-forge/noarch::tzdata-2026e-h5d301ff_0 
+  wheel              conda-forge/noarch::wheel-0.48.0-pyhd8ed1ab_0 
+  zstd               conda-forge/linux-64::zstd-1.5.7-hb78ec9c_7 
+
+
+
+Downloading and Extracting Packages: ...working...pip-26.2.2           | 1.0 MB    |            |   0% pip-26.2.2           | 1.0 MB    | ########## | 100% pip-26.2.2           | 1.0 MB    | ########## | 100% pip-26.2.2           | 1.0 MB    | ########## | 100%                                                       done
+Preparing transaction: | / - \ done
+Verifying transaction: / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ done
+Executing transaction: / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ done
+#
+# To activate this environment, use
+#
+#     $ conda activate /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+Requirement already satisfied: pip in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (26.2.2)
+Collecting pip
+  Downloading pip-26.3-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: setuptools in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (84.2.1)
+Requirement already satisfied: wheel in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (0.48.0)
+Requirement already satisfied: packaging>=24.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from wheel) (26.3)
+Downloading pip-26.3-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 51.7 MB/s  0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 26.2.2
+    Uninstalling pip-26.2.2:
+      Successfully uninstalled pip-26.2.2
+Successfully installed pip-26.3
+Looking in indexes: https://download.pytorch.org/whl/cu132
+Collecting torch==2.14.1
+  Downloading torch-2.14.1%2Bcu132-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting filelock (from torch==2.14.1)
+  Downloading filelock-4.2.4-py3-none-any.whl.metadata (2.0 kB)
+Collecting typing-extensions>=4.10.0 (from torch==2.14.1)
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: setuptools>=77.0.3 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch==2.14.1) (84.2.1)
+Collecting sympy>=1.13.3 (from torch==2.14.1)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx>=2.5.1 (from torch==2.14.1)
+  Using cached networkx-3.7-py3-none-any.whl.metadata (6.7 kB)
+Collecting jinja2 (from torch==2.14.1)
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec>=0.8.5 (from torch==2.14.1)
+  Using cached fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+Collecting cuda-toolkit==13.2.2 (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading cuda_toolkit-13.2.2-py2.py3-none-any.whl (2.6 kB)
+Collecting cuda-bindings<14,>=13.0.3 (from torch==2.14.1)
+  Downloading cuda_bindings-13.4.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting nvidia-cudnn-cu13==9.24.0.43 (from torch==2.14.1)
+  Downloading nvidia_cudnn_cu13-9.24.0.43-py3-none-manylinux_2_27_x86_64.whl (553.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 553.1/553.1 MB 129.1 MB/s  0:00:03
+Collecting nvidia-cusparselt-cu13==0.8.1 (from torch==2.14.1)
+  Downloading nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_x86_64.whl (170.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 170.1/170.1 MB 175.6 MB/s  0:00:00
+Collecting nvidia-nccl-cu13==2.30.7 (from torch==2.14.1)
+  Using cached nvidia_nccl_cu13-2.30.7-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting nvidia-nvshmem-cu13==3.4.5 (from torch==2.14.1)
+  Downloading nvidia_nvshmem_cu13-3.4.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (60.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.4/60.4 MB 188.7 MB/s  0:00:00
+Collecting triton~=3.8.0 (from torch==2.14.1)
+  Downloading triton-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (978 bytes)
+Collecting nvidia-cublas==13.4.1.3.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cublas-13.4.1.3-py3-none-manylinux_2_27_x86_64.whl (404.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 404.9/404.9 MB 117.0 MB/s  0:00:03
+Collecting nvidia-cuda-nvrtc==13.2.86.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cuda_nvrtc-13.2.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (47.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.0/47.0 MB 88.7 MB/s  0:00:00
+Collecting nvidia-cuda-runtime==13.2.86.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cuda_runtime-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 205.8 MB/s  0:00:00
+Collecting nvidia-cufft==12.2.0.57.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cufft-12.2.0.57-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (218.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 218.3/218.3 MB 139.3 MB/s  0:00:01
+Collecting nvidia-nvjitlink<14,>=13.2.86 (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_nvjitlink-13.4.92-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (42.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.5/42.5 MB 145.2 MB/s  0:00:00
+Collecting nvidia-cufile==1.17.1.22.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cufile-1.17.1.22-py3-none-manylinux_2_27_x86_64.whl (1.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 213.8 MB/s  0:00:00
+Collecting nvidia-cuda-cupti==13.2.86.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cuda_cupti-13.2.86-py3-none-manylinux_2_25_x86_64.whl (12.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 176.5 MB/s  0:00:00
+Collecting nvidia-curand==10.4.2.66.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_curand-10.4.2.66-py3-none-manylinux_2_27_x86_64.whl (60.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.0/60.0 MB 54.6 MB/s  0:00:01
+Collecting nvidia-cusolver==12.2.0.11.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cusolver-12.2.0.11-py3-none-manylinux_2_27_x86_64.whl (227.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.9/227.9 MB 119.7 MB/s  0:00:01
+Collecting nvidia-cusparse==12.7.10.12.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_cusparse-12.7.10.12-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (151.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.0/151.0 MB 183.9 MB/s  0:00:00
+Collecting nvidia-nvtx==13.2.86.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch==2.14.1)
+  Downloading nvidia_nvtx-13.2.86-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl (153 kB)
+Collecting cuda-pathfinder>=1.4.2 (from cuda-bindings<14,>=13.0.3->torch==2.14.1)
+  Downloading cuda_pathfinder-1.8.4-py3-none-any.whl.metadata (1.9 kB)
+Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch==2.14.1)
+  Using cached mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch==2.14.1)
+  Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Downloading torch-2.14.1%2Bcu132-cp312-cp312-manylinux_2_28_x86_64.whl (559.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 559.2/559.2 MB 104.4 MB/s  0:00:04
+Using cached nvidia_nccl_cu13-2.30.7-py3-none-manylinux_2_18_x86_64.whl (216.0 MB)
+Downloading cuda_bindings-13.4.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (7.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 141.2 MB/s  0:00:00
+Downloading triton-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (246.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 246.8/246.8 MB 194.1 MB/s  0:00:01
+Downloading cuda_pathfinder-1.8.4-py3-none-any.whl (62 kB)
+Using cached fsspec-2026.9.0-py3-none-any.whl (221 kB)
+Using cached networkx-3.7-py3-none-any.whl (2.1 MB)
+Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading filelock-4.2.4-py3-none-any.whl (162 kB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Installing collected packages: nvidia-cusparselt-cu13, mpmath, cuda-toolkit, typing-extensions, triton, sympy, nvidia-nvtx, nvidia-nvshmem-cu13, nvidia-nvjitlink, nvidia-nccl-cu13, nvidia-curand, nvidia-cufile, nvidia-cuda-runtime, nvidia-cuda-nvrtc, nvidia-cuda-cupti, networkx, MarkupSafe, fsspec, filelock, cuda-pathfinder, nvidia-cusparse, nvidia-cufft, nvidia-cublas, jinja2, cuda-bindings, nvidia-cusolver, nvidia-cudnn-cu13, torch
+
+Successfully installed MarkupSafe-3.0.3 cuda-bindings-13.4.4 cuda-pathfinder-1.8.4 cuda-toolkit-13.2.2 filelock-4.2.4 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.7 nvidia-cublas-13.4.1.3 nvidia-cuda-cupti-13.2.86 nvidia-cuda-nvrtc-13.2.86 nvidia-cuda-runtime-13.2.86 nvidia-cudnn-cu13-9.24.0.43 nvidia-cufft-12.2.0.57 nvidia-cufile-1.17.1.22 nvidia-curand-10.4.2.66 nvidia-cusolver-12.2.0.11 nvidia-cusparse-12.7.10.12 nvidia-cusparselt-cu13-0.8.1 nvidia-nccl-cu13-2.30.7 nvidia-nvjitlink-13.4.92 nvidia-nvshmem-cu13-3.4.5 nvidia-nvtx-13.2.86 sympy-1.14.0 torch-2.14.1+cu132 triton-3.8.0 typing-extensions-4.16.0
+Collecting scikit-build-core
+  Using cached scikit_build_core-1.1.1-py3-none-any.whl.metadata (19 kB)
+Collecting cmake
+  Using cached cmake-4.4.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (7.0 kB)
+Collecting ninja
+  Using cached ninja-1.13.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.4 kB)
+Collecting pytest
+  Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting scipy
+  Using cached scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Requirement already satisfied: packaging>=23.2 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from scikit-build-core) (26.3)
+Collecting pathspec>=0.12.0 (from scikit-build-core)
+  Using cached pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+Collecting iniconfig>=2 (from pytest)
+  Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting pluggy<2,>=1.6 (from pytest)
+  Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pygments>=2.15 (from pytest)
+  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting numpy<2.8,>=2.0.0 (from scipy)
+  Using cached numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Using cached scikit_build_core-1.1.1-py3-none-any.whl (293 kB)
+Using cached cmake-4.4.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (30.2 MB)
+Using cached ninja-1.13.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (183 kB)
+Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+Using cached scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+Using cached numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Using cached pathspec-1.1.1-py3-none-any.whl (57 kB)
+Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Installing collected packages: pygments, pluggy, pathspec, numpy, ninja, iniconfig, cmake, scipy, scikit-build-core, pytest
+
+Successfully installed cmake-4.4.4 iniconfig-2.3.1 ninja-1.13.2 numpy-2.5.4 pathspec-1.1.1 pluggy-1.7.0 pygments-2.21.0 pytest-9.2.0 scikit-build-core-1.1.1 scipy-1.18.1
+Collecting mace-torch==0.3.16
+  Using cached mace_torch-0.3.16-py3-none-any.whl.metadata (27 kB)
+Requirement already satisfied: torch>=1.12 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from mace-torch==0.3.16) (2.14.1+cu132)
+Collecting e3nn==0.4.4 (from mace-torch==0.3.16)
+  Using cached e3nn-0.4.4-py3-none-any.whl.metadata (5.1 kB)
+Requirement already satisfied: numpy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from mace-torch==0.3.16) (2.5.4)
+Collecting opt_einsum (from mace-torch==0.3.16)
+  Using cached opt_einsum-3.4.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting ase (from mace-torch==0.3.16)
+  Using cached ase-3.29.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting torch-ema (from mace-torch==0.3.16)
+  Using cached torch_ema-0.3-py3-none-any.whl.metadata (415 bytes)
+Collecting prettytable (from mace-torch==0.3.16)
+  Using cached prettytable-3.18.0-py3-none-any.whl.metadata (37 kB)
+Collecting matscipy (from mace-torch==0.3.16)
+  Using cached matscipy-1.3.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting h5py (from mace-torch==0.3.16)
+  Using cached h5py-3.16.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Collecting torchmetrics (from mace-torch==0.3.16)
+  Using cached torchmetrics-1.9.0-py3-none-any.whl.metadata (23 kB)
+Collecting python-hostlist (from mace-torch==0.3.16)
+  Using cached python_hostlist-2.3.0-py3-none-any.whl
+Collecting configargparse (from mace-torch==0.3.16)
+  Downloading configargparse-1.9.0-py3-none-any.whl.metadata (24 kB)
+Collecting GitPython (from mace-torch==0.3.16)
+  Using cached gitpython-3.2.1-py3-none-any.whl.metadata (13 kB)
+Collecting pyYAML (from mace-torch==0.3.16)
+  Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting tqdm (from mace-torch==0.3.16)
+  Using cached tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+Collecting lmdb (from mace-torch==0.3.16)
+  Using cached lmdb-3.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.2 kB)
+Collecting orjson (from mace-torch==0.3.16)
+  Using cached orjson-3.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (42 kB)
+Collecting matplotlib (from mace-torch==0.3.16)
+  Using cached matplotlib-3.11.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+Collecting pandas (from mace-torch==0.3.16)
+  Using cached pandas-3.1.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (18 kB)
+Requirement already satisfied: sympy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.14.0)
+Requirement already satisfied: scipy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.18.1)
+Collecting opt-einsum-fx>=0.1.4 (from e3nn==0.4.4->mace-torch==0.3.16)
+  Using cached opt_einsum_fx-0.1.4-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: packaging in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from opt-einsum-fx>=0.1.4->e3nn==0.4.4->mace-torch==0.3.16) (26.3)
+Requirement already satisfied: filelock in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (4.2.4)
+Requirement already satisfied: typing-extensions>=4.10.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (4.16.0)
+Requirement already satisfied: setuptools>=77.0.3 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (84.2.1)
+Requirement already satisfied: networkx>=2.5.1 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (3.7)
+Requirement already satisfied: jinja2 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (2026.9.0)
+Requirement already satisfied: cuda-toolkit==13.2.2 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.2.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (13.4.4)
+Requirement already satisfied: nvidia-cudnn-cu13==9.24.0.43 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (9.24.0.43)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.1 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (0.8.1)
+Requirement already satisfied: nvidia-nccl-cu13==2.30.7 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (2.30.7)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (3.4.5)
+Requirement already satisfied: triton~=3.8.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (3.8.0)
+Requirement already satisfied: nvidia-cublas==13.4.1.3.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.4.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.2.86.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.2.86)
+Requirement already satisfied: nvidia-cuda-runtime==13.2.86.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.2.86)
+Requirement already satisfied: nvidia-cufft==12.2.0.57.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (12.2.0.57)
+Requirement already satisfied: nvidia-nvjitlink<14,>=13.2.86 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.4.92)
+Requirement already satisfied: nvidia-cufile==1.17.1.22.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (1.17.1.22)
+Requirement already satisfied: nvidia-cuda-cupti==13.2.86.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.2.86)
+Requirement already satisfied: nvidia-curand==10.4.2.66.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (10.4.2.66)
+Requirement already satisfied: nvidia-cusolver==12.2.0.11.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (12.2.0.11)
+Requirement already satisfied: nvidia-cusparse==12.7.10.12.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (12.7.10.12)
+Requirement already satisfied: nvidia-nvtx==13.2.86.* in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.2.2; platform_system == "Linux"->torch>=1.12->mace-torch==0.3.16) (13.2.86)
+Requirement already satisfied: cuda-pathfinder>=1.4.2 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuda-bindings<14,>=13.0.3->torch>=1.12->mace-torch==0.3.16) (1.8.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from sympy->e3nn==0.4.4->mace-torch==0.3.16) (1.3.0)
+Collecting contourpy>=1.0.1 (from matplotlib->mace-torch==0.3.16)
+  Using cached contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib->mace-torch==0.3.16)
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib->mace-torch==0.3.16)
+  Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (139 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib->mace-torch==0.3.16)
+  Using cached kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting pillow>=9 (from matplotlib->mace-torch==0.3.16)
+  Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting pyparsing>=3 (from matplotlib->mace-torch==0.3.16)
+  Using cached pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting python-dateutil>=2.7 (from matplotlib->mace-torch==0.3.16)
+  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting tzdata (from python-dateutil>=2.7->matplotlib->mace-torch==0.3.16)
+  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting gitdb<5,>=4.0.1 (from GitPython->mace-torch==0.3.16)
+  Using cached gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->GitPython->mace-torch==0.3.16)
+  Using cached smmap-5.0.3-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from jinja2->torch>=1.12->mace-torch==0.3.16) (3.0.3)
+Collecting wcwidth>=0.3.5 (from prettytable->mace-torch==0.3.16)
+  Using cached wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+Collecting lightning-utilities>=0.15.3 (from torchmetrics->mace-torch==0.3.16)
+  Using cached lightning_utilities-0.15.3-py3-none-any.whl.metadata (5.5 kB)
+Using cached mace_torch-0.3.16-py3-none-any.whl (316 kB)
+Using cached e3nn-0.4.4-py3-none-any.whl (387 kB)
+Using cached opt_einsum_fx-0.1.4-py3-none-any.whl (13 kB)
+Using cached ase-3.29.0-py3-none-any.whl (3.0 MB)
+Using cached matplotlib-3.11.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.9 MB)
+Using cached contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 104.2 MB/s  0:00:00
+Using cached kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 141.4 MB/s  0:00:00
+Using cached pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Downloading configargparse-1.9.0-py3-none-any.whl (37 kB)
+Using cached gitpython-3.2.1-py3-none-any.whl (231 kB)
+Using cached gitdb-4.0.12-py3-none-any.whl (62 kB)
+Using cached smmap-5.0.3-py3-none-any.whl (24 kB)
+Using cached h5py-3.16.0-cp312-cp312-manylinux_2_28_x86_64.whl (5.4 MB)
+Using cached lmdb-3.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (569 kB)
+Using cached matscipy-1.3.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (469 kB)
+Using cached opt_einsum-3.4.0-py3-none-any.whl (71 kB)
+Using cached orjson-3.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (130 kB)
+Using cached pandas-3.1.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.0 MB)
+Using cached prettytable-3.18.0-py3-none-any.whl (37 kB)
+Using cached wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (785 kB)
+Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+Using cached torch_ema-0.3-py3-none-any.whl (5.5 kB)
+Using cached torchmetrics-1.9.0-py3-none-any.whl (983 kB)
+Using cached lightning_utilities-0.15.3-py3-none-any.whl (31 kB)
+Using cached tqdm-4.70.1-py3-none-any.whl (80 kB)
+Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: python-hostlist, wcwidth, tzdata, tqdm, smmap, pyYAML, pyparsing, pillow, orjson, opt_einsum, lmdb, lightning-utilities, kiwisolver, h5py, fonttools, cycler, contourpy, configargparse, python-dateutil, prettytable, gitdb, pandas, matplotlib, GitPython, ase, torchmetrics, torch-ema, opt-einsum-fx, matscipy, e3nn, mace-torch
+
+Successfully installed GitPython-3.2.1 ase-3.29.0 configargparse-1.9.0 contourpy-1.4.0 cycler-0.12.1 e3nn-0.4.4 fonttools-4.68.0 gitdb-4.0.12 h5py-3.16.0 kiwisolver-1.5.1 lightning-utilities-0.15.3 lmdb-3.0.0 mace-torch-0.3.16 matplotlib-3.11.2 matscipy-1.3.1 opt-einsum-fx-0.1.4 opt_einsum-3.4.0 orjson-3.13.0 pandas-3.1.0 pillow-13.0.0 prettytable-3.18.0 pyYAML-6.0.3 pyparsing-3.3.3 python-dateutil-4.0.0 python-hostlist-2.3.0 smmap-5.0.3 torch-ema-0.3 torchmetrics-1.9.0 tqdm-4.70.1 tzdata-2026.6 wcwidth-0.9.4
+No broken requirements found.
+Torch: 2.14.1+cu132
+Torch CUDA: 13.2
+Visible GPUs: 2
+MACE: 0.3.16
+Processing ./dynamis_state
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_state
+  Building wheel for dynamis_state (pyproject.toml): started
+  Building wheel for dynamis_state (pyproject.toml): still running...
+  Building wheel for dynamis_state (pyproject.toml): still running...
+  Building wheel for dynamis_state (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_state: filename=dynamis_state-0.1.0-cp312-cp312-linux_x86_64.whl size=625645 sha256=44d4ce9a6e24dff9debd58f9b8b71d2763c3d165be574b2b38b2cafc7879eb84
+  Stored in directory: /tmp/pip-ephem-wheel-cache-idiz8w6x/wheels/58/f6/44/428cbce65c18cdf42bd27fd0cf9002e1d3d7900094242b358d
+Successfully built dynamis_state
+Installing collected packages: dynamis_state
+Successfully installed dynamis_state-0.1.0
+Processing ./dynamis_model
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_model
+  Building wheel for dynamis_model (pyproject.toml): started
+  Building wheel for dynamis_model (pyproject.toml): still running...
+  Building wheel for dynamis_model (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_model: filename=dynamis_model-0.0.1-cp312-cp312-linux_x86_64.whl size=301565 sha256=a4f3dfe29b220b7756e2cf290c3ecb5f1b24f5ea7ae3441aa78b722e6a094acf
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6dtdoqf3/wheels/65/f9/30/f74c3735418ef2801dd9abcea404414d2eb6cf72ee185a5dc1
+Successfully built dynamis_model
+Installing collected packages: dynamis_model
+Successfully installed dynamis_model-0.0.1
+Processing ./dynamis_integrator
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_integrator
+  Building wheel for dynamis_integrator (pyproject.toml): started
+  Building wheel for dynamis_integrator (pyproject.toml): still running...
+  Building wheel for dynamis_integrator (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_integrator: filename=dynamis_integrator-0.0.1-cp312-cp312-linux_x86_64.whl size=137031 sha256=293d3ce2b9af0ffce599ac8adf79e76dce4283f87d1a6fa1d447cf0e92effbda
+  Stored in directory: /tmp/pip-ephem-wheel-cache-w4kymjd4/wheels/2d/7d/91/a1618ae367c2dabb26403438cd3e5992b613c359b9685010df
+Successfully built dynamis_integrator
+Installing collected packages: dynamis_integrator
+Successfully installed dynamis_integrator-0.0.1
+Processing ./dynamis
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis
+  Building wheel for dynamis (pyproject.toml): started
+  Building wheel for dynamis (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis: filename=dynamis-0.0.1-cp312-cp312-linux_x86_64.whl size=10825 sha256=81566b1211a9c11b457efd438bb9ae81e3d8a498cafa9f31e8a085ca9696df54
+  Stored in directory: /tmp/pip-ephem-wheel-cache-twgvwz8l/wheels/b6/6c/4f/701f39f7552cf273b9cc9924c64d5ab9fa2fda804abfdd29c7
+Successfully built dynamis
+Installing collected packages: dynamis
+Successfully installed dynamis-0.0.1
+No broken requirements found.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+cuequivariance or cuequivariance_torch is not available. Cuequivariance acceleration will be disabled.
+Dynamis native modules and MACE imported successfully.
+W1102 17:58:23.129000 3169295 site-packages/torch/distributed/run.py:982] 
+W1102 17:58:23.129000 3169295 site-packages/torch/distributed/run.py:982] *****************************************
+W1102 17:58:23.129000 3169295 site-packages/torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 17:58:23.129000 3169295 site-packages/torch/distributed/run.py:982] *****************************************
+============================= test session starts =========================================================== test session starts ==============================
+
+platform linux -- Python 3.12.16, pytest-9.2.0, pluggy-1.7.0 -- /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/bin/pythonplatform linux -- Python 3.12.16, pytest-9.2.0, pluggy-1.7.0 -- /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/bin/python
+
+cachedir: .pytest_cachecachedir: .pytest_cache
+
+rootdir: /tmp/dynamis-t214-23454372-T1qzwf
+rootdir: /tmp/dynamis-t214-23454372-T1qzwfconfigfile: pytest.ini
+
+configfile: pytest.ini
+collecting ... collecting ... collected 18 itemscollected 18 items
+
+
+
+dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[euler] dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[euler] PASSEDPASSED [  5%] [  5%]
+dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[verlet] PASSED [ 11%]PASSED [ 11%]
+dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[langevin] 
+dynamis/tests/test_simulation_distributed.py::test_simulation_constructs[langevin] PASSEDPASSED [ 16%] [ 16%]
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[euler] 
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[euler] PASSEDPASSED [ 22%] [ 22%]
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[verlet] PASSED [ 27%]PASSED [ 27%]
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[langevin] 
+dynamis/tests/test_simulation_distributed.py::test_simulation_step_runs[langevin] PASSED [ 33%]PASSED [ 33%]
+dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[euler] 
+dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[euler] PASSED [ 38%]PASSED [ 38%]
+dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[verlet] PASSED [ 44%]PASSED [ 44%]
+
+dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[langevin] dynamis/tests/test_simulation_distributed.py::test_energy_is_scalar[langevin] PASSED [ 50%]PASSED [ 50%]
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[euler] 
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[euler] PASSED [ 55%]PASSED [ 55%]
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[verlet] PASSED [ 61%]PASSED [ 61%]
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[langevin] 
+dynamis/tests/test_simulation_distributed.py::test_forces_shape[langevin] PASSED [ 66%]PASSED [ 66%]
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[euler] 
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[euler] PASSEDPASSED [ 72%] [ 72%]
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[verlet] PASSED [ 77%]PASSED [ 77%]
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[langevin] 
+dynamis/tests/test_simulation_distributed.py::test_energy_forces_finite[langevin] PASSED [ 83%]PASSED [ 83%]
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[euler] 
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[euler] PASSED [ 88%]PASSED [ 88%]
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[verlet] 
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[verlet] PASSED [ 94%]PASSED [ 94%]
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[langevin] 
+dynamis/tests/test_simulation_distributed.py::test_multi_step_no_crash[langevin] PASSED [100%]PASSED [100%]
+
+============================== 18 passed in 2.37s ==============================
+
+
+============================== 18 passed in 2.37s ==============================
+W1102 17:58:30.833000 3169374 site-packages/torch/distributed/run.py:982] 
+W1102 17:58:30.833000 3169374 site-packages/torch/distributed/run.py:982] *****************************************
+W1102 17:58:30.833000 3169374 site-packages/torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 17:58:30.833000 3169374 site-packages/torch/distributed/run.py:982] *****************************************
+Initializing distributed environment...
+Initializing distributed environment...
+Hello from global rank 0, local rank 0, world size 2, device cuda:0!
+Hello from global rank 1, local rank 1, world size 2, device cuda:1!
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+cuequivariance or cuequivariance_torch is not available. Cuequivariance acceleration will be disabled.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+system: natural_chain12
+source_path: builtin://natural_chain12
+num_atoms: 12
+model_family: mp
+model_name: medium-mpa-0
+head_name: default
+enable_cueq: False
+cutoff: 6.0
+artifact_version: 3
+precision:
+  calculator.requested_dtype: float32
+  calculator.model_parameter_dtype: torch.float32
+  calculator.energy_result_type: float
+  calculator.energy_float32_roundtrip_delta_ev: 0.0
+  calculator.force_result_dtype: float32
+  core_model.model_parameter_dtype: torch.float32
+  core_model.input_position_dtype: torch.float32
+  core_model.energy_tensor_dtype: torch.float32
+  core_model.node_energy_tensor_dtype: torch.float64
+  core_model.interaction_energy_tensor_dtype: torch.float32
+  core_model.force_tensor_dtype: torch.float32
+  core_model.energy_float32_roundtrip_delta_ev: 0.0
+calculator_energy: -54.70977020263672
+core_model_energy: -54.709774017333984
+core_model_node_energy_sum_float64: -54.7097749710083
+core_model_node_energy_sum_float32: -54.709774017333984
+core_model_stable_energy: -54.7097749710083
+calculator_minus_core_model_energy: 3.814697265625e-06
+calculator_minus_core_model_force_mae: 4.304779963604233e-07
+W1102 17:58:50.545000 3169504 site-packages/torch/distributed/run.py:982] 
+W1102 17:58:50.545000 3169504 site-packages/torch/distributed/run.py:982] *****************************************
+W1102 17:58:50.545000 3169504 site-packages/torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 17:58:50.545000 3169504 site-packages/torch/distributed/run.py:982] *****************************************
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+cuequivariance or cuequivariance_torch is not available. Cuequivariance acceleration will be disabled.
+cuequivariance or cuequivariance_torch is not available. Cuequivariance acceleration will be disabled.
+Initializing distributed environment...
+Initializing distributed environment...
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: natural_chain12
+source_path: builtin://natural_chain12
+num_atoms: 12
+model: {'model_family': 'mp', 'model_name': 'medium-mpa-0', 'head_name': 'default', 'enable_cueq': False, 'energy_mode': 'legacy'}
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Parity
+------------------------------------------------------------
+distributed_energy: -0.5278690755367279
+summed_owned_local_energy: -0.5278690755367279
+explicit_dynamis_graph_energy: -0.5278690341645111
+explicit_stable_energy: -0.5278690790221079
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: 4.4857596748215656e-08
+distributed_minus_explicit_stable_energy: 3.4853799846246147e-09
+explicit_stable_energy_abs_error: 3.4853799846246147e-09
+stable_reference_gap_reduction: 3.7886836778966426e-08
+core_model_stable_energy: -0.5278690801723026
+distributed_minus_core_model_stable_energy: 4.635574701872258e-09
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_energy_sum: -0.5278690790221079
+explicit_node_energy_sum_float32: -0.5278690709707443
+explicit_node_sum_float64_minus_float32: -8.051363575845016e-09
+explicit_node_sum_minus_model_energy: -4.4857596748215656e-08
+distributed_minus_explicit_node_sum: 3.4853799846246147e-09
+distributed_minus_explicit_node_sum_float32: -4.565983591220402e-09
+explicit_interaction_energy: -0.3929279239951675
+explicit_node_e0_sum: -0.13494111477012272
+explicit_node_e0_sum_float32: -0.13494111016934357
+explicit_node_e0_tensor_dtype: torch.float32
+explicit_node_e0_model_style_scatter_sum: -0.13494111016934357
+explicit_node_e0_scatter_minus_sum_float64: 4.60077914654633e-09
+explicit_node_e0_scatter_minus_model_e0: 5.551115123125783e-17
+explicit_node_interaction_sum: -0.3929279642519851
+explicit_node_interaction_sum_float32: -0.39292796080140074
+explicit_node_interaction_minus_model_interaction: -4.0256817601669326e-08
+explicit_node_e0_minus_model_e0: -4.600779091035179e-09
+calculator_mace_energy: -0.5278690341645111
+core_model_mace_energy: -0.5278690709707443
+distributed_minus_explicit_energy: -4.137221676359104e-08
+distributed_minus_calculator_energy: -4.137221676359104e-08
+distributed_minus_core_model_energy: -4.565983591220402e-09
+explicit_energy_abs_error: 4.137221676359104e-08
+calculator_energy_abs_error: 4.137221676359104e-08
+core_model_energy_abs_error: 4.565983591220402e-09
+explicit_energy_abs_error_per_atom: 3.4476847302992533e-09
+calculator_energy_abs_error_per_atom: 3.4476847302992533e-09
+core_model_energy_abs_error_per_atom: 3.8049863260170014e-10
+explicit_force_mae: 6.886289760643649e-09
+explicit_force_max_abs: 2.60770320892334e-08
+calculator_force_mae: 5.568532746025312e-09
+calculator_force_max_abs: 2.421438694000244e-08
+core_model_force_mae: 8.066611378865218e-09
+core_model_force_max_abs: 2.7008354663848877e-08
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+explicit_forces_close: True
+calculator_energy_close: True
+calculator_forces_close: True
+explicit_edge_count: 132
+core_model_edge_count: 132
+calculator_minus_core_model_energy: 3.680623321533203e-08
+calculator_minus_core_model_force_mae: 4.1534812397530235e-09
+calculator_minus_core_model_force_max_abs: 1.3802337455749512e-08
+explicit_node_minus_core_node_sum: 1.150194787979126e-09
+explicit_vs_core_node_energy_mae: 2.2045400102933246e-09
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+
+------------------------------------------------------------
+Per-Rank
+------------------------------------------------------------
+rank 0: local_atoms=6, owned_local_energy=-0.26432061195373535, energy_dtype=torch.float32, model_dtype=torch.float32, baseline=None, interaction=None
+rank 1: local_atoms=6, owned_local_energy=-0.26354846358299255, energy_dtype=torch.float32, model_dtype=torch.float32, baseline=None, interaction=None
+
+------------------------------------------------------------
+Graph edge comparison
+------------------------------------------------------------
+cutoff: 6.0
+explicit_raw_count: 132
+core_raw_count: 132
+explicit_unique_count: 132
+core_unique_count: 132
+explicit_duplicate_count: 0
+core_duplicate_count: 0
+common_count_with_multiplicity: 132
+explicit_only: {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}
+core_only: {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}
+Collecting cuequivariance==0.9.1
+  Using cached cuequivariance-0.9.1-py3-none-any.whl.metadata (15 kB)
+Collecting cuequivariance-torch==0.9.1
+  Using cached cuequivariance_torch-0.9.1-py3-none-any.whl.metadata (15 kB)
+Collecting cuequivariance-ops-cu13==0.9.1
+  Downloading cuequivariance_ops_cu13-0.9.1-py3-none-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (19 kB)
+Collecting cuequivariance-ops-torch-cu13==0.9.1
+  Downloading cuequivariance_ops_torch_cu13-0.9.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (21 kB)
+Requirement already satisfied: networkx in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance==0.9.1) (3.7)
+Requirement already satisfied: numpy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance==0.9.1) (2.5.4)
+Requirement already satisfied: opt-einsum in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance==0.9.1) (3.4.0)
+Requirement already satisfied: scipy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance==0.9.1) (1.18.1)
+Requirement already satisfied: sympy in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance==0.9.1) (1.14.0)
+Requirement already satisfied: nvidia-cublas>=12.5.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance-ops-cu13==0.9.1) (13.4.1.3)
+Requirement already satisfied: tqdm in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from cuequivariance-ops-cu13==0.9.1) (4.70.1)
+Collecting nvidia-ml-py (from cuequivariance-ops-cu13==0.9.1)
+  Using cached nvidia_ml_py-13.615.71-py3-none-any.whl.metadata (9.7 kB)
+Collecting platformdirs (from cuequivariance-ops-cu13==0.9.1)
+  Downloading platformdirs-4.14.3-py3-none-any.whl.metadata (5.4 kB)
+Requirement already satisfied: nvidia-cuda-nvrtc in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from nvidia-cublas>=12.5.0->cuequivariance-ops-cu13==0.9.1) (13.2.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages (from sympy->cuequivariance==0.9.1) (1.3.0)
+Using cached cuequivariance-0.9.1-py3-none-any.whl (269 kB)
+Using cached cuequivariance_torch-0.9.1-py3-none-any.whl (205 kB)
+Downloading cuequivariance_ops_cu13-0.9.1-py3-none-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (31.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 31.9/31.9 MB 72.8 MB/s  0:00:00
+Downloading cuequivariance_ops_torch_cu13-0.9.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (393 kB)
+Using cached nvidia_ml_py-13.615.71-py3-none-any.whl (58 kB)
+Downloading platformdirs-4.14.3-py3-none-any.whl (35 kB)
+Installing collected packages: nvidia-ml-py, platformdirs, cuequivariance-ops-cu13, cuequivariance, cuequivariance-torch, cuequivariance-ops-torch-cu13
+
+Successfully installed cuequivariance-0.9.1 cuequivariance-ops-cu13-0.9.1 cuequivariance-ops-torch-cu13-0.9.1 cuequivariance-torch-0.9.1 nvidia-ml-py-13.615.71 platformdirs-4.14.3
+No broken requirements found.
+Torch after CuEq installation: 2.14.1+cu132
+Compiled CuEq CUDA 13 ops imported.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+W1102 17:59:24.728000 3170207 site-packages/torch/fx/_symbolic_trace.py:57] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+system: natural_chain12
+source_path: builtin://natural_chain12
+num_atoms: 12
+model_family: mp
+model_name: medium-mpa-0
+head_name: default
+enable_cueq: True
+cutoff: 6.0
+artifact_version: 3
+precision:
+  calculator.requested_dtype: float32
+  calculator.model_parameter_dtype: torch.float32
+  calculator.energy_result_type: float
+  calculator.energy_float32_roundtrip_delta_ev: 0.0
+  calculator.force_result_dtype: float32
+  core_model.model_parameter_dtype: torch.float32
+  core_model.input_position_dtype: torch.float32
+  core_model.energy_tensor_dtype: torch.float32
+  core_model.node_energy_tensor_dtype: torch.float64
+  core_model.interaction_energy_tensor_dtype: torch.float32
+  core_model.force_tensor_dtype: torch.float32
+  core_model.energy_float32_roundtrip_delta_ev: 0.0
+calculator_energy: -54.709774017333984
+core_model_energy: -54.70977020263672
+core_model_node_energy_sum_float64: -54.70977556705475
+core_model_node_energy_sum_float32: -54.709774017333984
+core_model_stable_energy: -54.70977556705475
+calculator_minus_core_model_energy: -3.814697265625e-06
+calculator_minus_core_model_force_mae: 3.998478348421486e-07
+W1102 18:01:20.401000 3171627 site-packages/torch/distributed/run.py:982] 
+W1102 18:01:20.401000 3171627 site-packages/torch/distributed/run.py:982] *****************************************
+W1102 18:01:20.401000 3171627 site-packages/torch/distributed/run.py:982] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1102 18:01:20.401000 3171627 site-packages/torch/distributed/run.py:982] *****************************************
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Initializing distributed environment...
+Initializing distributed environment...
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /u/jsaravananindira/.cache/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/calculators/foundations_models.py:297: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model_path, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+[rank0]:W1102 18:01:35.515000 3171740 site-packages/torch/fx/_symbolic_trace.py:57] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[rank1]:W1102 18:01:35.517000 3171741 site-packages/torch/fx/_symbolic_trace.py:57] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: natural_chain12
+source_path: builtin://natural_chain12
+num_atoms: 12
+model: {'model_family': 'mp', 'model_name': 'medium-mpa-0', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'legacy'}
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Parity
+------------------------------------------------------------
+distributed_energy: -0.5278690755367279
+summed_owned_local_energy: -0.5278690755367279
+explicit_dynamis_graph_energy: -0.5278690341645111
+explicit_stable_energy: -0.5278690744213287
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: 4.0256817546158175e-08
+distributed_minus_explicit_stable_energy: -1.1153992174328664e-09
+explicit_stable_energy_abs_error: 1.1153992174328664e-09
+stable_reference_gap_reduction: 4.0256817546158175e-08
+core_model_stable_energy: -0.5278690859232765
+distributed_minus_core_model_stable_energy: 1.0386548621177383e-08
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_energy_sum: -0.5278690744213287
+explicit_node_energy_sum_float32: -0.5278690709707443
+explicit_node_sum_float64_minus_float32: -3.4505843737875352e-09
+explicit_node_sum_minus_model_energy: -4.0256817546158175e-08
+distributed_minus_explicit_node_sum: -1.1153992174328664e-09
+distributed_minus_explicit_node_sum_float32: -4.565983591220402e-09
+explicit_interaction_energy: -0.3929279239951675
+explicit_node_e0_sum: -0.13494111477012272
+explicit_node_e0_sum_float32: -0.13494111016934357
+explicit_node_e0_tensor_dtype: torch.float32
+explicit_node_e0_model_style_scatter_sum: -0.13494111016934357
+explicit_node_e0_scatter_minus_sum_float64: 4.60077914654633e-09
+explicit_node_e0_scatter_minus_model_e0: 5.551115123125783e-17
+explicit_node_interaction_sum: -0.39292795965120597
+explicit_node_interaction_sum_float32: -0.39292796080140074
+explicit_node_interaction_minus_model_interaction: -3.5656038455122996e-08
+explicit_node_e0_minus_model_e0: -4.600779091035179e-09
+calculator_mace_energy: -0.5278690709707443
+core_model_mace_energy: -0.5278690341645111
+distributed_minus_explicit_energy: -4.137221676359104e-08
+distributed_minus_calculator_energy: -4.565983591220402e-09
+distributed_minus_core_model_energy: -4.137221676359104e-08
+explicit_energy_abs_error: 4.137221676359104e-08
+calculator_energy_abs_error: 4.565983591220402e-09
+core_model_energy_abs_error: 4.137221676359104e-08
+explicit_energy_abs_error_per_atom: 3.4476847302992533e-09
+calculator_energy_abs_error_per_atom: 3.8049863260170014e-10
+core_model_energy_abs_error_per_atom: 3.4476847302992533e-09
+explicit_force_mae: 6.4481153749795794e-09
+explicit_force_max_abs: 1.862645149230957e-08
+calculator_force_mae: 5.822383020159805e-09
+calculator_force_max_abs: 2.60770320892334e-08
+core_model_force_mae: 5.4925397563465594e-09
+core_model_force_max_abs: 1.6763806343078613e-08
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+explicit_forces_close: True
+calculator_energy_close: True
+calculator_forces_close: True
+explicit_edge_count: 132
+core_model_edge_count: 132
+calculator_minus_core_model_energy: -3.680623321533203e-08
+calculator_minus_core_model_force_mae: 3.857945109422588e-09
+calculator_minus_core_model_force_max_abs: 1.3802337455749512e-08
+explicit_node_minus_core_node_sum: 1.150194787979126e-08
+explicit_vs_core_node_energy_mae: 1.3418939193089802e-09
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+
+------------------------------------------------------------
+Per-Rank
+------------------------------------------------------------
+rank 0: local_atoms=6, owned_local_energy=-0.26432061195373535, energy_dtype=torch.float32, model_dtype=torch.float32, baseline=None, interaction=None
+rank 1: local_atoms=6, owned_local_energy=-0.26354846358299255, energy_dtype=torch.float32, model_dtype=torch.float32, baseline=None, interaction=None
+
+------------------------------------------------------------
+Graph edge comparison
+------------------------------------------------------------
+cutoff: 6.0
+explicit_raw_count: 132
+core_raw_count: 132
+explicit_unique_count: 132
+core_unique_count: 132
+explicit_duplicate_count: 0
+core_duplicate_count: 0
+common_count_with_multiplicity: 132
+explicit_only: {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}
+core_only: {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}
+Environment: /u/jsaravananindira/.conda/envs/dynamis-py312-t2141-cu132-cueq091
+Scratch copy: /tmp/dynamis-t214-23454372-T1qzwf
+Source commit: 51ad334d1a5716c264065d94df79698e190414f1
+Dynamis and MACE CuEq validation passed.

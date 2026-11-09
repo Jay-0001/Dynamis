@@ -24,6 +24,7 @@ import torch
 from dynamis_model.nnp.mace import (
     COMPUTE_DTYPE,
     load_raw_mace_model,
+    resolve_mace_model_name,
     resolve_model_head_name,
 )
 
@@ -33,7 +34,7 @@ try:
     from ase.data import atomic_numbers as ASE_ATOMIC_NUMBERS
     from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
     from mace.data import AtomicData, Configuration
-    from mace.tools import AtomicNumberTable
+    from mace.tools import AtomicNumberTable, torch_tools
     from mace.tools.torch_geometric.batch import Batch
 
     HAS_STANDALONE_MACE = True
@@ -48,7 +49,7 @@ except Exception as exc:  # pragma: no cover - optional dependency
 else:
     _STANDALONE_IMPORT_ERROR = None
 
-ARTIFACT_VERSION = 3
+ARTIFACT_VERSION = 4
 TEST_FILE_DIR = Path(__file__).resolve().parent
 ELEMENT_TO_Z = dict(ASE_ATOMIC_NUMBERS)
 
@@ -102,7 +103,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model-family", choices=["mp", "off", "omol", "polar"], default="mp"
     )
-    parser.add_argument("--model", default="medium-mpa-0")
+    parser.add_argument("--model", default=None, help="Checkpoint name (defaults by family).")
     parser.add_argument(
         "--head-name",
         default="",
@@ -124,6 +125,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--benchmark-iterations", type=int, default=10)
     parser.add_argument("--benchmark-samples", type=int, default=5)
     parser.add_argument("--output-json", type=Path)
+    parser.add_argument("--float64-diagnostic", action="store_true",
+                        help="Compare float64 calculator/core scalar and per-atom totals outside benchmark timing.")
+    parser.add_argument("--float64-max-atoms", type=int, default=1000)
+    parser.add_argument("--repeatability-runs", type=int, default=0,
+                        help="Number of untimed repeated calculator evaluations (0 disables).")
     return parser
 
 
@@ -238,31 +244,84 @@ def raw_to_atoms(raw: Dict[str, Any]) -> Atoms:
 
 
 def load_mace_calculator(
-    model_family: str, model_name: str, device: str, enable_cueq: bool = False
+    model_family: str, model_name: str, device: str, enable_cueq: bool = False,
+    head_name: Optional[str] = None, default_dtype: str = "float32",
 ):
     _require_standalone_mace()
     loaders = {"mp": mace_mp, "off": mace_off, "omol": mace_omol, "polar": mace_polar}
     if model_family not in loaders:
         raise ValueError(f"Unsupported MACE model family: {model_family}")
+    kwargs = {"head": head_name} if head_name is not None else {}
     return loaders[model_family](
         model=model_name,
         device=device,
-        default_dtype="float32",
+        default_dtype=default_dtype,
         enable_cueq=enable_cueq,
+        **kwargs,
     )
 
 
-def evaluate_with_calculator(calculator, atoms: Atoms) -> Dict[str, Any]:
+def evaluate_with_calculator(
+    calculator, atoms: Atoms, collect_precision: bool = False,
+    collect_details: bool = False, collect_graph: bool = True,
+) -> Dict[str, Any]:
     _require_standalone_mace()
     calculator.calculate(
         atoms, properties=["energy", "forces"], system_changes=all_changes
     )
-    return {
-        "energy": float(calculator.results["energy"]),
+    energy_result = calculator.results["energy"]
+    force_result = calculator.results["forces"]
+    result = {
+        "energy": float(energy_result),
         "forces": torch.as_tensor(
-            calculator.results["forces"], dtype=COMPUTE_DTYPE
+            force_result, dtype=COMPUTE_DTYPE
         ).cpu(),
     }
+    if collect_details:
+        full = np.asarray(calculator.results["energies"])
+        interaction = np.asarray(calculator.results["node_energy"])
+        if full.shape != (len(atoms),) or interaction.shape != full.shape:
+            raise ValueError("Calculator per-atom energies have unexpected shape.")
+        # MACECalculator copies the full node energy into `energies`, then
+        # removes E0 from `node_energy`. Preserve the original NumPy dtypes.
+        result.update(
+            node_energy_values=torch.from_numpy(full.copy()).cpu(),
+            interaction_node_energy_values=torch.from_numpy(interaction.copy()).cpu(),
+            node_energy_dtype=str(full.dtype),
+            interaction_node_energy_dtype=str(interaction.dtype),
+            stable_energy=float(full.astype(np.float64).sum(dtype=np.float64)),
+            stable_interaction_energy=float(interaction.astype(np.float64).sum(dtype=np.float64)),
+        )
+        result["stable_baseline_energy"] = (
+            result["stable_energy"] - result["stable_interaction_energy"]
+        )
+        # Rebuild the calculator's graph through its own batch constructor.
+        # This is a diagnostic reconstruction, separate from the timed forward.
+        if collect_graph:
+            batch = calculator._atoms_to_batch(atoms)
+            rows = torch.cat(
+                (batch["edge_index"].T.long(), batch["unit_shifts"].round().long()),
+                dim=1,
+            ).to(dtype=torch.int32, device="cpu")
+            result["edge_rows"] = rows
+            result["edge_count"] = int(rows.shape[0])
+    if collect_precision:
+        result["precision"] = {
+            "requested_dtype": str(calculator.default_dtype),
+            "model_parameter_dtype": str(next(calculator.models[0].parameters()).dtype),
+            "energy_result_type": type(energy_result).__name__,
+            "energy_float32_roundtrip_delta_ev": (
+                float(energy_result) - float(np.float32(energy_result))
+            ),
+            "force_result_dtype": str(np.asarray(force_result).dtype),
+            "full_node_energy_result_dtype": str(
+                np.asarray(calculator.results["energies"]).dtype
+            ),
+            "interaction_node_energy_result_dtype": str(
+                np.asarray(calculator.results["node_energy"]).dtype
+            ),
+        }
+    return result
 
 
 def _align_batch_dtype(
@@ -289,10 +348,16 @@ def build_core_model_batch(
     resolved_head = resolve_model_head_name(model, head_name)
     config = Configuration(
         atomic_numbers=np.asarray(raw["atomic_numbers"], dtype=np.int64),
-        positions=np.asarray(raw["positions"], dtype=np.float32),
+        positions=np.asarray(
+            raw["positions"],
+            dtype=np.float64 if next(model.parameters()).dtype == torch.float64 else np.float32,
+        ),
         properties={},
         property_weights={},
-        cell=np.asarray(raw["cell"], dtype=np.float32),
+        cell=np.asarray(
+            raw["cell"],
+            dtype=np.float64 if next(model.parameters()).dtype == torch.float64 else np.float32,
+        ),
         pbc=tuple(raw["pbc"]),
         weight=1.0,
         config_type="dynamis_mace_model_core_model_reference",
@@ -302,12 +367,15 @@ def build_core_model_batch(
     z_table = AtomicNumberTable(
         [int(value) for value in model.atomic_numbers.detach().cpu().tolist()]
     )
-    atomic_data = AtomicData.from_config(
-        config=config,
-        z_table=z_table,
-        cutoff=cutoff,
-        heads=model_heads or [resolved_head],
-    )
+    with torch_tools.default_dtype(
+        "float64" if next(model.parameters()).dtype == torch.float64 else "float32"
+    ):
+        atomic_data = AtomicData.from_config(
+            config=config,
+            z_table=z_table,
+            cutoff=cutoff,
+            heads=model_heads or [resolved_head],
+        )
     edge_count = int(atomic_data.edge_index.shape[1])
     batch = Batch.from_data_list([atomic_data]).to(device).to_dict()
     return _align_batch_dtype(batch, model), edge_count
@@ -330,10 +398,107 @@ def evaluate_with_core_model(
         compute_stress=False,
         compute_hessian=False,
     )
+    energy_tensor = out["energy"].detach()
+    node_energy_tensor = out["node_energy"].detach().reshape(-1)
+    head_index = int(batch["head"].reshape(()).item())
+    node_e0 = model.atomic_energies_fn(batch["node_attrs"])[
+        :, head_index
+    ].detach().double()
+    stable_baseline = node_e0.sum()
+    stable_interaction = (node_energy_tensor.double() - node_e0).sum()
+    stable_energy = stable_baseline + stable_interaction
+    # Preserve directed edge identities for comparison with Dynamis's graph.
+    # A count alone cannot distinguish cutoff-boundary edges from missing
+    # neighbors, reversed edges, or duplicate records.
+    edge_rows = torch.cat(
+        (batch["edge_index"].T, batch["unit_shifts"].round().long()), dim=1
+    ).to(dtype=torch.int32, device="cpu")
     return {
-        "energy": float(out["energy"].detach().cpu().reshape(())),
-        "forces": out["forces"].detach().to(COMPUTE_DTYPE).cpu(),
+        "energy": float(energy_tensor.cpu().reshape(())),
+        "node_energy_sum_float64": float(node_energy_tensor.double().sum().cpu()),
+        "node_energy_sum_float32": float(node_energy_tensor.float().sum().cpu()),
+        "stable_energy": float(stable_energy.cpu()),
+        "stable_baseline_energy": float(stable_baseline.cpu()),
+        "stable_interaction_energy": float(stable_interaction.cpu()),
+        "node_energy_values": node_energy_tensor.double().cpu(),
+        "forces": out["forces"].detach().cpu(),
         "edge_count": edge_count,
+        "edge_rows": edge_rows,
+        "precision": {
+            "model_parameter_dtype": str(next(model.parameters()).dtype),
+            "input_position_dtype": str(batch["positions"].dtype),
+            "energy_tensor_dtype": str(energy_tensor.dtype),
+            "node_energy_tensor_dtype": str(out["node_energy"].dtype),
+            "interaction_energy_tensor_dtype": str(out["interaction_energy"].dtype),
+            "force_tensor_dtype": str(out["forces"].dtype),
+            "energy_float32_roundtrip_delta_ev": (
+                float(energy_tensor.cpu().reshape(()))
+                - float(energy_tensor.to(torch.float32).cpu().reshape(()))
+            ),
+        },
+    }
+
+
+def compare_calculator_core(calculator: Dict[str, Any], core: Dict[str, Any]) -> Dict[str, Any]:
+    """Compare independently evaluated MACE paths in eV and eV/Angstrom."""
+    calc_nodes = calculator["node_energy_values"].double().reshape(-1)
+    core_nodes = core["node_energy_values"].double().reshape(-1)
+    if calc_nodes.shape != core_nodes.shape:
+        raise ValueError("Calculator and core per-atom energy shapes differ.")
+    delta = calc_nodes - core_nodes
+    calc_edges = calculator["edge_rows"].long()
+    core_edges = core["edge_rows"].long()
+    from collections import Counter
+    calc_counts = Counter(map(tuple, calc_edges.tolist()))
+    core_counts = Counter(map(tuple, core_edges.tolist()))
+    force_delta = calculator["forces"].double() - core["forces"].double()
+    return {
+        "calculator_minus_core_legacy_energy_ev": calculator["energy"] - core["energy"],
+        "calculator_minus_core_controlled_energy_ev": (
+            calculator["stable_energy"] - core["stable_energy"]
+        ),
+        "calculator_minus_core_node_energy_sum_ev": float(delta.sum()),
+        "calculator_vs_core_node_energy_mae_ev": float(delta.abs().mean()),
+        "calculator_vs_core_node_energy_max_abs_ev": float(delta.abs().max()),
+        "calculator_vs_core_force_mae_ev_per_angstrom": float(force_delta.abs().mean()),
+        "calculator_vs_core_force_max_abs_ev_per_angstrom": float(force_delta.abs().max()),
+        "calculator_graph_edge_count": int(calc_edges.shape[0]),
+        "core_graph_edge_count": int(core_edges.shape[0]),
+        "calculator_only_edge_count": sum((calc_counts - core_counts).values()),
+        "core_only_edge_count": sum((core_counts - calc_counts).values()),
+    }
+
+
+def repeat_calculator(calculator, atoms: Atoms, runs: int) -> Dict[str, Any]:
+    if runs < 2:
+        raise ValueError("--repeatability-runs must be 0 or at least 2.")
+    records = []
+    first_forces = None
+    for index in range(runs):
+        result = evaluate_with_calculator(
+            calculator, atoms, collect_details=True, collect_graph=False
+        )
+        forces = result["forces"].double()
+        if first_forces is None:
+            first_forces = forces
+        delta = forces - first_forces
+        records.append({
+            "run": index + 1,
+            "calculator_legacy_energy_ev": result["energy"],
+            "calculator_controlled_energy_ev": result["stable_energy"],
+            "calculator_force_max_abs_ev_per_angstrom": float(forces.abs().max()),
+            "force_vs_first_mae_ev_per_angstrom": float(delta.abs().mean()),
+            "force_vs_first_max_abs_ev_per_angstrom": float(delta.abs().max()),
+        })
+    legacy = [item["calculator_legacy_energy_ev"] for item in records]
+    controlled = [item["calculator_controlled_energy_ev"] for item in records]
+    return {
+        "runs": records,
+        "calculator_legacy_energy_spread_ev": max(legacy) - min(legacy),
+        "calculator_controlled_energy_spread_ev": max(controlled) - min(controlled),
+        "calculator_force_max_abs_spread_ev_per_angstrom": max(
+            item["force_vs_first_max_abs_ev_per_angstrom"] for item in records
+        ),
     }
 
 
@@ -458,6 +623,16 @@ def generate_reference_artifact(
     benchmark: bool,
 ) -> Dict[str, Any]:
     _require_standalone_mace()
+    args.model = resolve_mace_model_name(args.model_family, args.model)
+    if args.repeatability_runs == 1 or args.repeatability_runs < 0:
+        raise ValueError("--repeatability-runs must be 0 or at least 2.")
+    if args.float64_diagnostic and (
+        args.float64_max_atoms <= 0 or len(raw["atomic_numbers"]) > args.float64_max_atoms
+    ):
+        raise ValueError(
+            "Float64 diagnostic exceeds --float64-max-atoms; use a smaller structure "
+            "or explicitly raise the limit."
+        )
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     raw_model = (
         load_raw_mace_model(
@@ -479,10 +654,13 @@ def generate_reference_artifact(
         args.model,
         str(device),
         enable_cueq=args.enable_cueq,
+        head_name=head_name,
     )
     atoms = raw_to_atoms(raw)
 
-    calculator_reference = evaluate_with_calculator(calculator, atoms)
+    calculator_reference = evaluate_with_calculator(
+        calculator, atoms, collect_precision=True, collect_details=True
+    )
     core_model_reference = evaluate_with_core_model(
         raw, raw_model, cutoff, device, head_name=head_name
     )
@@ -492,6 +670,46 @@ def generate_reference_artifact(
     calc_core_force_delta = (
         calculator_reference["forces"] - core_model_reference["forces"]
     )
+    calculator_core_comparison = compare_calculator_core(
+        calculator_reference, core_model_reference
+    )
+
+    float64_diagnostic = None
+    if args.float64_diagnostic:
+        # Bypass load_raw_mace_model here: it intentionally casts to float32.
+        # Load the original checkpoint directly, then retain its float64 values.
+        loader = {"mp": mace_mp, "off": mace_off, "omol": mace_omol,
+                  "polar": mace_polar}[args.model_family]
+        raw_model64 = loader(
+            model=args.model, device=str(device), return_raw_model=True
+        ).to(device=device, dtype=torch.float64).eval()
+        calculator64 = load_mace_calculator(
+            args.model_family, args.model, str(device),
+            head_name=head_name, default_dtype="float64",
+        )
+        calc64 = evaluate_with_calculator(
+            calculator64, atoms, collect_precision=True, collect_details=True
+        )
+        core64 = evaluate_with_core_model(
+            raw, raw_model64, float(raw_model64.r_max.cpu()), device,
+            head_name=head_name,
+        )
+        float64_diagnostic = {
+            "backend": "e3nn (CuEq disabled for float64 diagnostic)",
+            "calculator": {
+                "legacy_energy_ev": calc64["energy"],
+                "controlled_energy_ev": calc64["stable_energy"],
+                "legacy_minus_controlled_ev": calc64["energy"] - calc64["stable_energy"],
+                "precision": calc64["precision"],
+            },
+            "core": {
+                "legacy_energy_ev": core64["energy"],
+                "controlled_energy_ev": core64["stable_energy"],
+                "legacy_minus_controlled_ev": core64["energy"] - core64["stable_energy"],
+                "precision": core64["precision"],
+            },
+            "calculator_core": compare_calculator_core(calc64, core64),
+        }
 
     calculator_benchmark = None
     core_model_benchmark = None
@@ -546,14 +764,55 @@ def generate_reference_artifact(
             ),
         }
 
+    repeatability = (
+        repeat_calculator(calculator, atoms, args.repeatability_runs)
+        if args.repeatability_runs else None
+    )
+
     artifact = {
         "metadata": reference_artifact_metadata(raw, args, cutoff, head_name),
+        "precision": {
+            "calculator": calculator_reference["precision"],
+            "core_model": core_model_reference["precision"],
+        },
         "reference": {
             "calculator_energy": calculator_reference["energy"],
+            "calculator_node_energy_sum_float64": calculator_reference["stable_energy"],
+            "calculator_interaction_node_energy_sum_float64": calculator_reference[
+                "stable_interaction_energy"
+            ],
+            "calculator_baseline_node_energy_sum_float64": calculator_reference[
+                "stable_baseline_energy"
+            ],
+            "calculator_node_energy_values": calculator_reference["node_energy_values"],
+            "calculator_interaction_node_energy_values": calculator_reference[
+                "interaction_node_energy_values"
+            ],
+            "calculator_graph_edge_count": calculator_reference["edge_count"],
+            "calculator_graph_edge_rows": calculator_reference["edge_rows"],
             "calculator_forces": calculator_reference["forces"],
             "core_model_energy": core_model_reference["energy"],
+            "core_model_node_energy_sum_float64": core_model_reference[
+                "node_energy_sum_float64"
+            ],
+            "core_model_stable_energy": core_model_reference[
+                "stable_energy"
+            ],
+            "core_model_stable_baseline_energy": core_model_reference[
+                "stable_baseline_energy"
+            ],
+            "core_model_stable_interaction_energy": core_model_reference[
+                "stable_interaction_energy"
+            ],
+            "core_model_node_energy_sum_float32": core_model_reference[
+                "node_energy_sum_float32"
+            ],
             "core_model_forces": core_model_reference["forces"],
             "core_model_edge_count": core_model_reference["edge_count"],
+            "core_model_edge_rows": core_model_reference["edge_rows"],
+            "core_model_node_energy_values": core_model_reference[
+                "node_energy_values"
+            ],
             "calculator_minus_core_model_energy": calc_core_energy_delta,
             "calculator_minus_core_model_force_mae": float(
                 calc_core_force_delta.abs().mean()
@@ -561,6 +820,11 @@ def generate_reference_artifact(
             "calculator_minus_core_model_force_max_abs": float(
                 calc_core_force_delta.abs().max()
             ),
+        },
+        "diagnostics": {
+            "calculator_core": calculator_core_comparison,
+            "float64": float64_diagnostic,
+            "calculator_repeatability": repeatability,
         },
         "calculator_benchmark": calculator_benchmark,
         "core_model_benchmark": core_model_benchmark,
@@ -571,40 +835,75 @@ def generate_reference_artifact(
 
 
 def print_summary(artifact: Dict[str, Any]) -> None:
+    def section(title: str, values: Dict[str, Any]) -> None:
+        print("\n" + "-" * 60 + f"\n{title}\n" + "-" * 60)
+        for key, value in values.items():
+            print(f"{key}: {value}")
+
     print("=" * 60)
     print("Standalone MACE Reference Artifact")
     print("=" * 60)
-    print(f"system: {artifact['metadata']['system_name']}")
-    print(f"source_path: {artifact['metadata']['source_path']}")
-    print(f"num_atoms: {artifact['metadata']['num_atoms']}")
-    print(f"model_family: {artifact['metadata']['model_family']}")
-    print(f"model_name: {artifact['metadata']['model_name']}")
-    print(f"head_name: {artifact['metadata']['head_name']}")
-    print(f"enable_cueq: {artifact['metadata']['enable_cueq']}")
-    print(f"cutoff: {artifact['metadata']['cutoff']}")
-    print(f"artifact_version: {artifact['metadata']['artifact_version']}")
-    print(f"calculator_energy: {artifact['reference']['calculator_energy']}")
-    print(f"core_model_energy: {artifact['reference']['core_model_energy']}")
-    print(
-        f"calculator_minus_core_model_energy: {artifact['reference']['calculator_minus_core_model_energy']}"
-    )
-    print(
-        "calculator_minus_core_model_force_mae: "
-        f"{artifact['reference']['calculator_minus_core_model_force_mae']}"
-    )
+    metadata = artifact["metadata"]
+    reference = artifact["reference"]
+    diagnostics = artifact["diagnostics"]
+    section("Configuration and precision", {
+        **{key: metadata[key] for key in (
+            "system_name", "source_path", "num_atoms", "model_family",
+            "model_name", "head_name", "enable_cueq", "cutoff", "artifact_version"
+        )},
+        **{f"{path}.{key}": value for path, values in artifact["precision"].items()
+           for key, value in values.items()},
+    })
+    section("Energy definitions (eV)", {
+        "calculator_legacy_scalar": reference["calculator_energy"],
+        "calculator_controlled_per_atom_sum": reference["calculator_node_energy_sum_float64"],
+        "core_legacy_scalar": reference["core_model_energy"],
+        "core_controlled_per_atom_sum": reference["core_model_stable_energy"],
+    })
+    section("Matched parity comparisons (eV)", {
+        key: value for key, value in diagnostics["calculator_core"].items()
+        if "energy" in key and "node_energy_mae" not in key
+        and "node_energy_max_abs" not in key
+    })
+    section("Reduction decomposition (eV)", {
+        "calculator_legacy_minus_controlled": (
+            reference["calculator_energy"] - reference["calculator_node_energy_sum_float64"]
+        ),
+        "core_legacy_minus_controlled": (
+            reference["core_model_energy"] - reference["core_model_stable_energy"]
+        ),
+        "calculator_controlled_baseline": reference["calculator_baseline_node_energy_sum_float64"],
+        "calculator_controlled_interaction": reference["calculator_interaction_node_energy_sum_float64"],
+        "core_controlled_baseline": reference["core_model_stable_baseline_energy"],
+        "core_controlled_interaction": reference["core_model_stable_interaction_energy"],
+    })
+    section("Per-atom and force parity", {
+        key: value for key, value in diagnostics["calculator_core"].items()
+        if "mae" in key or "max_abs" in key
+    })
+    section("Graph diagnostics", {
+        key: value for key, value in diagnostics["calculator_core"].items()
+        if "edge_count" in key
+    })
+    if diagnostics["float64"] is not None:
+        section("Float64 calculator and core diagnostic (eV)", diagnostics["float64"])
+    if diagnostics["calculator_repeatability"] is not None:
+        section("Calculator repeatability (outside benchmark timing)",
+                diagnostics["calculator_repeatability"])
     if artifact["calculator_benchmark"] is not None:
         calc = artifact["calculator_benchmark"]
         core = artifact["core_model_benchmark"]
-        print("\n" + "-" * 60 + "\nPerformance Benchmark\n" + "-" * 60)
-        print(f"calculator_scope: {calc['scope']}")
-        print(f"core_model_scope: {core['scope']}")
-        print(f"device_name: {calc['device_name']}")
-        print(f"timing_method: {calc['timing_method']}")
-        print(f"warmup_steps: {calc['warmup_steps']}")
-        print(f"iterations_per_sample: {calc['iterations_per_sample']}")
-        print(f"num_samples: {calc['num_samples']}")
-        print(f"calculator_median_ms_per_step: {calc['timings']['median_ms_per_step']}")
-        print(f"core_model_median_ms_per_step: {core['timings']['median_ms_per_step']}")
+        section("Performance benchmark", {
+            "calculator_scope": calc["scope"],
+            "core_scope": core["scope"],
+            "device_name": calc["device_name"],
+            "timing_method": calc["timing_method"],
+            "warmup_steps": calc["warmup_steps"],
+            "iterations_per_sample": calc["iterations_per_sample"],
+            "num_samples": calc["num_samples"],
+            "calculator_median_ms_per_step": calc["timings"]["median_ms_per_step"],
+            "core_median_ms_per_step": core["timings"]["median_ms_per_step"],
+        })
 
 
 def main() -> None:

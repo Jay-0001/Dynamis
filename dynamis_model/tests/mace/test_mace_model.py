@@ -9,6 +9,7 @@ same driver.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import hashlib
 import json
 import os
@@ -28,7 +29,9 @@ import torch.distributed as dist
 from dynamis_model.nnp.mace import (
     COMPUTE_DTYPE,
     MACEModel,
+    MACEStableEnergyRuntime,
     load_raw_mace_model,
+    resolve_mace_model_name,
     resolve_model_head_index,
     resolve_model_head_name,
 )
@@ -55,7 +58,7 @@ except Exception:  # pragma: no cover - optional dependency
     ASE_ATOMIC_NUMBERS = {}
     HAS_ASE = False
 
-ARTIFACT_VERSION = 3
+ARTIFACT_VERSION = 4
 TEST_FILE_DIR = Path(__file__).resolve().parent
 ELEMENT_TO_Z = dict(ASE_ATOMIC_NUMBERS)
 
@@ -118,9 +121,15 @@ def build_parser() -> argparse.ArgumentParser:
     distributed_parser.add_argument(
         "--model-family", choices=["mp", "off", "omol", "polar"], default="mp"
     )
-    distributed_parser.add_argument("--model", default="medium-mpa-0")
+    distributed_parser.add_argument(
+        "--model", default=None, help="Checkpoint name (defaults by family)."
+    )
     distributed_parser.add_argument(
         "--head-name", default="", help="Optional explicit MACE head name."
+    )
+    distributed_parser.add_argument(
+        "--energy-mode", choices=["legacy", "stable"], default="legacy",
+        help="Use the original float32 node sum or separate float64 baseline/interaction sums.",
     )
     distributed_parser.add_argument(
         "--enable-cueq",
@@ -148,6 +157,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     distributed_parser.add_argument("--atol", type=float, default=1e-5)
     distributed_parser.add_argument("--rtol", type=float, default=1e-5)
+    distributed_parser.add_argument(
+        "--stable-energy-atol", type=float, default=1e-3,
+        help="Absolute MD-energy tolerance for the controlled float64 total.",
+    )
     distributed_parser.add_argument("--strict-parity", action="store_true")
     distributed_parser.add_argument("--output-json", type=Path)
     return parser
@@ -349,6 +362,71 @@ def edge_records(
     }
 
 
+def edge_record_rows(
+    edge_index: torch.Tensor, unit_shifts: torch.Tensor
+) -> torch.Tensor:
+    """Directed sender/receiver and integer cell shift, preserving duplicates."""
+    return torch.cat(
+        (edge_index.T.long(), unit_shifts.round().long()), dim=1
+    ).to(dtype=torch.int32, device="cpu")
+
+
+def compare_graph_edges(
+    explicit_rows: torch.Tensor,
+    core_rows: torch.Tensor,
+    positions: torch.Tensor,
+    cell: torch.Tensor,
+    cutoff: float,
+) -> Dict[str, Any]:
+    """Compare edge multisets and locate unmatched edges relative to cutoff."""
+    explicit = Counter(map(tuple, explicit_rows.long().tolist()))
+    core = Counter(map(tuple, core_rows.long().tolist()))
+    positions = positions.detach().double().cpu()
+    cell = cell.detach().reshape(3, 3).double().cpu()
+
+    def describe_only(rows: Counter) -> Dict[str, Any]:
+        count = sum(rows.values())
+        if not count:
+            return {"count": 0, "distance_min": None, "distance_max": None,
+                    "within_1e_4_angstrom_of_cutoff": 0,
+                    "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+                    "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+                    "examples": []}
+        values = torch.tensor(list(rows.elements()), dtype=torch.long)
+        displacement = (
+            positions.index_select(0, values[:, 1])
+            - positions.index_select(0, values[:, 0])
+            + values[:, 2:].double() @ cell
+        )
+        distances = torch.linalg.vector_norm(displacement, dim=1)
+        delta = distances - cutoff
+        return {
+            "count": count,
+            "distance_min": float(distances.min()),
+            "distance_max": float(distances.max()),
+            "within_1e_4_angstrom_of_cutoff": int((delta.abs() <= 1e-4).sum()),
+            "inside_cutoff_by_more_than_1e_4_angstrom": int((delta < -1e-4).sum()),
+            "outside_cutoff_by_more_than_1e_4_angstrom": int((delta > 1e-4).sum()),
+            "examples": [
+                {"edge": values[i].tolist(), "distance": float(distances[i])}
+                for i in range(min(5, count))
+            ],
+        }
+
+    return {
+        "cutoff": cutoff,
+        "explicit_raw_count": int(explicit_rows.shape[0]),
+        "core_raw_count": int(core_rows.shape[0]),
+        "explicit_unique_count": len(explicit),
+        "core_unique_count": len(core),
+        "explicit_duplicate_count": sum(explicit.values()) - len(explicit),
+        "core_duplicate_count": sum(core.values()) - len(core),
+        "common_count_with_multiplicity": sum((explicit & core).values()),
+        "explicit_only": describe_only(explicit - core),
+        "core_only": describe_only(core - explicit),
+    }
+
+
 def explicit_mace_batch_from_tensors(
     positions: torch.Tensor,
     numbers: torch.Tensor,
@@ -442,20 +520,26 @@ def load_and_validate_reference_artifact(
     raw: Dict[str, Any],
     args: argparse.Namespace,
     require_standalone_benchmark: bool = False,
+    expected_head_name: Optional[str] = None,
 ) -> Dict[str, Any]:
+    args.model = resolve_mace_model_name(args.model_family, args.model)
     artifact = torch.load(artifact_path, map_location="cpu", weights_only=False)
     metadata = artifact.get("metadata", {})
-    expected_head = args.head_name or resolve_model_head_name(
-        load_raw_mace_model(args.model_family, args.model, "cpu")
-        .to(dtype=COMPUTE_DTYPE)
-        .eval(),
-        args.head_name or None,
-    )
+    if expected_head_name is None:
+        expected_head_name = resolve_model_head_name(
+            load_raw_mace_model(
+                args.model_family,
+                args.model,
+                "cpu",
+                enable_cueq=args.enable_cueq,
+            ).eval(),
+            args.head_name or None,
+        )
     expected_signature = _reference_signature(
         raw,
         args.model_family,
         args.model,
-        expected_head,
+        expected_head_name,
         args.enable_cueq,
     )
     if metadata.get("artifact_version") != ARTIFACT_VERSION:
@@ -464,8 +548,28 @@ def load_and_validate_reference_artifact(
             f"got {metadata.get('artifact_version')!r}."
         )
     if metadata.get("signature") != expected_signature:
+        expected_identity = {
+            "system_name": raw["name"],
+            "source_path": raw.get("source_path", f"builtin://{raw['name']}"),
+            "num_atoms": len(raw["atomic_numbers"]),
+            "model_family": args.model_family,
+            "model_name": args.model,
+            "head_name": expected_head_name,
+            "enable_cueq": args.enable_cueq,
+        }
+        differences = [
+            f"{key}: artifact={metadata.get(key)!r}, requested={value!r}"
+            for key, value in expected_identity.items()
+            if metadata.get(key) != value
+        ]
+        if not differences:
+            differences = [
+                "recorded identity fields match; check XYZ atomic numbers, "
+                "positions, cell, and pbc for changes since reference generation"
+            ]
         raise ValueError(
-            "Reference artifact is stale or incompatible with the requested system/model."
+            "Reference artifact is stale or incompatible with the requested "
+            "system/model. " + "; ".join(differences)
         )
     reference = artifact.get("reference", {})
     required_reference_keys = {
@@ -509,6 +613,7 @@ def resolve_reference_artifact_path(args: argparse.Namespace) -> Path:
 
 
 def prepare_distributed(args: argparse.Namespace) -> PreparedExperiment:
+    args.model = resolve_mace_model_name(args.model_family, args.model)
     if int(os.environ.get("WORLD_SIZE", "1")) < 2:
         raise RuntimeError("Launch this test with torchrun and at least two ranks.")
     if not HAS_ASE and args.xyz_path is not None:
@@ -532,7 +637,13 @@ def prepare_distributed(args: argparse.Namespace) -> PreparedExperiment:
     )
     cutoff = float(model.r_max.detach().cpu())
     state, sim = build_state(raw, cutoff, args.ghost_cutoff_buffer, torch_env)
-    adapter = MACEModel(model, head_name=args.head_name or None)
+    adapter = MACEModel(
+        model, head_name=args.head_name or None, energy_mode=args.energy_mode
+    )
+    if not torch.isclose(
+        torch.as_tensor(state.sim_config.cutoff), torch.as_tensor(adapter.cutoff)
+    ):
+        raise ValueError("Simulation halo cutoff must match the MACE checkpoint r_max.")
     adapter.initialize_buffers(
         state.local_partition_info, device, dist.get_world_size()
     )
@@ -547,6 +658,7 @@ def prepare_distributed(args: argparse.Namespace) -> PreparedExperiment:
             "model_name": args.model,
             "head_name": adapter.head_name,
             "enable_cueq": args.enable_cueq,
+            "energy_mode": args.energy_mode,
         },
     )
 
@@ -570,15 +682,23 @@ def run_distributed_adapter_step(
     prepared: PreparedExperiment,
 ) -> Tuple[float, torch.Tensor, List[Dict[str, Any]]]:
     try:
-        energy, forces = prepared.adapter(prepared.state)
+        energy, forces, components = prepared.adapter(
+            prepared.state, return_energy_components=True
+        )
         record = {
             "rank": dist.get_rank(),
             "local_global_indices": prepared.state.local_partition_info.partition_indices.long()
             .cpu()
             .tolist(),
             "owned_local_energy": float(energy.cpu()),
+            "owned_local_energy_dtype": str(energy.dtype),
+            "model_parameter_dtype": str(
+                next(prepared.adapter.model.parameters()).dtype
+            ),
             "owned_local_forces": forces.detach().cpu().tolist(),
         }
+        for key, value in components.items():
+            record[key] = float(value.cpu())
         records = gather_records(record)
         dist.barrier()
         return float(energy.cpu()), forces, records
@@ -594,6 +714,8 @@ def build_explicit_global_reference(
     prepared: PreparedExperiment,
     args: argparse.Namespace,
 ) -> Dict[str, Any]:
+    from mace.tools.scatter import scatter_sum
+
     model = prepared.adapter.model
     cutoff = float(model.r_max.detach().cpu())
     positions = prepared.state.global_molecular_info.atom_positions.detach().clone()
@@ -615,11 +737,43 @@ def build_explicit_global_reference(
         compute_stress=False,
         compute_hessian=False,
     )
-    explicit_records = edge_records(explicit_edges, explicit_shifts)
+    head_index = int(explicit_batch["head"].reshape(()).item())
+    node_e0_raw = model.atomic_energies_fn(explicit_batch["node_attrs"])[
+        :, head_index
+    ].detach()
+    node_e0 = node_e0_raw.double()
+    # Reproduce ScaleShiftMACE.forward's E0 reduction. Its scatter_add_ can
+    # accumulate differently from torch.sum even with the same input dtype.
+    model_style_e0 = scatter_sum(
+        node_e0_raw, explicit_batch["batch"], dim=0, dim_size=1
+    ).to(explicit_batch["positions"].dtype)
+    node_energy = explicit_out["node_energy"].detach().double().reshape(-1)
+    node_interaction = node_energy - node_e0
+    stable_energy = node_e0.sum() + node_interaction.sum()
+    explicit_rows = edge_record_rows(explicit_edges, explicit_shifts)
     return {
         "energy": float(explicit_out["energy"].detach().cpu().reshape(())),
+        "energy_tensor_dtype": str(explicit_out["energy"].dtype),
+        "node_energy_tensor_dtype": str(explicit_out["node_energy"].dtype),
+        "node_energy_sum": float(node_energy.sum().cpu()),
+        "node_energy_sum_float32": float(node_energy.float().sum().cpu()),
+        "stable_energy": float(stable_energy.cpu()),
+        "node_energy_values": node_energy.cpu(),
+        "node_e0_sum": float(node_e0.sum().cpu()),
+        "node_e0_sum_float32": float(node_e0.float().sum().cpu()),
+        "node_e0_tensor_dtype": str(node_e0_raw.dtype),
+        "node_e0_model_style_scatter_sum": float(model_style_e0.cpu().reshape(())),
+        "node_interaction_sum": float(node_interaction.sum().cpu()),
+        "node_interaction_sum_float32": float(
+            node_interaction.float().sum().cpu()
+        ),
+        "interaction_energy": float(
+            explicit_out["interaction_energy"].detach().cpu().reshape(())
+        ),
         "forces": explicit_out["forces"].detach().to(COMPUTE_DTYPE).cpu(),
-        "edge_count": len(explicit_records),
+        "edge_count": int(explicit_edges.shape[1]),
+        "edge_unique_count": len(edge_records(explicit_edges, explicit_shifts)),
+        "edge_rows": explicit_rows,
     }
 
 
@@ -797,7 +951,11 @@ def benchmark_distributed(
             dist.barrier()
             _synchronize(device)
             start = time.perf_counter()
-            init_adapter = MACEModel(base_model, head_name=args.head_name or None)
+            init_adapter = MACEModel(
+                base_model,
+                head_name=args.head_name or None,
+                energy_mode=args.energy_mode,
+            )
             init_adapter.initialize_buffers(
                 state.local_partition_info, device, dist.get_world_size()
             )
@@ -854,36 +1012,124 @@ def build_summary(
     # comparing MD-unit output against an unscaled eV reference is a ~99%
     # relative error that no tolerance would forgive.
     explicit_energy = float(explicit_reference["energy"]) * EV_TO_MD
+    explicit_stable_energy = float(explicit_reference["stable_energy"]) * EV_TO_MD
+    explicit_node_energy_sum = (
+        float(explicit_reference["node_energy_sum"]) * EV_TO_MD
+    )
+    explicit_node_energy_sum_float32 = (
+        float(explicit_reference["node_energy_sum_float32"]) * EV_TO_MD
+    )
+    explicit_interaction_energy = (
+        float(explicit_reference["interaction_energy"]) * EV_TO_MD
+    )
+    explicit_node_e0_sum = float(explicit_reference["node_e0_sum"]) * EV_TO_MD
+    explicit_node_e0_sum_float32 = (
+        float(explicit_reference["node_e0_sum_float32"]) * EV_TO_MD
+    )
+    explicit_node_e0_model_style_scatter_sum = (
+        float(explicit_reference["node_e0_model_style_scatter_sum"]) * EV_TO_MD
+    )
+    explicit_node_interaction_sum = (
+        float(explicit_reference["node_interaction_sum"]) * EV_TO_MD
+    )
+    explicit_node_interaction_sum_float32 = (
+        float(explicit_reference["node_interaction_sum_float32"]) * EV_TO_MD
+    )
     explicit_forces = explicit_reference["forces"].to(dtype=COMPUTE_DTYPE) * EV_TO_MD
     calculator_energy = float(artifact["reference"]["calculator_energy"]) * EV_TO_MD
+    calculator_controlled_ev = artifact["reference"].get(
+        "calculator_node_energy_sum_float64"
+    )
+    calculator_controlled_energy = (
+        float(calculator_controlled_ev) * EV_TO_MD
+        if calculator_controlled_ev is not None else None
+    )
     calculator_forces = (
         artifact["reference"]["calculator_forces"].to(dtype=COMPUTE_DTYPE) * EV_TO_MD
     )
     core_model_energy = float(artifact["reference"]["core_model_energy"]) * EV_TO_MD
+    core_stable_ev = artifact["reference"].get(
+        "core_model_stable_energy",
+        artifact["reference"].get("core_model_node_energy_sum_float64"),
+    )
+    core_model_stable_energy = (
+        float(core_stable_ev) * EV_TO_MD if core_stable_ev is not None else None
+    )
     core_model_forces = (
         artifact["reference"]["core_model_forces"].to(dtype=COMPUTE_DTYPE) * EV_TO_MD
     )
-    energy_close = torch.isclose(
+    legacy_energy_close = torch.isclose(
         torch.tensor(distributed_energy, dtype=COMPUTE_DTYPE),
         torch.tensor(explicit_energy, dtype=COMPUTE_DTYPE),
         atol=args.atol,
         rtol=args.rtol,
     ).item()
+    stable_energy_close = torch.isclose(
+        torch.tensor(distributed_energy, dtype=torch.float64),
+        torch.tensor(explicit_stable_energy, dtype=torch.float64),
+        atol=args.stable_energy_atol,
+        rtol=0.0,
+    ).item()
+    energy_close = (
+        stable_energy_close if args.energy_mode == "stable" else legacy_energy_close
+    )
     force_close = torch.allclose(
         distributed_forces,
         explicit_forces,
         atol=args.atol,
         rtol=args.rtol,
     )
-    classification = (
-        "parity_ok" if energy_close and force_close else "post_graph_model_mismatch"
+    calculator_energy_close = bool(
+        torch.isclose(
+            torch.tensor(distributed_energy, dtype=COMPUTE_DTYPE),
+            torch.tensor(calculator_energy, dtype=COMPUTE_DTYPE),
+            atol=args.atol,
+            rtol=args.rtol,
+        ).item()
     )
+    calculator_forces_close = bool(
+        torch.allclose(
+            distributed_forces, calculator_forces, atol=args.atol, rtol=args.rtol
+        )
+    )
+    if not (energy_close and force_close):
+        classification = (
+            "stable_energy_mismatch"
+            if args.energy_mode == "stable"
+            else "post_graph_model_mismatch"
+        )
+    elif args.energy_mode == "legacy" and args.model_family == "off" and not (
+        calculator_energy_close and calculator_forces_close
+    ):
+        classification = "public_calculator_mismatch"
+    else:
+        classification = "parity_ok"
     explicit_energy_abs = abs(distributed_energy - explicit_energy)
     calculator_energy_abs = abs(distributed_energy - calculator_energy)
     core_model_energy_abs = abs(distributed_energy - core_model_energy)
     explicit_force_delta = distributed_forces - explicit_forces
     calculator_force_delta = distributed_forces - calculator_forces
     core_model_force_delta = distributed_forces - core_model_forces
+    core_edge_rows = artifact["reference"].get("core_model_edge_rows")
+    edge_comparison = (
+        compare_graph_edges(
+            explicit_reference["edge_rows"],
+            core_edge_rows,
+            prepared.state.global_molecular_info.atom_positions,
+            prepared.sim.cell,
+            float(prepared.adapter.cutoff),
+        )
+        if core_edge_rows is not None
+        else None
+    )
+    calculator_edge_rows = artifact["reference"].get("calculator_graph_edge_rows")
+    calculator_edge_comparison = (
+        compare_graph_edges(
+            explicit_reference["edge_rows"], calculator_edge_rows,
+            prepared.state.global_molecular_info.atom_positions,
+            prepared.sim.cell, float(prepared.adapter.cutoff),
+        ) if calculator_edge_rows is not None else None
+    )
     summary = {
         "system": prepared.raw["name"],
         "source_path": prepared.raw.get(
@@ -897,7 +1143,83 @@ def build_summary(
             "distributed_energy": distributed_energy,
             "summed_owned_local_energy": distributed_energy,
             "explicit_dynamis_graph_energy": explicit_energy,
+            "explicit_stable_energy": explicit_stable_energy,
+            "explicit_stable_minus_node_sum": (
+                explicit_stable_energy - explicit_node_energy_sum
+            ),
+            "explicit_legacy_minus_stable_energy": (
+                explicit_energy - explicit_stable_energy
+            ),
+            "distributed_minus_explicit_stable_energy": (
+                distributed_energy - explicit_stable_energy
+            ),
+            "explicit_stable_energy_abs_error": abs(
+                distributed_energy - explicit_stable_energy
+            ),
+            "stable_reference_gap_reduction": (
+                abs(distributed_energy - explicit_energy)
+                - abs(distributed_energy - explicit_stable_energy)
+            ),
+            "core_model_stable_energy": core_model_stable_energy,
+            "distributed_minus_core_model_stable_energy": (
+                distributed_energy - core_model_stable_energy
+                if core_model_stable_energy is not None else None
+            ),
+            "explicit_energy_tensor_dtype": explicit_reference["energy_tensor_dtype"],
+            "explicit_node_energy_tensor_dtype": explicit_reference[
+                "node_energy_tensor_dtype"
+            ],
+            "explicit_node_energy_sum": explicit_node_energy_sum,
+            "explicit_node_energy_sum_float32": explicit_node_energy_sum_float32,
+            "explicit_node_sum_float64_minus_float32": (
+                explicit_node_energy_sum - explicit_node_energy_sum_float32
+            ),
+            "explicit_node_sum_minus_model_energy": (
+                explicit_node_energy_sum - explicit_energy
+            ),
+            "distributed_minus_explicit_node_sum": (
+                distributed_energy - explicit_node_energy_sum
+            ),
+            "distributed_minus_explicit_node_sum_float32": (
+                distributed_energy - explicit_node_energy_sum_float32
+            ),
+            "explicit_interaction_energy": explicit_interaction_energy,
+            "explicit_node_e0_sum": explicit_node_e0_sum,
+            "explicit_node_e0_sum_float32": explicit_node_e0_sum_float32,
+            "explicit_node_e0_tensor_dtype": explicit_reference[
+                "node_e0_tensor_dtype"
+            ],
+            "explicit_node_e0_model_style_scatter_sum": (
+                explicit_node_e0_model_style_scatter_sum
+            ),
+            "explicit_node_e0_scatter_minus_sum_float64": (
+                explicit_node_e0_model_style_scatter_sum - explicit_node_e0_sum
+            ),
+            "explicit_node_e0_scatter_minus_model_e0": (
+                explicit_node_e0_model_style_scatter_sum
+                - (explicit_energy - explicit_interaction_energy)
+            ),
+            "explicit_node_interaction_sum": explicit_node_interaction_sum,
+            "explicit_node_interaction_sum_float32": (
+                explicit_node_interaction_sum_float32
+            ),
+            "explicit_node_interaction_minus_model_interaction": (
+                explicit_node_interaction_sum - explicit_interaction_energy
+            ),
+            "explicit_node_e0_minus_model_e0": (
+                explicit_node_e0_sum
+                - (explicit_energy - explicit_interaction_energy)
+            ),
             "calculator_mace_energy": calculator_energy,
+            "calculator_controlled_per_atom_energy": calculator_controlled_energy,
+            "calculator_legacy_minus_controlled_energy": (
+                calculator_energy - calculator_controlled_energy
+                if calculator_controlled_energy is not None else None
+            ),
+            "distributed_minus_calculator_controlled_energy": (
+                distributed_energy - calculator_controlled_energy
+                if calculator_controlled_energy is not None else None
+            ),
             "core_model_mace_energy": core_model_energy,
             "distributed_minus_explicit_energy": distributed_energy - explicit_energy,
             "distributed_minus_calculator_energy": distributed_energy
@@ -916,8 +1238,12 @@ def build_summary(
             "calculator_force_max_abs": float(calculator_force_delta.abs().max()),
             "core_model_force_mae": float(core_model_force_delta.abs().mean()),
             "core_model_force_max_abs": float(core_model_force_delta.abs().max()),
-            "explicit_energy_close": bool(energy_close),
+            "explicit_energy_close": bool(legacy_energy_close),
+            "explicit_stable_energy_close": bool(stable_energy_close),
+            "selected_reference_energy_close": bool(energy_close),
             "explicit_forces_close": bool(force_close),
+            "calculator_energy_close": calculator_energy_close,
+            "calculator_forces_close": calculator_forces_close,
             "explicit_edge_count": int(explicit_reference["edge_count"]),
             "core_model_edge_count": int(
                 artifact["reference"]["core_model_edge_count"]
@@ -939,6 +1265,46 @@ def build_summary(
         },
         "ranks": records,
     }
+    if args.energy_mode == "stable":
+        distributed_baseline = sum(
+            item["owned_baseline_energy"] for item in records
+        )
+        distributed_interaction = sum(
+            item["owned_interaction_energy"] for item in records
+        )
+        summary["parity"].update(
+            distributed_baseline_energy=distributed_baseline,
+            distributed_interaction_energy=distributed_interaction,
+            distributed_minus_explicit_baseline=(
+                distributed_baseline - explicit_node_e0_sum
+            ),
+            distributed_minus_explicit_interaction=(
+                distributed_interaction - explicit_node_interaction_sum
+            ),
+            distributed_total_minus_components=(
+                distributed_energy - distributed_baseline - distributed_interaction
+            ),
+        )
+    if edge_comparison is not None:
+        summary["edge_comparison"] = edge_comparison
+    if calculator_edge_comparison is not None:
+        summary["calculator_edge_comparison"] = calculator_edge_comparison
+    summary["standalone_diagnostics"] = artifact.get("diagnostics", {})
+    core_node_values = artifact["reference"].get("core_model_node_energy_values")
+    if core_node_values is not None:
+        explicit_node_values = explicit_reference["node_energy_values"]
+        if core_node_values.shape != explicit_node_values.shape:
+            raise ValueError("Core and explicit node-energy arrays have different shapes.")
+        node_delta = (explicit_node_values - core_node_values).double() * EV_TO_MD
+        summary["parity"]["explicit_node_minus_core_node_sum"] = float(
+            node_delta.sum()
+        )
+        summary["parity"]["explicit_vs_core_node_energy_mae"] = float(
+            node_delta.abs().mean()
+        )
+        summary["parity"]["explicit_vs_core_node_energy_max_abs"] = float(
+            node_delta.abs().max()
+        )
     if benchmark is not None:
         calculator_benchmark = artifact["calculator_benchmark"]
         core_model_benchmark = artifact["core_model_benchmark"]
@@ -965,6 +1331,62 @@ def build_summary(
             "parallel_efficiency": core_model_speedup / dist.get_world_size(),
         }
         summary["benchmark"] = benchmark
+    parity = summary["parity"]
+    definitions = (
+        "calculator_mace_energy", "calculator_controlled_per_atom_energy",
+        "core_model_mace_energy", "core_model_stable_energy",
+        "explicit_dynamis_graph_energy", "explicit_stable_energy",
+        "distributed_energy",
+    )
+    precision = (
+        "explicit_energy_tensor_dtype", "explicit_node_energy_tensor_dtype",
+        "explicit_node_e0_tensor_dtype",
+    )
+    groups: Dict[str, Dict[str, Any]] = {
+        "configuration_and_precision": {
+            "model": summary["model"], "num_atoms": num_atoms,
+            "energy_unit": "amu * Angstrom^2 / fs^2",
+            "reference_precision": artifact.get("precision"),
+            **{key: parity[key] for key in precision if key in parity},
+        },
+        "energy_definitions": {key: parity[key] for key in definitions if key in parity},
+        "matched_parity_comparisons": {},
+        "reduction_decomposition": {},
+        "per_atom_and_force_parity": {},
+        "graph_diagnostics": {},
+        "repeatability": artifact.get("diagnostics", {}).get("calculator_repeatability"),
+    }
+    for key, value in parity.items():
+        if key in definitions or key in precision:
+            continue
+        if "force" in key or "node_energy_mae" in key or "node_energy_max_abs" in key:
+            target = "per_atom_and_force_parity"
+        elif "edge_count" in key:
+            target = "graph_diagnostics"
+        elif any(word in key for word in (
+            "baseline", "interaction", "node_sum", "node_e0", "node_energy_sum",
+            "scatter", "components", "legacy_minus_controlled", "legacy_minus_stable",
+            "float32", "float64",
+        )):
+            target = "reduction_decomposition"
+        else:
+            target = "matched_parity_comparisons"
+        groups[target][key] = value
+    calculator_core = artifact.get("diagnostics", {}).get("calculator_core") or {}
+    for key, value in calculator_core.items():
+        if "edge_count" in key:
+            target = "graph_diagnostics"
+        elif "force" in key or "node_energy_mae" in key or "node_energy_max_abs" in key:
+            target = "per_atom_and_force_parity"
+        else:
+            target = "matched_parity_comparisons"
+        groups[target][f"reference.{key}"] = value
+    groups["graph_diagnostics"]["explicit_vs_core"] = edge_comparison
+    groups["graph_diagnostics"]["explicit_vs_calculator"] = calculator_edge_comparison
+    groups["reduction_decomposition"]["float64_diagnostic_ev"] = (
+        artifact.get("diagnostics", {}).get("float64")
+    )
+    summary["report_sections"] = groups
     return summary
 
 
@@ -974,17 +1396,22 @@ def print_summary(summary: Dict[str, Any]) -> None:
     print("=" * 60)
     print(f"system: {summary['system']}")
     print(f"source_path: {summary['source_path']}")
-    print(f"num_atoms: {summary['num_atoms']}")
-    print(f"model: {summary['model']}")
     print(f"mismatch_classification: {summary['mismatch_classification']}")
-    print("\n" + "-" * 60 + "\nParity\n" + "-" * 60)
-    for key, value in summary["parity"].items():
-        print(f"{key}: {value}")
-    print("\n" + "-" * 60 + "\nPer-Rank\n" + "-" * 60)
+    for title, values in summary["report_sections"].items():
+        if values is None:
+            continue
+        print("\n" + "-" * 60 + f"\n{title.replace('_', ' ').title()}\n" + "-" * 60)
+        for key, value in values.items():
+            print(f"{key}: {value}")
+    print("\n" + "-" * 60 + "\nPer-rank contributions\n" + "-" * 60)
     for record in summary["ranks"]:
         print(
             f"rank {record['rank']}: local_atoms={len(record['local_global_indices'])}, "
-            f"owned_local_energy={record['owned_local_energy']}"
+            f"owned_local_energy={record['owned_local_energy']}, "
+            f"energy_dtype={record['owned_local_energy_dtype']}, "
+            f"model_dtype={record['model_parameter_dtype']}, "
+            f"baseline={record.get('owned_baseline_energy')}, "
+            f"interaction={record.get('owned_interaction_energy')}"
         )
     if "benchmark" in summary:
         benchmark = summary["benchmark"]
@@ -1054,14 +1481,37 @@ def print_summary(summary: Dict[str, Any]) -> None:
 
 def run_distributed(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
     prepared = prepare_distributed(args)
+    check_off_medium_fixture = (
+        args.model_family == "off"
+        and args.model == "medium"
+        and args.xyz_path is None
+        and args.builtin_system == "natural_chain12"
+        and dist.get_world_size() == 2
+    )
+    if check_off_medium_fixture:
+        assert len(prepared.adapter.model.interactions) == 2
+        assert sum(
+            prepared.adapter.runtime._should_exchange_after_product(index)
+            for index in range(len(prepared.adapter.model.interactions))
+        ) == 1
+        assert prepared.adapter.exchange_enabled
+        assert prepared.adapter.partition_validation["total_recv"] > 0
     artifact_path = resolve_reference_artifact_path(args)
     artifact = load_and_validate_reference_artifact(
         artifact_path,
         prepared.raw,
         args,
         require_standalone_benchmark=args.benchmark,
+        expected_head_name=prepared.adapter.head_name,
     )
     _, _, records = run_distributed_adapter_step(prepared)
+    if check_off_medium_fixture:
+        num_atoms = len(prepared.raw["atomic_numbers"])
+        assert all(
+            0 < len(record["local_global_indices"]) < num_atoms
+            for record in records
+        )
+        assert prepared.adapter.runtime._feature_width is not None
     benchmark = benchmark_distributed(prepared, args) if args.benchmark else None
     if dist.get_rank() != 0:
         return None
@@ -1144,6 +1594,44 @@ def test_mace_model_parity_halo_fixture() -> None:
     run_distributed(args)
 
 
+def test_off23_medium_parity_builtin() -> None:
+    if int(os.environ.get("WORLD_SIZE", "1")) < 2:
+        import pytest
+
+        pytest.skip("Run with torchrun --nproc-per-node=2")
+    artifact = _require_reference_env("DISTMACE_OFF_REFERENCE_ARTIFACT")
+    args = build_parser().parse_args(
+        [
+            "run-distributed",
+            "--model-family", "off",
+            "--reference-artifact", artifact,
+            "--strict-parity",
+        ]
+    )
+    run_distributed(args)
+
+
+def test_off23_medium_stable_energy_builtin() -> None:
+    if int(os.environ.get("WORLD_SIZE", "1")) < 2:
+        import pytest
+
+        pytest.skip("Run with torchrun --nproc-per-node=2")
+    artifact = _require_reference_env("DISTMACE_OFF_REFERENCE_ARTIFACT")
+    args = build_parser().parse_args(
+        [
+            "run-distributed",
+            "--model-family", "off",
+            "--energy-mode", "stable",
+            "--reference-artifact", artifact,
+            "--strict-parity",
+        ]
+    )
+    summary = run_distributed(args)
+    if summary is not None:
+        assert abs(summary["parity"]["explicit_stable_minus_node_sum"]) < 1e-9
+        assert summary["parity"]["explicit_stable_energy_close"]
+
+
 def test_mace_model_reinitialize_buffers() -> None:
     if int(os.environ.get("WORLD_SIZE", "1")) < 2:
         import pytest
@@ -1162,13 +1650,113 @@ def test_mace_model_reinitialize_buffers() -> None:
     assert torch.allclose(forces0.cpu(), forces1.cpu(), atol=1e-6, rtol=1e-6)
 
 
+def test_mace_model_rejects_specialized_scaleshift_subclass(monkeypatch) -> None:
+    import importlib
+    import pytest
+
+    mace_module = importlib.import_module("dynamis_model.nnp.mace")
+
+    class OrdinaryScaleShiftMACE:
+        r_max = 5.0
+        atomic_numbers = (1, 6)
+        node_embedding = spherical_harmonics = radial_embedding = object()
+        interactions = products = readouts = (object(), object())
+        atomic_energies_fn = scale_shift = object()
+
+    class SpecializedScaleShiftMACE(OrdinaryScaleShiftMACE):
+        pass
+
+    monkeypatch.setattr(mace_module, "ScaleShiftMACE", OrdinaryScaleShiftMACE)
+    MACEModel._validate_model_contract(OrdinaryScaleShiftMACE())
+    with pytest.raises(TypeError, match="specialized model class SpecializedScaleShiftMACE"):
+        MACEModel._validate_model_contract(SpecializedScaleShiftMACE())
+
+
+def test_compare_graph_edges_preserves_direction_multiplicity_and_cutoff() -> None:
+    positions = torch.tensor([[0.0, 0.0, 0.0], [5.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
+    cell = torch.eye(3) * 20.0
+    explicit = torch.tensor(
+        [[0, 1, 0, 0, 0], [0, 1, 0, 0, 0], [0, 2, 0, 0, 0]],
+        dtype=torch.int32,
+    )
+    core = torch.tensor(
+        [[0, 1, 0, 0, 0], [0, 2, 0, 0, 0], [2, 0, 0, 0, 0]],
+        dtype=torch.int32,
+    )
+    result = compare_graph_edges(explicit, core, positions, cell, cutoff=5.0)
+    assert result["explicit_duplicate_count"] == 1
+    assert result["common_count_with_multiplicity"] == 2
+    assert result["explicit_only"]["count"] == 1
+    assert result["explicit_only"]["within_1e_4_angstrom_of_cutoff"] == 1
+    assert result["core_only"]["count"] == 1
+    assert result["core_only"]["inside_cutoff_by_more_than_1e_4_angstrom"] == 1
+
+
+def test_stable_runtime_reduces_owned_components_in_float64() -> None:
+    runtime = MACEStableEnergyRuntime(torch.nn.Identity())
+    baseline = torch.tensor([-1.0e8, -1.0, 1.0e8, 99.0], dtype=torch.float32)
+    interaction = torch.tensor(
+        [0.25, 0.5, 0.75, 100.0], dtype=torch.float32, requires_grad=True
+    )
+    outputs = runtime._reduce_owned_energy(baseline, interaction, num_local=3)
+    expected = baseline[:3].double().sum() + interaction[:3].double().sum()
+    legacy_energy = (baseline[:3] + interaction[:3]).sum()
+    assert outputs["owned_local_energy"].dtype == torch.float64
+    assert torch.equal(outputs["owned_local_energy"], expected)
+    assert abs(float(outputs["owned_local_energy"] - expected)) < abs(
+        float(legacy_energy.double() - expected)
+    )
+    assert torch.equal(outputs["owned_baseline_energy"], torch.tensor(-1.0))
+    outputs["owned_local_energy"].backward()
+    assert torch.equal(interaction.grad, torch.tensor([1.0, 1.0, 1.0, 0.0]))
+
+
+def test_stable_energy_mode_is_opt_in() -> None:
+    parser = build_parser()
+    assert parser.parse_args(["run-distributed"]).energy_mode == "legacy"
+    assert (
+        parser.parse_args(["run-distributed", "--energy-mode", "stable"]).energy_mode
+        == "stable"
+    )
+
+
+def test_mace_loader_uses_family_default_and_preserves_explicit_name(monkeypatch) -> None:
+    import importlib
+
+    mace_module = importlib.import_module("dynamis_model.nnp.mace")
+    calls = []
+
+    def loader(family):
+        def load(**kwargs):
+            calls.append((family, kwargs))
+            return torch.nn.Linear(1, 1).double()
+
+        return load
+
+    monkeypatch.setattr(mace_module, "_require_mace", lambda: None)
+    monkeypatch.setattr(mace_module, "mace_mp", loader("mp"))
+    monkeypatch.setattr(mace_module, "mace_off", loader("off"))
+    mace_module.load_raw_mace_model("mp", device="cpu")
+    mace_module.load_raw_mace_model("off", device="cpu")
+    model = mace_module.load_raw_mace_model("off", "small", device="cpu")
+    assert [kwargs["model"] for _, kwargs in calls] == [
+        "medium-mpa-0", "medium", "small"
+    ]
+    assert all(kwargs["return_raw_model"] for _, kwargs in calls)
+    assert all(kwargs["default_dtype"] == "float32" for _, kwargs in calls)
+    assert next(model.parameters()).dtype == torch.float32
+
+
 def test_reference_artifact_rejects_missing_benchmark_stats(tmp_path: Path) -> None:
     artifact_path = tmp_path / "artifact.pt"
+    raw = natural_chain12()
     torch.save(
         {
             "metadata": {
                 "artifact_version": ARTIFACT_VERSION,
-                "signature": "abc",
+                "signature": _reference_signature(
+                    raw, "mp", "medium-mpa-0", "Default", False
+                ),
             },
             "reference": {
                 "calculator_energy": 0.0,
@@ -1181,7 +1769,6 @@ def test_reference_artifact_rejects_missing_benchmark_stats(tmp_path: Path) -> N
         },
         artifact_path,
     )
-    raw = natural_chain12()
     args = build_parser().parse_args(
         [
             "run-distributed",
@@ -1190,27 +1777,81 @@ def test_reference_artifact_rejects_missing_benchmark_stats(tmp_path: Path) -> N
             "--benchmark",
         ]
     )
-    original_loader = load_raw_mace_model
+    import pytest
 
-    class _DummyModel(torch.nn.Module):
-        def __init__(self) -> None:
-            super().__init__()
-            self.register_buffer("r_max", torch.tensor(1.0))
-            self.heads = ["Default"]
+    with pytest.raises(ValueError, match="timing stats"):
+        load_and_validate_reference_artifact(
+            artifact_path,
+            raw,
+            args,
+            require_standalone_benchmark=True,
+            expected_head_name="Default",
+        )
 
-    try:
-        globals()["load_raw_mace_model"] = lambda *a, **k: _DummyModel()
-        import pytest
 
-        with pytest.raises(ValueError, match="stale or incompatible|timing stats"):
-            load_and_validate_reference_artifact(
-                artifact_path,
-                raw,
-                args,
-                require_standalone_benchmark=True,
-            )
-    finally:
-        globals()["load_raw_mace_model"] = original_loader
+def test_reference_artifact_reports_cueq_identity_mismatch(tmp_path: Path) -> None:
+    import pytest
+
+    raw = natural_chain12()
+    artifact_path = tmp_path / "artifact.pt"
+    torch.save(
+        {
+            "metadata": {
+                "artifact_version": ARTIFACT_VERSION,
+                "system_name": raw["name"],
+                "source_path": f"builtin://{raw['name']}",
+                "num_atoms": len(raw["atomic_numbers"]),
+                "model_family": "off",
+                "model_name": "medium",
+                "head_name": "default",
+                "enable_cueq": True,
+                "signature": _reference_signature(
+                    raw, "off", "medium", "default", True
+                ),
+            }
+        },
+        artifact_path,
+    )
+    args = build_parser().parse_args(["run-distributed", "--model-family", "off"])
+    with pytest.raises(ValueError, match="enable_cueq: artifact=True, requested=False"):
+        load_and_validate_reference_artifact(
+            artifact_path, raw, args, expected_head_name="default"
+        )
+
+
+def test_reference_artifact_uses_distributed_model_head(
+    tmp_path: Path, monkeypatch
+) -> None:
+    raw = natural_chain12()
+    artifact_path = tmp_path / "artifact.pt"
+    metadata = {
+        "artifact_version": ARTIFACT_VERSION,
+        "signature": _reference_signature(raw, "off", "medium", "default", True),
+    }
+    torch.save(
+        {
+            "metadata": metadata,
+            "reference": {
+                "calculator_energy": 0.0,
+                "calculator_forces": torch.zeros(12, 3, dtype=COMPUTE_DTYPE),
+                "core_model_energy": 0.0,
+                "core_model_forces": torch.zeros(12, 3, dtype=COMPUTE_DTYPE),
+            },
+        },
+        artifact_path,
+    )
+    args = build_parser().parse_args(
+        ["run-distributed", "--model-family", "off", "--enable-cueq"]
+    )
+
+    def fail_if_reloaded(*args, **kwargs):
+        raise AssertionError("Validation must reuse the distributed model head.")
+
+    monkeypatch.setitem(globals(), "load_raw_mace_model", fail_if_reloaded)
+    loaded = load_and_validate_reference_artifact(
+        artifact_path, raw, args, expected_head_name="default"
+    )
+    assert loaded["metadata"]["signature"] == metadata["signature"]
 
 
 if __name__ == "__main__":

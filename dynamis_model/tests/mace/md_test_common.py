@@ -22,6 +22,7 @@ from dynamis import SimulatorConfig
 from dynamis_model.nnp.mace import (
     MACEModel,
     load_raw_mace_model,
+    resolve_mace_model_name,
 )
 
 # MACEModel returns MD units (amu * A^2 / fs^2, amu * A / fs^2) like UMAModel
@@ -77,7 +78,22 @@ STRUCTURE_PERTURBATION_ANGSTROM = 0.01
 HELIUM_N_ATOMS = 64
 HELIUM_SIDE_LENGTH_ANGSTROM = 20.0
 HELIUM_MIN_DISTANCE_ANGSTROM = 3.0
-TEST_SYSTEMS = ("silicon", "helium")
+TEST_SYSTEMS = ("silicon", "helium", "organic")
+ORGANIC_NUMBERS = [6] * 4 + [1] * 8
+ORGANIC_POSITIONS = [
+    [2.00, 2.00, 2.00],
+    [3.52, 2.12, 2.00],
+    [5.01, 1.90, 2.18],
+    [6.50, 2.08, 1.95],
+    [1.45, 2.92, 2.20],
+    [1.52, 1.08, 1.80],
+    [3.52, 3.08, 1.55],
+    [3.55, 1.22, 2.62],
+    [5.00, 2.82, 2.72],
+    [5.02, 0.95, 1.58],
+    [7.03, 2.96, 2.20],
+    [7.02, 1.18, 1.72],
+]
 _TEST_SYSTEM_SPECS = {
     "silicon": {
         "filename": "silicon_supercell.xyz",
@@ -85,6 +101,10 @@ _TEST_SYSTEM_SPECS = {
         "atomic_number": 14,
         "n_atoms": SILICON_N_ATOMS,
         "side_length_angstrom": SILICON_SIDE_LENGTH_ANGSTROM,
+        "atomic_numbers": [14] * SILICON_N_ATOMS,
+        "pbc": True,
+        "step_count": N_STEPS,
+        "timestep_fs": 0.5,
     },
     "helium": {
         "filename": "helium_box.xyz",
@@ -92,6 +112,19 @@ _TEST_SYSTEM_SPECS = {
         "atomic_number": 2,
         "n_atoms": HELIUM_N_ATOMS,
         "side_length_angstrom": HELIUM_SIDE_LENGTH_ANGSTROM,
+        "atomic_numbers": [2] * HELIUM_N_ATOMS,
+        "pbc": True,
+        "step_count": N_STEPS,
+        "timestep_fs": 0.5,
+    },
+    "organic": {
+        "filename": "organic_chain12.xyz",
+        "n_atoms": len(ORGANIC_NUMBERS),
+        "side_length_angstrom": 20.0,
+        "atomic_numbers": ORGANIC_NUMBERS,
+        "pbc": False,
+        "step_count": 20,
+        "timestep_fs": 0.1,
     },
 }
 DEFAULT_GHOST_CUTOFF_BUFFER = 0.5
@@ -186,8 +219,8 @@ def ensure_test_structure(
         expected_cell = np.full(3, spec["side_length_angstrom"])
         if (
             len(atoms) != spec["n_atoms"]
-            or not np.all(actual_numbers == spec["atomic_number"])
-            or not bool(np.all(atoms.pbc))
+            or not np.array_equal(actual_numbers, spec["atomic_numbers"])
+            or not np.array_equal(atoms.pbc, [spec["pbc"]] * 3)
             or not np.allclose(atoms.cell.lengths(), expected_cell, atol=1e-6, rtol=0)
         ):
             raise ValueError(
@@ -204,7 +237,7 @@ def ensure_test_structure(
             f"periodic {SILICON_N_ATOMS}-atom diamond-Si supercell with "
             f"{STRUCTURE_PERTURBATION_ANGSTROM:.3f} A perturbations"
         )
-    else:
+    elif system == "helium":
         atoms = Atoms(
             ["He"] * HELIUM_N_ATOMS,
             positions=_generate_periodic_helium_positions(seed),
@@ -215,7 +248,16 @@ def ensure_test_structure(
             f"periodic {HELIUM_N_ATOMS}-atom helium box with minimum initial "
             f"separation {HELIUM_MIN_DISTANCE_ANGSTROM:.1f} A"
         )
-    atoms.wrap()
+    else:
+        atoms = Atoms(
+            numbers=ORGANIC_NUMBERS,
+            positions=ORGANIC_POSITIONS,
+            cell=[spec["side_length_angstrom"]] * 3,
+            pbc=False,
+        )
+        description = "nonperiodic 12-atom C/H chain"
+    if spec["pbc"]:
+        atoms.wrap()
     assert len(atoms) == spec["n_atoms"]
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     write(path, atoms, format="extxyz")
@@ -254,13 +296,14 @@ def teardown_singleton_dist_env() -> None:
 
 def build_mace_model(
     device: torch.device,
-    model: str = "medium-mpa-0",
+    model: Optional[str] = None,
     head_name: Optional[str] = None,
     model_family: str = "mp",
     system: str = "silicon",
     enable_cueq: bool = False,
 ) -> MACEModel:
     spec = get_test_system_spec(system)
+    model = resolve_mace_model_name(model_family, model)
     raw_model = load_raw_mace_model(
         model_family=model_family,
         model=model,
@@ -270,10 +313,11 @@ def build_mace_model(
     supported_atomic_numbers = {
         int(value) for value in raw_model.atomic_numbers.detach().cpu().tolist()
     }
-    if spec["atomic_number"] not in supported_atomic_numbers:
+    unsupported = sorted(set(spec["atomic_numbers"]) - supported_atomic_numbers)
+    if unsupported:
         raise ValueError(
             f"Selected MACE model_family={model_family!r}, model={model!r} does not support "
-            f"{spec['symbol']} (atomic number {spec['atomic_number']}). Supported atomic numbers: "
+            f"atomic numbers {unsupported}. Supported atomic numbers: "
             f"{sorted(supported_atomic_numbers)}"
         )
     # MACEModel already returns Dynamis MD units, so it drives the Simulator
@@ -358,7 +402,7 @@ class MonolithicMACECalculatorAdapter:
 
 def build_monolithic_mace_model(
     device: torch.device,
-    model: str = "medium-mpa-0",
+    model: Optional[str] = None,
     head_name: Optional[str] = None,
     model_family: str = "mp",
     system: str = "silicon",
@@ -366,6 +410,7 @@ def build_monolithic_mace_model(
 ) -> MonolithicMACECalculatorAdapter:
     """Build an independent public-calculator reference for trajectory tests."""
     spec = get_test_system_spec(system)
+    model = resolve_mace_model_name(model_family, model)
     if head_name:
         raise ValueError(
             "The monolithic trajectory reference does not yet support --head-name; "
@@ -401,10 +446,11 @@ def build_monolithic_mace_model(
     supported_atomic_numbers = {
         int(value) for value in calculator_model.atomic_numbers.detach().cpu().tolist()
     }
-    if spec["atomic_number"] not in supported_atomic_numbers:
+    unsupported = sorted(set(spec["atomic_numbers"]) - supported_atomic_numbers)
+    if unsupported:
         raise ValueError(
             f"Selected MACE model_family={model_family!r}, model={model!r} does not support "
-            f"{spec['symbol']} (atomic number {spec['atomic_number']}). Supported atomic numbers: "
+            f"atomic numbers {unsupported}. Supported atomic numbers: "
             f"{sorted(supported_atomic_numbers)}"
         )
     return MonolithicMACECalculatorAdapter(calculator, cutoff=cutoff, device=device)
@@ -416,11 +462,12 @@ def make_config(
     timestep_fs: float = 0.5,
     rebalance_interval: int = REBALANCE_INTERVAL,
     side_length_angstrom: float = SILICON_SIDE_LENGTH_ANGSTROM,
+    total_steps: int = N_STEPS,
 ) -> SimulatorConfig:
     os.makedirs(output_dir, exist_ok=True)
     return SimulatorConfig(
         timestep_fs=timestep_fs,
-        total_steps=N_STEPS,
+        total_steps=total_steps,
         side_length_angstrom=side_length_angstrom,
         cutoff_angstrom=float(cutoff_angstrom),
         ghost_buffer_angstrom=DEFAULT_GHOST_CUTOFF_BUFFER,
@@ -620,6 +667,8 @@ def compare_trajectories(
     dist_traj,
     report_path: Optional[str] = None,
     side_length_angstrom: float = SILICON_SIDE_LENGTH_ANGSTROM,
+    expected_steps: int = N_STEPS,
+    periodic: bool = True,
 ) -> None:
     rows = build_comparison_report(ref_traj, dist_traj)
     if report_path is not None:
@@ -627,8 +676,8 @@ def compare_trajectories(
     print_comparison_report_summary(rows)
 
     assert (
-        len(dist_traj) == len(ref_traj) == N_STEPS
-    ), f"frame count mismatch: ref={len(ref_traj)} dist={len(dist_traj)} expected={N_STEPS}"
+        len(dist_traj) == len(ref_traj) == expected_steps
+    ), f"frame count mismatch: ref={len(ref_traj)} dist={len(dist_traj)} expected={expected_steps}"
 
     for step, (ref_frame, dist_frame) in enumerate(zip(ref_traj, dist_traj)):
         assert np.array_equal(ref_frame["vid"], dist_frame["vid"]), (
@@ -662,7 +711,7 @@ def compare_trajectories(
         )
 
     diffs = rmsd_between_trajectories(ref_traj, dist_traj)
-    for step in range(EARLY_PHASE_STEPS + 1, N_STEPS):
+    for step in range(EARLY_PHASE_STEPS + 1, expected_steps):
         pos_tol = _pos_rmsd_tolerance(step)
         vel_tol = _vel_rmsd_tolerance(step)
         assert diffs["pos"][step] <= pos_tol, (
@@ -707,22 +756,23 @@ def compare_trajectories(
         f"bound={std_bound:.3e} amu*A^2/fs^2)"
     )
 
-    _, g_ref = averaged_rdf(ref_traj, RDF_LAST_K_FRAMES, side_length_angstrom)
-    _, g_dist = averaged_rdf(dist_traj, RDF_LAST_K_FRAMES, side_length_angstrom)
-    rdf_diff = float(np.mean(np.abs(g_ref - g_dist)))
-    print(
-        f"[phase 2] RDF mean abs difference (last {RDF_LAST_K_FRAMES} frames): {rdf_diff:.4f}"
-    )
-    assert (
-        rdf_diff <= RDF_TOL
-    ), f"[phase 2] RDF mean abs difference {rdf_diff:.4f} exceeds loose sanity threshold {RDF_TOL}"
+    if periodic:
+        _, g_ref = averaged_rdf(ref_traj, RDF_LAST_K_FRAMES, side_length_angstrom)
+        _, g_dist = averaged_rdf(dist_traj, RDF_LAST_K_FRAMES, side_length_angstrom)
+        rdf_diff = float(np.mean(np.abs(g_ref - g_dist)))
+        print(
+            f"[phase 2] RDF mean abs difference (last {RDF_LAST_K_FRAMES} frames): {rdf_diff:.4f}"
+        )
+        assert (
+            rdf_diff <= RDF_TOL
+        ), f"[phase 2] RDF mean abs difference {rdf_diff:.4f} exceeds loose sanity threshold {RDF_TOL}"
 
 
 def reference_vs_reference_check(
     structure_path: str,
     output_dir_a: str,
     output_dir_b: str,
-    model: str = "medium-mpa-0",
+    model: Optional[str] = None,
     head_name: Optional[str] = None,
     model_family: str = "mp",
 ):

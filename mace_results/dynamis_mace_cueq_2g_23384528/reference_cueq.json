@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "artifact_version": 3,
+    "system_name": "benchmark_scaling_molecular_7500",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz",
+    "num_atoms": 7500,
+    "model_family": "mp",
+    "model_name": "medium-mpa-0",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 6.0,
+    "signature": "db385bd8dbf62bd241b854b8cf13e9752b59d1f3bf121e6a3b43af3a5f2b52c2"
+  },
+  "precision": {
+    "calculator": {
+      "requested_dtype": "float32",
+      "model_parameter_dtype": "torch.float32",
+      "energy_result_type": "float",
+      "energy_float32_roundtrip_delta_ev": 0.0,
+      "force_result_dtype": "float32"
+    },
+    "core_model": {
+      "model_parameter_dtype": "torch.float32",
+      "input_position_dtype": "torch.float32",
+      "energy_tensor_dtype": "torch.float32",
+      "node_energy_tensor_dtype": "torch.float64",
+      "interaction_energy_tensor_dtype": "torch.float32",
+      "force_tensor_dtype": "torch.float32",
+      "energy_float32_roundtrip_delta_ev": 0.0
+    }
+  },
+  "reference": {
+    "calculator_energy": -39524.7109375,
+    "calculator_forces": "tensor([[ 0.0724, -0.8125,  0.1593],\n        [ 0.5511,  0.4739, -0.0382],\n        [-0.5303,  0.4645, -0.0352],\n        ...,\n        [-0.1420, -0.1200,  0.0775],\n        [-0.1456,  0.0547, -0.0837],\n        [ 0.0939, -0.1338, -0.1046]])",
+    "core_model_energy": -39524.796875,
+    "core_model_node_energy_sum_float64": -39525.02973341942,
+    "core_model_node_energy_sum_float32": -39525.03125,
+    "core_model_forces": "tensor([[ 0.0724, -0.8125,  0.1593],\n        [ 0.5511,  0.4739, -0.0382],\n        [-0.5303,  0.4645, -0.0352],\n        ...,\n        [-0.1420, -0.1200,  0.0775],\n        [-0.1456,  0.0547, -0.0837],\n        [ 0.0939, -0.1338, -0.1046]])",
+    "core_model_edge_count": 170134,
+    "calculator_minus_core_model_energy": 0.0859375,
+    "calculator_minus_core_model_force_mae": 5.17880323513964e-07,
+    "calculator_minus_core_model_force_max_abs": 6.780028343200684e-06
+  },
+  "calculator_benchmark": {
+    "scope": "single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        195.69754892028868,
+        195.93239105306566,
+        195.9612922836095,
+        195.7537756394595,
+        196.13858711905777,
+        195.92324754223228,
+        196.1583110690117
+      ],
+      "median_ms_per_step": 195.93239105306566,
+      "mean_ms_per_step": 195.93787908953215,
+      "min_ms_per_step": 195.69754892028868,
+      "p95_ms_per_step": 196.1583110690117,
+      "stdev_ms_per_step": 0.17383853602702717,
+      "coefficient_of_variation_percent": 0.08872125024257976,
+      "atoms_per_second": 38278.51004976878
+    }
+  },
+  "core_model_benchmark": {
+    "scope": "single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading",
+    "device_name": "NVIDIA A100-SXM4-40GB",
+    "warmup_steps": 10,
+    "iterations_per_sample": 50,
+    "num_samples": 7,
+    "timing_method": "perf_counter with device synchronization",
+    "timings": {
+      "samples_ms_per_step": [
+        144.00632281787694,
+        144.0506059024483,
+        143.6749864462763,
+        144.073591446504,
+        143.91427568159997,
+        144.1301513183862,
+        144.14172708056867
+      ],
+      "median_ms_per_step": 144.0506059024483,
+      "mean_ms_per_step": 143.99880867052292,
+      "min_ms_per_step": 143.6749864462763,
+      "p95_ms_per_step": 144.14172708056867,
+      "stdev_ms_per_step": 0.16228324078548573,
+      "coefficient_of_variation_percent": 0.11269762735106967,
+      "atoms_per_second": 52065.036124034305
+    }
+  }
+}

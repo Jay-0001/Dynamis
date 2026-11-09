@@ -1,0 +1,240 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+============================================================
+Dynamis MACE/CuEq two-GPU parity benchmark
+Job: 23253057
+Host: gpua091.delta.ncsa.illinois.edu
+Commit: 51ad334d1a5716c264065d94df79698e190414f1
+Environment: /u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean
+Model: off/medium
+Structure: /u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz
+Results: /u/jsaravananindira/Dynamis/mace_results/dynamis_mace_cueq_2g_23253057
+============================================================
+Dynamis: /u/jsaravananindira/Dynamis/dynamis/src/dynamis/__init__.py
+dynamis_state: /u/jsaravananindira/Dynamis/dynamis_state/src/dynamis_state/__init__.py
+dynamis_model: /u/jsaravananindira/Dynamis/dynamis_model/src/dynamis_model/__init__.py
+dynamis_integrator: /u/jsaravananindira/Dynamis/dynamis_integrator/src/dynamis_integrator/__init__.py
+PyTorch: 2.8.0+cu129
+PyTorch CUDA: 12.9
+Visible GPUs: 2
+MACE: 0.3.16
+CuEq: 0.9.1
+CuEq Torch: 0.9.1
+CuEq CUDA ops: 0.9.1
+CuEq Torch ops: 0.9.1
+GPU topology:
+	[4mGPU0	GPU1	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV4	32-33	2		N/A
+GPU1	NV4	 X 	0-1	0		N/A
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+Generating standalone CuEq MACE reference
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+system: benchmark_scaling_molecular_7500
+source_path: /u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz
+num_atoms: 7500
+model_family: off
+model_name: medium
+head_name: default
+enable_cueq: True
+cutoff: 5.0
+artifact_version: 3
+calculator_energy: -4929591.5
+core_model_energy: -4929591.0
+calculator_minus_core_model_energy: -0.5
+calculator_minus_core_model_force_mae: 1.9930457995087636e-07
+
+------------------------------------------------------------
+Performance Benchmark
+------------------------------------------------------------
+calculator_scope: single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading
+core_model_scope: single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading
+device_name: NVIDIA A100-SXM4-40GB
+timing_method: perf_counter with device synchronization
+warmup_steps: 10
+iterations_per_sample: 50
+num_samples: 7
+calculator_median_ms_per_step: 134.24005120061338
+core_model_median_ms_per_step: 109.45491753984243
+Running two-rank Dynamis MACE/CuEq benchmark
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: benchmark_scaling_molecular_7500
+source_path: /u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz
+num_atoms: 7500
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'default', 'enable_cueq': True}
+mismatch_classification: post_graph_model_mismatch
+
+------------------------------------------------------------
+Parity
+------------------------------------------------------------
+distributed_energy: -47564.216796875
+summed_owned_local_energy: -47564.216796875
+explicit_dynamis_graph_energy: -47563.2934803216
+calculator_mace_energy: -47563.3272501878
+core_model_mace_energy: -47563.3224259212
+distributed_minus_explicit_energy: -0.923316553402401
+distributed_minus_calculator_energy: -0.8895466871981625
+distributed_minus_core_model_energy: -0.8943709537998075
+explicit_energy_abs_error: 0.923316553402401
+calculator_energy_abs_error: 0.8895466871981625
+core_model_energy_abs_error: 0.8943709537998075
+explicit_energy_abs_error_per_atom: 0.0001231088737869868
+calculator_energy_abs_error_per_atom: 0.000118606224959755
+core_model_energy_abs_error_per_atom: 0.000119249460506641
+explicit_force_mae: 3.615637345077971e-09
+explicit_force_max_abs: 7.194466888904572e-08
+calculator_force_mae: 3.5746732240937718e-09
+calculator_force_max_abs: 6.583286449313164e-08
+core_model_force_mae: 3.5666896103236922e-09
+core_model_force_max_abs: 7.270136848092079e-08
+explicit_energy_close: False
+explicit_forces_close: True
+calculator_energy_close: False
+calculator_forces_close: True
+explicit_edge_count: 91866
+core_model_edge_count: 85466
+calculator_minus_core_model_energy: -0.0048242666
+calculator_minus_core_model_force_mae: 1.922996856568085e-09
+calculator_minus_core_model_force_max_abs: 3.745321778357029e-08
+
+------------------------------------------------------------
+Per-Rank
+------------------------------------------------------------
+rank 0: local_atoms=3750, owned_local_energy=-23782.10546875
+rank 1: local_atoms=3750, owned_local_energy=-23782.111328125
+
+------------------------------------------------------------
+Performance Benchmark
+------------------------------------------------------------
+scope: steady-state distributed MACEModel energy+forces; includes position exchange, owned-graph build, runtime feature exchange, and force recovery; excludes standalone reference generation, explicit parity reconstruction, and parity comparison
+device_name: NVIDIA A100-SXM4-40GB
+timing_method: perf_counter with device synchronization; distributed samples use slowest rank
+world_size: 2
+warmup_steps: 10
+iterations_per_sample: 50
+num_samples: 7
+distributed_median_ms_per_step: 34.52827948029153
+
+Per-rank stage diagnostics:
+rank 0: owned=3750, halos=650, total=4400, pre_filter_edges=52304, owned_destination_edges=45928
+  send_rows_per_peer=[0, 650], receive_rows_per_peer=[0, 650], feature_width=512
+  feature_bytes: forward_send=1331200, forward_receive=1331200, backward_send=1331200, backward_receive=1331200
+  structural_view_with_position_exchange_median_ms=0.2132500521838665, fraction=0.0061895171406642245
+  owned_graph_build_median_ms=1.6242149868048728, fraction=0.04714234016826678
+  mace_forward_with_feature_exchange_median_ms=14.55666497349739, fraction=0.42250272129680205
+  force_recovery_with_backward_exchange_median_ms=18.50418804679066, fraction=0.5370783637179799
+  total_profiled_step_median_ms=34.4534229952842, fraction=1.0
+rank 1: owned=3750, halos=650, total=4400, pre_filter_edges=52324, owned_destination_edges=45938
+  send_rows_per_peer=[650, 0], receive_rows_per_peer=[650, 0], feature_width=512
+  feature_bytes: forward_send=1331200, forward_receive=1331200, backward_send=1331200, backward_receive=1331200
+  structural_view_with_position_exchange_median_ms=0.22225698921829462, fraction=0.006424794122474027
+  owned_graph_build_median_ms=1.660033012740314, fraction=0.047986658961224345
+  mace_forward_with_feature_exchange_median_ms=14.998383005149662, fraction=0.4335590224497115
+  force_recovery_with_backward_exchange_median_ms=17.53649301826954, fraction=0.5069282980429705
+  total_profiled_step_median_ms=34.59363599540666, fraction=1.0
+calculator_scope: single-GPU standalone MACE calculator path; includes MACE internal graph construction, calculator evaluation, energy extraction, and force extraction; excludes input parsing and model loading
+calculator_median_ms_per_step: 134.24005120061338
+speedup_calculator_over_distributed: 3.8878291424059093
+calculator_parallel_efficiency: 1.9439145712029546
+core_model_scope: single-GPU raw ScaleShiftMACE path; includes MACE-native Configuration creation, AtomicData.from_config graph construction, Batch.from_data_list packaging, and raw model forward with force computation; excludes ASE calculator result packaging, host-side output extraction, and model loading
+core_model_median_ms_per_step: 109.45491753984243
+speedup_core_model_over_distributed: 3.1700078656487483
+core_model_parallel_efficiency: 1.5850039328243741
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/test_mace_model.py", line 1416, in <module>
+[rank0]:     main()
+[rank0]:   File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/test_mace_model.py", line 1164, in main
+[rank0]:     run_distributed(args)
+[rank0]:   File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/test_mace_model.py", line 1154, in run_distributed
+[rank0]:     assert summary["mismatch_classification"] == "parity_ok", summary[
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: AssertionError: post_graph_model_mismatch
+W1027 10:38:02.726000 342045 site-packages/torch/distributed/elastic/multiprocessing/api.py:900] Sending process 342048 closing signal SIGTERM
+E1027 10:38:02.941000 342045 site-packages/torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 0 (pid: 342047) of binary: /u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/bin/python
+Traceback (most recent call last):
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/torch/distributed/run.py", line 901, in main
+    run(args)
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 143, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 277, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+dynamis_model/tests/mace/test_mace_model.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-27_10:38:02
+  host      : gpua091.delta.ncsa.illinois.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 342047)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

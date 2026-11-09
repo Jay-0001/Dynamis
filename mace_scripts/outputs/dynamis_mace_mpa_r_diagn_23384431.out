@@ -1,0 +1,50 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+============================================================
+Dynamis MACE/CuEq two-GPU parity benchmark
+Job: 23384431
+Host: gpua002.delta.ncsa.illinois.edu
+Commit: 51ad334d1a5716c264065d94df79698e190414f1
+Environment: /u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean
+Model: mpa/medium-mpa-0
+Structure: /u/jsaravananindira/Dynamis/mace_data/benchmark_scaling_molecular_7500.xyz
+Results: /u/jsaravananindira/Dynamis/mace_results/dynamis_mace_cueq_2g_23384431
+============================================================
+Dynamis: /u/jsaravananindira/Dynamis/dynamis/src/dynamis/__init__.py
+dynamis_state: /u/jsaravananindira/Dynamis/dynamis_state/src/dynamis_state/__init__.py
+dynamis_model: /u/jsaravananindira/Dynamis/dynamis_model/src/dynamis_model/__init__.py
+dynamis_integrator: /u/jsaravananindira/Dynamis/dynamis_integrator/src/dynamis_integrator/__init__.py
+PyTorch: 2.8.0+cu129
+PyTorch CUDA: 12.9
+Visible GPUs: 2
+MACE: 0.3.16
+CuEq: 0.9.1
+CuEq Torch: 0.9.1
+CuEq CUDA ops: 0.9.1
+CuEq Torch ops: 0.9.1
+GPU topology:
+	[4mGPU0	GPU1	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV4	32-33	2		N/A
+GPU1	NV4	 X 	0-1	0		N/A
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+Generating standalone CuEq MACE reference
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+[2026-10-31T16:43:26.458] error: *** JOB 23384431 ON gpua002 CANCELLED AT 2026-10-31T16:43:26 DUE to SIGNAL Terminated ***
