@@ -28,12 +28,14 @@ from dynamis_state.masses import TORCH_ATOMIC_MASSES
 
 if __package__:
     from .mace_standalone_reference import (
-        ARTIFACT_VERSION, load_raw_structure, natural_chain12, reference_signature,
+        ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
+    from .mace_test_systems import DEFAULT_SEED, organic_molecules
 else:
     from mace_standalone_reference import (
-        ARTIFACT_VERSION, load_raw_structure, natural_chain12, reference_signature,
+        ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
+    from mace_test_systems import DEFAULT_SEED, organic_molecules
 
 ENERGY_ATOL_MD = 1e-3
 FORCE_ATOL_MD = 1e-5
@@ -45,8 +47,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run-distributed")
-    run.add_argument("--builtin-system", choices=["natural_chain12"], default="natural_chain12")
-    run.add_argument("--xyz-path", type=Path)
+    run.add_argument("--system-seed", type=int, default=DEFAULT_SEED)
+    run.add_argument("--molecule-count", type=int, default=1)
     run.add_argument("--model-family", choices=["mp", "off"], default="mp")
     run.add_argument("--model", default=None)
     run.add_argument("--head-name", default="")
@@ -300,13 +302,15 @@ def run_distributed(args: argparse.Namespace):
         "benchmark": ({"distributed": timing, "raw_core": artifact["benchmark"]}
                       if timing else None),
     }
-    if args.model_family == "off" and args.model == "medium" and args.xyz_path is None:
+    if args.model_family == "off" and args.model == "medium":
         if len(model.interactions) != 2 or sum(
             adapter.runtime._should_exchange_after_product(i)
             for i in range(len(model.interactions))
         ) != 1:
             raise AssertionError("OFF23 medium must have two interactions and one feature exchange.")
-        if any(item["owned_atoms"] == 0 or item["halo_atoms"] == 0 for item in summary["ranks"]):
+        if args.molecule_count == 1 and any(
+            item["owned_atoms"] == 0 or item["halo_atoms"] == 0 for item in summary["ranks"]
+        ):
             raise AssertionError("The OFF23 halo fixture must place owned and halo atoms on both ranks.")
     print(json.dumps(summary, indent=2))
     if args.output_json:
@@ -337,6 +341,21 @@ def test_default_model_and_family_resolution():
     assert args.model_family == "mp"
     assert resolve_mace_model_name(args.model_family, args.model) == "medium-mpa-0"
     assert resolve_mace_model_name("off", None) == "medium"
+
+
+def test_generated_molecules_are_deterministic_and_graph_safe():
+    for count in (1, 2, 8):
+        raw = organic_molecules(seed=2026, count=count)
+        assert raw == organic_molecules(seed=2026, count=count)
+        assert len(raw["atomic_numbers"]) == 12 * count
+        assert raw["pbc"] == [False] * 3
+        positions = torch.tensor(raw["positions"], dtype=torch.float64)
+        side = raw["cell"][0][0]
+        assert bool(((positions > 6.5) & (positions < side - 6.5)).all())
+        pair_distances = torch.pdist(positions)
+        assert bool((pair_distances > 0.75).all())
+        for cutoff in (5.0, 6.0):
+            assert bool((torch.abs(pair_distances - cutoff) > 1e-3).all())
 
 
 def test_off_checkpoint_name_selection(monkeypatch):
@@ -374,7 +393,7 @@ def test_selected_head_is_explicit_and_validated():
 def test_reference_artifact_rejects_stale_version_and_head(tmp_path):
     import pytest
 
-    raw = natural_chain12()
+    raw = organic_molecules()
     args = build_parser().parse_args(
         ["run-distributed", "--reference-artifact", str(tmp_path / "reference.pt")]
     )
@@ -438,7 +457,7 @@ def test_reinitialize_buffers_preserves_energy_and_forces():
     if int(os.environ.get("WORLD_SIZE", "1")) < 2:
         pytest.skip("Launch with torchrun and two CUDA ranks.")
     torch_env = TorchDistEnv(is_distributed=True)
-    raw = natural_chain12()
+    raw = organic_molecules()
     model = load_raw_mace_model(device=str(torch_env.device)).to(torch_env.device).eval()
     adapter = MACEModel(model)
     state = build_state(raw, adapter.cutoff, 0.5, torch_env)

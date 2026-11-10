@@ -19,69 +19,24 @@ from dynamis_model.nnp.mace import (
     resolve_mace_model_name,
     resolve_model_head_name,
 )
+if __package__:
+    from .mace_test_systems import DEFAULT_SEED, organic_molecules, structure_signature
+else:
+    from mace_test_systems import DEFAULT_SEED, organic_molecules, structure_signature
 
 ARTIFACT_VERSION = 5
-TEST_FILE_DIR = Path(__file__).resolve().parent
-
-
-def natural_chain12() -> dict[str, Any]:
-    return {
-        "name": "natural_chain12",
-        "atomic_numbers": [6] * 4 + [1] * 8,
-        "positions": [
-            [2.00, 2.00, 2.00], [3.52, 2.12, 2.00],
-            [5.01, 1.90, 2.18], [6.50, 2.08, 1.95],
-            [1.45, 2.92, 2.20], [1.52, 1.08, 1.80],
-            [3.52, 3.08, 1.55], [3.55, 1.22, 2.62],
-            [5.00, 2.82, 2.72], [5.02, 0.95, 1.58],
-            [7.03, 2.96, 2.20], [7.02, 1.18, 1.72],
-        ],
-        "cell": [[20.0, 0.0, 0.0], [0.0, 20.0, 0.0], [0.0, 0.0, 20.0]],
-        "pbc": [False, False, False],
-    }
-
-
-def resolve_xyz_path(path: Path) -> Path:
-    candidates = [path] if path.is_absolute() else [Path.cwd() / path, TEST_FILE_DIR / path, TEST_FILE_DIR / "data" / path]
-    for candidate in candidates:
-        if candidate.is_file():
-            return candidate.resolve()
-    raise FileNotFoundError(f"XYZ structure does not exist: {path}")
-
-
-def load_xyz(path: Path) -> dict[str, Any]:
-    from ase.io import read
-
-    path = resolve_xyz_path(path)
-    atoms = read(path)
-    positions = np.asarray(atoms.positions, dtype=np.float32)
-    if not atoms.cell.any():
-        lengths = np.maximum(positions.max(axis=0) + 10.0, 20.0)
-        atoms.set_cell(np.diag(lengths))
-    if not np.any(atoms.pbc):
-        cell = np.asarray(atoms.cell, dtype=np.float64)
-        fractional = positions.astype(np.float64) @ np.linalg.inv(cell)
-        if np.any(positions < 0) or np.any(fractional < 0) or np.any(fractional >= 1):
-            raise ValueError(
-                "Nonperiodic MACE test atoms must lie within the positive simulation cell."
-            )
-    return {
-        "name": path.stem,
-        "source_path": str(path),
-        "atomic_numbers": atoms.numbers.astype(int).tolist(),
-        "positions": positions.tolist(),
-        "cell": np.asarray(atoms.cell, dtype=np.float32).tolist(),
-        "pbc": np.asarray(atoms.pbc, dtype=bool).tolist(),
-    }
 
 
 def load_raw_structure(args: argparse.Namespace) -> dict[str, Any]:
-    return load_xyz(args.xyz_path) if args.xyz_path else natural_chain12()
+    return organic_molecules(args.system_seed, args.molecule_count)
 
 
 def reference_signature(raw: dict[str, Any], family: str, model: str, head: str, cueq: bool) -> str:
-    payload = {key: raw[key] for key in ("atomic_numbers", "positions", "cell", "pbc")}
-    payload.update(model_family=family, model_name=model, head_name=head, enable_cueq=cueq)
+    payload = {
+        "structure_signature": structure_signature(raw),
+        "model_family": family, "model_name": model,
+        "head_name": head, "enable_cueq": cueq,
+    }
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
 
 
@@ -169,8 +124,8 @@ def benchmark_raw_core(raw, model, device, head_name, warmup, iterations, sample
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--builtin-system", choices=["natural_chain12"], default="natural_chain12")
-    parser.add_argument("--xyz-path", type=Path)
+    parser.add_argument("--system-seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--molecule-count", type=int, default=1)
     parser.add_argument("--model-family", choices=["mp", "off"], default="mp")
     parser.add_argument("--model", default=None)
     parser.add_argument("--head-name", default="")

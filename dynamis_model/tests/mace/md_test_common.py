@@ -7,17 +7,16 @@ an independent singleton raw-MACE reference on a native MACE graph.
 
 from __future__ import annotations
 
-import hashlib
 import os
 import socket
-from pathlib import Path
 from typing import Any, Dict, Optional
 
 import numpy as np
 import torch
 import torch.distributed as dist
 
-from dynamis import SimulatorConfig
+from dynamis import Simulator, SimulatorConfig
+from dynamis_state import MolecularInfo
 from dynamis_model.nnp.mace import (
     MACEModel,
     load_raw_mace_model,
@@ -26,6 +25,10 @@ from dynamis_model.nnp.mace import (
 
 # Raw MACE predicts eV / (eV per Angstrom); Dynamis uses MD units.
 from dynamis_model.units import EV_PER_A_TO_AMU_A_PER_FS2 as EV_TO_MD
+if __package__:
+    from .mace_test_systems import DEFAULT_SEED, ORGANIC_ATOMIC_NUMBERS, organic_chain12
+else:
+    from mace_test_systems import DEFAULT_SEED, ORGANIC_ATOMIC_NUMBERS, organic_chain12
 
 
 def install_trajectory_simulator_import_compatibility() -> None:
@@ -46,24 +49,18 @@ def install_trajectory_simulator_import_compatibility() -> None:
 
 
 try:
-    from ase import Atoms
     from ase.build import bulk
-    from ase.io import read
-    from ase.io import write
 
     HAS_ASE = True
     _ASE_IMPORT_ERROR: Optional[Exception] = None
 except Exception as exc:  # pragma: no cover - optional dependency
-    Atoms = None  # type: ignore[assignment]
     bulk = None  # type: ignore[assignment]
-    read = None  # type: ignore[assignment]
-    write = None  # type: ignore[assignment]
     HAS_ASE = False
     _ASE_IMPORT_ERROR = exc
 
 N_STEPS = 100
 REBALANCE_INTERVAL = 7
-SEED = 1234
+SEED = DEFAULT_SEED
 SILICON_LATTICE_CONSTANT_ANGSTROM = 5.431
 SILICON_SUPERCELL_REPETITIONS = (3, 3, 3)
 SILICON_N_ATOMS = 8 * int(np.prod(SILICON_SUPERCELL_REPETITIONS))
@@ -75,24 +72,8 @@ HELIUM_N_ATOMS = 64
 HELIUM_SIDE_LENGTH_ANGSTROM = 20.0
 HELIUM_MIN_DISTANCE_ANGSTROM = 3.0
 TEST_SYSTEMS = ("silicon", "helium", "organic")
-ORGANIC_NUMBERS = [6] * 4 + [1] * 8
-ORGANIC_POSITIONS = [
-    [2.00, 2.00, 2.00],
-    [3.52, 2.12, 2.00],
-    [5.01, 1.90, 2.18],
-    [6.50, 2.08, 1.95],
-    [1.45, 2.92, 2.20],
-    [1.52, 1.08, 1.80],
-    [3.52, 3.08, 1.55],
-    [3.55, 1.22, 2.62],
-    [5.00, 2.82, 2.72],
-    [5.02, 0.95, 1.58],
-    [7.03, 2.96, 2.20],
-    [7.02, 1.18, 1.72],
-]
 _TEST_SYSTEM_SPECS = {
     "silicon": {
-        "filename": "silicon_supercell.xyz",
         "symbol": "Si",
         "atomic_number": 14,
         "n_atoms": SILICON_N_ATOMS,
@@ -103,7 +84,6 @@ _TEST_SYSTEM_SPECS = {
         "timestep_fs": 0.5,
     },
     "helium": {
-        "filename": "helium_box.xyz",
         "symbol": "He",
         "atomic_number": 2,
         "n_atoms": HELIUM_N_ATOMS,
@@ -114,10 +94,9 @@ _TEST_SYSTEM_SPECS = {
         "timestep_fs": 0.5,
     },
     "organic": {
-        "filename": "organic_chain12.xyz",
-        "n_atoms": len(ORGANIC_NUMBERS),
+        "n_atoms": len(ORGANIC_ATOMIC_NUMBERS),
         "side_length_angstrom": 20.0,
-        "atomic_numbers": ORGANIC_NUMBERS,
+        "atomic_numbers": ORGANIC_ATOMIC_NUMBERS,
         "pbc": False,
         "step_count": 20,
         "timestep_fs": 0.1,
@@ -153,7 +132,7 @@ RDF_TOL = 0.3
 def _require_ase() -> None:
     if not HAS_ASE:
         raise ImportError(
-            "Periodic MACE trajectory tests require ASE."
+            "The silicon MACE trajectory generator requires ASE."
         ) from _ASE_IMPORT_ERROR
 
 
@@ -202,68 +181,58 @@ def _generate_periodic_helium_positions(seed: int) -> np.ndarray:
     return positions
 
 
-def ensure_test_structure(
-    path: str | Path,
-    seed: int = SEED,
-    system: str = "silicon",
-) -> None:
-    _require_ase()
+def generate_test_structure(system: str = "organic", seed: int = SEED) -> dict:
+    """Build the trajectory structure in memory with explicit cell and PBC."""
     spec = get_test_system_spec(system)
-    path = str(path)
-    if os.path.exists(path):
-        atoms = read(path)
-        actual_numbers = atoms.get_atomic_numbers()
-        expected_cell = np.full(3, spec["side_length_angstrom"])
-        if (
-            len(atoms) != spec["n_atoms"]
-            or not np.array_equal(actual_numbers, spec["atomic_numbers"])
-            or not np.array_equal(atoms.pbc, [spec["pbc"]] * 3)
-            or not np.allclose(atoms.cell.lengths(), expected_cell, atol=1e-6, rtol=0)
-        ):
-            raise ValueError(
-                f"Existing trajectory structure at {path} is not the required {system} "
-                "fixture. Use a clean --path directory."
-            )
-        return
-
+    if system == "organic":
+        return organic_chain12(seed)
     if system == "silicon":
+        _require_ase()
         atoms = bulk("Si", "diamond", a=SILICON_LATTICE_CONSTANT_ANGSTROM, cubic=True)
         atoms = atoms.repeat(SILICON_SUPERCELL_REPETITIONS)
         atoms.rattle(stdev=STRUCTURE_PERTURBATION_ANGSTROM, seed=seed)
-        description = (
-            f"periodic {SILICON_N_ATOMS}-atom diamond-Si supercell with "
-            f"{STRUCTURE_PERTURBATION_ANGSTROM:.3f} A perturbations"
-        )
-    elif system == "helium":
-        atoms = Atoms(
-            ["He"] * HELIUM_N_ATOMS,
-            positions=_generate_periodic_helium_positions(seed),
-            cell=[HELIUM_SIDE_LENGTH_ANGSTROM] * 3,
-            pbc=True,
-        )
-        description = (
-            f"periodic {HELIUM_N_ATOMS}-atom helium box with minimum initial "
-            f"separation {HELIUM_MIN_DISTANCE_ANGSTROM:.1f} A"
-        )
-    else:
-        atoms = Atoms(
-            numbers=ORGANIC_NUMBERS,
-            positions=ORGANIC_POSITIONS,
-            cell=[spec["side_length_angstrom"]] * 3,
-            pbc=False,
-        )
-        description = "nonperiodic 12-atom C/H chain"
-    if spec["pbc"]:
         atoms.wrap()
-    assert len(atoms) == spec["n_atoms"]
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    write(path, atoms, format="extxyz")
-    print(f"Wrote {description} to {path}")
+        positions = atoms.get_positions()
+    else:
+        positions = _generate_periodic_helium_positions(seed)
+    positions = np.asarray(positions, dtype=np.float32)
+    side = spec["side_length_angstrom"]
+    if len(positions) != spec["n_atoms"] or np.any(positions < 0) or np.any(positions >= side):
+        raise ValueError(f"Generated {system} atoms lie outside their positive cell.")
+    return {
+        "name": system,
+        "atomic_numbers": spec["atomic_numbers"],
+        "positions": positions.tolist(),
+        "cell": np.diag([side] * 3).tolist(),
+        "pbc": [spec["pbc"]] * 3,
+    }
 
 
-def structure_sha256(path: str | Path) -> str:
-    """Return the identity of the exact structure consumed by both trajectory runs."""
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def molecular_info_from_structure(raw: dict) -> MolecularInfo:
+    """Give Simulator.setup the same atom IDs and coordinates on every rank."""
+    info = MolecularInfo()
+    numbers = torch.tensor(raw["atomic_numbers"], dtype=torch.long)
+    positions = torch.tensor(raw["positions"], dtype=torch.float32)
+    info.num_atoms = len(numbers)
+    info.atom_vertex_numbers = torch.arange(len(numbers), dtype=torch.long)
+    info.atom_types = numbers
+    info.atom_positions = positions
+    info.atom_velocities = torch.zeros_like(positions)
+    info.atom_forces = torch.zeros_like(positions)
+    return info
+
+
+class GeneratedMaceSimulator(Simulator):
+    """Pass the generated structure's periodicity to the Dynamis graph builder."""
+
+    def __init__(self, *args, periodic: bool, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._test_periodic = periodic
+
+    def _get_simulation_config(self):
+        config = super()._get_simulation_config()
+        config.pbc = torch.tensor([self._test_periodic] * 3, dtype=torch.bool)
+        return config
 
 
 def free_port() -> int:

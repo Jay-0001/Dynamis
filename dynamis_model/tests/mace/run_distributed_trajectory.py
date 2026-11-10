@@ -14,7 +14,6 @@ import numpy as np
 import torch
 import torch.distributed as dist
 
-from dynamis import Simulator
 from dynamis_integrator import Verlet
 from dynamis_state import TorchDistEnv
 from dynamis_model.nnp.mace import resolve_mace_model_name
@@ -23,31 +22,36 @@ if __package__:
     from .md_test_common import (
         SEED,
         REBALANCE_INTERVAL,
+        GeneratedMaceSimulator,
         build_mace_model,
-        ensure_test_structure,
+        generate_test_structure,
         get_test_system_spec,
         install_trajectory_simulator_import_compatibility,
         make_config,
+        molecular_info_from_structure,
         run_md_loop,
-        structure_sha256,
     )
+    from .mace_test_systems import structure_signature
 else:
     from md_test_common import (
         SEED,
         REBALANCE_INTERVAL,
+        GeneratedMaceSimulator,
         build_mace_model,
-        ensure_test_structure,
+        generate_test_structure,
         get_test_system_spec,
         install_trajectory_simulator_import_compatibility,
         make_config,
+        molecular_info_from_structure,
         run_md_loop,
-        structure_sha256,
     )
+    from mace_test_systems import structure_signature
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--path", required=True)
+    parser.add_argument("--system-seed", type=int, default=SEED)
     parser.add_argument("--model", default=None)
     parser.add_argument(
         "--system", default="silicon", choices=["silicon", "helium", "organic"]
@@ -68,18 +72,14 @@ def main() -> None:
     args = build_parser().parse_args()
     args.model = resolve_mace_model_name(args.model_family, args.model)
     spec = get_test_system_spec(args.system)
+    raw = generate_test_structure(args.system, args.system_seed)
     install_trajectory_simulator_import_compatibility()
-    structure = Path(args.path) / spec["filename"]
     output_dir = Path(args.path) / "dist_out"
     dist_dump = Path(args.path) / "dist_traj.pt"
 
     try:
         torch_dist_env = TorchDistEnv(is_distributed=True)
         dist_env = torch_dist_env.dist_env
-
-        if dist_env.global_rank == 0:
-            ensure_test_structure(structure, system=args.system)
-        dist.barrier()
 
         torch.manual_seed(SEED)
         model = build_mace_model(
@@ -100,8 +100,11 @@ def main() -> None:
             total_steps=spec["step_count"],
         )
 
-        sim = Simulator(model, integrator, dist_env, config, torch_dist_env.device)
-        sim.setup(str(structure))
+        sim = GeneratedMaceSimulator(
+            model, integrator, dist_env, config, torch_dist_env.device,
+            periodic=spec["pbc"],
+        )
+        sim.setup(molecular_info_from_structure(raw))
 
         local_frames = run_md_loop(sim, config, steps=spec["step_count"])
         local_payload = [
@@ -144,13 +147,14 @@ def main() -> None:
                 merged.append(frame)
             artifact = {
                 "metadata": {
-                    "artifact_version": 4,
+                    "artifact_version": 5,
                     "model": args.model,
                     "model_family": args.model_family,
                     "system": args.system,
+                    "system_seed": args.system_seed,
                     "head_name": args.head_name,
                     "enable_cueq": args.enable_cueq,
-                    "structure_sha256": structure_sha256(structure),
+                    "structure_signature": structure_signature(raw),
                     "timestep_fs": config.timestep_fs,
                     "step_count": spec["step_count"],
                     "rebalance_interval": REBALANCE_INTERVAL,

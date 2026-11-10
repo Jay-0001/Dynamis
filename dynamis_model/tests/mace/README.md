@@ -45,9 +45,13 @@ torchrun --standalone --nproc-per-node=2 \
 ```
 
 Repeat with `--model small` and `--model large`. To validate CuEq, add
-`--enable-cueq` to **both** commands. `--xyz-path FILE` selects the same
-XYZ/extxyz structure in both commands; otherwise the nonperiodic 12-atom C/H
-fixture is used. The OFF23 medium fixture checks that both ranks own and halo
+`--enable-cueq` to **both** commands. Both commands generate the same
+nonperiodic 12-atom C/H molecule in memory. Set the same `--system-seed` and
+`--molecule-count` on each command to select another deterministic structure.
+For example, `--molecule-count 625` creates 7,500 atoms for a scaling run.
+Each molecule stays clear of the 5 and 6 Å cutoff boundaries, and all atoms
+lie inside a positive cell with more than 6 Å of margin. The OFF23 medium
+single-molecule fixture checks that both ranks own and halo
 atoms and that its two interactions require one feature exchange. The graph
 audit compares assembled owned directed edges with the native graph and fails
 on any difference more than `1e-4` Å inside the checkpoint cutoff. Exact cutoff
@@ -60,8 +64,9 @@ lean raw-core and distributed step timing; it does not relax parity.
 ## Trajectory
 
 The two-rank trajectory is compared with a one-rank raw checkpoint that rebuilds
-the native MACE graph every step. The organic fixture has 12 C/H atoms, is
-nonperiodic, and runs 20 Verlet steps at 0.1 fs. The comparison checks energy,
+the native MACE graph every step. Both runs generate the same organic structure
+in memory and pass it to the simulator with nonperiodic graph settings. The
+organic fixture has 12 C/H atoms and runs 20 Verlet steps at 0.1 fs. The comparison checks energy,
 atom IDs, positions, velocities, and energy drift.
 
 ```bash
@@ -73,7 +78,8 @@ python dynamis_model/tests/mace/test_md.py \
 ```
 
 Repeat with small and large, each in its own `--path` directory. Add
-`--enable-cueq` to both commands for CuEq. The trajectory artifact records atom
+`--enable-cueq` to both commands for CuEq. Pass the same `--system-seed` to
+both commands to vary the molecular geometry. The trajectory artifact records atom
 ownership by rank; the static halo fixture remains the mandatory cross-rank
 feature-exchange check.
 
