@@ -61,6 +61,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--system", default="silicon", choices=["silicon", "helium", "organic"]
     )
     parser.add_argument("--head-name", default="")
+    parser.add_argument("--energy-mode", choices=["legacy", "stable"], default="legacy")
     parser.add_argument(
         "--model-family", default="mp", choices=["mp", "off", "omol", "polar"]
     )
@@ -103,7 +104,7 @@ def main() -> None:
             if args.reference_mode == "monolithic"
             else build_mace_model
         )
-        model = model_factory(
+        model_kwargs = dict(
             device=torch_dist_env.device,
             model=args.model,
             head_name=args.head_name or None,
@@ -111,6 +112,9 @@ def main() -> None:
             system=args.system,
             enable_cueq=args.enable_cueq,
         )
+        if args.reference_mode == "mace":
+            model_kwargs["energy_mode"] = args.energy_mode
+        model = model_factory(**model_kwargs)
         print(
             f"Running {args.reference_mode} singleton MACE reference trajectory for {args.system}."
         )
@@ -137,12 +141,13 @@ def main() -> None:
                 "Distributed trajectory artifact must contain exactly 'metadata' and 'frames'."
             )
         expected_metadata = {
-            "artifact_version": 2,
+            "artifact_version": 3,
             "model": args.model,
             "model_family": args.model_family,
             "system": args.system,
             "head_name": args.head_name,
             "enable_cueq": args.enable_cueq,
+            "energy_mode": args.energy_mode,
             "structure_sha256": structure_sha256(structure),
             "timestep_fs": config.timestep_fs,
             "step_count": spec["step_count"],

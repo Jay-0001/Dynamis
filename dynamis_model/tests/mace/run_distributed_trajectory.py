@@ -53,6 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--system", default="silicon", choices=["silicon", "helium", "organic"]
     )
     parser.add_argument("--head-name", default="")
+    parser.add_argument("--energy-mode", choices=["legacy", "stable"], default="legacy")
     parser.add_argument(
         "--model-family", default="mp", choices=["mp", "off", "omol", "polar"]
     )
@@ -89,6 +90,7 @@ def main() -> None:
             model_family=args.model_family,
             system=args.system,
             enable_cueq=args.enable_cueq,
+            energy_mode=args.energy_mode,
         )
         integrator = Verlet(dt=spec["timestep_fs"])
         config = make_config(
@@ -144,12 +146,13 @@ def main() -> None:
                 merged.append(frame)
             artifact = {
                 "metadata": {
-                    "artifact_version": 2,
+                    "artifact_version": 3,
                     "model": args.model,
                     "model_family": args.model_family,
                     "system": args.system,
                     "head_name": args.head_name,
                     "enable_cueq": args.enable_cueq,
+                    "energy_mode": args.energy_mode,
                     "structure_sha256": structure_sha256(structure),
                     "timestep_fs": config.timestep_fs,
                     "step_count": spec["step_count"],

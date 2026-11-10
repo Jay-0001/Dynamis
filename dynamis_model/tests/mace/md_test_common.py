@@ -301,6 +301,7 @@ def build_mace_model(
     model_family: str = "mp",
     system: str = "silicon",
     enable_cueq: bool = False,
+    energy_mode: str = "legacy",
 ) -> MACEModel:
     spec = get_test_system_spec(system)
     model = resolve_mace_model_name(model_family, model)
@@ -322,7 +323,11 @@ def build_mace_model(
         )
     # MACEModel already returns Dynamis MD units, so it drives the Simulator
     # directly, exactly as UMAModel and ORBModel do.
-    return MACEModel(raw_model.to(device=device).eval(), head_name=head_name or None)
+    return MACEModel(
+        raw_model.to(device=device).eval(),
+        head_name=head_name or None,
+        energy_mode=energy_mode,
+    )
 
 
 class MonolithicMACECalculatorAdapter:
