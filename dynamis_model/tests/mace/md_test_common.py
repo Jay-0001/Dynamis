@@ -1,9 +1,8 @@
 """
 Shared helpers for MACEModel trajectory validation.
 
-This module carries over the model-agnostic orchestration and comparison logic
-from the UMA trajectory checks. It supports both the distributed MACEModel
-producer and singleton MACEModel or public-calculator reference models.
+This module shares trajectory orchestration between distributed MACEModel and
+an independent singleton raw-MACE reference on a native MACE graph.
 """
 
 from __future__ import annotations
@@ -25,10 +24,7 @@ from dynamis_model.nnp.mace import (
     resolve_mace_model_name,
 )
 
-# MACEModel returns MD units (amu * A^2 / fs^2, amu * A / fs^2) like UMAModel
-# and ORBModel. Public MACE calculators predict eV / (eV per Angstrom), so any
-# reference built from one must be scaled by this before it can be compared.
-# Imported rather than re-spelled so it cannot drift from the backends.
+# Raw MACE predicts eV / (eV per Angstrom); Dynamis uses MD units.
 from dynamis_model.units import EV_PER_A_TO_AMU_A_PER_FS2 as EV_TO_MD
 
 
@@ -132,6 +128,7 @@ DEFAULT_GHOST_CUTOFF_BUFFER = 0.5
 EARLY_PHASE_STEPS = 4
 POS_VEL_TOL = 2e-5
 ENERGY_RTOL = 1e-3
+CONTROLLED_ENERGY_ATOL_MD = 1e-3
 
 _RESOLUTION_FLOOR = 1e-6
 _POS_NOISE_RMSD_FLOOR = 1e-6
@@ -301,7 +298,6 @@ def build_mace_model(
     model_family: str = "mp",
     system: str = "silicon",
     enable_cueq: bool = False,
-    energy_mode: str = "legacy",
 ) -> MACEModel:
     spec = get_test_system_spec(system)
     model = resolve_mace_model_name(model_family, model)
@@ -326,130 +322,63 @@ def build_mace_model(
     return MACEModel(
         raw_model.to(device=device).eval(),
         head_name=head_name or None,
-        energy_mode=energy_mode,
     )
 
 
-class MonolithicMACECalculatorAdapter:
-    """Expose the public MACE ASE calculator through Dynamis's model protocol.
+class NativeMACEReference:
+    """Run a raw checkpoint on a freshly built native graph on one rank."""
 
-    This reference path is intentionally restricted to a singleton simulation:
-    ASE receives the complete system and performs MACE-native graph construction,
-    independently of MACEModel's distributed graph and feature exchange.
-    """
-
-    def __init__(self, calculator, cutoff: float, device: torch.device) -> None:
-        self._calculator = calculator
-        self._cutoff = float(cutoff)
+    def __init__(self, model: torch.nn.Module, head_name: str, device: torch.device):
+        self.model = model
+        self.head_name = head_name
         self._device = device
-
-    @property
-    def cutoff(self) -> float:
-        return self._cutoff
+        self.cutoff = float(model.r_max.detach().cpu())
 
     def initialize_buffers(self, partition_info, device: torch.device) -> None:
-        # The monolithic calculator owns no Dynamis communication buffers.
         if device != self._device:
-            raise ValueError(
-                f"Monolithic MACE calculator was created on {self._device}, "
-                f"but the simulator requested {device}."
-            )
+            raise ValueError("The native MACE reference moved to a different device.")
 
     def __call__(self, state, *args: Any, **kwargs: Any):
-        _require_ase()
-        from ase.calculators.calculator import all_changes
-
         if int(state.dist_env.world_size) != 1:
-            raise ValueError(
-                "Monolithic MACE trajectory references require a world-size=1 simulator."
-            )
+            raise ValueError("The native MACE trajectory reference requires one rank.")
+        if __package__:
+            from .mace_standalone_reference import evaluate_raw_core
+        else:
+            from mace_standalone_reference import evaluate_raw_core
+
         molecular_info = state.local_molecular_info
-        positions = molecular_info.atom_positions
-        num_atoms = int(molecular_info.num_atoms)
-        if positions.shape[0] != num_atoms:
-            raise ValueError(
-                "Monolithic MACE reference received inconsistent local atom metadata."
-            )
-
-        atoms = Atoms(
-            numbers=molecular_info.atom_types.detach().cpu().numpy(),
-            positions=positions.detach().cpu().numpy(),
-            cell=state.sim_config.cell.detach().cpu().numpy(),
-            pbc=state.sim_config.pbc.detach().cpu().numpy(),
+        raw = {
+            "atomic_numbers": molecular_info.atom_types.detach().cpu().tolist(),
+            "positions": molecular_info.atom_positions.detach().cpu().numpy(),
+            "cell": state.sim_config.cell.detach().cpu().numpy(),
+            "pbc": state.sim_config.pbc.detach().cpu().tolist(),
+        }
+        output = evaluate_raw_core(raw, self.model, self._device, self.head_name)
+        energy = torch.tensor(output["energy_ev"], dtype=torch.float64, device=self._device)
+        forces = output["forces_ev_per_angstrom"].to(
+            device=self._device, dtype=molecular_info.atom_positions.dtype
         )
-        self._calculator.calculate(
-            atoms,
-            properties=["energy", "forces"],
-            system_changes=all_changes,
-        )
-
-        energy_ev = torch.as_tensor(
-            self._calculator.results["energy"],
-            dtype=positions.dtype,
-            device=positions.device,
-        )
-        forces_ev_per_angstrom = torch.as_tensor(
-            self._calculator.results["forces"],
-            dtype=positions.dtype,
-            device=positions.device,
-        )
-        if forces_ev_per_angstrom.shape != positions.shape:
-            raise ValueError(
-                "Public MACE calculator returned forces with shape "
-                f"{tuple(forces_ev_per_angstrom.shape)}; expected {tuple(positions.shape)}."
-            )
-
-        # The public calculator predicts eV and eV/Angstrom. Convert BOTH so this
-        # reference reports the same units as MACEModel; scaling only the force
-        # would leave the trajectory energies on a different scale.
-        return energy_ev * EV_TO_MD, forces_ev_per_angstrom * EV_TO_MD
+        return energy * EV_TO_MD, forces * EV_TO_MD
 
 
-def build_monolithic_mace_model(
+def build_native_mace_reference(
     device: torch.device,
     model: Optional[str] = None,
     head_name: Optional[str] = None,
     model_family: str = "mp",
     system: str = "silicon",
     enable_cueq: bool = False,
-) -> MonolithicMACECalculatorAdapter:
-    """Build an independent public-calculator reference for trajectory tests."""
+) -> NativeMACEReference:
+    """Build the independent raw-checkpoint trajectory reference."""
     spec = get_test_system_spec(system)
     model = resolve_mace_model_name(model_family, model)
-    if head_name:
-        raise ValueError(
-            "The monolithic trajectory reference does not yet support --head-name; "
-            "use the selected foundation model's default head."
-        )
-
-    try:
-        from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
-    except Exception as exc:  # pragma: no cover - optional dependency
-        raise ImportError(
-            "Monolithic MACE trajectory references require the public mace.calculators API."
-        ) from exc
-
-    loaders = {"mp": mace_mp, "off": mace_off, "omol": mace_omol, "polar": mace_polar}
-    calculator = loaders[model_family](
-        model=model,
-        device=str(device),
-        default_dtype="float32",
-        enable_cueq=enable_cueq,
-    )
-
-    calculator_models = getattr(calculator, "models", None)
-    if calculator_models is None or len(calculator_models) == 0:
-        raise AttributeError(
-            "Public MACE calculator does not expose its loaded model list."
-        )
-    calculator_model = calculator_models[0]
-    cutoff_value = getattr(calculator_model, "r_max", None)
-    if cutoff_value is None:
-        raise AttributeError("Public MACE calculator model does not expose r_max.")
-    cutoff = float(torch.as_tensor(cutoff_value).detach().cpu())
-
+    raw_model = load_raw_mace_model(
+        model_family, model, str(device), enable_cueq=enable_cueq
+    ).to(device=device).eval()
+    from dynamis_model.nnp.mace import resolve_model_head_name
+    selected_head = resolve_model_head_name(raw_model, head_name)
     supported_atomic_numbers = {
-        int(value) for value in calculator_model.atomic_numbers.detach().cpu().tolist()
+        int(value) for value in raw_model.atomic_numbers.detach().cpu().tolist()
     }
     unsupported = sorted(set(spec["atomic_numbers"]) - supported_atomic_numbers)
     if unsupported:
@@ -458,7 +387,7 @@ def build_monolithic_mace_model(
             f"atomic numbers {unsupported}. Supported atomic numbers: "
             f"{sorted(supported_atomic_numbers)}"
         )
-    return MonolithicMACECalculatorAdapter(calculator, cutoff=cutoff, device=device)
+    return NativeMACEReference(raw_model, selected_head, device)
 
 
 def make_config(
@@ -689,6 +618,13 @@ def compare_trajectories(
             f"step {step}: vertex ID sets diverged between single-rank and distributed runs "
             "(indicates a bug in redistribute_atoms / vertex ID tracking, not numerics)"
         )
+        np.testing.assert_allclose(
+            dist_frame["energy"],
+            ref_frame["energy"],
+            atol=CONTROLLED_ENERGY_ATOL_MD,
+            rtol=0,
+            err_msg=f"step {step}: controlled total energy differs from raw MACE",
+        )
 
     for step in range(0, EARLY_PHASE_STEPS + 1):
         ref_frame = ref_traj[step]
@@ -771,60 +707,3 @@ def compare_trajectories(
         assert (
             rdf_diff <= RDF_TOL
         ), f"[phase 2] RDF mean abs difference {rdf_diff:.4f} exceeds loose sanity threshold {RDF_TOL}"
-
-
-def reference_vs_reference_check(
-    structure_path: str,
-    output_dir_a: str,
-    output_dir_b: str,
-    model: Optional[str] = None,
-    head_name: Optional[str] = None,
-    model_family: str = "mp",
-):
-    from dynamis import Simulator
-    from dynamis_integrator import Verlet
-
-    ensure_test_structure(structure_path)
-
-    def _one_run(output_dir: str):
-        env = real_singleton_torch_dist_env()
-        try:
-            dist_env = env.dist_env
-            adapter = build_mace_model(
-                device=env.device,
-                model=model,
-                head_name=head_name,
-                model_family=model_family,
-            )
-            integrator = Verlet(dt=0.5)
-            config = make_config(output_dir, adapter.cutoff)
-            sim = Simulator(adapter, integrator, dist_env, config, env.device)
-            sim.setup(structure_path)
-            return run_md_loop(sim, config)
-        finally:
-            teardown_singleton_dist_env()
-
-    traj_a = _one_run(output_dir_a)
-    traj_b = _one_run(output_dir_b)
-    diffs = rmsd_between_trajectories(traj_a, traj_b)
-
-    print(
-        f"{'step':>4}  {'pos_rmsd':>12}  {'pos_tol':>12}  {'vel_rmsd':>12}  {'vel_tol':>12}"
-    )
-    for step in range(N_STEPS):
-        if step <= EARLY_PHASE_STEPS:
-            pos_tol = POS_VEL_TOL
-            vel_tol = POS_VEL_TOL
-        else:
-            pos_tol = _pos_rmsd_tolerance(step)
-            vel_tol = _vel_rmsd_tolerance(step)
-        flag = (
-            "  <-- EXCEEDS TOLERANCE"
-            if diffs["pos"][step] > pos_tol or diffs["vel"][step] > vel_tol
-            else ""
-        )
-        print(
-            f"{step:>4}  {diffs['pos'][step]:>12.6f}  {pos_tol:>12.6f}  "
-            f"{diffs['vel'][step]:>12.6f}  {vel_tol:>12.6f}{flag}"
-        )
-    return diffs

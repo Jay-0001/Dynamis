@@ -53,9 +53,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--system", default="silicon", choices=["silicon", "helium", "organic"]
     )
     parser.add_argument("--head-name", default="")
-    parser.add_argument("--energy-mode", choices=["legacy", "stable"], default="legacy")
     parser.add_argument(
-        "--model-family", default="mp", choices=["mp", "off", "omol", "polar"]
+        "--model-family", default="mp", choices=["mp", "off"]
     )
     parser.add_argument(
         "--enable-cueq",
@@ -90,7 +89,6 @@ def main() -> None:
             model_family=args.model_family,
             system=args.system,
             enable_cueq=args.enable_cueq,
-            energy_mode=args.energy_mode,
         )
         integrator = Verlet(dt=spec["timestep_fs"])
         config = make_config(
@@ -146,24 +144,25 @@ def main() -> None:
                 merged.append(frame)
             artifact = {
                 "metadata": {
-                    "artifact_version": 3,
+                    "artifact_version": 4,
                     "model": args.model,
                     "model_family": args.model_family,
                     "system": args.system,
                     "head_name": args.head_name,
                     "enable_cueq": args.enable_cueq,
-                    "energy_mode": args.energy_mode,
                     "structure_sha256": structure_sha256(structure),
                     "timestep_fs": config.timestep_fs,
                     "step_count": spec["step_count"],
                     "rebalance_interval": REBALANCE_INTERVAL,
                     "world_size": dist_env.world_size,
+                    "owned_atoms_by_rank": [len(gathered[rank][0][1]) for rank in range(dist_env.world_size)],
                     "adapter_identity": "MACEModel",
                     "force_unit": "amu*angstrom/fs^2",
                 },
                 "frames": merged,
             }
             torch.save(artifact, dist_dump)
+            print(f"Owned atoms by rank: {artifact['metadata']['owned_atoms_by_rank']}")
             print(
                 f"Wrote merged {len(merged)}-step distributed trajectory to {dist_dump}"
             )

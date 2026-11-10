@@ -7,7 +7,8 @@ This adapter keeps the current Dynamis + MACE algorithm intact:
 * Dynamis's ``radius_graph_pbc_cuda`` builds the explicit graph.
 * Only edges whose destination is locally owned are passed into MACE.
 * Learned node features are exchanged after every non-final product block.
-* Forces are recovered from the owned local energy via autograd.
+* Owned atomic baselines and interaction contributions are summed separately
+  in float64; forces are recovered from the interaction gradient via autograd.
 * Energy and forces are returned in Dynamis MD units (amu * A^2 / fs^2 and
   amu * A / fs^2), not MACE's native eV / eV per Angstrom.
 
@@ -218,7 +219,7 @@ class _RadiusGraphInput:
 
 
 class MACEScaleShiftRuntime(torch.nn.Module):
-    """Explicit runtime wrapper for the distributed MACE forward path."""
+    """Distributed ScaleShiftMACE forward with controlled owned-energy reduction."""
 
     def __init__(self, model: torch.nn.Module) -> None:
         super().__init__()
@@ -301,11 +302,15 @@ class MACEScaleShiftRuntime(torch.nn.Module):
         node_inter_es: torch.Tensor,
         num_local: int,
     ) -> Dict[str, torch.Tensor]:
-        node_energy = node_e0 + node_inter_es
-        owned_node_energy = node_energy.reshape(-1)[:num_local]
+        owned_e0 = node_e0.reshape(-1)[:num_local].double()
+        owned_inter = node_inter_es.reshape(-1)[:num_local].double()
+        baseline_energy = owned_e0.sum()
+        interaction_energy = owned_inter.sum()
         return {
-            "owned_node_energy": owned_node_energy,
-            "owned_local_energy": owned_node_energy.sum(),
+            "owned_node_energy": owned_e0 + owned_inter,
+            "owned_baseline_energy": baseline_energy,
+            "owned_interaction_energy": interaction_energy,
+            "owned_local_energy": baseline_energy + interaction_energy,
         }
 
     def forward(self, data: Dict[str, torch.Tensor]) -> Dict[str, torch.Tensor]:
@@ -384,40 +389,20 @@ class MACEScaleShiftRuntime(torch.nn.Module):
             raise RuntimeError("The MACE runtime requires an active DynamisState.")
         num_local = int(state.local_molecular_info.num_atoms)
         return self._reduce_owned_energy(node_e0, node_inter_es, num_local)
-        # removed the force recovery logic performed by MACE beyond this point
-        # can experiment with this enabled to verify if speedup caused by this removal?
-
-
-class MACEStableEnergyRuntime(MACEScaleShiftRuntime):
-    """Accumulate owned baseline and interaction contributions in float64."""
-
-    def _reduce_owned_energy(
-        self,
-        node_e0: torch.Tensor,
-        node_inter_es: torch.Tensor,
-        num_local: int,
-    ) -> Dict[str, torch.Tensor]:
-        owned_e0 = node_e0.reshape(-1)[:num_local].double()
-        owned_inter = node_inter_es.reshape(-1)[:num_local].double()
-        baseline_energy = owned_e0.sum()
-        interaction_energy = owned_inter.sum()
-        return {
-            "owned_node_energy": owned_e0 + owned_inter,
-            "owned_baseline_energy": baseline_energy,
-            "owned_interaction_energy": interaction_energy,
-            "owned_local_energy": baseline_energy + interaction_energy,
-        }
 
 
 class MACEModel(DynamisModel):
-    """Explicit-graph adapter for ordinary ScaleShiftMACE checkpoints."""
+    """Explicit-graph adapter for ordinary ScaleShiftMACE checkpoints.
+
+    The returned local energy uses float64 accumulation of owned baseline and
+    interaction terms; the checkpoint forward itself remains float32.
+    """
 
     def __init__(
         self,
         model: torch.nn.Module,
         atomic_number_map: Optional[Mapping[int, int]] = None,
         head_name: Optional[str] = None,
-        energy_mode: str = "legacy",
     ) -> None:
         super().__init__()
         _require_mace()
@@ -426,13 +411,7 @@ class MACEModel(DynamisModel):
         self.head_name = resolve_model_head_name(self.model, head_name)
         self.atomic_number_map = dict(atomic_number_map or {})
         self.cutoff = float(self.model.r_max.detach().cpu().item())
-        if energy_mode not in ("legacy", "stable"):
-            raise ValueError("MACE energy_mode must be 'legacy' or 'stable'.")
-        self.energy_mode = energy_mode
-        runtime_cls = (
-            MACEStableEnergyRuntime if energy_mode == "stable" else MACEScaleShiftRuntime
-        )
-        self.runtime = runtime_cls(self.model)
+        self.runtime = MACEScaleShiftRuntime(self.model)
         self.position_exchanger = GPUDirectExchanger()
         self.atom_type_exchanger = GPUDirectExchanger()
         self.exchange_enabled = False
@@ -731,7 +710,6 @@ __all__ = [
     "DEFAULT_MACE_MODELS",
     "MACEModel",
     "MACEScaleShiftRuntime",
-    "MACEStableEnergyRuntime",
     "load_raw_mace_model",
     "resolve_mace_model_name",
     "resolve_model_head_index",

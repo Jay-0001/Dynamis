@@ -1,7 +1,7 @@
 """
 Run a world-size=1 MACE reference simulation and compare it against a MACEModel
-trajectory written by run_distributed_trajectory.py. The reference can use
-either MACEModel or MACE's independent public ASE calculator.
+trajectory written by run_distributed_trajectory.py. The reference runs a raw
+MACE checkpoint on its native graph at each step.
 
 Usage:
     python dynamis_model/tests/mace/test_md.py --path <temp dir path>
@@ -23,8 +23,7 @@ if __package__:
     from .md_test_common import (
         SEED,
         REBALANCE_INTERVAL,
-        build_monolithic_mace_model,
-        build_mace_model,
+        build_native_mace_reference,
         compare_trajectories,
         ensure_test_structure,
         get_test_system_spec,
@@ -39,8 +38,7 @@ else:
     from md_test_common import (
         SEED,
         REBALANCE_INTERVAL,
-        build_monolithic_mace_model,
-        build_mace_model,
+        build_native_mace_reference,
         compare_trajectories,
         ensure_test_structure,
         get_test_system_spec,
@@ -61,23 +59,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--system", default="silicon", choices=["silicon", "helium", "organic"]
     )
     parser.add_argument("--head-name", default="")
-    parser.add_argument("--energy-mode", choices=["legacy", "stable"], default="legacy")
     parser.add_argument(
-        "--model-family", default="mp", choices=["mp", "off", "omol", "polar"]
+        "--model-family", default="mp", choices=["mp", "off"]
     )
     parser.add_argument(
         "--enable-cueq",
         action="store_true",
         help="Use cuEquivariance in both the singleton reference and distributed artifact.",
-    )
-    parser.add_argument(
-        "--reference-mode",
-        choices=["mace", "monolithic"],
-        default="monolithic",
-        help=(
-            "Singleton reference implementation. 'monolithic' is the acceptance oracle; "
-            "'mace' is retained only for explicit developer comparisons."
-        ),
     )
     return parser
 
@@ -99,12 +87,7 @@ def main() -> None:
         assert dist_env.world_size == 1
 
         torch.manual_seed(SEED)
-        model_factory = (
-            build_monolithic_mace_model
-            if args.reference_mode == "monolithic"
-            else build_mace_model
-        )
-        model_kwargs = dict(
+        model = build_native_mace_reference(
             device=torch_dist_env.device,
             model=args.model,
             head_name=args.head_name or None,
@@ -112,11 +95,8 @@ def main() -> None:
             system=args.system,
             enable_cueq=args.enable_cueq,
         )
-        if args.reference_mode == "mace":
-            model_kwargs["energy_mode"] = args.energy_mode
-        model = model_factory(**model_kwargs)
         print(
-            f"Running {args.reference_mode} singleton MACE reference trajectory for {args.system}."
+            f"Running raw-core singleton MACE reference trajectory for {args.system}."
         )
         integrator = Verlet(dt=spec["timestep_fs"])
         config = make_config(
@@ -141,13 +121,12 @@ def main() -> None:
                 "Distributed trajectory artifact must contain exactly 'metadata' and 'frames'."
             )
         expected_metadata = {
-            "artifact_version": 3,
+            "artifact_version": 4,
             "model": args.model,
             "model_family": args.model_family,
             "system": args.system,
             "head_name": args.head_name,
             "enable_cueq": args.enable_cueq,
-            "energy_mode": args.energy_mode,
             "structure_sha256": structure_sha256(structure),
             "timestep_fs": config.timestep_fs,
             "step_count": spec["step_count"],
@@ -156,10 +135,19 @@ def main() -> None:
             "adapter_identity": "MACEModel",
             "force_unit": "amu*angstrom/fs^2",
         }
-        if artifact["metadata"] != expected_metadata:
+        recorded_metadata = dict(artifact["metadata"])
+        owned_atoms = recorded_metadata.pop("owned_atoms_by_rank", None)
+        if (
+            not isinstance(owned_atoms, list)
+            or len(owned_atoms) != 2
+            or any(not isinstance(count, int) or count < 0 for count in owned_atoms)
+            or sum(owned_atoms) != spec["n_atoms"]
+        ):
+            raise ValueError(f"Invalid distributed ownership counts: {owned_atoms}")
+        if recorded_metadata != expected_metadata:
             raise ValueError(
                 "Distributed trajectory metadata does not match the singleton reference: "
-                f"expected {expected_metadata}, got {artifact['metadata']}"
+                f"expected {expected_metadata}, got {recorded_metadata}"
             )
         compare_trajectories(
             ref_traj,
