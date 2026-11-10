@@ -1,0 +1,1244 @@
+{
+  "system": "off_organic_irregular",
+  "source_path": "/u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz",
+  "num_atoms": 18,
+  "model": {
+    "model_family": "off",
+    "model_name": "small",
+    "head_name": "default",
+    "enable_cueq": true,
+    "energy_mode": "stable"
+  },
+  "reference_artifact": {
+    "artifact_version": 4,
+    "system_name": "off_organic_irregular",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz",
+    "num_atoms": 18,
+    "model_family": "off",
+    "model_name": "small",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff": 4.5,
+    "signature": "bb2ec676fb7922e343590237bcdd79f2fecf949959bb97cb53019b3cc26f48dd"
+  },
+  "mismatch_classification": "parity_ok",
+  "parity": {
+    "distributed_energy": -81.45943959886978,
+    "summed_owned_local_energy": -81.45943959886978,
+    "explicit_dynamis_graph_energy": -81.45944699462227,
+    "explicit_stable_energy": -81.45943960347056,
+    "explicit_stable_minus_node_sum": 0.0,
+    "explicit_legacy_minus_stable_energy": -7.391151711999555e-06,
+    "distributed_minus_explicit_stable_energy": 4.600778424901364e-09,
+    "explicit_stable_energy_abs_error": 4.600778424901364e-09,
+    "stable_reference_gap_reduction": 7.391151711999555e-06,
+    "core_model_stable_energy": -81.45943961267211,
+    "distributed_minus_core_model_stable_energy": 1.3802335274704092e-08,
+    "explicit_energy_tensor_dtype": "torch.float32",
+    "explicit_node_energy_tensor_dtype": "torch.float64",
+    "explicit_node_energy_sum": -81.45943960347056,
+    "explicit_node_energy_sum_float32": -81.45943757222656,
+    "explicit_node_sum_float64_minus_float32": -2.0312439943381833e-06,
+    "explicit_node_sum_minus_model_energy": 7.391151711999555e-06,
+    "distributed_minus_explicit_node_sum": 4.600778424901364e-09,
+    "distributed_minus_explicit_node_sum_float32": -2.026643215913282e-06,
+    "explicit_interaction_energy": -0.6722753456862091,
+    "explicit_node_e0_sum": -80.78716432449565,
+    "explicit_node_e0_sum_float32": -80.7871684836,
+    "explicit_node_e0_tensor_dtype": "torch.float32",
+    "explicit_node_e0_model_style_scatter_sum": -80.7871684836,
+    "explicit_node_e0_scatter_minus_sum_float64": -4.15910434981015e-06,
+    "explicit_node_e0_scatter_minus_model_e0": 3.165336067922908e-06,
+    "explicit_node_interaction_sum": -0.6722752789749114,
+    "explicit_node_interaction_sum_float32": -0.6722752720737427,
+    "explicit_node_interaction_minus_model_interaction": 6.671129770818851e-08,
+    "explicit_node_e0_minus_model_e0": 7.324440417733058e-06,
+    "calculator_mace_energy": -81.45944699462227,
+    "calculator_controlled_per_atom_energy": -81.45943958966822,
+    "calculator_legacy_minus_controlled_energy": -7.404954047274259e-06,
+    "distributed_minus_calculator_controlled_energy": -9.201556849802728e-09,
+    "core_model_mace_energy": -81.45944699462227,
+    "distributed_minus_explicit_energy": 7.3957524904244565e-06,
+    "distributed_minus_calculator_energy": 7.3957524904244565e-06,
+    "distributed_minus_core_model_energy": 7.3957524904244565e-06,
+    "explicit_energy_abs_error": 7.3957524904244565e-06,
+    "calculator_energy_abs_error": 7.3957524904244565e-06,
+    "core_model_energy_abs_error": 7.3957524904244565e-06,
+    "explicit_energy_abs_error_per_atom": 4.1087513835691425e-07,
+    "calculator_energy_abs_error_per_atom": 4.1087513835691425e-07,
+    "core_model_energy_abs_error_per_atom": 4.1087513835691425e-07,
+    "explicit_force_mae": 2.9634705800418715e-09,
+    "explicit_force_max_abs": 1.1175870895385742e-08,
+    "calculator_force_mae": 2.903376650209566e-09,
+    "calculator_force_max_abs": 9.89530235528946e-09,
+    "core_model_force_mae": 2.491880701782634e-09,
+    "core_model_force_max_abs": 1.1641532182693481e-08,
+    "explicit_energy_close": true,
+    "explicit_stable_energy_close": true,
+    "selected_reference_energy_close": true,
+    "explicit_forces_close": true,
+    "calculator_energy_close": true,
+    "calculator_forces_close": true,
+    "explicit_edge_count": 166,
+    "core_model_edge_count": 166,
+    "calculator_minus_core_model_energy": 0.0,
+    "calculator_minus_core_model_force_mae": 1.893028967586946e-09,
+    "calculator_minus_core_model_force_max_abs": 5.75097393989563e-09,
+    "distributed_baseline_energy": -80.78716432449565,
+    "distributed_interaction_energy": -0.6722752743741323,
+    "distributed_minus_explicit_baseline": 0.0,
+    "distributed_minus_explicit_interaction": 4.600779091035179e-09,
+    "distributed_total_minus_components": 2.6645352591003757e-15,
+    "explicit_node_minus_core_node_sum": 9.201558303833008e-09,
+    "explicit_vs_core_node_energy_mae": 1.0223953670925565e-09,
+    "explicit_vs_core_node_energy_max_abs": 4.600779151916504e-09
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "local_global_indices": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        14,
+        15
+      ],
+      "owned_local_energy": -40.72846070995536,
+      "owned_local_energy_dtype": "torch.float64",
+      "model_parameter_dtype": "torch.float32",
+      "owned_local_forces": [
+        [
+          -0.003886538790538907,
+          0.0035077990032732487,
+          0.0009912909008562565
+        ],
+        [
+          0.011864786967635155,
+          -0.016149373725056648,
+          -0.01924757845699787
+        ],
+        [
+          0.0006386823370121419,
+          0.007938845083117485,
+          0.009695715270936489
+        ],
+        [
+          0.0008546700119040906,
+          0.0007370280800387263,
+          0.005064557772129774
+        ],
+        [
+          0.0017771725542843342,
+          -0.0011110693449154496,
+          0.0006006582407280803
+        ],
+        [
+          -0.006346395239233971,
+          -0.003634961787611246,
+          0.004651779308915138
+        ],
+        [
+          -0.003647199599072337,
+          0.0008070330368354917,
+          -0.00022796285338699818
+        ],
+        [
+          -0.00023867900017648935,
+          -0.0005264835199341178,
+          0.004100588150322437
+        ],
+        [
+          0.0026362978387624025,
+          0.0004985302221029997,
+          0.004080437123775482
+        ]
+      ],
+      "owned_baseline_energy": -40.393582162247824,
+      "owned_interaction_energy": -0.33487854770753506
+    },
+    {
+      "rank": 1,
+      "local_global_indices": [
+        3,
+        6,
+        9,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17
+      ],
+      "owned_local_energy": -40.73097888891442,
+      "owned_local_energy_dtype": "torch.float64",
+      "model_parameter_dtype": "torch.float32",
+      "owned_local_forces": [
+        [
+          -0.001884512254036963,
+          0.0005290668341331184,
+          -0.004467434249818325
+        ],
+        [
+          0.0007811912801116705,
+          0.007449332624673843,
+          0.0029516159556806087
+        ],
+        [
+          -0.005348932463675737,
+          0.013132844120264053,
+          0.003269811626523733
+        ],
+        [
+          0.008427352644503117,
+          -0.014859689399600029,
+          -0.004778261296451092
+        ],
+        [
+          -0.008948029950261116,
+          0.0046556806191802025,
+          -0.0022741672582924366
+        ],
+        [
+          -0.002308312337845564,
+          -0.0006856118561699986,
+          -0.0028080292977392673
+        ],
+        [
+          0.006123349070549011,
+          -0.0009352085180580616,
+          0.0007363379118032753
+        ],
+        [
+          -0.001974248792976141,
+          0.001254555070772767,
+          -0.0019427689258009195
+        ],
+        [
+          0.0014793474692851305,
+          -0.002608318580314517,
+          -0.0003965900978073478
+        ]
+      ],
+      "owned_baseline_energy": -40.393582162247824,
+      "owned_interaction_energy": -0.3373967266665972
+    }
+  ],
+  "edge_comparison": {
+    "cutoff": 4.5,
+    "explicit_raw_count": 166,
+    "core_raw_count": 166,
+    "explicit_unique_count": 166,
+    "core_unique_count": 166,
+    "explicit_duplicate_count": 0,
+    "core_duplicate_count": 0,
+    "common_count_with_multiplicity": 166,
+    "explicit_only": {
+      "count": 0,
+      "distance_min": null,
+      "distance_max": null,
+      "within_1e_4_angstrom_of_cutoff": 0,
+      "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "examples": []
+    },
+    "core_only": {
+      "count": 0,
+      "distance_min": null,
+      "distance_max": null,
+      "within_1e_4_angstrom_of_cutoff": 0,
+      "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "examples": []
+    }
+  },
+  "calculator_edge_comparison": {
+    "cutoff": 4.5,
+    "explicit_raw_count": 166,
+    "core_raw_count": 166,
+    "explicit_unique_count": 166,
+    "core_unique_count": 166,
+    "explicit_duplicate_count": 0,
+    "core_duplicate_count": 0,
+    "common_count_with_multiplicity": 166,
+    "explicit_only": {
+      "count": 0,
+      "distance_min": null,
+      "distance_max": null,
+      "within_1e_4_angstrom_of_cutoff": 0,
+      "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "examples": []
+    },
+    "core_only": {
+      "count": 0,
+      "distance_min": null,
+      "distance_max": null,
+      "within_1e_4_angstrom_of_cutoff": 0,
+      "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+      "examples": []
+    }
+  },
+  "standalone_diagnostics": {
+    "calculator_core": {
+      "calculator_minus_core_legacy_energy_ev": 0.0,
+      "calculator_minus_core_controlled_energy_ev": 2.384185791015625e-06,
+      "calculator_minus_core_node_energy_sum_ev": 2.384185791015625e-06,
+      "calculator_vs_core_node_energy_mae_ev": 1.5894571940104166e-07,
+      "calculator_vs_core_node_energy_max_abs_ev": 9.5367431640625e-07,
+      "calculator_vs_core_force_mae_ev_per_angstrom": 1.961986223856608e-07,
+      "calculator_vs_core_force_max_abs_ev_per_angstrom": 5.960464477539062e-07,
+      "calculator_graph_edge_count": 166,
+      "core_graph_edge_count": 166,
+      "calculator_only_edge_count": 0,
+      "core_only_edge_count": 0
+    },
+    "float64": null,
+    "calculator_repeatability": null
+  },
+  "owned_graph_audit": {
+    "boundary_band_angstrom": 0.0001,
+    "assembled_owned_edge_count": 166,
+    "nonperiodic_outside_cell": {
+      "atom_count": 0,
+      "atom_count_by_axis": [
+        0,
+        0,
+        0
+      ],
+      "fractional_min": [
+        0.32592746385567345,
+        0.3883663087446256,
+        0.3942723925963252
+      ],
+      "fractional_max": [
+        0.6433569051022896,
+        0.5667748748662317,
+        0.5290707714984545
+      ]
+    },
+    "assembled_owned_edge_counts_by_band": {
+      "interior": 166,
+      "boundary": 0,
+      "exterior": 0
+    },
+    "assembled_vs_native_core": {
+      "cutoff": 4.5,
+      "explicit_raw_count": 166,
+      "core_raw_count": 166,
+      "explicit_unique_count": 166,
+      "core_unique_count": 166,
+      "explicit_duplicate_count": 0,
+      "core_duplicate_count": 0,
+      "common_count_with_multiplicity": 166,
+      "explicit_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      },
+      "core_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      }
+    },
+    "assembled_vs_native_core_by_band": {
+      "interior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 166,
+        "core_raw_count": 166,
+        "explicit_unique_count": 166,
+        "core_unique_count": 166,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 166,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "boundary": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "exterior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      }
+    },
+    "assembled_vs_public_calculator": {
+      "cutoff": 4.5,
+      "explicit_raw_count": 166,
+      "core_raw_count": 166,
+      "explicit_unique_count": 166,
+      "core_unique_count": 166,
+      "explicit_duplicate_count": 0,
+      "core_duplicate_count": 0,
+      "common_count_with_multiplicity": 166,
+      "explicit_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      },
+      "core_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      }
+    },
+    "assembled_vs_public_calculator_by_band": {
+      "interior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 166,
+        "core_raw_count": 166,
+        "explicit_unique_count": 166,
+        "core_unique_count": 166,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 166,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "boundary": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "exterior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      }
+    },
+    "assembled_vs_explicit_dynamis": {
+      "cutoff": 4.5,
+      "explicit_raw_count": 166,
+      "core_raw_count": 166,
+      "explicit_unique_count": 166,
+      "core_unique_count": 166,
+      "explicit_duplicate_count": 0,
+      "core_duplicate_count": 0,
+      "common_count_with_multiplicity": 166,
+      "explicit_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      },
+      "core_only": {
+        "count": 0,
+        "distance_min": null,
+        "distance_max": null,
+        "within_1e_4_angstrom_of_cutoff": 0,
+        "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+        "examples": []
+      }
+    },
+    "assembled_vs_explicit_dynamis_by_band": {
+      "interior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 166,
+        "core_raw_count": 166,
+        "explicit_unique_count": 166,
+        "core_unique_count": 166,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 166,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "boundary": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "exterior": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 0,
+        "core_raw_count": 0,
+        "explicit_unique_count": 0,
+        "core_unique_count": 0,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 0,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      }
+    },
+    "node_parity": {
+      "assembled_owned_node_energy_sum_md": -81.45943959886978,
+      "assembled_minus_native_core_node_sum_md": 1.3802335968593482e-08,
+      "assembled_vs_native_core_node_mae_md": 1.5335929702079791e-09,
+      "assembled_vs_native_core_node_max_abs_md": 4.60077914654633e-09,
+      "assembled_minus_public_calculator_node_sum_md": -9.201558653915143e-09,
+      "assembled_vs_public_calculator_node_mae_md": 1.277994227419674e-09,
+      "assembled_vs_public_calculator_node_max_abs_md": 9.201558626159567e-09,
+      "assembled_minus_explicit_dynamis_node_sum_md": 4.600778397145788e-09,
+      "assembled_vs_explicit_dynamis_node_mae_md": 7.667964858749777e-10,
+      "assembled_vs_explicit_dynamis_node_max_abs_md": 4.60077914654633e-09
+    }
+  },
+  "report_sections": {
+    "configuration_and_precision": {
+      "model": {
+        "model_family": "off",
+        "model_name": "small",
+        "head_name": "default",
+        "enable_cueq": true,
+        "energy_mode": "stable"
+      },
+      "num_atoms": 18,
+      "energy_unit": "amu * Angstrom^2 / fs^2",
+      "reference_precision": {
+        "calculator": {
+          "requested_dtype": "float32",
+          "model_parameter_dtype": "torch.float32",
+          "energy_result_type": "float",
+          "energy_float32_roundtrip_delta_ev": 0.0,
+          "force_result_dtype": "float32",
+          "full_node_energy_result_dtype": "float64",
+          "interaction_node_energy_result_dtype": "float64"
+        },
+        "core_model": {
+          "model_parameter_dtype": "torch.float32",
+          "input_position_dtype": "torch.float32",
+          "energy_tensor_dtype": "torch.float32",
+          "node_energy_tensor_dtype": "torch.float64",
+          "interaction_energy_tensor_dtype": "torch.float32",
+          "force_tensor_dtype": "torch.float32",
+          "energy_float32_roundtrip_delta_ev": 0.0
+        }
+      },
+      "explicit_energy_tensor_dtype": "torch.float32",
+      "explicit_node_energy_tensor_dtype": "torch.float64",
+      "explicit_node_e0_tensor_dtype": "torch.float32"
+    },
+    "energy_definitions": {
+      "calculator_mace_energy": -81.45944699462227,
+      "calculator_controlled_per_atom_energy": -81.45943958966822,
+      "core_model_mace_energy": -81.45944699462227,
+      "core_model_stable_energy": -81.45943961267211,
+      "explicit_dynamis_graph_energy": -81.45944699462227,
+      "explicit_stable_energy": -81.45943960347056,
+      "distributed_energy": -81.45943959886978
+    },
+    "matched_parity_comparisons": {
+      "summed_owned_local_energy": -81.45943959886978,
+      "distributed_minus_explicit_stable_energy": 4.600778424901364e-09,
+      "explicit_stable_energy_abs_error": 4.600778424901364e-09,
+      "stable_reference_gap_reduction": 7.391151711999555e-06,
+      "distributed_minus_core_model_stable_energy": 1.3802335274704092e-08,
+      "distributed_minus_calculator_controlled_energy": -9.201556849802728e-09,
+      "distributed_minus_explicit_energy": 7.3957524904244565e-06,
+      "distributed_minus_calculator_energy": 7.3957524904244565e-06,
+      "distributed_minus_core_model_energy": 7.3957524904244565e-06,
+      "explicit_energy_abs_error": 7.3957524904244565e-06,
+      "calculator_energy_abs_error": 7.3957524904244565e-06,
+      "core_model_energy_abs_error": 7.3957524904244565e-06,
+      "explicit_energy_abs_error_per_atom": 4.1087513835691425e-07,
+      "calculator_energy_abs_error_per_atom": 4.1087513835691425e-07,
+      "core_model_energy_abs_error_per_atom": 4.1087513835691425e-07,
+      "explicit_energy_close": true,
+      "explicit_stable_energy_close": true,
+      "selected_reference_energy_close": true,
+      "calculator_energy_close": true,
+      "calculator_minus_core_model_energy": 0.0,
+      "reference.calculator_minus_core_legacy_energy_ev": 0.0,
+      "reference.calculator_minus_core_controlled_energy_ev": 2.384185791015625e-06,
+      "reference.calculator_minus_core_node_energy_sum_ev": 2.384185791015625e-06
+    },
+    "reduction_decomposition": {
+      "explicit_stable_minus_node_sum": 0.0,
+      "explicit_legacy_minus_stable_energy": -7.391151711999555e-06,
+      "explicit_node_energy_sum": -81.45943960347056,
+      "explicit_node_energy_sum_float32": -81.45943757222656,
+      "explicit_node_sum_float64_minus_float32": -2.0312439943381833e-06,
+      "explicit_node_sum_minus_model_energy": 7.391151711999555e-06,
+      "distributed_minus_explicit_node_sum": 4.600778424901364e-09,
+      "distributed_minus_explicit_node_sum_float32": -2.026643215913282e-06,
+      "explicit_interaction_energy": -0.6722753456862091,
+      "explicit_node_e0_sum": -80.78716432449565,
+      "explicit_node_e0_sum_float32": -80.7871684836,
+      "explicit_node_e0_model_style_scatter_sum": -80.7871684836,
+      "explicit_node_e0_scatter_minus_sum_float64": -4.15910434981015e-06,
+      "explicit_node_e0_scatter_minus_model_e0": 3.165336067922908e-06,
+      "explicit_node_interaction_sum": -0.6722752789749114,
+      "explicit_node_interaction_sum_float32": -0.6722752720737427,
+      "explicit_node_interaction_minus_model_interaction": 6.671129770818851e-08,
+      "explicit_node_e0_minus_model_e0": 7.324440417733058e-06,
+      "calculator_legacy_minus_controlled_energy": -7.404954047274259e-06,
+      "distributed_baseline_energy": -80.78716432449565,
+      "distributed_interaction_energy": -0.6722752743741323,
+      "distributed_minus_explicit_baseline": 0.0,
+      "distributed_minus_explicit_interaction": 4.600779091035179e-09,
+      "distributed_total_minus_components": 2.6645352591003757e-15,
+      "explicit_node_minus_core_node_sum": 9.201558303833008e-09,
+      "float64_diagnostic_ev": null
+    },
+    "per_atom_and_force_parity": {
+      "explicit_force_mae": 2.9634705800418715e-09,
+      "explicit_force_max_abs": 1.1175870895385742e-08,
+      "calculator_force_mae": 2.903376650209566e-09,
+      "calculator_force_max_abs": 9.89530235528946e-09,
+      "core_model_force_mae": 2.491880701782634e-09,
+      "core_model_force_max_abs": 1.1641532182693481e-08,
+      "explicit_forces_close": true,
+      "calculator_forces_close": true,
+      "calculator_minus_core_model_force_mae": 1.893028967586946e-09,
+      "calculator_minus_core_model_force_max_abs": 5.75097393989563e-09,
+      "explicit_vs_core_node_energy_mae": 1.0223953670925565e-09,
+      "explicit_vs_core_node_energy_max_abs": 4.600779151916504e-09,
+      "reference.calculator_vs_core_node_energy_mae_ev": 1.5894571940104166e-07,
+      "reference.calculator_vs_core_node_energy_max_abs_ev": 9.5367431640625e-07,
+      "reference.calculator_vs_core_force_mae_ev_per_angstrom": 1.961986223856608e-07,
+      "reference.calculator_vs_core_force_max_abs_ev_per_angstrom": 5.960464477539062e-07,
+      "assembled_owned_node_energy_sum_md": -81.45943959886978,
+      "assembled_minus_native_core_node_sum_md": 1.3802335968593482e-08,
+      "assembled_vs_native_core_node_mae_md": 1.5335929702079791e-09,
+      "assembled_vs_native_core_node_max_abs_md": 4.60077914654633e-09,
+      "assembled_minus_public_calculator_node_sum_md": -9.201558653915143e-09,
+      "assembled_vs_public_calculator_node_mae_md": 1.277994227419674e-09,
+      "assembled_vs_public_calculator_node_max_abs_md": 9.201558626159567e-09,
+      "assembled_minus_explicit_dynamis_node_sum_md": 4.600778397145788e-09,
+      "assembled_vs_explicit_dynamis_node_mae_md": 7.667964858749777e-10,
+      "assembled_vs_explicit_dynamis_node_max_abs_md": 4.60077914654633e-09
+    },
+    "graph_diagnostics": {
+      "explicit_edge_count": 166,
+      "core_model_edge_count": 166,
+      "reference.calculator_graph_edge_count": 166,
+      "reference.core_graph_edge_count": 166,
+      "reference.calculator_only_edge_count": 0,
+      "reference.core_only_edge_count": 0,
+      "explicit_vs_core": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 166,
+        "core_raw_count": 166,
+        "explicit_unique_count": 166,
+        "core_unique_count": 166,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 166,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "explicit_vs_calculator": {
+        "cutoff": 4.5,
+        "explicit_raw_count": 166,
+        "core_raw_count": 166,
+        "explicit_unique_count": 166,
+        "core_unique_count": 166,
+        "explicit_duplicate_count": 0,
+        "core_duplicate_count": 0,
+        "common_count_with_multiplicity": 166,
+        "explicit_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        },
+        "core_only": {
+          "count": 0,
+          "distance_min": null,
+          "distance_max": null,
+          "within_1e_4_angstrom_of_cutoff": 0,
+          "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+          "examples": []
+        }
+      },
+      "assembled_owned_edges": {
+        "boundary_band_angstrom": 0.0001,
+        "assembled_owned_edge_count": 166,
+        "nonperiodic_outside_cell": {
+          "atom_count": 0,
+          "atom_count_by_axis": [
+            0,
+            0,
+            0
+          ],
+          "fractional_min": [
+            0.32592746385567345,
+            0.3883663087446256,
+            0.3942723925963252
+          ],
+          "fractional_max": [
+            0.6433569051022896,
+            0.5667748748662317,
+            0.5290707714984545
+          ]
+        },
+        "assembled_owned_edge_counts_by_band": {
+          "interior": 166,
+          "boundary": 0,
+          "exterior": 0
+        },
+        "assembled_vs_native_core": {
+          "cutoff": 4.5,
+          "explicit_raw_count": 166,
+          "core_raw_count": 166,
+          "explicit_unique_count": 166,
+          "core_unique_count": 166,
+          "explicit_duplicate_count": 0,
+          "core_duplicate_count": 0,
+          "common_count_with_multiplicity": 166,
+          "explicit_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          },
+          "core_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          }
+        },
+        "assembled_vs_native_core_by_band": {
+          "interior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 166,
+            "core_raw_count": 166,
+            "explicit_unique_count": 166,
+            "core_unique_count": 166,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 166,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "boundary": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "exterior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          }
+        },
+        "assembled_vs_public_calculator": {
+          "cutoff": 4.5,
+          "explicit_raw_count": 166,
+          "core_raw_count": 166,
+          "explicit_unique_count": 166,
+          "core_unique_count": 166,
+          "explicit_duplicate_count": 0,
+          "core_duplicate_count": 0,
+          "common_count_with_multiplicity": 166,
+          "explicit_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          },
+          "core_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          }
+        },
+        "assembled_vs_public_calculator_by_band": {
+          "interior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 166,
+            "core_raw_count": 166,
+            "explicit_unique_count": 166,
+            "core_unique_count": 166,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 166,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "boundary": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "exterior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          }
+        },
+        "assembled_vs_explicit_dynamis": {
+          "cutoff": 4.5,
+          "explicit_raw_count": 166,
+          "core_raw_count": 166,
+          "explicit_unique_count": 166,
+          "core_unique_count": 166,
+          "explicit_duplicate_count": 0,
+          "core_duplicate_count": 0,
+          "common_count_with_multiplicity": 166,
+          "explicit_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          },
+          "core_only": {
+            "count": 0,
+            "distance_min": null,
+            "distance_max": null,
+            "within_1e_4_angstrom_of_cutoff": 0,
+            "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+            "examples": []
+          }
+        },
+        "assembled_vs_explicit_dynamis_by_band": {
+          "interior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 166,
+            "core_raw_count": 166,
+            "explicit_unique_count": 166,
+            "core_unique_count": 166,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 166,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "boundary": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          },
+          "exterior": {
+            "cutoff": 4.5,
+            "explicit_raw_count": 0,
+            "core_raw_count": 0,
+            "explicit_unique_count": 0,
+            "core_unique_count": 0,
+            "explicit_duplicate_count": 0,
+            "core_duplicate_count": 0,
+            "common_count_with_multiplicity": 0,
+            "explicit_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            },
+            "core_only": {
+              "count": 0,
+              "distance_min": null,
+              "distance_max": null,
+              "within_1e_4_angstrom_of_cutoff": 0,
+              "inside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "outside_cutoff_by_more_than_1e_4_angstrom": 0,
+              "examples": []
+            }
+          }
+        }
+      }
+    },
+    "repeatability": null
+  }
+}

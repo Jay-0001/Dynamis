@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "artifact_version": 4,
+    "system_name": "off_cutoff_boundary",
+    "source_path": "/u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz",
+    "num_atoms": 13,
+    "model_family": "off",
+    "model_name": "medium",
+    "head_name": "Default",
+    "enable_cueq": false,
+    "cutoff": 5.0,
+    "signature": "5c2535169ab2e5b164f6ecbe601255d70622d14210ee6ea35d68e59622e6fddc"
+  },
+  "precision": {
+    "calculator": {
+      "requested_dtype": "float32",
+      "model_parameter_dtype": "torch.float32",
+      "energy_result_type": "float",
+      "energy_float32_roundtrip_delta_ev": 0.0,
+      "force_result_dtype": "float32",
+      "full_node_energy_result_dtype": "float64",
+      "interaction_node_energy_result_dtype": "float64"
+    },
+    "core_model": {
+      "model_parameter_dtype": "torch.float32",
+      "input_position_dtype": "torch.float32",
+      "energy_tensor_dtype": "torch.float32",
+      "node_energy_tensor_dtype": "torch.float64",
+      "interaction_energy_tensor_dtype": "torch.float32",
+      "force_tensor_dtype": "torch.float32",
+      "energy_float32_roundtrip_delta_ev": 0.0
+    }
+  },
+  "reference": {
+    "calculator_energy": -6756.74169921875,
+    "calculator_node_energy_sum_float64": -6756.742671487647,
+    "calculator_interaction_node_energy_sum_float64": -26.156817910987403,
+    "calculator_baseline_node_energy_sum_float64": -6730.58585357666,
+    "calculator_node_energy_values": "tensor([-1035.4558,   -13.5720, -1030.5671, -1486.3750, -2043.9337,   -13.5720,\n        -1036.5543,   -16.0860,   -16.1507,   -15.9813,   -16.2656,   -16.2640,\n          -15.9652], dtype=torch.float64)",
+    "calculator_interaction_node_energy_values": "tensor([-4.8886e+00,  2.0680e-09,  0.0000e+00,  0.0000e+00,  0.0000e+00,\n         0.0000e+00, -5.9871e+00, -2.5141e+00, -2.5788e+00, -2.4093e+00,\n        -2.6937e+00, -2.6920e+00, -2.3932e+00], dtype=torch.float64)",
+    "calculator_graph_edge_count": 58,
+    "calculator_graph_edge_rows": "tensor([[ 0,  8,  0,  0,  0],\n        [ 0, 12,  0,  0,  0],\n        [ 0, 11,  0,  0,  0],\n        [ 0,  6,  0,  0,  0],\n        [ 0, 10,  0,  0,  0],\n        [ 0,  1,  0,  0,  0],\n        [ 0,  7,  0,  0,  0],\n        [ 0,  9,  0,  0,  0],\n        [ 1,  0,  0,  0,  0],\n        [ 6,  8,  0,  0,  0],\n        [ 6, 12,  0,  0,  0],\n        [ 6, 11,  0,  0,  0],\n        [ 6, 10,  0,  0,  0],\n        [ 6,  0,  0,  0,  0],\n        [ 6,  7,  0,  0,  0],\n        [ 6,  9,  0,  0,  0],\n        [ 7,  8,  0,  0,  0],\n        [ 7, 12,  0,  0,  0],\n        [ 7, 11,  0,  0,  0],\n        [ 7,  6,  0,  0,  0],\n        [ 7, 10,  0,  0,  0],\n        [ 7,  0,  0,  0,  0],\n        [ 7,  9,  0,  0,  0],\n        [ 8, 12,  0,  0,  0],\n        [ 8, 11,  0,  0,  0],\n        [ 8,  6,  0,  0,  0],\n        [ 8, 10,  0,  0,  0],\n        [ 8,  0,  0,  0,  0],\n        [ 8,  7,  0,  0,  0],\n        [ 8,  9,  0,  0,  0],\n        [ 9,  8,  0,  0,  0],\n        [ 9, 12,  0,  0,  0],\n        [ 9, 11,  0,  0,  0],\n        [ 9,  6,  0,  0,  0],\n        [ 9, 10,  0,  0,  0],\n        [ 9,  0,  0,  0,  0],\n        [ 9,  7,  0,  0,  0],\n        [10,  8,  0,  0,  0],\n        [10, 12,  0,  0,  0],\n        [10, 11,  0,  0,  0],\n        [10,  6,  0,  0,  0],\n        [10,  0,  0,  0,  0],\n        [10,  7,  0,  0,  0],\n        [10,  9,  0,  0,  0],\n        [11,  8,  0,  0,  0],\n        [11, 12,  0,  0,  0],\n        [11,  6,  0,  0,  0],\n        [11, 10,  0,  0,  0],\n        [11,  0,  0,  0,  0],\n        [11,  7,  0,  0,  0],\n        [11,  9,  0,  0,  0],\n        [12,  8,  0,  0,  0],\n        [12, 11,  0,  0,  0],\n        [12,  6,  0,  0,  0],\n        [12, 10,  0,  0,  0],\n        [12,  0,  0,  0,  0],\n        [12,  7,  0,  0,  0],\n        [12,  9,  0,  0,  0]], dtype=torch.int32)",
+    "calculator_forces": "tensor([[-4.5470e+00, -8.6110e-02,  5.3442e+00],\n        [ 2.0798e-06, -9.5220e-11, -1.9823e-10],\n        [ 0.0000e+00,  0.0000e+00,  0.0000e+00],\n        [ 0.0000e+00,  0.0000e+00,  0.0000e+00],\n        [ 0.0000e+00,  0.0000e+00,  0.0000e+00],\n        [ 0.0000e+00,  0.0000e+00,  0.0000e+00],\n        [ 1.5848e+00,  4.6462e-02, -3.8657e+00],\n        [ 2.9940e+00,  3.6386e+00, -2.7923e+00],\n        [ 3.1038e+00, -2.7048e+00, -2.4390e+00],\n        [ 1.7999e+00, -9.1036e-01,  2.8386e+00],\n        [-1.9777e+00,  2.5901e+00,  1.8049e+00],\n        [-1.9813e+00, -2.5682e+00,  1.7630e+00],\n        [-9.7650e-01, -5.6882e-03, -2.6538e+00]])",
+    "core_model_energy": -6756.74169921875,
+    "core_model_node_energy_sum_float64": -6756.742670772392,
+    "core_model_stable_energy": -6756.742670772392,
+    "core_model_stable_baseline_energy": -6730.58585357666,
+    "core_model_stable_interaction_energy": -26.156817195731662,
+    "core_model_node_energy_sum_float32": -6756.74267578125,
+    "core_model_forces": "tensor([[-4.5470e+00, -8.6110e-02,  5.3442e+00],\n        [ 2.0738e-06, -9.5220e-11, -1.9823e-10],\n        [-0.0000e+00, -0.0000e+00, -0.0000e+00],\n        [-0.0000e+00, -0.0000e+00, -0.0000e+00],\n        [-0.0000e+00, -0.0000e+00, -0.0000e+00],\n        [-0.0000e+00, -0.0000e+00, -0.0000e+00],\n        [ 1.5848e+00,  4.6462e-02, -3.8657e+00],\n        [ 2.9940e+00,  3.6386e+00, -2.7923e+00],\n        [ 3.1038e+00, -2.7048e+00, -2.4390e+00],\n        [ 1.7999e+00, -9.1036e-01,  2.8386e+00],\n        [-1.9777e+00,  2.5901e+00,  1.8049e+00],\n        [-1.9813e+00, -2.5682e+00,  1.7630e+00],\n        [-9.7650e-01, -5.6883e-03, -2.6538e+00]])",
+    "core_model_edge_count": 58,
+    "core_model_edge_rows": "tensor([[ 0,  6,  0,  0,  0],\n        [ 0,  8,  0,  0,  0],\n        [ 0, 11,  0,  0,  0],\n        [ 0, 12,  0,  0,  0],\n        [ 0,  1,  0,  0,  0],\n        [ 0, 10,  0,  0,  0],\n        [ 0,  9,  0,  0,  0],\n        [ 0,  7,  0,  0,  0],\n        [ 1,  0,  0,  0,  0],\n        [ 6,  0,  0,  0,  0],\n        [ 6,  8,  0,  0,  0],\n        [ 6, 11,  0,  0,  0],\n        [ 6, 12,  0,  0,  0],\n        [ 6, 10,  0,  0,  0],\n        [ 6,  9,  0,  0,  0],\n        [ 6,  7,  0,  0,  0],\n        [ 7,  0,  0,  0,  0],\n        [ 7,  6,  0,  0,  0],\n        [ 7,  8,  0,  0,  0],\n        [ 7, 11,  0,  0,  0],\n        [ 7, 12,  0,  0,  0],\n        [ 7, 10,  0,  0,  0],\n        [ 7,  9,  0,  0,  0],\n        [ 8,  0,  0,  0,  0],\n        [ 8,  6,  0,  0,  0],\n        [ 8, 11,  0,  0,  0],\n        [ 8, 12,  0,  0,  0],\n        [ 8, 10,  0,  0,  0],\n        [ 8,  9,  0,  0,  0],\n        [ 8,  7,  0,  0,  0],\n        [ 9,  0,  0,  0,  0],\n        [ 9,  6,  0,  0,  0],\n        [ 9,  8,  0,  0,  0],\n        [ 9, 11,  0,  0,  0],\n        [ 9, 12,  0,  0,  0],\n        [ 9, 10,  0,  0,  0],\n        [ 9,  7,  0,  0,  0],\n        [10,  0,  0,  0,  0],\n        [10,  6,  0,  0,  0],\n        [10,  8,  0,  0,  0],\n        [10, 11,  0,  0,  0],\n        [10, 12,  0,  0,  0],\n        [10,  9,  0,  0,  0],\n        [10,  7,  0,  0,  0],\n        [11,  0,  0,  0,  0],\n        [11,  6,  0,  0,  0],\n        [11,  8,  0,  0,  0],\n        [11, 12,  0,  0,  0],\n        [11, 10,  0,  0,  0],\n        [11,  9,  0,  0,  0],\n        [11,  7,  0,  0,  0],\n        [12,  0,  0,  0,  0],\n        [12,  6,  0,  0,  0],\n        [12,  8,  0,  0,  0],\n        [12, 11,  0,  0,  0],\n        [12, 10,  0,  0,  0],\n        [12,  9,  0,  0,  0],\n        [12,  7,  0,  0,  0]], dtype=torch.int32)",
+    "core_model_node_energy_values": "tensor([-1035.4558,   -13.5720, -1030.5671, -1486.3750, -2043.9337,   -13.5720,\n        -1036.5543,   -16.0860,   -16.1507,   -15.9813,   -16.2656,   -16.2640,\n          -15.9652], dtype=torch.float64)",
+    "calculator_minus_core_model_energy": 0.0,
+    "calculator_minus_core_model_force_mae": 1.3837114920534077e-07,
+    "calculator_minus_core_model_force_max_abs": 7.152557373046875e-07
+  },
+  "diagnostics": {
+    "calculator_core": {
+      "calculator_minus_core_legacy_energy_ev": 0.0,
+      "calculator_minus_core_controlled_energy_ev": -7.152557373046875e-07,
+      "calculator_minus_core_node_energy_sum_ev": -7.152557390810443e-07,
+      "calculator_vs_core_node_energy_mae_ev": 1.283792350374842e-07,
+      "calculator_vs_core_node_energy_max_abs_ev": 4.76837158203125e-07,
+      "calculator_vs_core_force_mae_ev_per_angstrom": 1.3837115357862312e-07,
+      "calculator_vs_core_force_max_abs_ev_per_angstrom": 7.152557373046875e-07,
+      "calculator_graph_edge_count": 58,
+      "core_graph_edge_count": 58,
+      "calculator_only_edge_count": 0,
+      "core_only_edge_count": 0
+    },
+    "float64": null,
+    "calculator_repeatability": null
+  },
+  "calculator_benchmark": null,
+  "core_model_benchmark": null
+}

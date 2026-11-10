@@ -1,0 +1,2510 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+{'atoms': 15000, 'seed': 2026, 'repair_rounds': 11, 'initial_boundary_pairs': 1351, 'resampled_atom_events': 2219, 'minimum_gap_from_cutoff_angstrom': 0.0010012275132442738, 'output': '/u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz'}
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Validated /u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz: 13 atoms inside nonperiodic cell
+Validated /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz: 18 atoms inside nonperiodic cell
+Validated /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz: 15000 atoms inside nonperiodic cell
+Running boundary/medium/e3nn
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_cutoff_boundary
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz
+num_atoms: 13
+model_family: off
+model_name: medium
+head_name: Default
+enable_cueq: False
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -6756.74169921875
+calculator_controlled_per_atom_sum: -6756.742671487647
+core_legacy_scalar: -6756.74169921875
+core_controlled_per_atom_sum: -6756.742670772392
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: -7.152557373046875e-07
+calculator_minus_core_node_energy_sum_ev: -7.152557390810443e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: 0.00097226889738522
+core_legacy_minus_controlled: 0.0009715536416479154
+calculator_controlled_baseline: -6730.58585357666
+calculator_controlled_interaction: -26.156817910987403
+core_controlled_baseline: -6730.58585357666
+core_controlled_interaction: -26.156817195731662
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.283792350374842e-07
+calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.3837115357862312e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 7.152557373046875e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 58
+core_graph_edge_count: 58
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 1 is connected to 01 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 
+1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_cutoff_boundary
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'Default', 'enable_cueq': False, 'energy_mode': 'stable'}
+num_atoms: 13
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -65.19264660873652
+calculator_controlled_per_atom_energy: -65.19265598970526
+core_model_mace_energy: -65.19264660873652
+core_model_stable_energy: -65.19265598280408
+explicit_dynamis_graph_energy: -65.19264660873652
+explicit_stable_energy: -65.19265598740488
+distributed_energy: -65.19265598740486
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -65.19265598740486
+distributed_minus_explicit_stable_energy: 1.4210854715202004e-14
+explicit_stable_energy_abs_error: 1.4210854715202004e-14
+stable_reference_gap_reduction: 9.378668323734018e-06
+distributed_minus_core_model_stable_energy: -4.600778424901364e-09
+distributed_minus_calculator_controlled_energy: 2.3003963178780396e-09
+distributed_minus_explicit_energy: -9.378668337944873e-06
+distributed_minus_calculator_energy: -9.378668337944873e-06
+distributed_minus_core_model_energy: -9.378668337944873e-06
+explicit_energy_abs_error: 9.378668337944873e-06
+calculator_energy_abs_error: 9.378668337944873e-06
+core_model_energy_abs_error: 9.378668337944873e-06
+explicit_energy_abs_error_per_atom: 7.214360259957595e-07
+calculator_energy_abs_error_per_atom: 7.214360259957595e-07
+core_model_energy_abs_error_per_atom: 7.214360259957595e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: -7.152557373046875e-07
+reference.calculator_minus_core_node_energy_sum_ev: -7.152557390810443e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: 9.378668352155728e-06
+explicit_node_energy_sum: -65.19265598740488
+explicit_node_energy_sum_float32: -65.19265603113223
+explicit_node_sum_float64_minus_float32: 4.372735418201046e-08
+explicit_node_sum_minus_model_energy: -9.378668352155728e-06
+distributed_minus_explicit_node_sum: 1.4210854715202004e-14
+distributed_minus_explicit_node_sum_float32: 4.3727368392865174e-08
+explicit_interaction_energy: -0.2523749306412491
+explicit_node_e0_sum: -64.94028106368475
+explicit_node_e0_sum_float32: -64.94028187342188
+explicit_node_e0_model_style_scatter_sum: -64.94027245102617
+explicit_node_e0_scatter_minus_sum_float64: 8.612658575657406e-06
+explicit_node_e0_scatter_minus_model_e0: -7.729309032811216e-07
+explicit_node_interaction_sum: -0.25237492372012704
+explicit_node_interaction_sum_float32: -0.2523749306412491
+explicit_node_interaction_minus_model_interaction: 6.9211220643516924e-09
+explicit_node_e0_minus_model_e0: -9.385589478938527e-06
+calculator_legacy_minus_controlled_energy: 9.380968734262751e-06
+distributed_baseline_energy: -64.94028106368475
+distributed_interaction_energy: -0.25237492372012704
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 0.0
+distributed_total_minus_components: 1.5432100042289676e-14
+explicit_node_minus_core_node_sum: -4.6007791690557424e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.4976343498673828e-09
+explicit_force_max_abs: 7.450580596923828e-09
+calculator_force_mae: 1.5408943010442044e-09
+calculator_force_max_abs: 7.450580596923828e-09
+core_model_force_mae: 1.4569278006248965e-09
+core_model_force_max_abs: 7.450580596923828e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.3350786270298841e-09
+calculator_minus_core_model_force_max_abs: 6.901168727874756e-09
+explicit_vs_core_node_energy_mae: 7.078121785363266e-10
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+reference.calculator_vs_core_node_energy_mae_ev: 1.283792350374842e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.3837115357862312e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 7.152557373046875e-07
+assembled_owned_node_energy_sum_md: -65.19265598740488
+assembled_minus_native_core_node_sum_md: -4.6007784526569395e-09
+assembled_vs_native_core_node_mae_md: 7.078121230156361e-10
+assembled_vs_native_core_node_max_abs_md: 4.600778424901364e-09
+assembled_minus_public_calculator_node_sum_md: 2.300389573273165e-09
+assembled_vs_public_calculator_node_mae_md: 1.2386713129556388e-09
+assembled_vs_public_calculator_node_max_abs_md: 4.6007791743019055e-09
+assembled_minus_explicit_dynamis_node_sum_md: 0.0
+assembled_vs_explicit_dynamis_node_mae_md: 7.078121763917431e-10
+assembled_vs_explicit_dynamis_node_max_abs_md: 2.300389573273165e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 60
+core_model_edge_count: 58
+reference.calculator_graph_edge_count: 58
+reference.core_graph_edge_count: 58
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 60, 'core_raw_count': 58, 'explicit_unique_count': 60, 'core_unique_count': 58, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 58, 'explicit_only': {'count': 2, 'distance_min': 5.0, 'distance_max': 5.0, 'within_1e_4_angstrom_of_cutoff': 2, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': [{'edge': [3, 2, 0, 0, 0], 'distance': 5.0}, {'edge': [2, 3, 0, 0, 0], 'distance': 5.0}]}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 60, 'core_raw_count': 58, 'explicit_unique_count': 60, 'core_unique_count': 58, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 58, 'explicit_only': {'count': 2, 'distance_min': 5.0, 'distance_max': 5.0, 'within_1e_4_angstrom_of_cutoff': 2, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': [{'edge': [3, 2, 0, 0, 0], 'distance': 5.0}, {'edge': [2, 3, 0, 0, 0], 'distance': 5.0}]}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 60
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.2962853287935407, 0.2, 0.40497735994473], 'fractional_max': [0.5555720421296525, 0.7555555555555555, 0.5]}
+assembled_vs_native_core.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=2, reference=0, owned_only=2, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=2, reference=0, owned_only=2, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=2, reference=2, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=7, owned_local_energy=-20.74654186258978, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-20.54167028956501, interaction=-0.20487157302477552
+rank 1: local_atoms=6, owned_local_energy=-44.44611412481509, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-44.39861077411974, interaction=-0.047503350695351505
+Running jittered/medium/e3nn
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: jittered_15000
+source_path: /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz
+num_atoms: 15000
+model_family: off
+model_name: medium
+head_name: Default
+enable_cueq: False
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -9859744.0
+calculator_controlled_per_atom_sum: -9859346.837408543
+core_legacy_scalar: -9859757.0
+core_controlled_per_atom_sum: -9859346.837341309
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 13.0
+calculator_minus_core_controlled_energy_ev: -6.723403930664062e-05
+calculator_minus_core_node_energy_sum_ev: -6.723403930664062e-05
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -397.16259145736694
+core_legacy_minus_controlled: -410.16265869140625
+calculator_controlled_baseline: -9801458.111763
+calculator_controlled_interaction: -57888.725645542145
+core_controlled_baseline: -9801458.111763
+core_controlled_interaction: -57888.725578308105
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.5319188435872395e-07
+calculator_vs_core_node_energy_max_abs_ev: 1.430511474609375e-06
+calculator_vs_core_force_mae_ev_per_angstrom: 2.0344061485957354e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 3.814697265625e-06
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 173010
+core_graph_edge_count: 173010
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 10 is connected to  is connected to 11 peer ranks.  peer ranks. Expected number of connected peer ranks is : Expected number of connected peer ranks is : 11
+
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: jittered_15000
+source_path: /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'Default', 'enable_cueq': False, 'energy_mode': 'stable'}
+num_atoms: 15000
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -95132.0673275008
+calculator_controlled_per_atom_energy: -95128.23529105133
+core_model_mace_energy: -95132.1927584324
+core_model_stable_energy: -95128.23529040262
+explicit_dynamis_graph_energy: -95132.0962731004
+explicit_stable_energy: -95128.23529082359
+distributed_energy: -95128.23529072927
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -95128.23529072927
+distributed_minus_explicit_stable_energy: 9.432551451027393e-08
+explicit_stable_energy_abs_error: 9.432551451027393e-08
+stable_reference_gap_reduction: 3.8609822768048616
+distributed_minus_core_model_stable_energy: -3.266468411311507e-07
+distributed_minus_calculator_controlled_energy: 3.2206298783421516e-07
+distributed_minus_explicit_energy: 3.860982371130376
+distributed_minus_calculator_energy: 3.8320367715350585
+distributed_minus_core_model_energy: 3.9574677031341707
+explicit_energy_abs_error: 3.860982371130376
+calculator_energy_abs_error: 3.8320367715350585
+core_model_energy_abs_error: 3.9574677031341707
+explicit_energy_abs_error_per_atom: 0.0002573988247420251
+calculator_energy_abs_error_per_atom: 0.00025546911810233724
+core_model_energy_abs_error_per_atom: 0.00026383118020894473
+explicit_energy_close: False
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: False
+calculator_minus_core_model_energy: 0.1254309316
+reference.calculator_minus_core_legacy_energy_ev: 13.0
+reference.calculator_minus_core_controlled_energy_ev: -6.723403930664062e-05
+reference.calculator_minus_core_node_energy_sum_ev: -6.723403930664062e-05
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -3.8609822768048616
+explicit_node_energy_sum: -95128.23529082359
+explicit_node_energy_sum_float32: -95128.2272112872
+explicit_node_sum_float64_minus_float32: -0.008079536390141584
+explicit_node_sum_minus_model_energy: 3.8609822768048616
+distributed_minus_explicit_node_sum: 9.432551451027393e-08
+distributed_minus_explicit_node_sum_float32: -0.008079442064627074
+explicit_interaction_energy: -558.541714729414
+explicit_node_e0_sum: -94569.69399975461
+explicit_node_e0_sum_float32: -94569.6929214056
+explicit_node_e0_model_style_scatter_sum: -94573.5523346856
+explicit_node_e0_scatter_minus_sum_float64: -3.8583349309919868
+explicit_node_e0_scatter_minus_model_e0: 0.0022236853692447767
+explicit_node_interaction_sum: -558.5412910689663
+explicit_node_interaction_sum_float32: -558.5413001440031
+explicit_node_interaction_minus_model_interaction: 0.00042366044772279565
+explicit_node_e0_minus_model_e0: 3.8605586163612315
+calculator_legacy_minus_controlled_energy: -3.8320364494720707
+distributed_baseline_energy: -94569.69399975461
+distributed_interaction_energy: -558.5412909746503
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 9.431596481590532e-08
+distributed_total_minus_components: -1.5916157281026244e-12
+explicit_node_minus_core_node_sum: -4.209712924003601e-07
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 3.7547445153052195e-09
+explicit_force_max_abs: 8.568167686462402e-08
+calculator_force_mae: 3.749135224495603e-09
+calculator_force_max_abs: 9.650830179452896e-08
+core_model_force_mae: 3.754709876346851e-09
+core_model_force_max_abs: 8.85920599102974e-08
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.962903446845871e-09
+calculator_minus_core_model_force_max_abs: 3.680623321533203e-08
+explicit_vs_core_node_energy_mae: 1.5340531285540264e-09
+explicit_vs_core_node_energy_max_abs: 1.8403116607666016e-08
+reference.calculator_vs_core_node_energy_mae_ev: 1.5319188435872395e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 1.430511474609375e-06
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 2.0344061485957354e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 3.814697265625e-06
+assembled_owned_node_energy_sum_md: -95128.23529072927
+assembled_minus_native_core_node_sum_md: -3.266553460778976e-07
+assembled_vs_native_core_node_mae_md: 1.5774538140037967e-09
+assembled_vs_native_core_node_max_abs_md: 1.8403117252319134e-08
+assembled_minus_public_calculator_node_sum_md: 3.2205444799870975e-07
+assembled_vs_public_calculator_node_mae_md: 1.5547566420008133e-09
+assembled_vs_public_calculator_node_max_abs_md: 1.8403117252319134e-08
+assembled_minus_explicit_dynamis_node_sum_md: 9.431592165598524e-08
+assembled_vs_explicit_dynamis_node_mae_md: 1.5604309313373606e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 2.3003895677220498e-08
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 173010
+core_model_edge_count: 173010
+reference.calculator_graph_edge_count: 173010
+reference.core_graph_edge_count: 173010
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 173010, 'core_raw_count': 173010, 'explicit_unique_count': 173010, 'core_unique_count': 173010, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 173010, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 173010, 'core_raw_count': 173010, 'explicit_unique_count': 173010, 'core_unique_count': 173010, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 173010, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 173010
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.00634182407742455, 0.02793567180633545, 0.03101840615272522], 'fractional_max': [0.9460460844494049, 0.8053997039794921, 0.8023136138916015]}
+assembled_vs_native_core.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=7500, owned_local_energy=-47564.12047813107, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-47284.84699987731, interaction=-279.2734782537603
+rank 1: local_atoms=7500, owned_local_energy=-47564.1148125982, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-47284.84699987731, interaction=-279.26781272089
+Running organic/small/e3nn
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: small
+head_name: Default
+enable_cueq: False
+cutoff: 4.5
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6767578125
+calculator_controlled_per_atom_sum: -8442.675992012024
+core_legacy_scalar: -8442.6767578125
+core_controlled_per_atom_sum: -8442.67599272728
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: 7.152557373046875e-07
+calculator_minus_core_node_energy_sum_ev: 7.152557373046875e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.0007658004760742188
+core_legacy_minus_controlled: -0.0007650852203369141
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.67642307281494
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.67642378807068
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.457002427842882e-07
+calculator_vs_core_node_energy_max_abs_ev: 7.152557373046875e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.4052622848086887e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 4.76837158203125e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 166
+core_graph_edge_count: 166
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 0 is connected to 11 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 
+1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'small', 'head_name': 'Default', 'enable_cueq': False, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45944699462227
+calculator_controlled_per_atom_energy: -81.45943960577095
+core_model_mace_energy: -81.45944699462227
+core_model_stable_energy: -81.45943961267211
+explicit_dynamis_graph_energy: -81.45944699462227
+explicit_stable_energy: -81.45943961497251
+distributed_energy: -81.45943960347056
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.45943960347056
+distributed_minus_explicit_stable_energy: 1.1501953167680767e-08
+explicit_stable_energy_abs_error: 1.1501953167680767e-08
+stable_reference_gap_reduction: 7.379649758831874e-06
+distributed_minus_core_model_stable_energy: 9.201556849802728e-09
+distributed_minus_calculator_controlled_energy: 2.3003963178780396e-09
+distributed_minus_explicit_energy: 7.391151711999555e-06
+distributed_minus_calculator_energy: 7.391151711999555e-06
+distributed_minus_core_model_energy: 7.391151711999555e-06
+explicit_energy_abs_error: 7.391151711999555e-06
+calculator_energy_abs_error: 7.391151711999555e-06
+core_model_energy_abs_error: 7.391151711999555e-06
+explicit_energy_abs_error_per_atom: 4.106195395555308e-07
+calculator_energy_abs_error_per_atom: 4.106195395555308e-07
+core_model_energy_abs_error_per_atom: 4.106195395555308e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: 7.152557373046875e-07
+reference.calculator_minus_core_node_energy_sum_ev: 7.152557373046875e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -7.379649758831874e-06
+explicit_node_energy_sum: -81.45943961497251
+explicit_node_energy_sum_float32: -81.45943757222656
+explicit_node_sum_float64_minus_float32: -2.042745947505864e-06
+explicit_node_sum_minus_model_energy: 7.379649758831874e-06
+distributed_minus_explicit_node_sum: 1.1501953167680767e-08
+distributed_minus_explicit_node_sum_float32: -2.0312439943381833e-06
+explicit_interaction_energy: -0.6722753456862091
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: 3.165336067922908e-06
+explicit_node_interaction_sum: -0.6722752904768593
+explicit_node_interaction_sum_float32: -0.6722752720737427
+explicit_node_interaction_minus_model_interaction: 5.520934975855596e-08
+explicit_node_e0_minus_model_e0: 7.324440417733058e-06
+calculator_legacy_minus_controlled_energy: -7.388851315681677e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.6722752789749114
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 1.1501947949632552e-08
+distributed_total_minus_components: 3.3306690738754696e-15
+explicit_node_minus_core_node_sum: -2.300389575958252e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 2.7451918516163687e-09
+explicit_force_max_abs: 1.30385160446167e-08
+calculator_force_mae: 2.649795938225452e-09
+calculator_force_max_abs: 9.313225746154785e-09
+core_model_force_mae: 2.1749724243846913e-09
+core_model_force_max_abs: 7.683411240577698e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.3558719504986925e-09
+calculator_minus_core_model_force_max_abs: 4.600779151916504e-09
+explicit_vs_core_node_energy_mae: 6.389971044328478e-10
+explicit_vs_core_node_energy_max_abs: 2.300389575958252e-09
+reference.calculator_vs_core_node_energy_mae_ev: 1.457002427842882e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 7.152557373046875e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.4052622848086887e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 4.76837158203125e-07
+assembled_owned_node_energy_sum_md: -81.45943960347056
+assembled_minus_native_core_node_sum_md: 9.20155759920327e-09
+assembled_vs_native_core_node_mae_md: 1.27799416882457e-09
+assembled_vs_native_core_node_max_abs_md: 6.9011687475750705e-09
+assembled_minus_public_calculator_node_sum_md: 2.3003877969163256e-09
+assembled_vs_public_calculator_node_mae_md: 1.1501948051402995e-09
+assembled_vs_public_calculator_node_max_abs_md: 4.600780201258203e-09
+assembled_minus_explicit_dynamis_node_sum_md: 1.1501947144720859e-08
+assembled_vs_explicit_dynamis_node_mae_md: 1.4057935880199917e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.60077914654633e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 166
+core_model_edge_count: 166
+reference.calculator_graph_edge_count: 166
+reference.core_graph_edge_count: 166
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 4.5, 'explicit_raw_count': 166, 'core_raw_count': 166, 'explicit_unique_count': 166, 'core_unique_count': 166, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 166, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 4.5, 'explicit_raw_count': 166, 'core_raw_count': 166, 'explicit_unique_count': 166, 'core_unique_count': 166, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 166, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 166
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.72846070765497, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3348785454071455
+rank 1: local_atoms=9, owned_local_energy=-40.73097889581559, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3373967335677659
+Running organic/medium/e3nn
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: medium
+head_name: Default
+enable_cueq: False
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6640625
+calculator_controlled_per_atom_sum: -8442.663921356201
+core_legacy_scalar: -8442.6640625
+core_controlled_per_atom_sum: -8442.663922071457
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: 7.152557373046875e-07
+calculator_minus_core_node_energy_sum_ev: 7.152557373046875e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.000141143798828125
+core_legacy_minus_controlled: -0.0001404285430908203
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.66435241699219
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.66435313224792
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 9.271833631727431e-08
+calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.402157876226637e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 8.344650268554688e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 170
+core_graph_edge_count: 170
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 1 is connected to 01 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 
+1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'Default', 'enable_cueq': False, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45932450347813
+calculator_controlled_per_atom_energy: -81.4593231416475
+core_model_mace_energy: -81.45932450347813
+core_model_stable_energy: -81.45932314854866
+explicit_dynamis_graph_energy: -81.45932450347813
+explicit_stable_energy: -81.45932315084906
+distributed_energy: -81.45932313244595
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.45932313244595
+distributed_minus_explicit_stable_energy: 1.8403113699605456e-08
+explicit_stable_energy_abs_error: 1.8403113699605456e-08
+stable_reference_gap_reduction: 1.3526290700838217e-06
+distributed_minus_core_model_stable_energy: 1.6102717381727416e-08
+distributed_minus_calculator_controlled_energy: 9.201556849802728e-09
+distributed_minus_explicit_energy: 1.3710321837834272e-06
+distributed_minus_calculator_energy: 1.3710321837834272e-06
+distributed_minus_core_model_energy: 1.3710321837834272e-06
+explicit_energy_abs_error: 1.3710321837834272e-06
+calculator_energy_abs_error: 1.3710321837834272e-06
+core_model_energy_abs_error: 1.3710321837834272e-06
+explicit_energy_abs_error_per_atom: 7.616845465463484e-08
+calculator_energy_abs_error_per_atom: 7.616845465463484e-08
+core_model_energy_abs_error_per_atom: 7.616845465463484e-08
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: 7.152557373046875e-07
+reference.calculator_minus_core_node_energy_sum_ev: 7.152557373046875e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -1.3526290700838217e-06
+explicit_node_energy_sum: -81.45932315084906
+explicit_node_energy_sum_float32: -81.45931508108242
+explicit_node_sum_float64_minus_float32: -8.069766636253917e-06
+explicit_node_sum_minus_model_energy: 1.3526290700838217e-06
+distributed_minus_explicit_node_sum: 1.8403113699605456e-08
+distributed_minus_explicit_node_sum_float32: -8.051363522554311e-06
+explicit_interaction_energy: -0.6721588171518493
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: -2.7972737228765254e-06
+explicit_node_interaction_sum: -0.6721588263534076
+explicit_node_interaction_sum_float32: -0.6721588171518493
+explicit_node_interaction_minus_model_interaction: -9.20155829309266e-09
+explicit_node_e0_minus_model_e0: 1.3618306269336244e-06
+calculator_legacy_minus_controlled_energy: -1.3618306269336244e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.672158807950291
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 1.840311658618532e-08
+distributed_total_minus_components: -5.440092820663267e-15
+explicit_node_minus_core_node_sum: -2.3003895759582528e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.6680806735891451e-09
+explicit_force_max_abs: 9.313225746154785e-09
+calculator_force_mae: 1.914115754786394e-09
+calculator_force_max_abs: 9.313225746154785e-09
+core_model_force_mae: 1.7826096154749393e-09
+core_model_force_max_abs: 7.450580596923828e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.3528766972762981e-09
+calculator_minus_core_model_force_max_abs: 8.051363515853881e-09
+explicit_vs_core_node_energy_mae: 1.6613924715254044e-09
+explicit_vs_core_node_energy_max_abs: 9.201558303833008e-09
+reference.calculator_vs_core_node_energy_mae_ev: 9.271833631727431e-08
+reference.calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.402157876226637e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 8.344650268554688e-07
+assembled_owned_node_energy_sum_md: -81.45932313244593
+assembled_minus_native_core_node_sum_md: 1.610272520879974e-08
+assembled_vs_native_core_node_mae_md: 1.6613923693577073e-09
+assembled_vs_native_core_node_max_abs_md: 4.60077914654633e-09
+assembled_minus_public_calculator_node_sum_md: 9.201556155913337e-09
+assembled_vs_public_calculator_node_mae_md: 1.7891918085988223e-09
+assembled_vs_public_calculator_node_max_abs_md: 4.600780201258203e-09
+assembled_minus_explicit_dynamis_node_sum_md: 1.8403114088183514e-08
+assembled_vs_explicit_dynamis_node_mae_md: 2.044790710210699e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.600780201258203e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 170
+core_model_edge_count: 170
+reference.calculator_graph_edge_count: 170
+reference.core_graph_edge_count: 170
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 170
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.72837705398804, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.33479489174021576
+rank 1: local_atoms=9, owned_local_energy=-40.7309460784579, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3373639162100753
+Running organic/large/e3nn
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Downloading MACE model from 'https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off23/MACE-OFF23_large.model'
+The model is distributed under the Academic Software License (ASL) license, see https://github.com/gabor1/ASL 
+ To use the model you accept the terms of the license.
+ASL is based on the Gnu Public License, but does not permit commercial use
+Downloading: 0.5% (0.2 MB / 52.9 MB)Downloading: 0.9% (0.5 MB / 52.9 MB)Downloading: 1.4% (0.8 MB / 52.9 MB)Downloading: 1.9% (1.0 MB / 52.9 MB)Downloading: 2.4% (1.2 MB / 52.9 MB)Downloading: 2.8% (1.5 MB / 52.9 MB)Downloading: 3.3% (1.8 MB / 52.9 MB)Downloading: 3.8% (2.0 MB / 52.9 MB)Downloading: 4.3% (2.2 MB / 52.9 MB)Downloading: 4.7% (2.5 MB / 52.9 MB)Downloading: 5.2% (2.8 MB / 52.9 MB)Downloading: 5.7% (3.0 MB / 52.9 MB)Downloading: 6.1% (3.2 MB / 52.9 MB)Downloading: 6.6% (3.5 MB / 52.9 MB)Downloading: 7.1% (3.8 MB / 52.9 MB)Downloading: 7.6% (4.0 MB / 52.9 MB)Downloading: 8.0% (4.2 MB / 52.9 MB)Downloading: 8.5% (4.5 MB / 52.9 MB)Downloading: 9.0% (4.8 MB / 52.9 MB)Downloading: 9.4% (5.0 MB / 52.9 MB)Downloading: 9.9% (5.2 MB / 52.9 MB)Downloading: 10.4% (5.5 MB / 52.9 MB)Downloading: 10.9% (5.8 MB / 52.9 MB)Downloading: 11.3% (6.0 MB / 52.9 MB)Downloading: 11.8% (6.2 MB / 52.9 MB)Downloading: 12.3% (6.5 MB / 52.9 MB)Downloading: 12.8% (6.8 MB / 52.9 MB)Downloading: 13.2% (7.0 MB / 52.9 MB)Downloading: 13.7% (7.2 MB / 52.9 MB)Downloading: 14.2% (7.5 MB / 52.9 MB)Downloading: 14.6% (7.8 MB / 52.9 MB)Downloading: 15.1% (8.0 MB / 52.9 MB)Downloading: 15.6% (8.2 MB / 52.9 MB)Downloading: 16.1% (8.5 MB / 52.9 MB)Downloading: 16.5% (8.8 MB / 52.9 MB)Downloading: 17.0% (9.0 MB / 52.9 MB)Downloading: 17.5% (9.2 MB / 52.9 MB)Downloading: 18.0% (9.5 MB / 52.9 MB)Downloading: 18.4% (9.8 MB / 52.9 MB)Downloading: 18.9% (10.0 MB / 52.9 MB)Downloading: 19.4% (10.2 MB / 52.9 MB)Downloading: 19.8% (10.5 MB / 52.9 MB)Downloading: 20.3% (10.8 MB / 52.9 MB)Downloading: 20.8% (11.0 MB / 52.9 MB)Downloading: 21.3% (11.2 MB / 52.9 MB)Downloading: 21.7% (11.5 MB / 52.9 MB)Downloading: 22.2% (11.8 MB / 52.9 MB)Downloading: 22.7% (12.0 MB / 52.9 MB)Downloading: 23.1% (12.2 MB / 52.9 MB)Downloading: 23.6% (12.5 MB / 52.9 MB)Downloading: 24.1% (12.8 MB / 52.9 MB)Downloading: 24.6% (13.0 MB / 52.9 MB)Downloading: 25.0% (13.2 MB / 52.9 MB)Downloading: 25.5% (13.5 MB / 52.9 MB)Downloading: 26.0% (13.8 MB / 52.9 MB)Downloading: 26.5% (14.0 MB / 52.9 MB)Downloading: 26.9% (14.2 MB / 52.9 MB)Downloading: 27.4% (14.5 MB / 52.9 MB)Downloading: 27.9% (14.8 MB / 52.9 MB)Downloading: 28.3% (15.0 MB / 52.9 MB)Downloading: 28.8% (15.2 MB / 52.9 MB)Downloading: 29.3% (15.5 MB / 52.9 MB)Downloading: 29.8% (15.8 MB / 52.9 MB)Downloading: 30.2% (16.0 MB / 52.9 MB)Downloading: 30.7% (16.2 MB / 52.9 MB)Downloading: 31.2% (16.5 MB / 52.9 MB)Downloading: 31.7% (16.8 MB / 52.9 MB)Downloading: 32.1% (17.0 MB / 52.9 MB)Downloading: 32.6% (17.2 MB / 52.9 MB)Downloading: 33.1% (17.5 MB / 52.9 MB)Downloading: 33.5% (17.8 MB / 52.9 MB)Downloading: 34.0% (18.0 MB / 52.9 MB)Downloading: 34.5% (18.2 MB / 52.9 MB)Downloading: 35.0% (18.5 MB / 52.9 MB)Downloading: 35.4% (18.8 MB / 52.9 MB)Downloading: 35.9% (19.0 MB / 52.9 MB)Downloading: 36.4% (19.2 MB / 52.9 MB)Downloading: 36.8% (19.5 MB / 52.9 MB)Downloading: 37.3% (19.8 MB / 52.9 MB)Downloading: 37.8% (20.0 MB / 52.9 MB)Downloading: 38.3% (20.2 MB / 52.9 MB)Downloading: 38.7% (20.5 MB / 52.9 MB)Downloading: 39.2% (20.8 MB / 52.9 MB)Downloading: 39.7% (21.0 MB / 52.9 MB)Downloading: 40.2% (21.2 MB / 52.9 MB)Downloading: 40.6% (21.5 MB / 52.9 MB)Downloading: 41.1% (21.8 MB / 52.9 MB)Downloading: 41.6% (22.0 MB / 52.9 MB)Downloading: 42.0% (22.2 MB / 52.9 MB)Downloading: 42.5% (22.5 MB / 52.9 MB)Downloading: 43.0% (22.8 MB / 52.9 MB)Downloading: 43.5% (23.0 MB / 52.9 MB)Downloading: 43.9% (23.2 MB / 52.9 MB)Downloading: 44.4% (23.5 MB / 52.9 MB)Downloading: 44.9% (23.8 MB / 52.9 MB)Downloading: 45.3% (24.0 MB / 52.9 MB)Downloading: 45.8% (24.2 MB / 52.9 MB)Downloading: 46.3% (24.5 MB / 52.9 MB)Downloading: 46.8% (24.8 MB / 52.9 MB)Downloading: 47.2% (25.0 MB / 52.9 MB)Downloading: 47.7% (25.2 MB / 52.9 MB)Downloading: 48.2% (25.5 MB / 52.9 MB)Downloading: 48.7% (25.8 MB / 52.9 MB)Downloading: 49.1% (26.0 MB / 52.9 MB)Downloading: 49.6% (26.2 MB / 52.9 MB)Downloading: 50.1% (26.5 MB / 52.9 MB)Downloading: 50.5% (26.8 MB / 52.9 MB)Downloading: 51.0% (27.0 MB / 52.9 MB)Downloading: 51.5% (27.2 MB / 52.9 MB)Downloading: 52.0% (27.5 MB / 52.9 MB)Downloading: 52.4% (27.8 MB / 52.9 MB)Downloading: 52.9% (28.0 MB / 52.9 MB)Downloading: 53.4% (28.2 MB / 52.9 MB)Downloading: 53.9% (28.5 MB / 52.9 MB)Downloading: 54.3% (28.8 MB / 52.9 MB)Downloading: 54.8% (29.0 MB / 52.9 MB)Downloading: 55.3% (29.2 MB / 52.9 MB)Downloading: 55.7% (29.5 MB / 52.9 MB)Downloading: 56.2% (29.8 MB / 52.9 MB)Downloading: 56.7% (30.0 MB / 52.9 MB)Downloading: 57.2% (30.2 MB / 52.9 MB)Downloading: 57.6% (30.5 MB / 52.9 MB)Downloading: 58.1% (30.8 MB / 52.9 MB)Downloading: 58.6% (31.0 MB / 52.9 MB)Downloading: 59.0% (31.2 MB / 52.9 MB)Downloading: 59.5% (31.5 MB / 52.9 MB)Downloading: 60.0% (31.8 MB / 52.9 MB)Downloading: 60.5% (32.0 MB / 52.9 MB)Downloading: 60.9% (32.2 MB / 52.9 MB)Downloading: 61.4% (32.5 MB / 52.9 MB)Downloading: 61.9% (32.8 MB / 52.9 MB)Downloading: 62.4% (33.0 MB / 52.9 MB)Downloading: 62.8% (33.2 MB / 52.9 MB)Downloading: 63.3% (33.5 MB / 52.9 MB)Downloading: 63.8% (33.8 MB / 52.9 MB)Downloading: 64.2% (34.0 MB / 52.9 MB)Downloading: 64.7% (34.2 MB / 52.9 MB)Downloading: 65.2% (34.5 MB / 52.9 MB)Downloading: 65.7% (34.8 MB / 52.9 MB)Downloading: 66.1% (35.0 MB / 52.9 MB)Downloading: 66.6% (35.2 MB / 52.9 MB)Downloading: 67.1% (35.5 MB / 52.9 MB)Downloading: 67.6% (35.8 MB / 52.9 MB)Downloading: 68.0% (36.0 MB / 52.9 MB)Downloading: 68.5% (36.2 MB / 52.9 MB)Downloading: 69.0% (36.5 MB / 52.9 MB)Downloading: 69.4% (36.8 MB / 52.9 MB)Downloading: 69.9% (37.0 MB / 52.9 MB)Downloading: 70.4% (37.2 MB / 52.9 MB)Downloading: 70.9% (37.5 MB / 52.9 MB)Downloading: 71.3% (37.8 MB / 52.9 MB)Downloading: 71.8% (38.0 MB / 52.9 MB)Downloading: 72.3% (38.2 MB / 52.9 MB)Downloading: 72.7% (38.5 MB / 52.9 MB)Downloading: 73.2% (38.8 MB / 52.9 MB)Downloading: 73.7% (39.0 MB / 52.9 MB)Downloading: 74.2% (39.2 MB / 52.9 MB)Downloading: 74.6% (39.5 MB / 52.9 MB)Downloading: 75.1% (39.8 MB / 52.9 MB)Downloading: 75.6% (40.0 MB / 52.9 MB)Downloading: 76.1% (40.2 MB / 52.9 MB)Downloading: 76.5% (40.5 MB / 52.9 MB)Downloading: 77.0% (40.8 MB / 52.9 MB)Downloading: 77.5% (41.0 MB / 52.9 MB)Downloading: 77.9% (41.2 MB / 52.9 MB)Downloading: 78.4% (41.5 MB / 52.9 MB)Downloading: 78.9% (41.8 MB / 52.9 MB)Downloading: 79.4% (42.0 MB / 52.9 MB)Downloading: 79.8% (42.2 MB / 52.9 MB)Downloading: 80.3% (42.5 MB / 52.9 MB)Downloading: 80.8% (42.8 MB / 52.9 MB)Downloading: 81.3% (43.0 MB / 52.9 MB)Downloading: 81.7% (43.2 MB / 52.9 MB)Downloading: 82.2% (43.5 MB / 52.9 MB)Downloading: 82.7% (43.8 MB / 52.9 MB)Downloading: 83.1% (44.0 MB / 52.9 MB)Downloading: 83.6% (44.2 MB / 52.9 MB)Downloading: 84.1% (44.5 MB / 52.9 MB)Downloading: 84.6% (44.8 MB / 52.9 MB)Downloading: 85.0% (45.0 MB / 52.9 MB)Downloading: 85.5% (45.2 MB / 52.9 MB)Downloading: 86.0% (45.5 MB / 52.9 MB)Downloading: 86.4% (45.8 MB / 52.9 MB)Downloading: 86.9% (46.0 MB / 52.9 MB)Downloading: 87.4% (46.2 MB / 52.9 MB)Downloading: 87.9% (46.5 MB / 52.9 MB)Downloading: 88.3% (46.8 MB / 52.9 MB)Downloading: 88.8% (47.0 MB / 52.9 MB)Downloading: 89.3% (47.2 MB / 52.9 MB)Downloading: 89.8% (47.5 MB / 52.9 MB)Downloading: 90.2% (47.8 MB / 52.9 MB)Downloading: 90.7% (48.0 MB / 52.9 MB)Downloading: 91.2% (48.2 MB / 52.9 MB)Downloading: 91.6% (48.5 MB / 52.9 MB)Downloading: 92.1% (48.8 MB / 52.9 MB)Downloading: 92.6% (49.0 MB / 52.9 MB)Downloading: 93.1% (49.2 MB / 52.9 MB)Downloading: 93.5% (49.5 MB / 52.9 MB)Downloading: 94.0% (49.8 MB / 52.9 MB)Downloading: 94.5% (50.0 MB / 52.9 MB)Downloading: 95.0% (50.2 MB / 52.9 MB)Downloading: 95.4% (50.5 MB / 52.9 MB)Downloading: 95.9% (50.8 MB / 52.9 MB)Downloading: 96.4% (51.0 MB / 52.9 MB)Downloading: 96.8% (51.2 MB / 52.9 MB)Downloading: 97.3% (51.5 MB / 52.9 MB)Downloading: 97.8% (51.8 MB / 52.9 MB)Downloading: 98.3% (52.0 MB / 52.9 MB)Downloading: 98.7% (52.2 MB / 52.9 MB)Downloading: 99.2% (52.5 MB / 52.9 MB)Downloading: 99.7% (52.8 MB / 52.9 MB)Downloading: 100.0% (52.9 MB / 52.9 MB)/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+
+Cached MACE model to /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: large
+head_name: Default
+enable_cueq: False
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6611328125
+calculator_controlled_per_atom_sum: -8442.660626649857
+core_legacy_scalar: -8442.6611328125
+core_controlled_per_atom_sum: -8442.66062617302
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: -4.76837158203125e-07
+calculator_minus_core_node_energy_sum_ev: -4.76837158203125e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.0005061626434326172
+core_legacy_minus_controlled: -0.0005066394805908203
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.66105771064758
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.66105723381042
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 7.947285970052083e-08
+calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 9.727146890428331e-08
+calculator_vs_core_force_max_abs_ev_per_angstrom: 3.5762786865234375e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 170
+core_graph_edge_count: 170
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 0 is connected to 11 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 
+1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'large', 'head_name': 'Default', 'enable_cueq': False, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45929623629101
+calculator_controlled_per_atom_energy: -81.45929135256395
+core_model_mace_energy: -81.45929623629101
+core_model_stable_energy: -81.45929134796317
+explicit_dynamis_graph_energy: -81.45929623629101
+explicit_stable_energy: -81.45929135256395
+distributed_energy: -81.45929134566278
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.45929134566278
+distributed_minus_explicit_stable_energy: 6.9011747427794035e-09
+explicit_stable_energy_abs_error: 6.9011747427794035e-09
+stable_reference_gap_reduction: 4.883727058313525e-06
+distributed_minus_core_model_stable_energy: 2.3003963178780396e-09
+distributed_minus_calculator_controlled_energy: 6.9011747427794035e-09
+distributed_minus_explicit_energy: 4.8906282330563045e-06
+distributed_minus_calculator_energy: 4.8906282330563045e-06
+distributed_minus_core_model_energy: 4.8906282330563045e-06
+explicit_energy_abs_error: 4.8906282330563045e-06
+calculator_energy_abs_error: 4.8906282330563045e-06
+core_model_energy_abs_error: 4.8906282330563045e-06
+explicit_energy_abs_error_per_atom: 2.7170156850312804e-07
+calculator_energy_abs_error_per_atom: 2.7170156850312804e-07
+core_model_energy_abs_error_per_atom: 2.7170156850312804e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: -4.76837158203125e-07
+reference.calculator_minus_core_node_energy_sum_ev: -4.76837158203125e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -4.883727058313525e-06
+explicit_node_energy_sum: -81.45929135256395
+explicit_node_energy_sum_float32: -81.45928681389532
+explicit_node_sum_float64_minus_float32: -4.538668633813359e-06
+explicit_node_sum_minus_model_energy: 4.883727058313525e-06
+distributed_minus_explicit_node_sum: 6.9011747427794035e-09
+distributed_minus_explicit_node_sum_float32: -4.531767459070579e-06
+explicit_interaction_energy: -0.6721269429538849
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: 8.097371306803325e-07
+explicit_node_interaction_sum: -0.6721270280682992
+explicit_node_interaction_sum_float32: -0.6721270165663513
+explicit_node_interaction_minus_model_interaction: -8.511441429437383e-08
+explicit_node_e0_minus_model_e0: 4.968841480490482e-06
+calculator_legacy_minus_controlled_energy: -4.883727058313525e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.6721270211671304
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 6.9011687475750705e-09
+distributed_total_minus_components: 2.220446049250313e-15
+explicit_node_minus_core_node_sum: -4.600779151916505e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.716991215872099e-09
+explicit_force_max_abs: 7.450580596923828e-09
+calculator_force_mae: 1.632105117721494e-09
+calculator_force_max_abs: 7.2177499532699585e-09
+core_model_force_mae: 1.4471071008159697e-09
+core_model_force_max_abs: 5.587935447692871e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 9.385269819008669e-10
+calculator_minus_core_model_force_max_abs: 3.450584363937378e-09
+explicit_vs_core_node_energy_mae: 1.5335930506388347e-09
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+reference.calculator_vs_core_node_energy_mae_ev: 7.947285970052083e-08
+reference.calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 9.727146890428331e-08
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 3.5762786865234375e-07
+assembled_owned_node_energy_sum_md: -81.45929134566278
+assembled_minus_native_core_node_sum_md: 2.300388851628199e-09
+assembled_vs_native_core_node_mae_md: 1.916991307977018e-09
+assembled_vs_native_core_node_max_abs_md: 9.201558626159567e-09
+assembled_minus_public_calculator_node_sum_md: 6.901168719819495e-09
+assembled_vs_public_calculator_node_mae_md: 1.4057936651188128e-09
+assembled_vs_public_calculator_node_max_abs_md: 9.201558626159567e-09
+assembled_minus_explicit_dynamis_node_sum_md: 6.901169774531368e-09
+assembled_vs_explicit_dynamis_node_mae_md: 2.172590050765323e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 9.201558626159567e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 170
+core_model_edge_count: 170
+reference.calculator_graph_edge_count: 170
+reference.core_graph_edge_count: 170
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 170
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.728390173109794, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3348080108619675
+rank 1: local_atoms=9, owned_local_energy=-40.73090117255298, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.337319010305163
+Running boundary/medium/cueq
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Head default not found in available heads ['Default'], defaulting to the last head: Default
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_cutoff_boundary
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz
+num_atoms: 13
+model_family: off
+model_name: medium
+head_name: default
+enable_cueq: True
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -6756.74169921875
+calculator_controlled_per_atom_sum: -6756.7426719644845
+core_legacy_scalar: -6756.74169921875
+core_controlled_per_atom_sum: -6756.742671726066
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: -2.384185791015625e-07
+calculator_minus_core_node_energy_sum_ev: -2.3841858087791934e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: 0.0009727457345434232
+core_legacy_minus_controlled: 0.0009725073159643216
+calculator_controlled_baseline: -6730.58585357666
+calculator_controlled_interaction: -26.15681838782456
+core_controlled_baseline: -6730.58585357666
+core_controlled_interaction: -26.15681814940598
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.6505901643772455e-07
+calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.5252787586967652e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 9.5367431640625e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 58
+core_graph_edge_count: 58
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 10 is connected to  is connected to 11 peer ranks.  peer ranks. Expected number of connected peer ranks is : Expected number of connected peer ranks is : 11
+
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_cutoff_boundary
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_cutoff_boundary.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'stable'}
+num_atoms: 13
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -65.19264660873652
+calculator_controlled_per_atom_energy: -65.19265599430604
+core_model_mace_energy: -65.19264660873652
+core_model_stable_energy: -65.19265599200565
+explicit_dynamis_graph_energy: -65.19264660873652
+explicit_stable_energy: -65.19265598970526
+distributed_energy: -65.19265599660643
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -65.19265599660643
+distributed_minus_explicit_stable_energy: -6.9011747427794035e-09
+explicit_stable_energy_abs_error: 6.9011747427794035e-09
+stable_reference_gap_reduction: 9.380968734262751e-06
+distributed_minus_core_model_stable_energy: -4.600778424901364e-09
+distributed_minus_calculator_controlled_energy: -2.3003963178780396e-09
+distributed_minus_explicit_energy: -9.38786990900553e-06
+distributed_minus_calculator_energy: -9.38786990900553e-06
+distributed_minus_core_model_energy: -9.38786990900553e-06
+explicit_energy_abs_error: 9.38786990900553e-06
+calculator_energy_abs_error: 9.38786990900553e-06
+core_model_energy_abs_error: 9.38786990900553e-06
+explicit_energy_abs_error_per_atom: 7.221438391542716e-07
+calculator_energy_abs_error_per_atom: 7.221438391542716e-07
+core_model_energy_abs_error_per_atom: 7.221438391542716e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: -2.384185791015625e-07
+reference.calculator_minus_core_node_energy_sum_ev: -2.3841858087791934e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: 9.380968734262751e-06
+explicit_node_energy_sum: -65.19265598970526
+explicit_node_energy_sum_float32: -65.19265603113223
+explicit_node_sum_float64_minus_float32: 4.1426972074987134e-08
+explicit_node_sum_minus_model_energy: -9.380968734262751e-06
+distributed_minus_explicit_node_sum: -6.9011747427794035e-09
+distributed_minus_explicit_node_sum_float32: 3.452579733220773e-08
+explicit_interaction_energy: -0.2523749306412491
+explicit_node_e0_sum: -64.94028106368475
+explicit_node_e0_sum_float32: -64.94028187342188
+explicit_node_e0_model_style_scatter_sum: -64.94027245102617
+explicit_node_e0_scatter_minus_sum_float64: 8.612658575657406e-06
+explicit_node_e0_scatter_minus_model_e0: -7.729309032811216e-07
+explicit_node_interaction_sum: -0.2523749260205166
+explicit_node_interaction_sum_float32: -0.2523749306412491
+explicit_node_interaction_minus_model_interaction: 4.620732518834103e-09
+explicit_node_e0_minus_model_e0: -9.385589478938527e-06
+calculator_legacy_minus_controlled_energy: 9.385569512687653e-06
+distributed_baseline_energy: -64.94028106368475
+distributed_interaction_energy: -0.2523749329216853
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: -6.901168692063919e-09
+distributed_total_minus_components: 2.609024107869118e-15
+explicit_node_minus_core_node_sum: 2.300389575958252e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.5495595917514038e-09
+explicit_force_max_abs: 7.450580596923828e-09
+calculator_force_mae: 2.156935297037421e-09
+calculator_force_max_abs: 1.1175870895385742e-08
+core_model_force_mae: 1.324023002347019e-09
+core_model_force_max_abs: 7.450580596923828e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.4716702636913794e-09
+calculator_minus_core_model_force_max_abs: 9.201558303833008e-09
+explicit_vs_core_node_energy_mae: 1.5925773987403283e-09
+explicit_vs_core_node_energy_max_abs: 9.201558303833008e-09
+reference.calculator_vs_core_node_energy_mae_ev: 1.6505901643772455e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.5252787586967652e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 9.5367431640625e-07
+assembled_owned_node_energy_sum_md: -65.19265599660643
+assembled_minus_native_core_node_sum_md: -4.600778480412515e-09
+assembled_vs_native_core_node_mae_md: 1.4156243015424235e-09
+assembled_vs_native_core_node_max_abs_md: 4.6007791743019055e-09
+assembled_minus_public_calculator_node_sum_md: -2.3003895455175893e-09
+assembled_vs_public_calculator_node_mae_md: 5.308591344288516e-10
+assembled_vs_public_calculator_node_max_abs_md: 4.60077914654633e-09
+assembled_minus_explicit_dynamis_node_sum_md: -6.901167720618773e-09
+assembled_vs_explicit_dynamis_node_mae_md: 1.2386713940873215e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.600780201258203e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 60
+core_model_edge_count: 58
+reference.calculator_graph_edge_count: 58
+reference.core_graph_edge_count: 58
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 60, 'core_raw_count': 58, 'explicit_unique_count': 60, 'core_unique_count': 58, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 58, 'explicit_only': {'count': 2, 'distance_min': 5.0, 'distance_max': 5.0, 'within_1e_4_angstrom_of_cutoff': 2, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': [{'edge': [3, 2, 0, 0, 0], 'distance': 5.0}, {'edge': [2, 3, 0, 0, 0], 'distance': 5.0}]}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 60, 'core_raw_count': 58, 'explicit_unique_count': 60, 'core_unique_count': 58, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 58, 'explicit_only': {'count': 2, 'distance_min': 5.0, 'distance_max': 5.0, 'within_1e_4_angstrom_of_cutoff': 2, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': [{'edge': [3, 2, 0, 0, 0], 'distance': 5.0}, {'edge': [2, 3, 0, 0, 0], 'distance': 5.0}]}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 60
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.2962853287935407, 0.2, 0.40497735994473], 'fractional_max': [0.5555720421296525, 0.7555555555555555, 0.5]}
+assembled_vs_native_core.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=2, reference=0, owned_only=2, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=2, reference=0, owned_only=2, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=58, reference=58, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=2, reference=2, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=7, owned_local_energy=-20.746541864890172, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-20.54167028956501, interaction=-0.20487157532516506
+rank 1: local_atoms=6, owned_local_energy=-44.44611413171626, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-44.39861077411974, interaction=-0.04750335759652023
+Running jittered/medium/cueq
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Head default not found in available heads ['Default'], defaulting to the last head: Default
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: jittered_15000
+source_path: /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz
+num_atoms: 15000
+model_family: off
+model_name: medium
+head_name: default
+enable_cueq: True
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -9859740.0
+calculator_controlled_per_atom_sum: -9859346.837417841
+core_legacy_scalar: -9859758.0
+core_controlled_per_atom_sum: -9859346.83741355
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 18.0
+calculator_minus_core_controlled_energy_ev: -4.291534423828125e-06
+calculator_minus_core_node_energy_sum_ev: -4.291534423828125e-06
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -393.16258215904236
+core_legacy_minus_controlled: -411.1625864505768
+calculator_controlled_baseline: -9801458.111763
+calculator_controlled_interaction: -57888.72565484047
+core_controlled_baseline: -9801458.111763
+core_controlled_interaction: -57888.725650548935
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.568158467610677e-07
+calculator_vs_core_node_energy_max_abs_ev: 1.9073486328125e-06
+calculator_vs_core_force_mae_ev_per_angstrom: 2.0351225814212941e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 5.125999450683594e-06
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 173010
+core_graph_edge_count: 173010
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: jittered_15000
+source_path: /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386/jittered_15000.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'stable'}
+num_atoms: 15000
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -95132.028733368
+calculator_controlled_per_atom_energy: -95128.23529114104
+core_model_mace_energy: -95132.2024069656
+core_model_stable_energy: -95128.23529109963
+explicit_dynamis_graph_energy: -95132.1541642996
+explicit_stable_energy: -95128.23529037961
+distributed_energy: -95128.23529120315
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -95128.23529120315
+distributed_minus_explicit_stable_energy: -8.235365385189652e-07
+explicit_stable_energy_abs_error: 8.235365385189652e-07
+stable_reference_gap_reduction: 3.9188722729159053
+distributed_minus_core_model_stable_energy: -1.0352232493460178e-07
+distributed_minus_calculator_controlled_energy: -6.210757419466972e-08
+distributed_minus_explicit_energy: 3.918873096452444
+distributed_minus_calculator_energy: 3.7934421648533316
+distributed_minus_core_model_energy: 3.967115762454341
+explicit_energy_abs_error: 3.918873096452444
+calculator_energy_abs_error: 3.7934421648533316
+core_model_energy_abs_error: 3.967115762454341
+explicit_energy_abs_error_per_atom: 0.00026125820643016295
+calculator_energy_abs_error_per_atom: 0.00025289614432355545
+core_model_energy_abs_error_per_atom: 0.00026447438416362274
+explicit_energy_close: False
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: False
+calculator_minus_core_model_energy: 0.1736735976
+reference.calculator_minus_core_legacy_energy_ev: 18.0
+reference.calculator_minus_core_controlled_energy_ev: -4.291534423828125e-06
+reference.calculator_minus_core_node_energy_sum_ev: -4.291534423828125e-06
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -3.9188739199889824
+explicit_node_energy_sum: -95128.23529037961
+explicit_node_energy_sum_float32: -95128.2272112872
+explicit_node_sum_float64_minus_float32: -0.008079092411207967
+explicit_node_sum_minus_model_energy: 3.9188739199889824
+distributed_minus_explicit_node_sum: -8.235365385189652e-07
+distributed_minus_explicit_node_sum_float32: -0.008079915947746485
+explicit_interaction_energy: -558.5408478690093
+explicit_node_e0_sum: -94569.69399975461
+explicit_node_e0_sum_float32: -94569.6929214056
+explicit_node_e0_model_style_scatter_sum: -94573.5330376192
+explicit_node_e0_scatter_minus_sum_float64: -3.839037864585407
+explicit_node_e0_scatter_minus_model_e0: 0.08027881139423698
+explicit_node_interaction_sum: -558.541290624991
+explicit_node_interaction_sum_float32: -558.5413001440031
+explicit_node_interaction_minus_model_interaction: -0.0004427559816804205
+explicit_node_e0_minus_model_e0: 3.919316675979644
+calculator_legacy_minus_controlled_energy: -3.793442226960906
+distributed_baseline_energy: -94569.69399975461
+distributed_interaction_energy: -558.5412914485305
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: -8.23539494376746e-07
+distributed_total_minus_components: -4.547473508864641e-12
+explicit_node_minus_core_node_sum: 7.20021937274933e-07
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 3.761472466834448e-09
+explicit_force_max_abs: 9.313225746154785e-08
+calculator_force_mae: 3.8119045697726506e-09
+calculator_force_max_abs: 9.12696123123169e-08
+core_model_force_mae: 3.788936275839205e-09
+core_model_force_max_abs: 8.754432201385498e-08
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.963594775147419e-09
+calculator_minus_core_model_force_max_abs: 4.945837588310242e-08
+explicit_vs_core_node_energy_mae: 1.5610443662452699e-09
+explicit_vs_core_node_energy_max_abs: 1.8403116607666016e-08
+reference.calculator_vs_core_node_energy_mae_ev: 1.568158467610677e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 1.9073486328125e-06
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 2.0351225814212941e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 5.125999450683594e-06
+assembled_owned_node_energy_sum_md: -95128.23529120315
+assembled_minus_native_core_node_sum_md: -1.0351749676895672e-07
+assembled_vs_native_core_node_mae_md: 1.6674757203331374e-09
+assembled_vs_native_core_node_max_abs_md: 1.8403117252319134e-08
+assembled_minus_public_calculator_node_sum_md: -6.211044517590025e-08
+assembled_vs_public_calculator_node_mae_md: 1.6702361889368392e-09
+assembled_vs_public_calculator_node_max_abs_md: 2.3003895677220498e-08
+assembled_minus_explicit_dynamis_node_sum_md: -8.235394347022584e-07
+assembled_vs_explicit_dynamis_node_mae_md: 1.672536579807223e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 2.3003895677220498e-08
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 173010
+core_model_edge_count: 173010
+reference.calculator_graph_edge_count: 173010
+reference.core_graph_edge_count: 173010
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 173010, 'core_raw_count': 173010, 'explicit_unique_count': 173010, 'core_unique_count': 173010, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 173010, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 173010, 'core_raw_count': 173010, 'explicit_unique_count': 173010, 'core_unique_count': 173010, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 173010, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 173010
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.00634182407742455, 0.02793567180633545, 0.03101840615272522], 'fractional_max': [0.9460460844494049, 0.8053997039794921, 0.8023136138916015]}
+assembled_vs_native_core.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=173010, reference=173010, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=7500, owned_local_energy=-47564.12047822768, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-47284.84699987731, interaction=-279.27347835037665
+rank 1: local_atoms=7500, owned_local_energy=-47564.114812975466, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-47284.84699987731, interaction=-279.2678130981539
+Running organic/small/cueq
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Head default not found in available heads ['Default'], defaulting to the last head: Default
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: small
+head_name: default
+enable_cueq: True
+cutoff: 4.5
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6767578125
+calculator_controlled_per_atom_sum: -8442.675990343094
+core_legacy_scalar: -8442.6767578125
+core_controlled_per_atom_sum: -8442.67599272728
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: 2.384185791015625e-06
+calculator_minus_core_node_energy_sum_ev: 2.384185791015625e-06
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.0007674694061279297
+core_legacy_minus_controlled: -0.0007650852203369141
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.67642140388489
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.67642378807068
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 1.5894571940104166e-07
+calculator_vs_core_node_energy_max_abs_ev: 9.5367431640625e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.961986223856608e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 5.960464477539062e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 166
+core_graph_edge_count: 166
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_small.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'small', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45944699462227
+calculator_controlled_per_atom_energy: -81.45943958966822
+core_model_mace_energy: -81.45944699462227
+core_model_stable_energy: -81.45943961267211
+explicit_dynamis_graph_energy: -81.45944699462227
+explicit_stable_energy: -81.45943960347056
+distributed_energy: -81.45943959886978
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.45943959886978
+distributed_minus_explicit_stable_energy: 4.600778424901364e-09
+explicit_stable_energy_abs_error: 4.600778424901364e-09
+stable_reference_gap_reduction: 7.391151711999555e-06
+distributed_minus_core_model_stable_energy: 1.3802335274704092e-08
+distributed_minus_calculator_controlled_energy: -9.201556849802728e-09
+distributed_minus_explicit_energy: 7.3957524904244565e-06
+distributed_minus_calculator_energy: 7.3957524904244565e-06
+distributed_minus_core_model_energy: 7.3957524904244565e-06
+explicit_energy_abs_error: 7.3957524904244565e-06
+calculator_energy_abs_error: 7.3957524904244565e-06
+core_model_energy_abs_error: 7.3957524904244565e-06
+explicit_energy_abs_error_per_atom: 4.1087513835691425e-07
+calculator_energy_abs_error_per_atom: 4.1087513835691425e-07
+core_model_energy_abs_error_per_atom: 4.1087513835691425e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: 2.384185791015625e-06
+reference.calculator_minus_core_node_energy_sum_ev: 2.384185791015625e-06
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -7.391151711999555e-06
+explicit_node_energy_sum: -81.45943960347056
+explicit_node_energy_sum_float32: -81.45943757222656
+explicit_node_sum_float64_minus_float32: -2.0312439943381833e-06
+explicit_node_sum_minus_model_energy: 7.391151711999555e-06
+distributed_minus_explicit_node_sum: 4.600778424901364e-09
+distributed_minus_explicit_node_sum_float32: -2.026643215913282e-06
+explicit_interaction_energy: -0.6722753456862091
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: 3.165336067922908e-06
+explicit_node_interaction_sum: -0.6722752789749114
+explicit_node_interaction_sum_float32: -0.6722752720737427
+explicit_node_interaction_minus_model_interaction: 6.671129770818851e-08
+explicit_node_e0_minus_model_e0: 7.324440417733058e-06
+calculator_legacy_minus_controlled_energy: -7.404954047274259e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.6722752743741323
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 4.600779091035179e-09
+distributed_total_minus_components: 2.6645352591003757e-15
+explicit_node_minus_core_node_sum: 9.201558303833008e-09
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 2.9634705800418715e-09
+explicit_force_max_abs: 1.1175870895385742e-08
+calculator_force_mae: 2.903376650209566e-09
+calculator_force_max_abs: 9.89530235528946e-09
+core_model_force_mae: 2.491880701782634e-09
+core_model_force_max_abs: 1.1641532182693481e-08
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.893028967586946e-09
+calculator_minus_core_model_force_max_abs: 5.75097393989563e-09
+explicit_vs_core_node_energy_mae: 1.0223953670925565e-09
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+reference.calculator_vs_core_node_energy_mae_ev: 1.5894571940104166e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 9.5367431640625e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.961986223856608e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 5.960464477539062e-07
+assembled_owned_node_energy_sum_md: -81.45943959886978
+assembled_minus_native_core_node_sum_md: 1.3802335968593482e-08
+assembled_vs_native_core_node_mae_md: 1.5335929702079791e-09
+assembled_vs_native_core_node_max_abs_md: 4.60077914654633e-09
+assembled_minus_public_calculator_node_sum_md: -9.201558653915143e-09
+assembled_vs_public_calculator_node_mae_md: 1.277994227419674e-09
+assembled_vs_public_calculator_node_max_abs_md: 9.201558626159567e-09
+assembled_minus_explicit_dynamis_node_sum_md: 4.600778397145788e-09
+assembled_vs_explicit_dynamis_node_mae_md: 7.667964858749777e-10
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.60077914654633e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 166
+core_model_edge_count: 166
+reference.calculator_graph_edge_count: 166
+reference.core_graph_edge_count: 166
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 4.5, 'explicit_raw_count': 166, 'core_raw_count': 166, 'explicit_unique_count': 166, 'core_unique_count': 166, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 166, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 4.5, 'explicit_raw_count': 166, 'core_raw_count': 166, 'explicit_unique_count': 166, 'core_unique_count': 166, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 166, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 166
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=166, reference=166, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.72846070995536, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.33487854770753506
+rank 1: local_atoms=9, owned_local_energy=-40.73097888891442, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3373967266665972
+Running organic/medium/cueq
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Head default not found in available heads ['Default'], defaulting to the last head: Default
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: medium
+head_name: default
+enable_cueq: True
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6640625
+calculator_controlled_per_atom_sum: -8442.663923978806
+core_legacy_scalar: -8442.6640625
+core_controlled_per_atom_sum: -8442.663923978806
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: 0.0
+calculator_minus_core_node_energy_sum_ev: 0.0
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.0001385211944580078
+core_legacy_minus_controlled: -0.0001385211944580078
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.66435503959656
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.66435503959656
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 5.2981906467013886e-08
+calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+calculator_vs_core_force_mae_ev_per_angstrom: 1.0879227408656367e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 3.5762786865234375e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 170
+core_graph_edge_count: 170
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 0 is connected to 11 peer ranks.  is connected to Expected number of connected peer ranks is : 11 peer ranks. 
+Expected number of connected peer ranks is : 1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'medium', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45932450347813
+calculator_controlled_per_atom_energy: -81.45932316695178
+core_model_mace_energy: -81.45932450347813
+core_model_stable_energy: -81.45932316695178
+explicit_dynamis_graph_energy: -81.45932450347813
+explicit_stable_energy: -81.45932315544984
+distributed_energy: -81.45932315544982
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.45932315544982
+distributed_minus_explicit_stable_energy: 1.4210854715202004e-14
+explicit_stable_energy_abs_error: 1.4210854715202004e-14
+stable_reference_gap_reduction: 1.3480282916589204e-06
+distributed_minus_core_model_stable_energy: 1.1501953167680767e-08
+distributed_minus_calculator_controlled_energy: 1.1501953167680767e-08
+distributed_minus_explicit_energy: 1.348028305869775e-06
+distributed_minus_calculator_energy: 1.348028305869775e-06
+distributed_minus_core_model_energy: 1.348028305869775e-06
+explicit_energy_abs_error: 1.348028305869775e-06
+calculator_energy_abs_error: 1.348028305869775e-06
+core_model_energy_abs_error: 1.348028305869775e-06
+explicit_energy_abs_error_per_atom: 7.489046143720972e-08
+calculator_energy_abs_error_per_atom: 7.489046143720972e-08
+core_model_energy_abs_error_per_atom: 7.489046143720972e-08
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: 0.0
+reference.calculator_minus_core_node_energy_sum_ev: 0.0
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -1.3480282916589204e-06
+explicit_node_energy_sum: -81.45932315544984
+explicit_node_energy_sum_float32: -81.45931508108242
+explicit_node_sum_float64_minus_float32: -8.074367414678818e-06
+explicit_node_sum_minus_model_energy: 1.3480282916589204e-06
+distributed_minus_explicit_node_sum: 1.4210854715202004e-14
+distributed_minus_explicit_node_sum_float32: -8.074367400467963e-06
+explicit_interaction_energy: -0.6721588171518493
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: -2.7972737228765254e-06
+explicit_node_interaction_sum: -0.6721588309541868
+explicit_node_interaction_sum_float32: -0.6721588171518493
+explicit_node_interaction_minus_model_interaction: -1.3802337495150141e-08
+explicit_node_e0_minus_model_e0: 1.3618306269336244e-06
+calculator_legacy_minus_controlled_energy: -1.3365263527020943e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.6721588309541868
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 0.0
+distributed_total_minus_components: 1.2434497875801753e-14
+explicit_node_minus_core_node_sum: 1.150194787979126e-08
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.5804997310908675e-09
+explicit_force_max_abs: 9.313225746154785e-09
+calculator_force_mae: 1.561905604852143e-09
+calculator_force_max_abs: 4.6566128730773926e-09
+core_model_force_mae: 1.71604808141268e-09
+core_model_force_max_abs: 5.587935447692871e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 1.0496858404970994e-09
+calculator_minus_core_model_force_max_abs: 3.450584363937378e-09
+explicit_vs_core_node_energy_mae: 6.389971044328478e-10
+explicit_vs_core_node_energy_max_abs: 4.600779151916504e-09
+reference.calculator_vs_core_node_energy_mae_ev: 5.2981906467013886e-08
+reference.calculator_vs_core_node_energy_max_abs_ev: 4.76837158203125e-07
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.0879227408656367e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 3.5762786865234375e-07
+assembled_owned_node_energy_sum_md: -81.45932315544982
+assembled_minus_native_core_node_sum_md: 1.1501946783898376e-08
+assembled_vs_native_core_node_mae_md: 1.6613923292663202e-09
+assembled_vs_native_core_node_max_abs_md: 4.60077914654633e-09
+assembled_minus_public_calculator_node_sum_md: 1.1501946783898376e-08
+assembled_vs_public_calculator_node_mae_md: 1.150194646316728e-09
+assembled_vs_public_calculator_node_max_abs_md: 4.600778424901364e-09
+assembled_minus_explicit_dynamis_node_sum_md: -3.608224830031759e-16
+assembled_vs_explicit_dynamis_node_mae_md: 1.022395265670717e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.60077914654633e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 170
+core_model_edge_count: 170
+reference.calculator_graph_edge_count: 170
+reference.core_graph_edge_count: 170
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 170
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.728377067790376, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.33479490554255326
+rank 1: local_atoms=9, owned_local_energy=-40.730946087659454, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.33736392541163357
+Running organic/large/cueq
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/mace.py:226: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  torch.load(f=model_path, map_location=device)
+WARNING:root:Head default not found in available heads ['Default'], defaulting to the last head: Default
+WARNING:root:Default dtype float32 does not match model dtype float64, converting models to float32.
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/atoms.py:432: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  a.shape = (-1,) + shape
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+============================================================
+Standalone MACE Reference Artifact
+============================================================
+
+------------------------------------------------------------
+Configuration and precision
+------------------------------------------------------------
+system_name: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+num_atoms: 18
+model_family: off
+model_name: large
+head_name: default
+enable_cueq: True
+cutoff: 5.0
+artifact_version: 4
+calculator.requested_dtype: float32
+calculator.model_parameter_dtype: torch.float32
+calculator.energy_result_type: float
+calculator.energy_float32_roundtrip_delta_ev: 0.0
+calculator.force_result_dtype: float32
+calculator.full_node_energy_result_dtype: float64
+calculator.interaction_node_energy_result_dtype: float64
+core_model.model_parameter_dtype: torch.float32
+core_model.input_position_dtype: torch.float32
+core_model.energy_tensor_dtype: torch.float32
+core_model.node_energy_tensor_dtype: torch.float64
+core_model.interaction_energy_tensor_dtype: torch.float32
+core_model.force_tensor_dtype: torch.float32
+core_model.energy_float32_roundtrip_delta_ev: 0.0
+
+------------------------------------------------------------
+Energy definitions (eV)
+------------------------------------------------------------
+calculator_legacy_scalar: -8442.6611328125
+calculator_controlled_per_atom_sum: -8442.660628080368
+core_legacy_scalar: -8442.6611328125
+core_controlled_per_atom_sum: -8442.660627126694
+
+------------------------------------------------------------
+Matched parity comparisons (eV)
+------------------------------------------------------------
+calculator_minus_core_legacy_energy_ev: 0.0
+calculator_minus_core_controlled_energy_ev: -9.5367431640625e-07
+calculator_minus_core_node_energy_sum_ev: -9.5367431640625e-07
+
+------------------------------------------------------------
+Reduction decomposition (eV)
+------------------------------------------------------------
+calculator_legacy_minus_controlled: -0.0005047321319580078
+core_legacy_minus_controlled: -0.0005056858062744141
+calculator_controlled_baseline: -8372.999568939209
+calculator_controlled_interaction: -69.66105914115906
+core_controlled_baseline: -8372.999568939209
+core_controlled_interaction: -69.66105818748474
+
+------------------------------------------------------------
+Per-atom and force parity
+------------------------------------------------------------
+calculator_vs_core_node_energy_mae_ev: 2.1192762586805554e-07
+calculator_vs_core_node_energy_max_abs_ev: 1.430511474609375e-06
+calculator_vs_core_force_mae_ev_per_angstrom: 1.0354927292576543e-07
+calculator_vs_core_force_max_abs_ev_per_angstrom: 4.76837158203125e-07
+
+------------------------------------------------------------
+Graph diagnostics
+------------------------------------------------------------
+calculator_graph_edge_count: 170
+core_graph_edge_count: 170
+calculator_only_edge_count: 0
+core_only_edge_count: 0
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 10 is connected to  is connected to 11 peer ranks.  peer ranks. Expected number of connected peer ranks is : Expected number of connected peer ranks is : 11
+
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF23_large.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+============================================================
+Dynamis MACE Explicit-Graph Experiment
+============================================================
+system: off_organic_irregular
+source_path: /u/jsaravananindira/Dynamis/mace_data/off_organic_irregular.xyz
+mismatch_classification: parity_ok
+
+------------------------------------------------------------
+Configuration And Precision
+------------------------------------------------------------
+model: {'model_family': 'off', 'model_name': 'large', 'head_name': 'default', 'enable_cueq': True, 'energy_mode': 'stable'}
+num_atoms: 18
+energy_unit: amu * Angstrom^2 / fs^2
+reference_precision: {'calculator': {'requested_dtype': 'float32', 'model_parameter_dtype': 'torch.float32', 'energy_result_type': 'float', 'energy_float32_roundtrip_delta_ev': 0.0, 'force_result_dtype': 'float32', 'full_node_energy_result_dtype': 'float64', 'interaction_node_energy_result_dtype': 'float64'}, 'core_model': {'model_parameter_dtype': 'torch.float32', 'input_position_dtype': 'torch.float32', 'energy_tensor_dtype': 'torch.float32', 'node_energy_tensor_dtype': 'torch.float64', 'interaction_energy_tensor_dtype': 'torch.float32', 'force_tensor_dtype': 'torch.float32', 'energy_float32_roundtrip_delta_ev': 0.0}}
+explicit_energy_tensor_dtype: torch.float32
+explicit_node_energy_tensor_dtype: torch.float64
+explicit_node_e0_tensor_dtype: torch.float32
+
+------------------------------------------------------------
+Energy Definitions
+------------------------------------------------------------
+calculator_mace_energy: -81.45929623629101
+calculator_controlled_per_atom_energy: -81.45929136636629
+core_model_mace_energy: -81.45929623629101
+core_model_stable_energy: -81.45929135716473
+explicit_dynamis_graph_energy: -81.45929623629101
+explicit_stable_energy: -81.45929137096707
+distributed_energy: -81.4592913433624
+
+------------------------------------------------------------
+Matched Parity Comparisons
+------------------------------------------------------------
+summed_owned_local_energy: -81.4592913433624
+distributed_minus_explicit_stable_energy: 2.7604670549408183e-08
+explicit_stable_energy_abs_error: 2.7604670549408183e-08
+stable_reference_gap_reduction: 4.86532394461392e-06
+distributed_minus_core_model_stable_energy: 1.3802335274704092e-08
+distributed_minus_calculator_controlled_energy: 2.300389212450682e-08
+distributed_minus_explicit_energy: 4.892928615163328e-06
+distributed_minus_calculator_energy: 4.892928615163328e-06
+distributed_minus_core_model_energy: 4.892928615163328e-06
+explicit_energy_abs_error: 4.892928615163328e-06
+calculator_energy_abs_error: 4.892928615163328e-06
+core_model_energy_abs_error: 4.892928615163328e-06
+explicit_energy_abs_error_per_atom: 2.718293675090738e-07
+calculator_energy_abs_error_per_atom: 2.718293675090738e-07
+core_model_energy_abs_error_per_atom: 2.718293675090738e-07
+explicit_energy_close: True
+explicit_stable_energy_close: True
+selected_reference_energy_close: True
+calculator_energy_close: True
+calculator_minus_core_model_energy: 0.0
+reference.calculator_minus_core_legacy_energy_ev: 0.0
+reference.calculator_minus_core_controlled_energy_ev: -9.5367431640625e-07
+reference.calculator_minus_core_node_energy_sum_ev: -9.5367431640625e-07
+
+------------------------------------------------------------
+Reduction Decomposition
+------------------------------------------------------------
+explicit_stable_minus_node_sum: 0.0
+explicit_legacy_minus_stable_energy: -4.86532394461392e-06
+explicit_node_energy_sum: -81.45929137096707
+explicit_node_energy_sum_float32: -81.45928681389532
+explicit_node_sum_float64_minus_float32: -4.557071747512964e-06
+explicit_node_sum_minus_model_energy: 4.86532394461392e-06
+distributed_minus_explicit_node_sum: 2.7604670549408183e-08
+distributed_minus_explicit_node_sum_float32: -4.529467076963556e-06
+explicit_interaction_energy: -0.6721269429538849
+explicit_node_e0_sum: -80.78716432449565
+explicit_node_e0_sum_float32: -80.7871684836
+explicit_node_e0_model_style_scatter_sum: -80.7871684836
+explicit_node_e0_scatter_minus_sum_float64: -4.15910434981015e-06
+explicit_node_e0_scatter_minus_model_e0: 8.097371306803325e-07
+explicit_node_interaction_sum: -0.6721270464714159
+explicit_node_interaction_sum_float32: -0.6721270165663513
+explicit_node_interaction_minus_model_interaction: -1.0351753099158145e-07
+explicit_node_e0_minus_model_e0: 4.968841480490482e-06
+calculator_legacy_minus_controlled_energy: -4.869924723038821e-06
+distributed_baseline_energy: -80.78716432449565
+distributed_interaction_energy: -0.672127018866741
+distributed_minus_explicit_baseline: 0.0
+distributed_minus_explicit_interaction: 2.760467487927798e-08
+distributed_total_minus_components: -5.10702591327572e-15
+explicit_node_minus_core_node_sum: -1.3802337455749512e-08
+float64_diagnostic_ev: None
+
+------------------------------------------------------------
+Per Atom And Force Parity
+------------------------------------------------------------
+explicit_force_mae: 1.2495783296984087e-09
+explicit_force_max_abs: 5.587935447692871e-09
+calculator_force_mae: 1.2098300139484763e-09
+calculator_force_max_abs: 5.587935447692871e-09
+core_model_force_mae: 1.2869013632510473e-09
+core_model_force_max_abs: 5.587935447692871e-09
+explicit_forces_close: True
+calculator_forces_close: True
+calculator_minus_core_model_force_mae: 9.990986255907188e-10
+calculator_minus_core_model_force_max_abs: 4.600779151916504e-09
+explicit_vs_core_node_energy_mae: 1.7891918924119737e-09
+explicit_vs_core_node_energy_max_abs: 1.3802337455749512e-08
+reference.calculator_vs_core_node_energy_mae_ev: 2.1192762586805554e-07
+reference.calculator_vs_core_node_energy_max_abs_ev: 1.430511474609375e-06
+reference.calculator_vs_core_force_mae_ev_per_angstrom: 1.0354927292576543e-07
+reference.calculator_vs_core_force_max_abs_ev_per_angstrom: 4.76837158203125e-07
+assembled_owned_node_energy_sum_md: -81.45929134336238
+assembled_minus_native_core_node_sum_md: 1.3802336384927116e-08
+assembled_vs_native_core_node_mae_md: 1.7891918687359028e-09
+assembled_vs_native_core_node_max_abs_md: 9.201558626159567e-09
+assembled_minus_public_calculator_node_sum_md: 2.3003898175222304e-08
+assembled_vs_public_calculator_node_mae_md: 1.5335931845427018e-09
+assembled_vs_public_calculator_node_max_abs_md: 4.600781977615043e-09
+assembled_minus_explicit_dynamis_node_sum_md: 2.7604673769054955e-08
+assembled_vs_explicit_dynamis_node_mae_md: 1.7891918286445159e-09
+assembled_vs_explicit_dynamis_node_max_abs_md: 4.600780201258203e-09
+
+------------------------------------------------------------
+Graph Diagnostics
+------------------------------------------------------------
+explicit_edge_count: 170
+core_model_edge_count: 170
+reference.calculator_graph_edge_count: 170
+reference.core_graph_edge_count: 170
+reference.calculator_only_edge_count: 0
+reference.core_only_edge_count: 0
+explicit_vs_core: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+explicit_vs_calculator: {'cutoff': 5.0, 'explicit_raw_count': 170, 'core_raw_count': 170, 'explicit_unique_count': 170, 'core_unique_count': 170, 'explicit_duplicate_count': 0, 'core_duplicate_count': 0, 'common_count_with_multiplicity': 170, 'explicit_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}, 'core_only': {'count': 0, 'distance_min': None, 'distance_max': None, 'within_1e_4_angstrom_of_cutoff': 0, 'inside_cutoff_by_more_than_1e_4_angstrom': 0, 'outside_cutoff_by_more_than_1e_4_angstrom': 0, 'examples': []}}
+assembled_owned_edge_count: 170
+nonperiodic_outside_cell: {'atom_count': 0, 'atom_count_by_axis': [0, 0, 0], 'fractional_min': [0.32592746385567345, 0.3883663087446256, 0.3942723925963252], 'fractional_max': [0.6433569051022896, 0.5667748748662317, 0.5290707714984545]}
+assembled_vs_native_core.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_native_core.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_native_core.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_public_calculator.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_public_calculator.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.interior: owned=170, reference=170, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.boundary: owned=0, reference=0, owned_only=0, reference_only=0
+assembled_vs_explicit_dynamis.exterior: owned=0, reference=0, owned_only=0, reference_only=0
+
+------------------------------------------------------------
+Per-rank contributions
+------------------------------------------------------------
+rank 0: local_atoms=9, owned_local_energy=-40.72839017771057, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.33480801546274663
+rank 1: local_atoms=9, owned_local_energy=-40.730901165651815, energy_dtype=torch.float64, model_dtype=torch.float32, baseline=-40.393582162247824, interaction=-0.3373190034039943
+
+Graph-audit case summary (Dynamis MD units):
+boundary_medium_cueq_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=-4.60078e-09; force MAE=1.32402e-09
+boundary_medium_e3nn_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=-4.60078e-09; force MAE=1.45693e-09
+jittered_medium_cueq_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=-1.03522e-07; force MAE=3.78894e-09
+jittered_medium_e3nn_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=-3.26647e-07; force MAE=3.75471e-09
+organic_large_cueq_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=1.38023e-08; force MAE=1.2869e-09
+organic_large_e3nn_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=2.3004e-09; force MAE=1.44711e-09
+organic_medium_cueq_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=1.1502e-08; force MAE=1.71605e-09
+organic_medium_e3nn_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=1.61027e-08; force MAE=1.78261e-09
+organic_small_cueq_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=1.38023e-08; force MAE=2.49188e-09
+organic_small_e3nn_distributed: parity_ok; interior missing=0, extra=0; stable energy gap=9.20156e-09; force MAE=2.17497e-09
+Graph audit completed: /u/jsaravananindira/Dynamis/mace_results/off_graph_23709386
