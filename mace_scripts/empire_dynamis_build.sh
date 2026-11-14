@@ -23,6 +23,8 @@ done
 mkdir -p "$OUTPUT_DIR" "$RESULT_RUN_DIR"
 exec > >(tee -a "$LOG_FILE") 2>&1
 cd "$PROJECT_ROOT"
+export PIP_CACHE_DIR="$OUTPUT_DIR/pip-cache"
+mkdir -p "$PIP_CACHE_DIR"
 
 write_summary() {
     local status="$1"
@@ -119,7 +121,18 @@ assert torch.version.cuda and torch.version.cuda.startswith("13.0"), (
     "Recreate .venv with --system-site-packages inside this image."
 )
 PY
+# This image ships NumPy 1.26.4. Its numba and CuPy builds require NumPy 1.x,
+# and NVIDIA DALI requires packaging <=25. MACE's unconstrained dependencies
+# would otherwise pull NumPy 2.x and matscipy 1.2+ into this shared-site venv.
+CONSTRAINTS_FILE="$RESULT_RUN_DIR/pip-constraints.txt"
+cat > "$CONSTRAINTS_FILE" <<'CONSTRAINTS'
+numpy==1.26.4
+packaging==25.0
+matscipy==1.1.1
+CONSTRAINTS
+export PIP_CONSTRAINT="$CONSTRAINTS_FILE"
 python -m pip install --upgrade pip setuptools wheel
+python -m pip install 'numpy==1.26.4' 'packaging==25.0' 'matscipy==1.1.1'
 python -m pip install scikit-build-core pybind11 cmake ninja pytest scipy
 python -m pip install 'mace-torch==0.3.16'
 if [[ "${INSTALL_CUEQ:-1}" == 1 ]]; then
@@ -150,9 +163,13 @@ PY
 
 BUILD_PHASE=extension-build
 export CMAKE_ARGS="-DPython_EXECUTABLE=$(command -v python)"
-for package in dynamis_state dynamis_integrator dynamis_model dynamis; do
-    python -m pip install --no-build-isolation --no-deps -e "./$package"
-done
+if [[ "${SKIP_EXTENSION_BUILD:-0}" == 1 ]]; then
+    echo "Reusing existing editable Dynamis extensions; validating imports next."
+else
+    for package in dynamis_state dynamis_integrator dynamis_model dynamis; do
+        python -m pip install --no-build-isolation --no-deps -e "./$package"
+    done
+fi
 
 BUILD_PHASE=validation
 python -m pip check
