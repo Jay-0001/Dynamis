@@ -10,7 +10,7 @@ import numpy as np
 
 DEFAULT_SEED = 1234
 ORGANIC_ATOMIC_NUMBERS = [6] * 4 + [1] * 8
-OFF24_BRIDGE_PATH = "/u/jsaravananindira/Dynamis/mace_data/off24_bridge.xyz"
+OFF24_BRIDGE_PATH = Path(__file__).resolve().parents[3] / "mace_data" / "off24_bridge.xyz"
 _CHAIN_TEMPLATE = np.array(
     [
         [2.00, 2.00, 2.00], [3.52, 2.12, 2.00],
@@ -86,9 +86,10 @@ def load_xyz_structure(path: Path) -> dict:
     """Read one XYZ frame while preserving its cell and periodicity."""
     from ase.io import read
 
+    path = Path(path)
     atoms = read(str(path), index=0)
     positions = np.asarray(atoms.get_positions(), dtype=np.float32)
-    cell = np.asarray(atoms.cell, dtype=np.float32)
+    cell = np.array(atoms.cell.array, dtype=np.float32, copy=True)
     pbc = np.asarray(atoms.pbc, dtype=bool)
     if cell.shape != (3, 3) or abs(float(np.linalg.det(cell))) < 1e-8:
         raise ValueError(f"XYZ fixture needs a nonsingular cell: {path}")
