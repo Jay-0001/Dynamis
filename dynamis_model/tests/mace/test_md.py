@@ -60,7 +60,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--system-seed", type=int, default=SEED)
     parser.add_argument("--model", default=None)
     parser.add_argument(
-        "--system", default="silicon", choices=["silicon", "helium", "organic"]
+        "--system", default="silicon", choices=["silicon", "helium", "organic", "off24"]
     )
     parser.add_argument("--head-name", default="")
     parser.add_argument(

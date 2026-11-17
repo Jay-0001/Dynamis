@@ -6,6 +6,8 @@ contribution to float64, sums those contributions separately, then converts the
 energy and forces to Dynamis MD units. MPA (`mp/medium-mpa-0`) is the default;
 `--model-family off` selects OFF23 medium unless `--model` selects small or large.
 The checkpoint supplies its cutoff, species table, interactions, and readouts.
+The OFF24 medium checkpoint is available through the same `off` family with an
+explicit checkpoint URL or local path; the OFF23 default is unchanged.
 
 The acceptance reference is the **raw MACE model** on a MACE-native graph. Its
 selected-head per-atom baseline and interaction energies are summed in float64.
@@ -56,6 +58,35 @@ atoms and that its two interactions require one feature exchange. The graph
 audit compares assembled owned directed edges with the native graph and fails
 on any difference more than `1e-4` Å inside the checkpoint cutoff. Exact cutoff
 boundary edges are reported separately.
+
+### OFF24 medium validation
+
+`data/off24_bridge.xyz` contains two nonperiodic C/H fragments inside a positive
+36 Å cell. It includes cross-fragment distances between 5 and 6 Å and beyond
+6 Å, with no pair on the 6 Å boundary. The static test compares this fixture
+and a deterministic 50-copy, 1,200-atom repeat against native MACE on both
+e3nn and CuEq. The large case also records raw-core and distributed timings.
+The trajectory test runs 20 Verlet steps on the 24-atom XYZ fixture, comparing
+the two-rank adapter with a one-rank raw checkpoint.
+
+From the repository root on a two-GPU Delta allocation, prepare the Slurm log
+directory and submit the two independent gates:
+
+```bash
+mkdir -p mace_scripts/outputs
+sbatch dynamis_model/tests/mace/off24_static.sbatch
+sbatch dynamis_model/tests/mace/off24_trajectory.sbatch
+```
+
+The scripts load the official OFF24 medium checkpoint with `--model-family off`
+and an explicit `--model` URL to `mace_off24/MACE-OFF24_medium.model`.
+Each script caches the checkpoint before the two distributed ranks load it.
+The native loader currently prints "MACE-OFF23" even when this OFF24
+checkpoint is selected; inspect the checkpoint path and reported 6 Å cutoff.
+Static acceptance requires the controlled energy and force tolerances below
+and exact directed-edge agreement for these boundary-clear fixtures. Trajectory
+acceptance uses the existing position, velocity, atom-ID, energy, and drift
+checks. The smoke result alone does not establish trajectory support.
 
 Static acceptance uses `1e-3` MD energy units absolute error and `1e-5`
 absolute plus relative force tolerances. `--benchmark` on both commands adds
