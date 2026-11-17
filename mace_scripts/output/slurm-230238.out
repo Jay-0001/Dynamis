@@ -1,0 +1,186 @@
+Repository: /workspace/Dynamis
+Script log: /workspace/Dynamis/mace_scripts/output/empire_dynamis_build_230238.log
+JSON results: /workspace/Dynamis/mace_results/build_230238
+NVIDIA GB200, 580.167.08
+PyTorch: 2.8.0a0+34c6371d24.nv25.08 CUDA: 13.0
+GPU: NVIDIA GB200
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python3.12/dist-packages/torch/__init__.py", line 2249, in <module>
+    from torch import quantization as quantization  # usort: skip
+  File "/usr/local/lib/python3.12/dist-packages/torch/quantization/__init__.py", line 2, in <module>
+    from .fake_quantize import *  # noqa: F403
+  File "/usr/local/lib/python3.12/dist-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    from torch.ao.quantization.fake_quantize import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+    from .pt2e._numeric_debugger import (  # noqa: F401
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 9, in <module>
+    from torch.ao.quantization.pt2e.graph_utils import bfs_trace_with_node_process
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/pt2e/graph_utils.py", line 9, in <module>
+    from torch.export import ExportedProgram
+  File "/usr/local/lib/python3.12/dist-packages/torch/export/__init__.py", line 61, in <module>
+    from .decomp_utils import CustomDecompTable
+  File "/usr/local/lib/python3.12/dist-packages/torch/export/decomp_utils.py", line 5, in <module>
+    from torch._export.utils import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_export/__init__.py", line 48, in <module>
+    from .wrappers import _wrap_submodules
+  File "/usr/local/lib/python3.12/dist-packages/torch/_export/wrappers.py", line 7, in <module>
+    from torch._higher_order_ops.flat_apply import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/__init__.py", line 1, in <module>
+    from torch._higher_order_ops._invoke_quant import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/_invoke_quant.py", line 8, in <module>
+    from torch._higher_order_ops.base_hop import BaseHOP, FunctionWithNoFreeVars
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/base_hop.py", line 9, in <module>
+    from torch._higher_order_ops.utils import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/utils.py", line 15, in <module>
+    from torch._subclasses.functional_tensor import disable_functional_mode
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py", line 46, in <module>
+    class FunctionalTensor(torch.Tensor):
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py", line 279, in FunctionalTensor
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+ (Triggered internally at /opt/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (26.3)
+Requirement already satisfied: setuptools in ./.venv/lib/python3.12/site-packages (84.2.1)
+Requirement already satisfied: wheel in ./.venv/lib/python3.12/site-packages (0.48.0)
+Collecting packaging>=24.0 (from wheel)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Installing collected packages: packaging
+  Attempting uninstall: packaging
+    Found existing installation: packaging 26.3
+    Uninstalling packaging-26.3:
+      Successfully uninstalled packaging-26.3
+Successfully installed packaging-25.0
+Collecting numpy==1.26.4
+  Downloading numpy-1.26.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (62 kB)
+Requirement already satisfied: packaging==25.0 in ./.venv/lib/python3.12/site-packages (25.0)
+Collecting matscipy==1.1.1
+  Downloading matscipy-1.1.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (37 kB)
+Requirement already satisfied: scipy>=1.2.3 in /usr/local/lib/python3.12/dist-packages (from matscipy==1.1.1) (1.15.3)
+Requirement already satisfied: ase>=3.23.0 in ./.venv/lib/python3.12/site-packages (from matscipy==1.1.1) (3.29.0)
+Requirement already satisfied: matplotlib>=3.5.2 in /usr/local/lib/python3.12/dist-packages (from ase>=3.23.0->matscipy==1.1.1) (3.10.5)
+Requirement already satisfied: typing_extensions>=4.13.1 in /usr/local/lib/python3.12/dist-packages (from ase>=3.23.0->matscipy==1.1.1) (4.14.1)
+Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (4.59.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (1.4.8)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (11.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.7->matplotlib>=3.5.2->ase>=3.23.0->matscipy==1.1.1) (1.16.0)
+Downloading numpy-1.26.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (13.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.9/13.9 MB 16.2 MB/s  0:00:00
+Downloading matscipy-1.1.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (447 kB)
+Installing collected packages: numpy, matscipy
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.4.6
+    Uninstalling numpy-2.4.6:
+      Successfully uninstalled numpy-2.4.6
+  Attempting uninstall: matscipy
+    Found existing installation: matscipy 1.3.1
+    Uninstalling matscipy-1.3.1:
+      Successfully uninstalled matscipy-1.3.1
+
+Successfully installed matscipy-1.1.1 numpy-1.26.4
+Requirement already satisfied: scikit-build-core in ./.venv/lib/python3.12/site-packages (1.1.2)
+Requirement already satisfied: pybind11 in /usr/local/lib/python3.12/dist-packages (3.0.0)
+Requirement already satisfied: cmake in /usr/local/lib/python3.12/dist-packages (3.31.6)
+Requirement already satisfied: ninja in /usr/local/lib/python3.12/dist-packages (1.11.1.4)
+Requirement already satisfied: pytest in /usr/local/lib/python3.12/dist-packages (8.1.1)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (1.15.3)
+Requirement already satisfied: packaging>=23.2 in ./.venv/lib/python3.12/site-packages (from scikit-build-core) (25.0)
+Requirement already satisfied: pathspec>=0.12.0 in /usr/local/lib/python3.12/dist-packages (from scikit-build-core) (0.12.1)
+Requirement already satisfied: iniconfig in /usr/local/lib/python3.12/dist-packages (from pytest) (2.1.0)
+Requirement already satisfied: pluggy<2.0,>=1.4 in /usr/local/lib/python3.12/dist-packages (from pytest) (1.6.0)
+Requirement already satisfied: numpy<2.5,>=1.23.5 in ./.venv/lib/python3.12/site-packages (from scipy) (1.26.4)
+Requirement already satisfied: mace-torch==0.3.16 in ./.venv/lib/python3.12/site-packages (0.3.16)
+Requirement already satisfied: torch>=1.12 in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.8.0a0+34c6371d24.nv25.8)
+Requirement already satisfied: e3nn==0.4.4 in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (0.4.4)
+Requirement already satisfied: numpy in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (1.26.4)
+Requirement already satisfied: opt_einsum in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (3.4.0)
+Requirement already satisfied: ase in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.29.0)
+Requirement already satisfied: torch-ema in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (0.3)
+Requirement already satisfied: prettytable in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.18.0)
+Requirement already satisfied: matscipy in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (1.1.1)
+Requirement already satisfied: h5py in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.16.0)
+Requirement already satisfied: torchmetrics in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (1.9.0)
+Requirement already satisfied: python-hostlist in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.2.2)
+Requirement already satisfied: configargparse in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (1.9.0)
+Requirement already satisfied: GitPython in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.2.1)
+Requirement already satisfied: pyYAML in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (6.0.2)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (4.67.1)
+Requirement already satisfied: lmdb in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.0.0)
+Requirement already satisfied: orjson in ./.venv/lib/python3.12/site-packages (from mace-torch==0.3.16) (3.13.0)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (3.10.5)
+Requirement already satisfied: pandas in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.2.3)
+Requirement already satisfied: sympy in /usr/local/lib/python3.12/dist-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.14.0)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.15.3)
+Requirement already satisfied: opt-einsum-fx>=0.1.4 in ./.venv/lib/python3.12/site-packages (from e3nn==0.4.4->mace-torch==0.3.16) (0.1.4)
+Requirement already satisfied: packaging in ./.venv/lib/python3.12/site-packages (from opt-einsum-fx>=0.1.4->e3nn==0.4.4->mace-torch==0.3.16) (25.0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.18.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (4.14.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.5)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.1.6)
+Requirement already satisfied: fsspec in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (2025.7.0)
+Requirement already satisfied: setuptools in ./.venv/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (84.2.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy->e3nn==0.4.4->mace-torch==0.3.16) (1.3.0)
+Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (4.59.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (1.4.8)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (11.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.7->matplotlib->mace-torch==0.3.16) (1.16.0)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./.venv/lib/python3.12/site-packages (from GitPython->mace-torch==0.3.16) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./.venv/lib/python3.12/site-packages (from gitdb<5,>=4.0.1->GitPython->mace-torch==0.3.16) (5.0.3)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.12->mace-torch==0.3.16) (3.0.2)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas->mace-torch==0.3.16) (2023.4)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas->mace-torch==0.3.16) (2025.2)
+Requirement already satisfied: wcwidth>=0.3.5 in ./.venv/lib/python3.12/site-packages (from prettytable->mace-torch==0.3.16) (0.9.4)
+Requirement already satisfied: lightning-utilities>=0.15.3 in ./.venv/lib/python3.12/site-packages (from torchmetrics->mace-torch==0.3.16) (0.15.3)
+Requirement already satisfied: cuequivariance==0.9.1 in ./.venv/lib/python3.12/site-packages (0.9.1)
+Requirement already satisfied: cuequivariance-torch==0.9.1 in ./.venv/lib/python3.12/site-packages (0.9.1)
+Requirement already satisfied: cuequivariance-ops-cu13==0.9.1 in ./.venv/lib/python3.12/site-packages (0.9.1)
+Requirement already satisfied: cuequivariance-ops-torch-cu13==0.9.1 in ./.venv/lib/python3.12/site-packages (0.9.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (3.5)
+Requirement already satisfied: numpy in ./.venv/lib/python3.12/site-packages (from cuequivariance==0.9.1) (1.26.4)
+Requirement already satisfied: opt-einsum in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (3.4.0)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (1.15.3)
+Requirement already satisfied: sympy in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (1.14.0)
+Requirement already satisfied: nvidia-cublas>=12.5.0 in ./.venv/lib/python3.12/site-packages (from cuequivariance-ops-cu13==0.9.1) (13.10.0.20)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (4.67.1)
+Requirement already satisfied: nvidia-ml-py in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (12.575.51)
+Requirement already satisfied: platformdirs in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (4.3.8)
+Requirement already satisfied: nvidia-cuda-nvrtc in ./.venv/lib/python3.12/site-packages (from nvidia-cublas>=12.5.0->cuequivariance-ops-cu13==0.9.1) (13.5.37)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy->cuequivariance==0.9.1) (1.3.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.27.7 in ./.venv/lib/python3.12/site-packages (2.27.7)
+NCCL paths: {'include': '/workspace/Dynamis/.venv/lib/python3.12/site-packages/nvidia/nccl/include', 'lib': '/workspace/Dynamis/.venv/lib/python3.12/site-packages/nvidia/nccl/lib/libnccl.so.2', 'static': False}
+Reusing existing editable Dynamis extensions; validating imports next.
+No broken requirements found.
+Dynamis extensions imported; MACE: 0.3.16
+Running 1 items in this shard
+.                                                                        [100%]
+1 passed in 5.72s
+Beta Dynamis build passed. Commit: 05fbe90
+Build summary: /workspace/Dynamis/mace_results/build_230238/build_summary.json

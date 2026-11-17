@@ -1,0 +1,330 @@
+Repository: /workspace/Dynamis
+Script log: /workspace/Dynamis/mace_scripts/output/empire_dynamis_build_230200.log
+JSON results: /workspace/Dynamis/mace_results/build_230200
+NVIDIA GB200, 580.167.08
+PyTorch: 2.8.0a0+34c6371d24.nv25.08 CUDA: 13.0
+GPU: NVIDIA GB200
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+DEPRECATION: Loading egg at /usr/local/lib/python3.12/dist-packages/nvfuser-0.2.27a0+1a27c18-py3.12-linux-aarch64.egg is deprecated. pip 24.3 will enforce this behaviour change. A possible replacement is to use pip for package installation.. Discussion can be found at https://github.com/pypa/pip/issues/12330
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (24.0)
+Collecting pip
+  Downloading pip-26.3-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (79.0.1)
+Collecting setuptools
+  Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+Requirement already satisfied: wheel in /usr/local/lib/python3.12/dist-packages (0.45.1)
+Collecting wheel
+  Downloading wheel-0.48.0-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging>=24.0 (from wheel)
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Downloading pip-26.3-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 23.5 MB/s eta 0:00:00
+Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 kB 87.9 MB/s eta 0:00:00
+Downloading wheel-0.48.0-py3-none-any.whl (33 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 kB 567.0 MB/s eta 0:00:00
+Installing collected packages: setuptools, pip, packaging, wheel
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 79.0.1
+    Not uninstalling setuptools at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'setuptools'. No files were found to uninstall.
+  Attempting uninstall: pip
+    Found existing installation: pip 24.0
+    Uninstalling pip-24.0:
+      Successfully uninstalled pip-24.0
+  Attempting uninstall: packaging
+    Found existing installation: packaging 23.2
+    Not uninstalling packaging at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'packaging'. No files were found to uninstall.
+  Attempting uninstall: wheel
+    Found existing installation: wheel 0.45.1
+    Not uninstalling wheel at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'wheel'. No files were found to uninstall.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+nvidia-dali-cuda130 1.51.2 requires packaging<=25.0, but you have packaging 26.3 which is incompatible.
+Successfully installed packaging-26.3 pip-26.3 setuptools-84.2.1 wheel-0.48.0
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting scikit-build-core
+  Downloading scikit_build_core-1.1.2-py3-none-any.whl.metadata (19 kB)
+Requirement already satisfied: pybind11 in /usr/local/lib/python3.12/dist-packages (3.0.0)
+Requirement already satisfied: cmake in /usr/local/lib/python3.12/dist-packages (3.31.6)
+Requirement already satisfied: ninja in /usr/local/lib/python3.12/dist-packages (1.11.1.4)
+Requirement already satisfied: pytest in /usr/local/lib/python3.12/dist-packages (8.1.1)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (1.15.3)
+Requirement already satisfied: packaging>=23.2 in ./.venv/lib/python3.12/site-packages (from scikit-build-core) (26.3)
+Requirement already satisfied: pathspec>=0.12.0 in /usr/local/lib/python3.12/dist-packages (from scikit-build-core) (0.12.1)
+Requirement already satisfied: iniconfig in /usr/local/lib/python3.12/dist-packages (from pytest) (2.1.0)
+Requirement already satisfied: pluggy<2.0,>=1.4 in /usr/local/lib/python3.12/dist-packages (from pytest) (1.6.0)
+Requirement already satisfied: numpy<2.5,>=1.23.5 in /usr/local/lib/python3.12/dist-packages (from scipy) (1.26.4)
+Downloading scikit_build_core-1.1.2-py3-none-any.whl (295 kB)
+Installing collected packages: scikit-build-core
+Successfully installed scikit-build-core-1.1.2
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting mace-torch==0.3.16
+  Downloading mace_torch-0.3.16-py3-none-any.whl.metadata (27 kB)
+Requirement already satisfied: torch>=1.12 in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.8.0a0+34c6371d24.nv25.8)
+Collecting e3nn==0.4.4 (from mace-torch==0.3.16)
+  Downloading e3nn-0.4.4-py3-none-any.whl.metadata (5.1 kB)
+Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (1.26.4)
+Requirement already satisfied: opt_einsum in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (3.4.0)
+Collecting ase (from mace-torch==0.3.16)
+  Downloading ase-3.29.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting torch-ema (from mace-torch==0.3.16)
+  Downloading torch_ema-0.3-py3-none-any.whl.metadata (415 bytes)
+Collecting prettytable (from mace-torch==0.3.16)
+  Downloading prettytable-3.18.0-py3-none-any.whl.metadata (37 kB)
+Collecting matscipy (from mace-torch==0.3.16)
+  Downloading matscipy-1.3.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl.metadata (37 kB)
+Collecting h5py (from mace-torch==0.3.16)
+  Downloading h5py-3.16.0-cp312-cp312-manylinux_2_28_aarch64.whl.metadata (3.0 kB)
+Collecting torchmetrics (from mace-torch==0.3.16)
+  Downloading torchmetrics-1.9.0-py3-none-any.whl.metadata (23 kB)
+Requirement already satisfied: python-hostlist in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.2.2)
+Collecting configargparse (from mace-torch==0.3.16)
+  Downloading configargparse-1.9.0-py3-none-any.whl.metadata (24 kB)
+Collecting GitPython (from mace-torch==0.3.16)
+  Downloading gitpython-3.2.1-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: pyYAML in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (6.0.2)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (4.67.1)
+Collecting lmdb (from mace-torch==0.3.16)
+  Downloading lmdb-3.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (1.2 kB)
+Collecting orjson (from mace-torch==0.3.16)
+  Downloading orjson-3.13.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (42 kB)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (3.10.5)
+Requirement already satisfied: pandas in /usr/local/lib/python3.12/dist-packages (from mace-torch==0.3.16) (2.2.3)
+Requirement already satisfied: sympy in /usr/local/lib/python3.12/dist-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.14.0)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (from e3nn==0.4.4->mace-torch==0.3.16) (1.15.3)
+Collecting opt-einsum-fx>=0.1.4 (from e3nn==0.4.4->mace-torch==0.3.16)
+  Downloading opt_einsum_fx-0.1.4-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: packaging in ./.venv/lib/python3.12/site-packages (from opt-einsum-fx>=0.1.4->e3nn==0.4.4->mace-torch==0.3.16) (26.3)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.18.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (4.14.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.5)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (3.1.6)
+Requirement already satisfied: fsspec in /usr/local/lib/python3.12/dist-packages (from torch>=1.12->mace-torch==0.3.16) (2025.7.0)
+Requirement already satisfied: setuptools in ./.venv/lib/python3.12/site-packages (from torch>=1.12->mace-torch==0.3.16) (84.2.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy->e3nn==0.4.4->mace-torch==0.3.16) (1.3.0)
+Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (4.59.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (1.4.8)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (11.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib->mace-torch==0.3.16) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.7->matplotlib->mace-torch==0.3.16) (1.16.0)
+Collecting gitdb<5,>=4.0.1 (from GitPython->mace-torch==0.3.16)
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->GitPython->mace-torch==0.3.16)
+  Downloading smmap-5.0.3-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.12->mace-torch==0.3.16) (3.0.2)
+Collecting numpy (from mace-torch==0.3.16)
+  Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl.metadata (6.6 kB)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas->mace-torch==0.3.16) (2023.4)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas->mace-torch==0.3.16) (2025.2)
+Collecting wcwidth>=0.3.5 (from prettytable->mace-torch==0.3.16)
+  Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (23 kB)
+Collecting lightning-utilities>=0.15.3 (from torchmetrics->mace-torch==0.3.16)
+  Downloading lightning_utilities-0.15.3-py3-none-any.whl.metadata (5.5 kB)
+Downloading mace_torch-0.3.16-py3-none-any.whl (316 kB)
+Downloading e3nn-0.4.4-py3-none-any.whl (387 kB)
+Downloading opt_einsum_fx-0.1.4-py3-none-any.whl (13 kB)
+Downloading ase-3.29.0-py3-none-any.whl (3.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 66.6 MB/s  0:00:00
+Downloading configargparse-1.9.0-py3-none-any.whl (37 kB)
+Downloading gitpython-3.2.1-py3-none-any.whl (231 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading smmap-5.0.3-py3-none-any.whl (24 kB)
+Downloading h5py-3.16.0-cp312-cp312-manylinux_2_28_aarch64.whl (5.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 250.5 MB/s  0:00:00
+Downloading lmdb-3.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (565 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 565.1/565.1 kB 261.4 MB/s  0:00:00
+Downloading matscipy-1.3.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (468 kB)
+Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (15.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.7/15.7 MB 317.7 MB/s  0:00:00
+Downloading orjson-3.13.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (129 kB)
+Downloading prettytable-3.18.0-py3-none-any.whl (37 kB)
+Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (789 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 789.0/789.0 kB 204.8 MB/s  0:00:00
+Downloading torch_ema-0.3-py3-none-any.whl (5.5 kB)
+Downloading torchmetrics-1.9.0-py3-none-any.whl (983 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 983.4/983.4 kB 957.4 MB/s  0:00:00
+Downloading lightning_utilities-0.15.3-py3-none-any.whl (31 kB)
+Installing collected packages: wcwidth, smmap, orjson, numpy, lmdb, lightning-utilities, configargparse, prettytable, h5py, gitdb, torchmetrics, torch-ema, opt-einsum-fx, GitPython, e3nn, ase, matscipy, mace-torch
+  Attempting uninstall: wcwidth
+    Found existing installation: wcwidth 0.2.13
+    Not uninstalling wcwidth at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'wcwidth'. No files were found to uninstall.
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.26.4
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+  Attempting uninstall: lightning-utilities
+    Found existing installation: lightning-utilities 0.15.2
+    Not uninstalling lightning-utilities at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/Dynamis/.venv
+    Can't uninstall 'lightning-utilities'. No files were found to uninstall.
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+numba 0.59.1 requires numpy<1.27,>=1.22, but you have numpy 2.4.6 which is incompatible.
+cupy-cuda12x 13.3.0 requires numpy<2.3,>=1.22, but you have numpy 2.4.6 which is incompatible.
+Successfully installed GitPython-3.2.1 ase-3.29.0 configargparse-1.9.0 e3nn-0.4.4 gitdb-4.0.12 h5py-3.16.0 lightning-utilities-0.15.3 lmdb-3.0.0 mace-torch-0.3.16 matscipy-1.3.1 numpy-2.4.6 opt-einsum-fx-0.1.4 orjson-3.13.0 prettytable-3.18.0 smmap-5.0.3 torch-ema-0.3 torchmetrics-1.9.0 wcwidth-0.9.4
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting cuequivariance==0.9.1
+  Downloading cuequivariance-0.9.1-py3-none-any.whl.metadata (15 kB)
+Collecting cuequivariance-torch==0.9.1
+  Downloading cuequivariance_torch-0.9.1-py3-none-any.whl.metadata (15 kB)
+Collecting cuequivariance-ops-cu13==0.9.1
+  Downloading cuequivariance_ops_cu13-0.9.1-py3-none-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl.metadata (19 kB)
+Collecting cuequivariance-ops-torch-cu13==0.9.1
+  Downloading cuequivariance_ops_torch_cu13-0.9.1-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl.metadata (21 kB)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (3.5)
+Requirement already satisfied: numpy in ./.venv/lib/python3.12/site-packages (from cuequivariance==0.9.1) (2.4.6)
+Requirement already satisfied: opt-einsum in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (3.4.0)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (1.15.3)
+Requirement already satisfied: sympy in /usr/local/lib/python3.12/dist-packages (from cuequivariance==0.9.1) (1.14.0)
+Collecting nvidia-cublas>=12.5.0 (from cuequivariance-ops-cu13==0.9.1)
+  Downloading nvidia_cublas-13.10.0.20-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (1.8 kB)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (4.67.1)
+Requirement already satisfied: nvidia-ml-py in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (12.575.51)
+Requirement already satisfied: platformdirs in /usr/local/lib/python3.12/dist-packages (from cuequivariance-ops-cu13==0.9.1) (4.3.8)
+Collecting nvidia-cuda-nvrtc (from nvidia-cublas>=12.5.0->cuequivariance-ops-cu13==0.9.1)
+  Downloading nvidia_cuda_nvrtc-13.5.37-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (1.8 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy->cuequivariance==0.9.1) (1.3.0)
+Downloading cuequivariance-0.9.1-py3-none-any.whl (269 kB)
+Downloading cuequivariance_torch-0.9.1-py3-none-any.whl (205 kB)
+Downloading cuequivariance_ops_cu13-0.9.1-py3-none-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (31.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 31.8/31.8 MB 38.7 MB/s  0:00:00
+Downloading cuequivariance_ops_torch_cu13-0.9.1-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl (386 kB)
+Downloading nvidia_cublas-13.10.0.20-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (560.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 560.1/560.1 MB 137.8 MB/s  0:00:04
+Downloading nvidia_cuda_nvrtc-13.5.37-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (56.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.4/56.4 MB 129.6 MB/s  0:00:00
+Installing collected packages: nvidia-cuda-nvrtc, nvidia-cublas, cuequivariance, cuequivariance-torch, cuequivariance-ops-cu13, cuequivariance-ops-torch-cu13
+
+Successfully installed cuequivariance-0.9.1 cuequivariance-ops-cu13-0.9.1 cuequivariance-ops-torch-cu13-0.9.1 cuequivariance-torch-0.9.1 nvidia-cublas-13.10.0.20 nvidia-cuda-nvrtc-13.5.37
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting nvidia-nccl-cu13==2.27.7
+  Downloading nvidia_nccl_cu13-2.27.7-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (2.0 kB)
+Downloading nvidia_nccl_cu13-2.27.7-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (194.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 194.0/194.0 MB 135.3 MB/s  0:00:01
+Installing collected packages: nvidia-nccl-cu13
+Successfully installed nvidia-nccl-cu13-2.27.7
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "<stdin>", line 4, in <module>
+  File "/usr/local/lib/python3.12/dist-packages/torch/__init__.py", line 2249, in <module>
+    from torch import quantization as quantization  # usort: skip
+  File "/usr/local/lib/python3.12/dist-packages/torch/quantization/__init__.py", line 2, in <module>
+    from .fake_quantize import *  # noqa: F403
+  File "/usr/local/lib/python3.12/dist-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    from torch.ao.quantization.fake_quantize import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+    from .pt2e._numeric_debugger import (  # noqa: F401
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 9, in <module>
+    from torch.ao.quantization.pt2e.graph_utils import bfs_trace_with_node_process
+  File "/usr/local/lib/python3.12/dist-packages/torch/ao/quantization/pt2e/graph_utils.py", line 9, in <module>
+    from torch.export import ExportedProgram
+  File "/usr/local/lib/python3.12/dist-packages/torch/export/__init__.py", line 61, in <module>
+    from .decomp_utils import CustomDecompTable
+  File "/usr/local/lib/python3.12/dist-packages/torch/export/decomp_utils.py", line 5, in <module>
+    from torch._export.utils import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_export/__init__.py", line 48, in <module>
+    from .wrappers import _wrap_submodules
+  File "/usr/local/lib/python3.12/dist-packages/torch/_export/wrappers.py", line 7, in <module>
+    from torch._higher_order_ops.flat_apply import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/__init__.py", line 1, in <module>
+    from torch._higher_order_ops._invoke_quant import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/_invoke_quant.py", line 8, in <module>
+    from torch._higher_order_ops.base_hop import BaseHOP, FunctionWithNoFreeVars
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/base_hop.py", line 9, in <module>
+    from torch._higher_order_ops.utils import (
+  File "/usr/local/lib/python3.12/dist-packages/torch/_higher_order_ops/utils.py", line 15, in <module>
+    from torch._subclasses.functional_tensor import disable_functional_mode
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py", line 46, in <module>
+    class FunctionalTensor(torch.Tensor):
+  File "/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py", line 279, in FunctionalTensor
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+/usr/local/lib/python3.12/dist-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+ (Triggered internally at /opt/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+NCCL paths: {'include': '/workspace/Dynamis/.venv/lib/python3.12/site-packages/nvidia/nccl/include', 'lib': '/workspace/Dynamis/.venv/lib/python3.12/site-packages/nvidia/nccl/lib/libnccl.so.2', 'static': False}
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Obtaining file:///workspace/Dynamis/dynamis_state
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_state
+  Building editable for dynamis_state (pyproject.toml): started
+  Building editable for dynamis_state (pyproject.toml): still running...
+  Building editable for dynamis_state (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_state: filename=dynamis_state-0.1.0-cp312-cp312-linux_aarch64.whl size=531694 sha256=f37f2dc296f26652f2ad2b41bd1ac0d8c6783e150c7534ec4e1942fada9d7f20
+  Stored in directory: /tmp/pip-ephem-wheel-cache-7gszssej/wheels/fc/28/cc/3a077cf492e83e756d7dddd4977e0c96a185be070065d423af
+Successfully built dynamis_state
+Installing collected packages: dynamis_state
+Successfully installed dynamis_state-0.1.0
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Obtaining file:///workspace/Dynamis/dynamis_integrator
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_integrator
+  Building editable for dynamis_integrator (pyproject.toml): started
+  Building editable for dynamis_integrator (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_integrator: filename=dynamis_integrator-0.0.1-cp312-cp312-linux_aarch64.whl size=100844 sha256=2cef576524b3e1adb6938b2e765508081b480bfa5bed244d08f506baafb0be74
+  Stored in directory: /tmp/pip-ephem-wheel-cache-zimap9y1/wheels/03/73/34/05780bc28a395aecd77b0729139713aae9e86dca5441fe9867
+Successfully built dynamis_integrator
+Installing collected packages: dynamis_integrator
+Successfully installed dynamis_integrator-0.0.1
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Obtaining file:///workspace/Dynamis/dynamis_model
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis_model
+  Building editable for dynamis_model (pyproject.toml): started
+  Building editable for dynamis_model (pyproject.toml): still running...
+  Building editable for dynamis_model (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis_model: filename=dynamis_model-0.0.1-cp312-cp312-linux_aarch64.whl size=217801 sha256=d45dd2e470ea1fb49d8ee0600aa6101053ae125d32bac93bf5ad7172e023c28c
+  Stored in directory: /tmp/pip-ephem-wheel-cache-70s3bo6m/wheels/d8/f3/70/0ba519ce37696548d3c9b74c423bc3bf043d974a9c18a01948
+Successfully built dynamis_model
+Installing collected packages: dynamis_model
+Successfully installed dynamis_model-0.0.1
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Obtaining file:///workspace/Dynamis/dynamis
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: dynamis
+  Building editable for dynamis (pyproject.toml): started
+  Building editable for dynamis (pyproject.toml): finished with status 'done'
+  Created wheel for dynamis: filename=dynamis-0.0.1-cp312-cp312-linux_aarch64.whl size=10251 sha256=74d08e76e8e925461ff760485a24c75ef3d101e2239a55bd447abf426af127dd
+  Stored in directory: /tmp/pip-ephem-wheel-cache-l7ga6ta4/wheels/a1/fa/59/1d4edf24f57a24c0110c17043b816ce440c7294168ea9e8982
+Successfully built dynamis
+Installing collected packages: dynamis
+Successfully installed dynamis-0.0.1
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+numba 0.59.1 has requirement numpy<1.27,>=1.22, but you have numpy 2.4.6.
+cupy-cuda12x 13.3.0 has requirement numpy<2.3,>=1.22, but you have numpy 2.4.6.
+nvidia-dali-cuda130 1.51.2 has requirement packaging<=25.0, but you have packaging 26.3.
+Build summary: /workspace/Dynamis/mace_results/build_230200/build_summary.json

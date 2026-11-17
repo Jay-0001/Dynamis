@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "last_phase": "validation",
+  "job_id": "230200",
+  "finished_utc": "2026-11-14T01:24:18.306669+00:00",
+  "repository": "/workspace/Dynamis",
+  "commit": "e671717ea3bd4e9e5a1f664929cf0b98eb6b9aec",
+  "architecture": "aarch64",
+  "torch": "2.8.0a0+34c6371d24.nv25.8",
+  "mace_torch": "0.3.16",
+  "cuequivariance": "0.9.1",
+  "nccl_wheel": "2.27.7",
+  "log": "/workspace/Dynamis/mace_scripts/output/empire_dynamis_build_230200.log"
+}

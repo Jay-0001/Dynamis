@@ -1,0 +1,1323 @@
+pyxis: imported docker image: nvcr.io#nvidia/pytorch:25.08-py3
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/mnt/home/jsaravanan/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-p9w677n5 because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-e329rarx because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-5tx940cq because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-c_928ney because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-i5okh3e1 because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-0zgn97oj because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-608h6m1c because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-z_ea9q8t because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-k710xobk because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-gx5oij_i because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-hxdodoxw because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-3ipmaklp because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-mxosfk5w because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-w8o__nnb because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-sgv7r98n because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-pvmugiye because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-gfinfrd4 because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-1khjquon because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-ywmpao60 because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+mkdir -p failed for path /mnt/home/jsaravanan/.config/matplotlib: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.config'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-eu35bbmd because there was an issue with the default path (/mnt/home/jsaravanan/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/jsaravanan/.cache/cuequivariance-triton'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 40, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off, mace_omol, mace_polar
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 13, in <module>
+    from .mace import MACECalculator
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/mace.py", line 24, in <module>
+    from mace.modules.utils import extract_invariant
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/__init__.py", line 5, in <module>
+    from .blocks import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 16, in <module>
+    from mace.modules.wrapper_ops import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/wrapper_ops.py", line 18, in <module>
+    import cuequivariance_torch as cuet
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/__init__.py", line 21, in <module>
+    from .primitives.transpose import TransposeSegments, TransposeIrrepsLayout
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_torch/primitives/transpose.py", line 172, in <module>
+    from cuequivariance_ops_torch import segmented_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/__init__.py", line 35, in <module>
+    from cuequivariance_ops_torch.fused_layer_norm_torch import layer_norm_transpose
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops_torch/fused_layer_norm_torch.py", line 17, in <module>
+    from cuequivariance_ops.triton import (
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/__init__.py", line 24, in <module>
+    from .tuning_decorator import autotune_aot
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/tuning_decorator.py", line 19, in <module>
+    from .cache_manager import get_cache_manager
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 330, in <module>
+    cache_manager = CacheManager()
+                    ^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 190, in __init__
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+    self.json_path = str(get_triton_cache_dir())
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/cuequivariance_ops/triton/cache_manager.py", line 55, in get_triton_cache_dir
+    cache_dir.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1317, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+OSError: [Errno 30] Read-only file system: '/mnt/home/jsaravanan/.cache'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 187, in <module>
+    main()
+  File "/workspace/Dynamis/dynamis_model/tests/mace/mace_standalone_reference.py", line 147, in main
+    model = load_raw_mace_model(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 86, in load_raw_mace_model
+    _require_mace()
+  File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 62, in _require_mace
+    raise ImportError(
+ImportError: MACEModel requires the MACE package.
+srun: error: b3-36-s1-dgx-03-c17: tasks 0-10,12-19: Exited with exit code 1
+srun: error: b3-36-s1-dgx-03-c17: task 11: Exited with exit code 1
