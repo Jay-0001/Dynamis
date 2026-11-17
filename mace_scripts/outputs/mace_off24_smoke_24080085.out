@@ -1,0 +1,219 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+PyTorch: 2.8.0+cu129
+CUDA: 12.9
+Visible GPUs: 2
+MACE: 0.3.16
+Inspecting OFF24 checkpoint contract
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Downloading MACE model from 'https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model'
+The model is distributed under the Academic Software License (ASL) license, see https://github.com/gabor1/ASL 
+ To use the model you accept the terms of the license.
+ASL is based on the Gnu Public License, but does not permit commercial use
+Downloading: 1.4% (0.2 MB / 17.5 MB)Downloading: 2.9% (0.5 MB / 17.5 MB)Downloading: 4.3% (0.8 MB / 17.5 MB)Downloading: 5.7% (1.0 MB / 17.5 MB)Downloading: 7.1% (1.2 MB / 17.5 MB)Downloading: 8.6% (1.5 MB / 17.5 MB)Downloading: 10.0% (1.8 MB / 17.5 MB)Downloading: 11.4% (2.0 MB / 17.5 MB)Downloading: 12.8% (2.2 MB / 17.5 MB)Downloading: 14.3% (2.5 MB / 17.5 MB)Downloading: 15.7% (2.8 MB / 17.5 MB)Downloading: 17.1% (3.0 MB / 17.5 MB)Downloading: 18.5% (3.2 MB / 17.5 MB)Downloading: 20.0% (3.5 MB / 17.5 MB)Downloading: 21.4% (3.8 MB / 17.5 MB)Downloading: 22.8% (4.0 MB / 17.5 MB)Downloading: 24.3% (4.2 MB / 17.5 MB)Downloading: 25.7% (4.5 MB / 17.5 MB)Downloading: 27.1% (4.8 MB / 17.5 MB)Downloading: 28.5% (5.0 MB / 17.5 MB)Downloading: 30.0% (5.2 MB / 17.5 MB)Downloading: 31.4% (5.5 MB / 17.5 MB)Downloading: 32.8% (5.8 MB / 17.5 MB)Downloading: 34.2% (6.0 MB / 17.5 MB)Downloading: 35.7% (6.2 MB / 17.5 MB)Downloading: 37.1% (6.5 MB / 17.5 MB)Downloading: 38.5% (6.8 MB / 17.5 MB)Downloading: 39.9% (7.0 MB / 17.5 MB)Downloading: 41.4% (7.2 MB / 17.5 MB)Downloading: 42.8% (7.5 MB / 17.5 MB)Downloading: 44.2% (7.8 MB / 17.5 MB)Downloading: 45.7% (8.0 MB / 17.5 MB)Downloading: 47.1% (8.2 MB / 17.5 MB)Downloading: 48.5% (8.5 MB / 17.5 MB)Downloading: 49.9% (8.8 MB / 17.5 MB)Downloading: 51.4% (9.0 MB / 17.5 MB)Downloading: 52.8% (9.2 MB / 17.5 MB)Downloading: 54.2% (9.5 MB / 17.5 MB)Downloading: 55.6% (9.8 MB / 17.5 MB)Downloading: 57.1% (10.0 MB / 17.5 MB)Downloading: 58.5% (10.2 MB / 17.5 MB)Downloading: 59.9% (10.5 MB / 17.5 MB)Downloading: 61.3% (10.8 MB / 17.5 MB)Downloading: 62.8% (11.0 MB / 17.5 MB)Downloading: 64.2% (11.2 MB / 17.5 MB)Downloading: 65.6% (11.5 MB / 17.5 MB)Downloading: 67.0% (11.8 MB / 17.5 MB)Downloading: 68.5% (12.0 MB / 17.5 MB)Downloading: 69.9% (12.2 MB / 17.5 MB)Downloading: 71.3% (12.5 MB / 17.5 MB)Downloading: 72.8% (12.8 MB / 17.5 MB)Downloading: 74.2% (13.0 MB / 17.5 MB)Downloading: 75.6% (13.2 MB / 17.5 MB)Downloading: 77.0% (13.5 MB / 17.5 MB)Downloading: 78.5% (13.8 MB / 17.5 MB)Downloading: 79.9% (14.0 MB / 17.5 MB)Downloading: 81.3% (14.2 MB / 17.5 MB)Downloading: 82.7% (14.5 MB / 17.5 MB)Downloading: 84.2% (14.8 MB / 17.5 MB)Downloading: 85.6% (15.0 MB / 17.5 MB)Downloading: 87.0% (15.2 MB / 17.5 MB)Downloading: 88.4% (15.5 MB / 17.5 MB)Downloading: 89.9% (15.8 MB / 17.5 MB)Downloading: 91.3% (16.0 MB / 17.5 MB)Downloading: 92.7% (16.2 MB / 17.5 MB)Downloading: 94.2% (16.5 MB / 17.5 MB)Downloading: 95.6% (16.8 MB / 17.5 MB)Downloading: 97.0% (17.0 MB / 17.5 MB)Downloading: 98.4% (17.2 MB / 17.5 MB)Downloading: 99.9% (17.5 MB / 17.5 MB)Downloading: 100.0% (17.5 MB / 17.5 MB)/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+
+Cached MACE model to /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+Class: ScaleShiftMACE
+Cutoff (Å): 6.0
+Interactions: 2
+Products: 2
+Readouts: 2
+Heads: None
+Joint embedding: False
+Embedding readout: False
+Generating e3nn raw-core reference
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "off",
+    "model_name": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head_name": "Default",
+    "enable_cueq": false,
+    "cutoff_angstrom": 6.0,
+    "signature": "f4a56637d7e4c7e02fc0849c17c86f3eace90b198c6e071116626d33c14a9669"
+  },
+  "reference": {
+    "controlled_energy_ev": -4270.827792048454,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}
+Checking e3nn two-rank parity
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 0[Gloo] Rank  is connected to 11 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 
+1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+{
+  "model": {
+    "family": "off",
+    "checkpoint": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head": "Default",
+    "cueq": false
+  },
+  "system": {
+    "name": "organic_chain12",
+    "num_atoms": 12,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -41.207223752263765,
+    "raw_core_controlled_md": -41.20722374306221,
+    "error_md": -9.201556849802728e-09,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 3.836854833849657e-09,
+    "max_abs_md": 1.4901161193847656e-08,
+    "close": true
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 132,
+    "native_directed_edges": 132,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}
+Generating cueq raw-core reference
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "off",
+    "model_name": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff_angstrom": 6.0,
+    "signature": "31451afc3c8aa9cec3507d74081d5fca65eb9429d919f9e647bdfce25f9a7a97"
+  },
+  "reference": {
+    "controlled_energy_ev": -4270.827790856361,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}
+Checking cueq two-rank parity
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+Using MACE-OFF23 MODEL for MACECalculator with /u/jsaravananindira/.cache/mace/MACE-OFF24_medium.model
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/mace/modules/models.py:86: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
+{
+  "model": {
+    "family": "off",
+    "checkpoint": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head": "default",
+    "cueq": true
+  },
+  "system": {
+    "name": "organic_chain12",
+    "num_atoms": 12,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -41.207223744212406,
+    "raw_core_controlled_md": -41.20722373156026,
+    "error_md": -1.265214422119243e-08,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 4.7924308965718865e-09,
+    "max_abs_md": 3.725290298461914e-08,
+    "close": true
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 132,
+    "native_directed_edges": 132,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}
+OFF24 smoke results: /u/jsaravananindira/Dynamis/mace_results/off24_smoke_24080085

@@ -1,0 +1,2 @@
+{"type":"meta","version":"0.1.0","date":"2026-11-10T19:41:04Z","run_id":"2f99a3cf0ca64953bf25fc1c3b6a6e08","rank":0,"local_rank":0,"world_size":2,"pid":3049856,"device_id":0,"host":"gpua100.delta.ncsa.illinois.edu","clock":"steady_clock","time_unit":"ns","t0_ns":588657533012239}
+{"type":"call_order","order":[]}

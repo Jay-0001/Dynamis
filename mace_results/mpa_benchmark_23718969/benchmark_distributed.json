@@ -1,0 +1,72 @@
+{
+  "model": {
+    "family": "mp",
+    "checkpoint": "medium-mpa-0",
+    "head": "default",
+    "cueq": true
+  },
+  "system": {
+    "name": "organic_chain12_x625",
+    "num_atoms": 7500,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -329.8657343549341,
+    "raw_core_controlled_md": -329.8657344998586,
+    "error_md": 1.449245132789656e-07,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 1.4071426690520639e-08,
+    "max_abs_md": 1.3317912817001343e-07,
+    "close": true
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 3750,
+      "halo_atoms": 30
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 3750,
+      "halo_atoms": 90
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 82500,
+    "native_directed_edges": 82500,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": {
+    "distributed": {
+      "median_ms_per_step": 37.66558364033699,
+      "samples_ms": [
+        45.719722979702055,
+        37.96259036054835,
+        44.29414902115241,
+        37.66558364033699,
+        36.29738132003695,
+        36.37712710071355,
+        36.74988569924608
+      ]
+    },
+    "raw_core": {
+      "median_ms_per_step": 138.24377560056746,
+      "samples_ms": [
+        138.49467024207115,
+        138.32677700091153,
+        138.2351600797847,
+        138.21698242099956,
+        138.27615065965801,
+        138.24377560056746,
+        138.19257108028978
+      ]
+    }
+  }
+}

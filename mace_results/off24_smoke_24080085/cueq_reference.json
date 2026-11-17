@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "off",
+    "model_name": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff_angstrom": 6.0,
+    "signature": "31451afc3c8aa9cec3507d74081d5fca65eb9429d919f9e647bdfce25f9a7a97"
+  },
+  "reference": {
+    "controlled_energy_ev": -4270.827790856361,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}

@@ -7,7 +7,7 @@
 #SBATCH --gpus-per-node=2
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64g
-#SBATCH --time=01:00:00
+#SBATCH --time=00:20:00
 #SBATCH --job-name=mace-off24-static
 #SBATCH --output=/u/jsaravananindira/Dynamis/mace_scripts/outputs/mace_off24_static_%j.out
 
@@ -29,7 +29,7 @@ export MASTER_PORT="$((10000 + SLURM_JOB_ID % 50000))"
 
 cd "${PROJECT_ROOT}"
 mkdir -p "${RESULT_DIR}"
-SMALL_XYZ="${PROJECT_ROOT}/dynamis_model/tests/mace/data/off24_bridge.xyz"
+SMALL_XYZ="${PROJECT_ROOT}/mace_data/off24_bridge.xyz"
 LARGE_XYZ="${RESULT_DIR}/off24_bridge_x50.xyz"
 python dynamis_model/tests/mace/repeat_off24_xyz.py --copies 50 --output "${LARGE_XYZ}"
 

@@ -10,7 +10,7 @@ import numpy as np
 
 DEFAULT_SEED = 1234
 ORGANIC_ATOMIC_NUMBERS = [6] * 4 + [1] * 8
-OFF24_BRIDGE_PATH = Path(__file__).parent / "data" / "off24_bridge.xyz"
+OFF24_BRIDGE_PATH = "/u/jsaravananindira/Dynamis/mace_data/off24_bridge.xyz"
 _CHAIN_TEMPLATE = np.array(
     [
         [2.00, 2.00, 2.00], [3.52, 2.12, 2.00],
