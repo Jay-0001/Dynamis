@@ -6,17 +6,28 @@
 #SBATCH --gres=gpu:4
 #SBATCH --cpus-per-task=7
 #SBATCH --mem=64G
-#SBATCH --time=00:15:00
+#SBATCH --time=00:25:00
 #SBATCH --output=mace_scripts/output/cueq-4gpu-%j.out
 #SBATCH --error=mace_scripts/output/cueq-4gpu-%j.err
 
 set -euo pipefail
 
-srun --container-image=nvcr.io#nvidia/pytorch:25.08-py3 \
+srun --ntasks=1 --cpus-per-task=7 --container-image=nvcr.io#nvidia/pytorch:25.08-py3 \
   --container-mounts="$SLURM_SUBMIT_DIR:/workspace/Dynamis" \
   --container-workdir=/workspace/Dynamis \
   bash -lc '
     set -euo pipefail
+
+    cache_root=/workspace/Dynamis/mace_scripts/output/cache
+    mkdir -p "$cache_root"/{home,xdg,pip,mpl,triton,cueq,torch}
+    export HOME="$cache_root/home"
+    export XDG_CACHE_HOME="$cache_root/xdg"
+    export PIP_CACHE_DIR="$cache_root/pip"
+    export MPLCONFIGDIR="$cache_root/mpl"
+    export TRITON_CACHE_DIR="$cache_root/triton"
+    export CUEQ_TRITON_CACHE_DIR="$cache_root/cueq"
+    export TORCH_HOME="$cache_root/torch"
+
     source .venv/bin/activate
     export PYTHONNOUSERSITE=1
 
