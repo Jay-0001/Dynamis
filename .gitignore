@@ -224,3 +224,9 @@ CMakeInit.txt
 .skbuild*
 skbuild
 build.ninja
+
+# Generated MACE OFF strong-scaling inputs and job output
+mace_data/strong_scaling_off/
+mace_results/strong_scaling_off/
+mace_off_*gpu_*.out
+mace_off_prepare_*.out
