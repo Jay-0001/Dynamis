@@ -26,9 +26,15 @@ from dynamis_model.nnp.mace import (
 # Raw MACE predicts eV / (eV per Angstrom); Dynamis uses MD units.
 from dynamis_model.units import EV_PER_A_TO_AMU_A_PER_FS2 as EV_TO_MD
 if __package__:
-    from .mace_test_systems import DEFAULT_SEED, ORGANIC_ATOMIC_NUMBERS, organic_chain12
+    from .mace_test_systems import (
+        DEFAULT_SEED, OFF24_BRIDGE_PATH, ORGANIC_ATOMIC_NUMBERS,
+        load_xyz_structure, organic_chain12,
+    )
 else:
-    from mace_test_systems import DEFAULT_SEED, ORGANIC_ATOMIC_NUMBERS, organic_chain12
+    from mace_test_systems import (
+        DEFAULT_SEED, OFF24_BRIDGE_PATH, ORGANIC_ATOMIC_NUMBERS,
+        load_xyz_structure, organic_chain12,
+    )
 
 
 def install_trajectory_simulator_import_compatibility() -> None:
@@ -71,7 +77,7 @@ STRUCTURE_PERTURBATION_ANGSTROM = 0.01
 HELIUM_N_ATOMS = 64
 HELIUM_SIDE_LENGTH_ANGSTROM = 20.0
 HELIUM_MIN_DISTANCE_ANGSTROM = 3.0
-TEST_SYSTEMS = ("silicon", "helium", "organic")
+TEST_SYSTEMS = ("silicon", "helium", "organic", "off24")
 _TEST_SYSTEM_SPECS = {
     "silicon": {
         "symbol": "Si",
@@ -97,6 +103,14 @@ _TEST_SYSTEM_SPECS = {
         "n_atoms": len(ORGANIC_ATOMIC_NUMBERS),
         "side_length_angstrom": 20.0,
         "atomic_numbers": ORGANIC_ATOMIC_NUMBERS,
+        "pbc": False,
+        "step_count": 20,
+        "timestep_fs": 0.1,
+    },
+    "off24": {
+        "n_atoms": 2 * len(ORGANIC_ATOMIC_NUMBERS),
+        "side_length_angstrom": 36.0,
+        "atomic_numbers": 2 * ORGANIC_ATOMIC_NUMBERS,
         "pbc": False,
         "step_count": 20,
         "timestep_fs": 0.1,
@@ -186,6 +200,8 @@ def generate_test_structure(system: str = "organic", seed: int = SEED) -> dict:
     spec = get_test_system_spec(system)
     if system == "organic":
         return organic_chain12(seed)
+    if system == "off24":
+        return load_xyz_structure(OFF24_BRIDGE_PATH)
     if system == "silicon":
         _require_ase()
         atoms = bulk("Si", "diamond", a=SILICON_LATTICE_CONSTANT_ANGSTROM, cubic=True)
@@ -218,7 +234,8 @@ def molecular_info_from_structure(raw: dict) -> MolecularInfo:
     info.atom_types = numbers
     info.atom_positions = positions
     info.atom_velocities = torch.zeros_like(positions)
-    info.atom_forces = torch.zeros_like(positions)
+    # The native MolecularInfo binding has no atom_forces field; the model
+    # returns forces during integration.
     return info
 
 

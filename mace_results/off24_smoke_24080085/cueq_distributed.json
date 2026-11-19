@@ -1,0 +1,47 @@
+{
+  "model": {
+    "family": "off",
+    "checkpoint": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head": "default",
+    "cueq": true
+  },
+  "system": {
+    "name": "organic_chain12",
+    "num_atoms": 12,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -41.207223744212406,
+    "raw_core_controlled_md": -41.20722373156026,
+    "error_md": -1.265214422119243e-08,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 4.7924308965718865e-09,
+    "max_abs_md": 3.725290298461914e-08,
+    "close": true
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 6,
+      "halo_atoms": 6
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 132,
+    "native_directed_edges": 132,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}

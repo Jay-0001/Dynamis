@@ -1,0 +1,28 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+
+Traceback (most recent call last):
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/repeat_off24_xyz.py", line 77, in <module>
+    main()
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/repeat_off24_xyz.py", line 73, in main
+    print(json.dumps(repeat_off24_xyz(args.output, args.copies), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/repeat_off24_xyz.py", line 20, in repeat_off24_xyz
+    source = load_xyz_structure(OFF24_BRIDGE_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/Dynamis/dynamis_model/tests/mace/mace_test_systems.py", line 91, in load_xyz_structure
+    cell = np.asarray(atoms.cell, dtype=np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jsaravananindira/.conda/envs/dynamis-py312-cu129-clean/lib/python3.12/site-packages/ase/cell.py", line 244, in __array__
+    return np.array(self.array, dtype=dtype, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unable to avoid copy while creating an array as requested.
+If using `np.array(obj, copy=False)` replace it with `np.asarray(obj)` to allow a copy when needed (no behavior change in NumPy 1.x).
+For more details, see https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword.
