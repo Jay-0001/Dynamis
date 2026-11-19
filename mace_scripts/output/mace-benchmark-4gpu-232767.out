@@ -1,0 +1,104 @@
+No broken requirements found.
+/workspace/Dynamis/.venv/bin/python 2.8.0a0+34c6371d24.nv25.08 4
+Result directory: mace_results/mace_benchmark_4gpu_232767
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "mp",
+    "model_name": "medium-mpa-0",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff_angstrom": 6.0,
+    "signature": "13688fadce45c6abc39a16b7b93ed11db8598f814efd93aeab514ee7000a4ce5"
+  },
+  "reference": {
+    "controlled_energy_ev": -54.64495813846588,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 0 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 2 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 1 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 3 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+{
+  "model": {
+    "family": "mp",
+    "checkpoint": "medium-mpa-0",
+    "head": "default",
+    "cueq": true
+  },
+  "system": {
+    "name": "organic_chain12",
+    "num_atoms": 12,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -0.5272440424708138,
+    "raw_core_controlled_md": -0.5272436928115982,
+    "error_md": -3.496592155816103e-07,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 4.353862550487975e-06,
+    "max_abs_md": 1.4935620129108429e-05,
+    "close": false
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 3,
+      "halo_atoms": 9
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 3,
+      "halo_atoms": 9
+    },
+    {
+      "rank": 2,
+      "owned_atoms": 3,
+      "halo_atoms": 9
+    },
+    {
+      "rank": 3,
+      "owned_atoms": 3,
+      "halo_atoms": 9
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 132,
+    "native_directed_edges": 132,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}
