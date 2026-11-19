@@ -56,17 +56,29 @@ srun --ntasks=1 --cpus-per-task=7 \
         mkdir -p "$result_dir/smoke" "$result_dir/benchmark"
         echo "Result directory: $result_dir"
 
-        # Prove four-rank CuEq parity and graph agreement before timing.
+        # Keep the published parity tolerances. If a numerical parity check
+        # fails after writing its JSON, collect benchmark data before failing
+        # the job; failures before JSON creation still stop immediately.
+        parity_failed=0
+
         python dynamis_model/tests/mace/mace_standalone_reference.py \
             --enable-cueq \
             --output "$result_dir/smoke/reference.pt" \
             --output-json "$result_dir/smoke/reference.json"
-        python -m torch.distributed.run --standalone --nproc-per-node=4 \
+        if python -m torch.distributed.run --standalone --nproc-per-node=4 \
             dynamis_model/tests/mace/test_mace_model.py run-distributed \
             --enable-cueq \
             --reference-artifact "$result_dir/smoke/reference.pt" \
             --strict-parity --strict-graph-interior \
-            --output-json "$result_dir/smoke/distributed.json"
+            --output-json "$result_dir/smoke/distributed.json"; then
+            echo "Four-rank smoke parity passed."
+        elif [[ -s "$result_dir/smoke/distributed.json" ]]; then
+            parity_failed=1
+            echo "Smoke parity failed; JSON saved. Continuing to collect timing data." >&2
+        else
+            echo "Smoke test failed before writing JSON; stopping." >&2
+            exit 1
+        fi
 
         # Use the same generated structure and timing counts in both runs.
         python dynamis_model/tests/mace/mace_standalone_reference.py \
@@ -75,14 +87,26 @@ srun --ntasks=1 --cpus-per-task=7 \
             --benchmark-iterations "$iterations" --benchmark-samples "$samples" \
             --output "$result_dir/benchmark/reference.pt" \
             --output-json "$result_dir/benchmark/reference.json"
-        python -m torch.distributed.run --standalone --nproc-per-node=4 \
+        if python -m torch.distributed.run --standalone --nproc-per-node=4 \
             dynamis_model/tests/mace/test_mace_model.py run-distributed \
             --enable-cueq --molecule-count "$molecule_count" \
             --benchmark --benchmark-warmup "$warmup" \
             --benchmark-iterations "$iterations" --benchmark-samples "$samples" \
             --reference-artifact "$result_dir/benchmark/reference.pt" \
             --strict-parity --strict-graph-interior \
-            --output-json "$result_dir/benchmark/distributed.json"
+            --output-json "$result_dir/benchmark/distributed.json"; then
+            echo "Benchmark parity passed."
+        elif [[ -s "$result_dir/benchmark/distributed.json" ]]; then
+            parity_failed=1
+            echo "Benchmark parity failed; timing JSON saved." >&2
+        else
+            echo "Benchmark failed before writing JSON; stopping." >&2
+            exit 1
+        fi
 
-        echo "Four-GPU MACE-CuEq benchmark passed: $result_dir"
+        if (( parity_failed )); then
+            echo "Four-GPU timing collected, but strict parity failed: $result_dir" >&2
+            exit 1
+        fi
+        echo "Four-GPU MACE-CuEq benchmark and strict parity passed: $result_dir"
     '

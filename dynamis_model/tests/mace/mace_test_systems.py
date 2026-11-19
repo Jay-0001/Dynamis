@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 
 import numpy as np
 
 DEFAULT_SEED = 1234
 ORGANIC_ATOMIC_NUMBERS = [6] * 4 + [1] * 8
+OFF24_BRIDGE_PATH = Path(__file__).parent / "data" / "off24_bridge.xyz"
 _CHAIN_TEMPLATE = np.array(
     [
         [2.00, 2.00, 2.00], [3.52, 2.12, 2.00],
@@ -77,6 +79,28 @@ def organic_molecules(seed: int = DEFAULT_SEED, count: int = 1) -> dict:
         "positions": all_positions.tolist(),
         "cell": np.diag([side] * 3).tolist(),
         "pbc": [False, False, False],
+    }
+
+
+def load_xyz_structure(path: Path) -> dict:
+    """Read one XYZ frame while preserving its cell and periodicity."""
+    from ase.io import read
+
+    atoms = read(str(path), index=0)
+    positions = np.asarray(atoms.get_positions(), dtype=np.float32)
+    cell = np.asarray(atoms.cell, dtype=np.float32)
+    pbc = np.asarray(atoms.pbc, dtype=bool)
+    if cell.shape != (3, 3) or abs(float(np.linalg.det(cell))) < 1e-8:
+        raise ValueError(f"XYZ fixture needs a nonsingular cell: {path}")
+    fractional = positions.astype(np.float64) @ np.linalg.inv(cell.astype(np.float64))
+    if not np.isfinite(positions).all() or np.any(fractional < 0) or np.any(fractional >= 1):
+        raise ValueError(f"XYZ atoms must lie inside their cell: {path}")
+    return {
+        "name": path.stem,
+        "atomic_numbers": atoms.get_atomic_numbers().tolist(),
+        "positions": positions.tolist(),
+        "cell": cell.tolist(),
+        "pbc": pbc.tolist(),
     }
 
 

@@ -30,12 +30,12 @@ if __package__:
     from .mace_standalone_reference import (
         ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
-    from .mace_test_systems import DEFAULT_SEED, organic_molecules
+    from .mace_test_systems import DEFAULT_SEED, OFF24_BRIDGE_PATH, load_xyz_structure, organic_molecules
 else:
     from mace_standalone_reference import (
         ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
-    from mace_test_systems import DEFAULT_SEED, organic_molecules
+    from mace_test_systems import DEFAULT_SEED, OFF24_BRIDGE_PATH, load_xyz_structure, organic_molecules
 
 ENERGY_ATOL_MD = 1e-3
 FORCE_ATOL_MD = 1e-5
@@ -49,6 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
     run = commands.add_parser("run-distributed")
     run.add_argument("--system-seed", type=int, default=DEFAULT_SEED)
     run.add_argument("--molecule-count", type=int, default=1)
+    run.add_argument("--xyz-path", type=Path, help="Use an XYZ fixture instead of a generated structure.")
     run.add_argument("--model-family", choices=["mp", "off"], default="mp")
     run.add_argument("--model", default=None)
     run.add_argument("--head-name", default="")
@@ -281,6 +282,23 @@ def run_distributed(args: argparse.Namespace):
     energy_error = distributed_energy - reference_energy
     force_error = assembled - reference_forces
     force_ok = torch.allclose(assembled, reference_forces, atol=args.force_atol, rtol=args.force_rtol)
+    abs_force_error = force_error.abs()
+    force_limit = args.force_atol + args.force_rtol * reference_forces.abs()
+    force_violations = abs_force_error > force_limit
+    worst_flat = int((abs_force_error - force_limit).reshape(-1).argmax())
+    worst_atom, worst_axis = divmod(worst_flat, 3)
+    force_by_rank = []
+    for item in records:
+        rank_indices = torch.tensor(item["atom_ids"], dtype=torch.long)
+        rank_errors = abs_force_error[rank_indices]
+        force_by_rank.append({
+            "rank": item["rank"],
+            "owned_atoms": len(item["atom_ids"]),
+            "halo_atoms": item["halo_atoms"],
+            "mae_md": float(rank_errors.mean()) if rank_errors.numel() else 0.0,
+            "max_abs_md": float(rank_errors.max()) if rank_errors.numel() else 0.0,
+            "violating_components": int(force_violations[rank_indices].sum()),
+        })
     energy_ok = abs(energy_error) <= args.energy_atol
     graph = (
         compare_owned_edges(records, reference["edge_rows"], raw, adapter.cutoff)
@@ -294,8 +312,16 @@ def run_distributed(args: argparse.Namespace):
         "energy": {"distributed_md": distributed_energy,
                    "raw_core_controlled_md": reference_energy,
                    "error_md": energy_error, "close": energy_ok},
-        "forces": {"mae_md": float(force_error.abs().mean()),
-                   "max_abs_md": float(force_error.abs().max()), "close": bool(force_ok)},
+        "forces": {"mae_md": float(abs_force_error.mean()),
+                   "max_abs_md": float(abs_force_error.max()), "close": bool(force_ok),
+                   "atol_md": args.force_atol, "rtol": args.force_rtol,
+                   "violating_components": int(force_violations.sum()),
+                   "worst_component": {"atom_id": worst_atom, "axis": "xyz"[worst_axis],
+                                       "reference_md": float(reference_forces[worst_atom, worst_axis]),
+                                       "distributed_md": float(assembled[worst_atom, worst_axis]),
+                                       "abs_error_md": float(abs_force_error[worst_atom, worst_axis]),
+                                       "allowed_error_md": float(force_limit[worst_atom, worst_axis])},
+                   "by_rank": force_by_rank},
         "ranks": [{"rank": item["rank"], "owned_atoms": len(item["atom_ids"]),
                    "halo_atoms": item["halo_atoms"]} for item in records],
         "graph": graph,
@@ -334,6 +360,17 @@ def test_stable_reduction_keeps_interaction_gradient():
     assert result["owned_local_energy"] == baseline[:3].double().sum() + interaction[:3].double().sum()
     result["owned_local_energy"].backward()
     assert torch.equal(interaction.grad, torch.tensor([1.0, 1.0, 1.0, 0.0]))
+
+
+def test_off24_xyz_exercises_six_angstrom_cutoff():
+    raw = load_xyz_structure(OFF24_BRIDGE_PATH)
+    positions = torch.tensor(raw["positions"], dtype=torch.float64)
+    distances = torch.cdist(positions, positions)
+    cross_fragment = distances[:12, 12:]
+    assert len(positions) == 24 and raw["pbc"] == [False] * 3
+    assert bool(((cross_fragment > 5.0) & (cross_fragment < 6.0)).any())
+    assert bool((cross_fragment > 6.0).any())
+    assert bool((torch.abs(cross_fragment - 6.0) > 1e-3).all())
 
 
 def test_default_model_and_family_resolution():

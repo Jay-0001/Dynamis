@@ -20,14 +20,16 @@ from dynamis_model.nnp.mace import (
     resolve_model_head_name,
 )
 if __package__:
-    from .mace_test_systems import DEFAULT_SEED, organic_molecules, structure_signature
+    from .mace_test_systems import DEFAULT_SEED, load_xyz_structure, organic_molecules, structure_signature
 else:
-    from mace_test_systems import DEFAULT_SEED, organic_molecules, structure_signature
+    from mace_test_systems import DEFAULT_SEED, load_xyz_structure, organic_molecules, structure_signature
 
 ARTIFACT_VERSION = 5
 
 
 def load_raw_structure(args: argparse.Namespace) -> dict[str, Any]:
+    if args.xyz_path is not None:
+        return load_xyz_structure(args.xyz_path)
     return organic_molecules(args.system_seed, args.molecule_count)
 
 
@@ -126,6 +128,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--system-seed", type=int, default=DEFAULT_SEED)
     parser.add_argument("--molecule-count", type=int, default=1)
+    parser.add_argument("--xyz-path", type=Path, help="Use an XYZ fixture instead of a generated structure.")
     parser.add_argument("--model-family", choices=["mp", "off"], default="mp")
     parser.add_argument("--model", default=None)
     parser.add_argument("--head-name", default="")
