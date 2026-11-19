@@ -1,28 +1,17 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=mace-off-2gpu
+# Two active GPU workers on a four-GPU Beta allocation.
+#SBATCH --job-name=mace-off-2worker
+#SBATCH --partition=beta
+#SBATCH --account=su_kchiu_molecular
+#SBATCH --qos=standard
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --gpus-per-node=2
-#SBATCH --cpus-per-task=8
-#SBATCH --time=01:00:00
-#SBATCH --output=mace_off_2gpu_%j.out
+#SBATCH --gres=gpu:4
+#SBATCH --cpus-per-task=7
+#SBATCH --mem=128G
+#SBATCH --time=04:00:00
+#SBATCH --output=mace_scripts/output/mace-off-2worker-%j.out
+#SBATCH --error=mace_scripts/output/mace-off-2worker-%j.err
+
 set -euo pipefail
-
-project_root="${DYNAMIS_FORK_ROOT:-${SLURM_SUBMIT_DIR:?Submit from the fork root}}"
-cd "$project_root"
-python_bin="${PYTHON_BIN:-python}"
-export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}"
-xyz_path="${XYZ_PATH:-$project_root/mace_data/strong_scaling_off/ch4_45k_splited.xyz}"
-test -f "$xyz_path" || { echo "Missing XYZ: $xyz_path. Run prepare_ch4_o2.py first." >&2; exit 1; }
-output_dir="$project_root/mace_results/strong_scaling_off/2gpu_${SLURM_JOB_ID:?}"
-
-"$python_bin" -m torch.distributed.run --standalone --nproc_per_node=2 \
-  mace_scripts/scaling/run_mace_off.py \
-  --xyz "$xyz_path" --output-dir "$output_dir" --expected-gpus 2 \
-  --steps "${STEPS:-120}" --warmup-steps "${WARMUP_STEPS:-20}" \
-  --timestep-fs "${TIMESTEP_FS:-0.1}" --rebalance-interval "${REBALANCE_INTERVAL:-0}" \
-  --model "${MACE_OFF_MODEL:-medium}"
-
-"$python_bin" post_processing/strong_scaling_summary.py "$output_dir"
-"$python_bin" post_processing/timing_summary.py "$output_dir" --by-rank > "$output_dir/timing_diagnostics.txt"
-echo "Results: $output_dir"
+bash "${SLURM_SUBMIT_DIR:?}/mace_scripts/scaling/run_beta_job.sh" 2

@@ -60,6 +60,7 @@ def main() -> None:
     parser.add_argument("--timestep-fs", type=float, default=0.1)
     parser.add_argument("--rebalance-interval", type=int, default=0)
     parser.add_argument("--model", default="medium", help="MACE OFF checkpoint name")
+    parser.add_argument("--enable-cueq", action="store_true", help="Convert the MACE OFF checkpoint to CuEq")
     args = parser.parse_args()
     if args.steps <= args.warmup_steps or args.warmup_steps < 0:
         parser.error("require 0 <= warmup-steps < steps")
@@ -89,8 +90,10 @@ def main() -> None:
             output.mkdir(parents=True, exist_ok=False)
             (output / "run_metadata.json").write_text(json.dumps({
                 "model_family": "off", "model": args.model, "xyz": str(xyz),
+                "backend": "cueq" if args.enable_cueq else "e3nn",
                 "xyz_sha256": xyz_hash, "atoms": atoms, "box_angstrom": side,
                 "world_size": env.world_size, "steps": args.steps,
+                "allocated_gpus": int(os.environ.get("SCALING_ALLOCATED_GPUS", env.world_size)),
                 "warmup_steps": args.warmup_steps, "timestep_fs": args.timestep_fs,
                 "rebalance_interval": args.rebalance_interval,
                 "gpu_name": torch.cuda.get_device_name(env.device),
@@ -100,7 +103,9 @@ def main() -> None:
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
             }, indent=2) + "\n", encoding="utf-8")
         dist.barrier()
-        raw = load_raw_mace_model("off", args.model, device=str(env.device))
+        raw = load_raw_mace_model(
+            "off", args.model, device=str(env.device), enable_cueq=args.enable_cueq
+        )
         model = MACEModel(raw)
         config = SimulatorConfig(
             timestep_fs=args.timestep_fs, total_steps=args.steps,

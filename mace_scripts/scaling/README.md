@@ -1,37 +1,107 @@
-# CH4/O2 MACE OFF strong scaling on EmpireAI Beta
+# MACE OFF active-worker scaling on EmpireAI Beta
 
-These scripts prepare one fixed CH4/O2 system on EmpireAI Beta and run **separate** one-GPU and two-GPU jobs. The Python driver also accepts larger GPU counts when later job scripts are added. The same XYZ, model, step count, and timestep must be used for every GPU count.
+These jobs compare one, two, and four active GPU workers on the **same** CH4/O2
+system. Every job reserves four B200 GPUs on one Beta node to satisfy the
+minimum GPU request shown in the Beta login banner. The one- and two-worker
+jobs mask the unused GPUs inside the container. They still consume a four-GPU
+allocation; the comparison measures worker scaling, not service-unit
+efficiency or allocation scaling. Recheck the live policy before submission.
 
-## Prepare the input
+## Runtime and inputs
 
-Submit the CPU preparation job from the fork root on EmpireAI Beta. Its Python environment needs NumPy. The default target is **45,000 atoms**, which gives 5,625 atoms per GPU at eight GPUs. The generator creates 5,000 CH4 and 10,000 O2 molecules in a 107 Å cubic periodic cell, with seed 42 and zero initial momenta. It writes the XYZ and adjacent SHA-256 manifest to `mace_data/strong_scaling_off/` on the cluster's shared filesystem.
+Submit from the root of the Beta clone (`~/Dynamis`) after installing the
+repaired `.venv` with `mace_scripts/empire_dynamis_build.sh`. The jobs use the
+ARM64 `nvcr.io#nvidia/pytorch:25.08-py3` image via Pyxis, mount the repository
+at `/workspace/Dynamis`, and run `.venv/bin/python`. Runtime caches are placed
+in the writable `mace_scripts/output/cache` directory. The installed
+`dynamis_state` extension must report `TIMING_ENABLED=True`; its CMake option
+defaults to ON, but the binary in `.venv` is checked at runtime.
+
+The preparation job requests four GPUs because the observed Beta partitions
+do not include a CPU-only partition. Its GPU time is idle. If you already
+generated the XYZ and matching manifest elsewhere, copy both into
+`mace_data/strong_scaling_off/` and skip preparation.
+
+The default preparation creates 45,000 atoms (5,000 CH4 and 10,000 O2
+molecules) in a periodic 107 Å cube with seed 42 and zero initial momenta.
+It writes `ch4_45k_splited.xyz` and `ch4_45k_splited.json`; the runner checks
+the manifest hash and atom count. Do not regenerate the input between worker
+counts.
+
+## Pilot: small input and short run
+
+Create the log directory **before** calling `sbatch`, from the clone root:
 
 ```bash
-cd /path/to/dynamis_fork
-prep_job=$(sbatch --parsable --account=<your-account> --partition=<cpu-partition> mace_scripts/scaling/prepare_ch4_o2.sbatch)
-echo "Preparation job: $prep_job"
+cd ~/Dynamis
+mkdir -p mace_scripts/output mace_results
+sinfo -o '%P %a %l %D %G'
+sacctmgr show assoc user="$USER" format=Account%30,Partition%20,QOS%60
+sbatch --test-only mace_scripts/scaling/run_4gpu.sh
 ```
 
-This uses the existing `experiments/exp_datasets/scripts/03_generate_ch4.py` generator. The input is `mace_data/strong_scaling_off/ch4_45k_splited.xyz`; it is generated on the cluster, not shipped in Git. The preparation script refuses to replace an existing XYZ or manifest unless invoked manually with `--overwrite`. Keep the original pair for the full scaling series.
-
-## Submit distinct jobs
-
-Use the EmpireAI Beta allocation and GPU partition names assigned to your account. The active environment must have this fork's Dynamis packages, PyTorch with CUDA, and MACE installed. Build `dynamis_state` with `DYNAMIS_TIMING=ON`; the driver fails immediately when timing is unavailable. Confirm that the build matches the actual GPU architecture of the allocated node. Submit the run jobs with a dependency on successful preparation:
+An 8k target produces 8,001 atoms because each CH4 plus two O2 molecules
+contains nine atoms. Prepare it once, then run four active workers for 20
+steps. The `--dependency` avoids launching the GPU run if preparation fails.
 
 ```bash
-cd /path/to/dynamis_fork
-sbatch --account=<your-account> --partition=<gpu-partition> --dependency=afterok:${prep_job%%;*} mace_scripts/scaling/run_1gpu.sbatch
-sbatch --account=<your-account> --partition=<gpu-partition> --dependency=afterok:${prep_job%%;*} mace_scripts/scaling/run_2gpu.sbatch
+prep_job=$(sbatch --parsable --export=ALL,SIZE_K=8 mace_scripts/scaling/prepare_ch4_o2.sbatch)
+sbatch --dependency=afterok:${prep_job%%;*} \
+  --export=ALL,XYZ_PATH=/workspace/Dynamis/mace_data/strong_scaling_off/ch4_8k_splited.xyz,STEPS=20,WARMUP_STEPS=5 \
+  mace_scripts/scaling/run_4gpu.sh
 ```
 
-The scripts use `SLURM_SUBMIT_DIR` as the fork root, request one node, and launch one `torchrun` process per allocated GPU. They use the `python` on `PATH`; set `PYTHON_BIN` if needed. Both set `OMP_NUM_THREADS=4` per process by default. Supported environment overrides are `XYZ_PATH`, `STEPS`, `WARMUP_STEPS`, `TIMESTEP_FS`, `REBALANCE_INTERVAL`, `MACE_OFF_MODEL`, and `OMP_NUM_THREADS`. Apply the same values to both jobs. `DYNAMIS_FORK_ROOT` can override the submit directory if jobs must be submitted elsewhere.
+If that XYZ and manifest already exist, omit the preparation job and its
+dependency. The preparation script intentionally refuses to overwrite either
+file. Inspect `mace_scripts/output/mace-off-4worker-<job>.{out,err}` and the
+summary JSON before scheduling the full system.
 
-## Results and metric
+## Full fixed-input series
 
-The preparation job writes `mace_off_prepare_<job ID>.out` in the submission directory. Each run job gets its own `mace_results/strong_scaling_off/{1gpu,2gpu}_<Slurm job ID>/` directory. It contains `run_metadata.json`, one `timing_rank<N>.jsonl` per rank, `strong_scaling_summary.json`, and `timing_diagnostics.txt`. The run job's Slurm stdout is `mace_off_<N>gpu_<job ID>.out` in the submission directory. Generated inputs and job outputs are ignored by Git.
+The default workload is 45,000 atoms, 120 steps, and 20 warmup steps. One
+active GPU must be able to hold the whole system; this capacity has **not**
+been established on Beta. Run the four-worker case first and inspect its
+output before submitting the smaller worker counts.
 
-`Simulator.run()` writes the existing per-rank `iteration` timers. The driver synchronizes its GPU at the end of every step so the **host** duration includes queued GPU work. The new summary omits the first 20 of 120 steps by default, takes the slowest rank's host duration for each later step, and reports the median of those step durations. It checks that every expected rank and step is present. `timing_diagnostics.txt` comes from the existing `post_processing/timing_summary.py` and is for per-key investigation; the strong-scaling throughput metric comes from `strong_scaling_summary.json`.
+```bash
+cd ~/Dynamis
+prep_job=$(sbatch --parsable mace_scripts/scaling/prepare_ch4_o2.sbatch)
+sbatch --dependency=afterok:${prep_job%%;*} mace_scripts/scaling/run_4gpu.sh
+```
 
-The measured region includes MD integration, MACE forward/backward, communication, and any drift-triggered halo rebuild. Initial model loading and simulation setup are excluded. Periodic repartitioning is disabled by default (`REBALANCE_INTERVAL=0`), while the drift watchdog remains active. The synthetic mixture is a scaling workload; the timings do not establish chemical accuracy or stable long-time dynamics.
+After the four-worker summary has passed, submit `run_2gpu.sh`; inspect its
+memory use and summary before submitting `run_1gpu.sh`. If the 45k XYZ and
+manifest already exist, skip preparation and submit `run_4gpu.sh` directly.
+All three request `beta`, `su_kchiu_molecular`, `standard`, four GPUs, one
+Slurm task, and seven CPUs per task. They set the same value on `srun` to
+avoid conflicting Slurm CPU settings. The default limit is four hours and
+128 GiB of host memory per run; override these with `sbatch --time` or
+`--mem` after the pilot if needed. `OMP_NUM_THREADS` defaults to one for each
+Torch worker so four workers fit within the seven-CPU allocation.
 
-Compare the two jobs only after checking `xyz_sha256`, atom count, model, step count, and timestep in their metadata. The ideal two-GPU speedup denominator is the one-GPU median ms/step; divide that by the two-GPU median ms/step to get observed speedup. Confirm the 45,000-atom input fits on one GPU before interpreting the scaling series; capacity on EmpireAI Beta has not been measured here.
+The checkpoint is MACE OFF `medium` (the default OFF23 path), using the e3nn
+backend. To compare CuEq instead, submit **all** jobs with
+`--export=ALL,MACE_ENABLE_CUEQ=1`. `MACE_OFF_MODEL`, `XYZ_PATH`, `STEPS`,
+`WARMUP_STEPS`, `TIMESTEP_FS`, `REBALANCE_INTERVAL`, and `OMP_NUM_THREADS`
+are also accepted, but must match across worker counts. Model loading and
+simulation setup are outside the timed region.
+
+## Outputs and interpretation
+
+Slurm logs are in `mace_scripts/output/`. Each run writes to
+`mace_results/strong_scaling_off/<workers>gpu_<Slurm job ID>/`, including
+`run_metadata.json`, `timing_rank<N>.jsonl`, `strong_scaling_summary.json`,
+and `timing_diagnostics.txt`. Metadata records both the four allocated GPUs
+and the active worker count, along with the backend and input hash.
+
+The driver synchronizes the GPU at the end of each MD step. The summary
+requires every rank and step, takes the slowest rank's synchronized host
+duration for each post-warmup step, and reports their median. This includes
+integration, MACE forward/backward, communication, and any halo rebuild. The
+input has zero initial momenta and serves as a scaling workload; these timings
+do not establish chemical accuracy or stable long-time dynamics. Compare
+summaries only after confirming the input hash, atom count, model, backend,
+steps, timestep, and warmup match.
+
+An eight-worker series needs a separate multi-node launcher because the
+observed Beta nodes expose four B200 GPUs each. These scripts are single-node.
