@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --gpus-per-node=2
 #SBATCH --cpus-per-task=8
-#SBATCH --time=02:00:00
+#SBATCH --time=01:00:00
 #SBATCH --output=mace_off_2gpu_%j.out
 set -euo pipefail
 

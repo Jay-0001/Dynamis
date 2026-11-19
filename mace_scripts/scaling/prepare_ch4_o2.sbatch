@@ -2,7 +2,7 @@
 #SBATCH --job-name=mace-off-xyz
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=7
 #SBATCH --mem=4G
 #SBATCH --time=00:15:00
 #SBATCH --output=mace_off_prepare_%j.out
