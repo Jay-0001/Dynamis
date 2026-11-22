@@ -1,0 +1,5 @@
+Wrote /workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_splited.xyz  (45000 atoms)
+XYZ: /workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_splited.xyz
+SHA256: 767ff664da886568a2c9709b992b2cbe58e50127040adf9e0ad8ef246f281cf6
+Atoms: 45000
+Manifest: /workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_splited.json

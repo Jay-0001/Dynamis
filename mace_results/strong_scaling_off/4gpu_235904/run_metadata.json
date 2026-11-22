@@ -1,0 +1,21 @@
+{
+  "model_family": "off",
+  "model": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+  "xyz": "/workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_splited.xyz",
+  "backend": "cueq",
+  "xyz_sha256": "767ff664da886568a2c9709b992b2cbe58e50127040adf9e0ad8ef246f281cf6",
+  "atoms": 45000,
+  "box_angstrom": 107.0,
+  "world_size": 4,
+  "steps": 120,
+  "allocated_gpus": 4,
+  "warmup_steps": 20,
+  "timestep_fs": 0.1,
+  "rebalance_interval": 0,
+  "gpu_name": "NVIDIA GB200",
+  "host": "b1-37-s1-dgx-01-c18",
+  "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+  "cuda_runtime_version": "13.0",
+  "omp_num_threads": "1",
+  "slurm_job_id": "235904"
+}

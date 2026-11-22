@@ -1,0 +1,30 @@
+No broken requirements found.
+Python: /workspace/Dynamis/.venv/bin/python; Torch: 2.8.0a0+34c6371d24.nv25.08; CUDA: 13.0; active GPUs: 4; allocated GPUs: 4
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+MACE mp checkpoint preloaded
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 0 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 1 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank [Gloo] Rank 3 is connected to 23 is connected to  peer ranks. 3Expected number of connected peer ranks is :  peer ranks. 3Expected number of connected peer ranks is : 3
+
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argumentUsing medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+
+Using medium MPA-0 model as default MACE-MP model, to use previous (before 3.10) default model please specify 'medium' as model argument
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodelUsing Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Using Materials Project MACE for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/macempa0mediummodel
+Using float32 for MACECalculator, which is faster but less accurate. Recommended for MD. Use float64 for geometry optimization.
+Completed 120 steps with 4 GPU(s): /workspace/Dynamis/mace_results/strong_scaling_mpa/4gpu_235901
+4 GPU(s), 45000 atoms, 100 measured steps: 306.274 ms/step (3.265 steps/s)
+Summary: /workspace/Dynamis/mace_results/strong_scaling_mpa/4gpu_235901/strong_scaling_summary.json
+Results: /workspace/Dynamis/mace_results/strong_scaling_mpa/4gpu_235901
