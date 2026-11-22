@@ -1,0 +1,99 @@
+run_id=e89d7dcf0aa541089511e8b02d89b406 world_size=4 ranks_loaded=[0, 1, 2, 3]
+
+== Compute / Comm / Wait / Other (fraction of iteration self time) ==
+  compute      32290.81 ms  8519.47%
+  comm           756.31 ms  199.54%
+  wait             0.00 ms    0.00%
+  other            5.65 ms    1.49%
+
+== Per-key totals across all ranks (call_order) ==
+  key                      class       calls      self ms   self/call us      incl ms  % iter   errs
+  --------------------------------------------------------------------------------------------------
+  partition                compute         8       221.46       27682.84       221.46  58.43%      0
+  build_graph              compute        28       295.38       10549.15       295.38  77.93%      0
+  build_halo_maps          compute         8       218.41       27301.52       486.73  57.62%      0
+  halo_exchange            comm           84       756.31        9003.65       756.31 199.54%      0
+  model_forward            compute        40     31388.70      784717.44     32172.06 8281.46%      0
+  integrator_halfstep1     compute        16         3.12         195.30         3.12   0.82%      0
+  integrator_halfstep2     compute        16         0.13           7.98         0.13   0.03%      0
+  integrator_step          compute        32       163.60        5112.62     32338.92  43.16%      0
+  iteration                total          32       379.02       11844.49     32717.94 100.00%      0
+  traj_flush               other           4         5.65        1413.56         5.65   1.49%      0
+
+== Rank imbalance (self time, max/mean across ranks) ==
+  key                          min ms    mean ms     max ms  max/mean  max rank
+  -----------------------------------------------------------------------------
+  partition                     53.40      55.37      60.77      1.10         1
+  build_graph                   68.88      73.84      79.25      1.07         1
+  build_halo_maps               54.17      54.60      55.04      1.01         0
+  halo_exchange                 38.39     189.08     258.04      1.36         3
+  model_forward               7750.04    7847.17    7989.95      1.02         1
+  integrator_halfstep1           0.75       0.78       0.81      1.04         1
+  integrator_halfstep2           0.03       0.03       0.04      1.31         2
+  integrator_step               35.54      40.90      43.08      1.05         0
+  iteration                     69.84      94.76     120.79      1.27         3
+  traj_flush                     1.20       1.41       2.05      1.45         1
+
+== Rank 0 ==
+
+== Per-key totals across all ranks (call_order) ==
+  key                      class       calls      self ms   self/call us      incl ms  % iter   errs
+  --------------------------------------------------------------------------------------------------
+  partition                compute         2        53.40       26698.14        53.40  61.56%      0
+  build_graph              compute         7        75.45       10778.20        75.45  86.99%      0
+  build_halo_maps          compute         2        55.04       27518.37       123.97  63.46%      0
+  halo_exchange            comm           21       210.52       10025.00       210.52 242.73%      0
+  model_forward            compute        10      7831.95      783194.65      8048.99 9030.08%      0
+  integrator_halfstep1     compute         4         0.75         187.07         0.75   0.86%      0
+  integrator_halfstep2     compute         4         0.03           7.20         0.03   0.03%      0
+  integrator_step          compute         8        43.08        5385.33      8092.85  49.67%      0
+  iteration                total           8        86.73       10841.47      8179.58 100.00%      0
+  traj_flush               other           1         1.20        1198.88         1.20   1.38%      0
+
+== Rank 1 ==
+
+== Per-key totals across all ranks (call_order) ==
+  key                      class       calls      self ms   self/call us      incl ms  % iter   errs
+  --------------------------------------------------------------------------------------------------
+  partition                compute         2        60.77       30386.49        60.77  59.78%      0
+  build_graph              compute         7        79.25       11321.30        79.25  77.95%      0
+  build_halo_maps          compute         2        54.17       27086.53       126.88  53.29%      0
+  halo_exchange            comm           21        38.39        1828.28        38.39  37.77%      0
+  model_forward            compute        10      7989.95      798995.47      8034.89 7859.31%      0
+  integrator_halfstep1     compute         4         0.81         202.70         0.81   0.80%      0
+  integrator_halfstep2     compute         4         0.03           7.49         0.03   0.03%      0
+  integrator_step          compute         8        42.16        5269.41      8077.89  41.47%      0
+  iteration                total           8       101.66       12707.78      8179.55 100.00%      0
+  traj_flush               other           1         2.05        2047.24         2.05   2.01%      0
+
+== Rank 2 ==
+
+== Per-key totals across all ranks (call_order) ==
+  key                      class       calls      self ms   self/call us      incl ms  % iter   errs
+  --------------------------------------------------------------------------------------------------
+  partition                compute         2        53.62       26809.12        53.62  76.77%      0
+  build_graph              compute         7        68.88        9839.53        68.88  98.62%      0
+  build_halo_maps          compute         2        54.68       27339.09       116.33  78.29%      0
+  halo_exchange            comm           21       249.35       11873.91       249.35 357.04%      0
+  model_forward            compute        10      7816.76      781675.54      8073.33 11192.61%      0
+  integrator_halfstep1     compute         4         0.79         197.74         0.79   1.13%      0
+  integrator_halfstep2     compute         4         0.04          10.45         0.04   0.06%      0
+  integrator_step          compute         8        35.54        4442.79      8109.71  50.89%      0
+  iteration                total           8        69.84        8729.82      8179.54 100.00%      0
+  traj_flush               other           1         1.21        1205.76         1.21   1.73%      0
+
+== Rank 3 ==
+
+== Per-key totals across all ranks (call_order) ==
+  key                      class       calls      self ms   self/call us      incl ms  % iter   errs
+  --------------------------------------------------------------------------------------------------
+  partition                compute         2        53.68       26837.60        53.68  44.44%      0
+  build_graph              compute         7        71.80       10257.56        71.80  59.44%      0
+  build_halo_maps          compute         2        54.52       27262.09       119.55  45.14%      0
+  halo_exchange            comm           21       258.04       12287.41       258.04 213.62%      0
+  model_forward            compute        10      7750.04      775004.09      8014.85 6416.06%      0
+  integrator_halfstep1     compute         4         0.77         193.68         0.77   0.64%      0
+  integrator_halfstep2     compute         4         0.03           6.80         0.03   0.02%      0
+  integrator_step          compute         8        42.82        5352.96      8058.48  35.45%      0
+  iteration                total           8       120.79       15098.91      8179.27 100.00%      0
+  traj_flush               other           1         1.20        1202.34         1.20   1.00%      0
