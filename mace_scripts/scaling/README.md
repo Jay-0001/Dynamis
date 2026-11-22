@@ -1,6 +1,6 @@
 # MACE OFF active-worker scaling on EmpireAI Beta
 
-The shared driver now also supports Medium MPA with separate `run_{1,2,4}gpu_mpa.sh` jobs. They use the same cluster-generated XYZ and manifest, and write to `mace_results/strong_scaling_mpa/`. This CH4/O2 workload compares execution cost; it does not validate MPA chemistry. Start with `STEPS=4,WARMUP_STEPS=1` to verify the MPA path, then run the standard 120-step setting. Keep `MACE_ENABLE_CUEQ=0` for the initial MPA E2E runs while the static CuEq force-parity discrepancy remains open.
+The shared driver also supports Medium MPA with separate `run_{1,2,4}gpu_mpa.sh` jobs. These jobs require CuEq, use the same cluster-generated XYZ and manifest, and write to `mace_results/strong_scaling_mpa/`. This CH4/O2 workload compares execution cost; it does not validate MPA chemistry. Start with `STEPS=4,WARMUP_STEPS=1` to verify the MPA path, then run the standard 120-step setting. The static MPA CuEq force-parity discrepancy remains open and must be resolved before using trajectories for accuracy claims.
 
 These jobs compare one, two, and four active GPU workers on the **same** CH4/O2
 system. Every job reserves four B200 GPUs on one Beta node to satisfy the
@@ -81,9 +81,8 @@ avoid conflicting Slurm CPU settings. The default limit is four hours and
 `--mem` after the pilot if needed. `OMP_NUM_THREADS` defaults to one for each
 Torch worker so four workers fit within the seven-CPU allocation.
 
-The checkpoint is MACE OFF24 medium (the explicit OFF24 model URL), using the e3nn
-backend. To compare CuEq instead, submit **all** jobs with
-`--export=ALL,MACE_ENABLE_CUEQ=1`. `MACE_OFF_MODEL`, `XYZ_PATH`, `STEPS`,
+The OFF checkpoint defaults to MACE OFF24 medium (the explicit OFF24 model URL). For OFF24 CuEq, submit **each** OFF job with
+`--export=ALL,MACE_ENABLE_CUEQ=1` and pass `MACE_OFF_MODEL` explicitly if your environment may override it. The MPA job scripts enforce CuEq. `MACE_OFF_MODEL`, `XYZ_PATH`, `STEPS`,
 `WARMUP_STEPS`, `TIMESTEP_FS`, `REBALANCE_INTERVAL`, and `OMP_NUM_THREADS`
 are also accepted, but must match across worker counts. Model loading and
 simulation setup are outside the timed region.

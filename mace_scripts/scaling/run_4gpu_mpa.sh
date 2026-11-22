@@ -14,4 +14,5 @@
 #SBATCH --error=mace_scripts/output/mace-mpa-4worker-%j.err
 set -euo pipefail
 export MACE_MODEL_FAMILY=mp
+export MACE_ENABLE_CUEQ=1
 bash "${SLURM_SUBMIT_DIR:?}/mace_scripts/scaling/run_beta_job.sh" 4

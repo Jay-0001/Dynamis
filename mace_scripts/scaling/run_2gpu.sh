@@ -14,4 +14,5 @@
 #SBATCH --error=mace_scripts/output/mace-off-2worker-%j.err
 
 set -euo pipefail
+export MACE_MODEL_FAMILY=off
 bash "${SLURM_SUBMIT_DIR:?}/mace_scripts/scaling/run_beta_job.sh" 2

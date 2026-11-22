@@ -9,6 +9,7 @@ import os
 import statistics
 import time
 from pathlib import Path
+from types import MethodType
 
 import torch
 import torch.distributed as dist
@@ -43,6 +44,24 @@ FORCE_RTOL = 1e-5
 GRAPH_BOUNDARY_BAND_ANGSTROM = 1e-4
 
 
+def legacy_reduce_owned_energy(self, node_e0, node_inter_es, num_local):
+    """Reproduce the pre-OFF adapter's float32 add-then-sum force path.
+
+    The extra detached components support the current parity report; they do
+    not participate in the energy differentiated to recover forces.
+    """
+    owned_e0 = node_e0.reshape(-1)[:num_local]
+    owned_node_energy = (node_e0 + node_inter_es).reshape(-1)[:num_local]
+    return {
+        "owned_node_energy": owned_node_energy,
+        "owned_local_energy": owned_node_energy.sum(),
+        "owned_baseline_energy": owned_e0.detach().double().sum(),
+        "owned_interaction_energy": (
+            owned_node_energy.detach().double() - owned_e0.detach().double()
+        ).sum(),
+    }
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -62,11 +81,15 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--energy-atol", type=float, default=ENERGY_ATOL_MD)
     run.add_argument("--force-atol", type=float, default=FORCE_ATOL_MD)
     run.add_argument("--force-rtol", type=float, default=FORCE_RTOL)
+    run.add_argument("--adapter-reduction", choices=("current", "legacy"), default="current",
+                     help="Use the current float64 separated sum or the historical float32 add-then-sum path")
     run.add_argument("--benchmark", action="store_true")
     run.add_argument("--benchmark-warmup", type=int, default=3)
     run.add_argument("--benchmark-iterations", type=int, default=10)
     run.add_argument("--benchmark-samples", type=int, default=5)
     run.add_argument("--output-json", type=Path)
+    run.add_argument("--output-forces", type=Path,
+                     help="Save aligned reference, distributed, and error force tensors for diagnosis")
     return parser
 
 
@@ -239,6 +262,8 @@ def run_distributed(args: argparse.Namespace):
         args.model_family, args.model, str(device), enable_cueq=args.enable_cueq
     ).to(device=device).eval()
     adapter = MACEModel(model, head_name=args.head_name or None)
+    if args.adapter_reduction == "legacy":
+        adapter.runtime._reduce_owned_energy = MethodType(legacy_reduce_owned_energy, adapter.runtime)
     state = build_state(raw, adapter.cutoff, args.ghost_cutoff_buffer, torch_env)
     if not torch.isclose(torch.as_tensor(state.sim_config.cutoff), torch.as_tensor(adapter.cutoff)):
         raise ValueError("Simulation halo cutoff differs from checkpoint r_max.")
@@ -282,6 +307,23 @@ def run_distributed(args: argparse.Namespace):
     energy_error = distributed_energy - reference_energy
     force_error = assembled - reference_forces
     force_ok = torch.allclose(assembled, reference_forces, atol=args.force_atol, rtol=args.force_rtol)
+    abs_force_error = force_error.abs()
+    force_limit = args.force_atol + args.force_rtol * reference_forces.abs()
+    force_violations = abs_force_error > force_limit
+    worst_flat = int((abs_force_error - force_limit).reshape(-1).argmax())
+    worst_atom, worst_axis = divmod(worst_flat, 3)
+    force_by_rank = []
+    for item in records:
+        rank_indices = torch.tensor(item["atom_ids"], dtype=torch.long)
+        rank_errors = abs_force_error[rank_indices]
+        force_by_rank.append({
+            "rank": item["rank"],
+            "owned_atoms": len(item["atom_ids"]),
+            "halo_atoms": item["halo_atoms"],
+            "mae_md": float(rank_errors.mean()) if rank_errors.numel() else 0.0,
+            "max_abs_md": float(rank_errors.max()) if rank_errors.numel() else 0.0,
+            "violating_components": int(force_violations[rank_indices].sum()),
+        })
     energy_ok = abs(energy_error) <= args.energy_atol
     graph = (
         compare_owned_edges(records, reference["edge_rows"], raw, adapter.cutoff)
@@ -289,14 +331,24 @@ def run_distributed(args: argparse.Namespace):
     )
     summary = {
         "model": {"family": args.model_family, "checkpoint": args.model,
-                  "head": adapter.head_name, "cueq": args.enable_cueq},
+                  "head": adapter.head_name, "cueq": args.enable_cueq,
+                  "adapter_reduction": args.adapter_reduction},
         "system": {"name": raw["name"], "num_atoms": n_atoms,
                    "cutoff_angstrom": adapter.cutoff},
         "energy": {"distributed_md": distributed_energy,
+                   "reported_local_sum_md": sum(item["local_energy_md"] for item in records),
                    "raw_core_controlled_md": reference_energy,
                    "error_md": energy_error, "close": energy_ok},
-        "forces": {"mae_md": float(force_error.abs().mean()),
-                   "max_abs_md": float(force_error.abs().max()), "close": bool(force_ok)},
+        "forces": {"mae_md": float(abs_force_error.mean()),
+                   "max_abs_md": float(abs_force_error.max()), "close": bool(force_ok),
+                   "atol_md": args.force_atol, "rtol": args.force_rtol,
+                   "violating_components": int(force_violations.sum()),
+                   "worst_component": {"atom_id": worst_atom, "axis": "xyz"[worst_axis],
+                                       "reference_md": float(reference_forces[worst_atom, worst_axis]),
+                                       "distributed_md": float(assembled[worst_atom, worst_axis]),
+                                       "abs_error_md": float(abs_force_error[worst_atom, worst_axis]),
+                                       "allowed_error_md": float(force_limit[worst_atom, worst_axis])},
+                   "by_rank": force_by_rank},
         "ranks": [{"rank": item["rank"], "owned_atoms": len(item["atom_ids"]),
                    "halo_atoms": item["halo_atoms"]} for item in records],
         "graph": graph,
@@ -317,6 +369,10 @@ def run_distributed(args: argparse.Namespace):
     if args.output_json:
         args.output_json.parent.mkdir(parents=True, exist_ok=True)
         args.output_json.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    if args.output_forces:
+        args.output_forces.parent.mkdir(parents=True, exist_ok=True)
+        torch.save({"reference_md": reference_forces, "distributed_md": assembled,
+                    "error_md": force_error}, args.output_forces)
     if args.strict_parity and not (energy_ok and force_ok):
         raise AssertionError("MACE energy or force parity failed against the raw-core reference.")
     if args.strict_graph_interior and graph and (
