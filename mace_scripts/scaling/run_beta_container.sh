@@ -45,7 +45,7 @@ xyz_path="${XYZ_PATH:-/workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_sp
 test -f "$xyz_path" || { echo "Missing XYZ: $xyz_path. Run preparation first." >&2; exit 1; }
 test -f "${xyz_path%.xyz}.json" || { echo "Missing XYZ manifest: ${xyz_path%.xyz}.json" >&2; exit 1; }
 
-model="${MACE_OFF_MODEL:-medium}"
+model="${MACE_OFF_MODEL:-https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model}"
 backend_args=()
 case "${MACE_ENABLE_CUEQ:-0}" in
     0) ;;

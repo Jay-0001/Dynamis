@@ -59,7 +59,11 @@ def main() -> None:
     parser.add_argument("--warmup-steps", type=int, default=20)
     parser.add_argument("--timestep-fs", type=float, default=0.1)
     parser.add_argument("--rebalance-interval", type=int, default=0)
-    parser.add_argument("--model", default="medium", help="MACE OFF checkpoint name")
+    parser.add_argument(
+        "--model",
+        default="https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+        help="MACE OFF checkpoint name, path, or URL (default: OFF24 medium)",
+    )
     parser.add_argument("--enable-cueq", action="store_true", help="Convert the MACE OFF checkpoint to CuEq")
     args = parser.parse_args()
     if args.steps <= args.warmup_steps or args.warmup_steps < 0:
@@ -106,6 +110,10 @@ def main() -> None:
         raw = load_raw_mace_model(
             "off", args.model, device=str(env.device), enable_cueq=args.enable_cueq
         )
+        # The OFF loader can return TorchScript/e3nn buffers on CPU even when
+        # its device argument names CUDA. Move the complete model, including
+        # registered buffers, before the first distributed force evaluation.
+        raw = raw.to(device=env.device, dtype=torch.float32)
         model = MACEModel(raw)
         config = SimulatorConfig(
             timestep_fs=args.timestep_fs, total_steps=args.steps,

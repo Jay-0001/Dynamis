@@ -79,12 +79,15 @@ avoid conflicting Slurm CPU settings. The default limit is four hours and
 `--mem` after the pilot if needed. `OMP_NUM_THREADS` defaults to one for each
 Torch worker so four workers fit within the seven-CPU allocation.
 
-The checkpoint is MACE OFF `medium` (the default OFF23 path), using the e3nn
+The checkpoint is MACE OFF24 medium (the explicit OFF24 model URL), using the e3nn
 backend. To compare CuEq instead, submit **all** jobs with
 `--export=ALL,MACE_ENABLE_CUEQ=1`. `MACE_OFF_MODEL`, `XYZ_PATH`, `STEPS`,
 `WARMUP_STEPS`, `TIMESTEP_FS`, `REBALANCE_INTERVAL`, and `OMP_NUM_THREADS`
 are also accepted, but must match across worker counts. Model loading and
 simulation setup are outside the timed region.
+Set `MACE_OFF_MODEL=medium` explicitly only when comparing against the older
+OFF23 checkpoint; record that override because the two models are not
+interchangeable scaling cases.
 
 ## Outputs and interpretation
 
