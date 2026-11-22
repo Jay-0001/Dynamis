@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one synchronized MACE OFF strong-scaling measurement under torchrun."""
+"""Run one synchronized MACE OFF24 or MPA measurement under torchrun."""
 
 import argparse
 import hashlib
@@ -14,7 +14,7 @@ import torch.distributed as dist
 
 from dynamis import Simulator, SimulatorConfig
 from dynamis_integrator import Verlet
-from dynamis_model.nnp.mace import MACEModel, load_raw_mace_model
+from dynamis_model.nnp.mace import MACEModel, load_raw_mace_model, resolve_mace_model_name
 from dynamis_state import TIMING_ENABLED, TimingRegistry, TorchDistEnv
 
 
@@ -59,13 +59,11 @@ def main() -> None:
     parser.add_argument("--warmup-steps", type=int, default=20)
     parser.add_argument("--timestep-fs", type=float, default=0.1)
     parser.add_argument("--rebalance-interval", type=int, default=0)
-    parser.add_argument(
-        "--model",
-        default="https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
-        help="MACE OFF checkpoint name, path, or URL (default: OFF24 medium)",
-    )
-    parser.add_argument("--enable-cueq", action="store_true", help="Convert the MACE OFF checkpoint to CuEq")
+    parser.add_argument("--model-family", choices=("off", "mp"), default="off")
+    parser.add_argument("--model", default=None, help="Checkpoint name, path, or URL; defaults to OFF24 medium or medium-mpa-0")
+    parser.add_argument("--enable-cueq", action="store_true", help="Convert the MACE checkpoint to CuEq")
     args = parser.parse_args()
+    args.model = resolve_mace_model_name(args.model_family, args.model)
     if args.steps <= args.warmup_steps or args.warmup_steps < 0:
         parser.error("require 0 <= warmup-steps < steps")
     if args.timestep_fs <= 0 or args.rebalance_interval < 0:
@@ -93,7 +91,7 @@ def main() -> None:
         if env.global_rank == 0:
             output.mkdir(parents=True, exist_ok=False)
             (output / "run_metadata.json").write_text(json.dumps({
-                "model_family": "off", "model": args.model, "xyz": str(xyz),
+                "model_family": args.model_family, "model": args.model, "xyz": str(xyz),
                 "backend": "cueq" if args.enable_cueq else "e3nn",
                 "xyz_sha256": xyz_hash, "atoms": atoms, "box_angstrom": side,
                 "world_size": env.world_size, "steps": args.steps,
@@ -108,7 +106,7 @@ def main() -> None:
             }, indent=2) + "\n", encoding="utf-8")
         dist.barrier()
         raw = load_raw_mace_model(
-            "off", args.model, device=str(env.device), enable_cueq=args.enable_cueq
+            args.model_family, args.model, device=str(env.device), enable_cueq=args.enable_cueq
         )
         # The OFF loader can return TorchScript/e3nn buffers on CPU even when
         # its device argument names CUDA. Move the complete model, including

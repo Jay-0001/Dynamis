@@ -4,10 +4,9 @@
 controlled energy total. It widens each owned atom's baseline and interaction
 contribution to float64, sums those contributions separately, then converts the
 energy and forces to Dynamis MD units. MPA (`mp/medium-mpa-0`) is the default;
-`--model-family off` selects OFF23 medium unless `--model` selects small or large.
+`--model-family off` defaults to the explicit OFF24 medium checkpoint. Pass `--model medium` for the historical OFF23 medium checkpoint.
 The checkpoint supplies its cutoff, species table, interactions, and readouts.
-The OFF24 medium checkpoint is available through the same `off` family with an
-explicit checkpoint URL or local path; the OFF23 default is unchanged.
+The OFF24 medium checkpoint is also available through an explicit URL or local path.
 
 The acceptance reference is the **raw MACE model** on a MACE-native graph. Its
 selected-head per-atom baseline and interaction energies are summed in float64.

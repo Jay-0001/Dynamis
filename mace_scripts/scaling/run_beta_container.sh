@@ -45,7 +45,12 @@ xyz_path="${XYZ_PATH:-/workspace/Dynamis/mace_data/strong_scaling_off/ch4_45k_sp
 test -f "$xyz_path" || { echo "Missing XYZ: $xyz_path. Run preparation first." >&2; exit 1; }
 test -f "${xyz_path%.xyz}.json" || { echo "Missing XYZ manifest: ${xyz_path%.xyz}.json" >&2; exit 1; }
 
-model="${MACE_OFF_MODEL:-https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model}"
+model_family="${MACE_MODEL_FAMILY:-off}"
+case "$model_family" in
+    off) model="${MACE_OFF_MODEL:-https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model}"; result_group=strong_scaling_off ;;
+    mp) model="${MACE_MP_MODEL:-medium-mpa-0}"; result_group=strong_scaling_mpa ;;
+    *) echo "MACE_MODEL_FAMILY must be off or mp" >&2; exit 2 ;;
+esac
 backend_args=()
 case "${MACE_ENABLE_CUEQ:-0}" in
     0) ;;
@@ -53,15 +58,15 @@ case "${MACE_ENABLE_CUEQ:-0}" in
     *) echo "MACE_ENABLE_CUEQ must be 0 or 1" >&2; exit 2 ;;
 esac
 
-output_dir="/workspace/Dynamis/mace_results/strong_scaling_off/${workers}gpu_${SLURM_JOB_ID:?}"
+output_dir="/workspace/Dynamis/mace_results/${result_group}/${workers}gpu_${SLURM_JOB_ID:?}"
 
 # Cache the checkpoint once before the ranks load it concurrently.
-python - "$model" "${MACE_ENABLE_CUEQ:-0}" <<'PY'
+python - "$model_family" "$model" "${MACE_ENABLE_CUEQ:-0}" <<'PY'
 import sys
 from dynamis_model.nnp.mace import load_raw_mace_model
 
-load_raw_mace_model("off", sys.argv[1], device="cuda:0", enable_cueq=sys.argv[2] == "1")
-print("MACE OFF checkpoint preloaded", flush=True)
+load_raw_mace_model(sys.argv[1], sys.argv[2], device="cuda:0", enable_cueq=sys.argv[3] == "1")
+print(f"MACE {sys.argv[1]} checkpoint preloaded", flush=True)
 PY
 
 python -m torch.distributed.run --standalone --nproc-per-node="$workers" \
@@ -69,7 +74,7 @@ python -m torch.distributed.run --standalone --nproc-per-node="$workers" \
     --xyz "$xyz_path" --output-dir "$output_dir" --expected-gpus "$workers" \
     --steps "${STEPS:-120}" --warmup-steps "${WARMUP_STEPS:-20}" \
     --timestep-fs "${TIMESTEP_FS:-0.1}" --rebalance-interval "${REBALANCE_INTERVAL:-0}" \
-    --model "$model" "${backend_args[@]}"
+    --model-family "$model_family" --model "$model" "${backend_args[@]}"
 
 python post_processing/strong_scaling_summary.py "$output_dir"
 python post_processing/timing_summary.py "$output_dir" --by-rank > "$output_dir/timing_diagnostics.txt"

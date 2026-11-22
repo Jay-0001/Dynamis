@@ -1,5 +1,7 @@
 # MACE OFF active-worker scaling on EmpireAI Beta
 
+The shared driver now also supports Medium MPA with separate `run_{1,2,4}gpu_mpa.sh` jobs. They use the same cluster-generated XYZ and manifest, and write to `mace_results/strong_scaling_mpa/`. This CH4/O2 workload compares execution cost; it does not validate MPA chemistry. Start with `STEPS=4,WARMUP_STEPS=1` to verify the MPA path, then run the standard 120-step setting. Keep `MACE_ENABLE_CUEQ=0` for the initial MPA E2E runs while the static CuEq force-parity discrepancy remains open.
+
 These jobs compare one, two, and four active GPU workers on the **same** CH4/O2
 system. Every job reserves four B200 GPUs on one Beta node to satisfy the
 minimum GPU request shown in the Beta login banner. The one- and two-worker

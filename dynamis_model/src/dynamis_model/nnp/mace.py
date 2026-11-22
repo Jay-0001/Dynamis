@@ -34,7 +34,10 @@ from dynamis_state import (
 )
 
 COMPUTE_DTYPE = torch.float32
-DEFAULT_MACE_MODELS = {"mp": "medium-mpa-0", "off": "medium"}
+DEFAULT_MACE_MODELS = {
+    "mp": "medium-mpa-0",
+    "off": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+}
 
 try:
     from mace.calculators import mace_mp, mace_off, mace_omol, mace_polar
@@ -93,13 +96,13 @@ def load_raw_mace_model(
         device=device,
         default_dtype="float32",
         return_raw_model=True,
-    ).to(dtype=COMPUTE_DTYPE)
+    ).to(device=device, dtype=COMPUTE_DTYPE)
     if enable_cueq:
         if _CUEQ_IMPORT_ERROR is not None:
             raise ImportError(
                 "CuEquivariance conversion was requested but is unavailable."
             ) from _CUEQ_IMPORT_ERROR
-        loaded_model = run_e3nn_to_cueq(loaded_model, device=device).to(device)
+        loaded_model = run_e3nn_to_cueq(loaded_model, device=device).to(device=device, dtype=COMPUTE_DTYPE)
     return loaded_model
 
 

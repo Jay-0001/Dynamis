@@ -352,7 +352,7 @@ def test_default_model_and_family_resolution():
     args = build_parser().parse_args(["run-distributed", "--reference-artifact", "ref.pt"])
     assert args.model_family == "mp"
     assert resolve_mace_model_name(args.model_family, args.model) == "medium-mpa-0"
-    assert resolve_mace_model_name("off", None) == "medium"
+    assert resolve_mace_model_name("off", None).endswith("/mace_off24/MACE-OFF24_medium.model")
 
 
 def test_generated_molecules_are_deterministic_and_graph_safe():
