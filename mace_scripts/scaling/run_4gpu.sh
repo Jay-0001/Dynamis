@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:4
 #SBATCH --cpus-per-task=7
 #SBATCH --mem=128G
-#SBATCH --time=04:00:00
+#SBATCH --time=00:30:00
 #SBATCH --output=mace_scripts/output/mace-off-4worker-%j.out
 #SBATCH --error=mace_scripts/output/mace-off-4worker-%j.err
 

@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "benchmark_scaling_molecular_7500",
+    "num_atoms": 7500,
+    "model_family": "mp",
+    "model_name": "medium-mpa-0",
+    "head_name": "default",
+    "enable_cueq": true,
+    "cutoff_angstrom": 6.0,
+    "signature": "ae0f2596a65ddad8362b9797ad0728130fd9529a69baaa5309a2e5dad824a0a0"
+  },
+  "reference": {
+    "controlled_energy_ev": -39526.54971790314,
+    "directed_edges": 170134,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": {
+    "median_ms_per_step": 83.78206160850823,
+    "samples_ms": [
+      84.87436238210648,
+      83.78206160850823,
+      83.34015859290957
+    ]
+  }
+}

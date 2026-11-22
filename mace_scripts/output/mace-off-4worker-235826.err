@@ -1,0 +1,456 @@
+pyxis: importing docker image: nvcr.io#nvidia/pytorch:25.08-py3
+pyxis: imported docker image: nvcr.io#nvidia/pytorch:25.08-py3
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/calculators/foundations_models.py:421: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  return torch.load(model, map_location=device)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 132, in <module>
+[rank1]:     main()
+[rank1]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 120, in main
+[rank1]:     sim.run()
+[rank1]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 437, in run
+[rank1]:     energy = self.step(self.config.timestep_fs)
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 23, in step
+[rank1]:     result = super().step(step_size)
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 331, in step
+[rank1]:     out = self.integrator.step(
+[rank1]:           ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 20, in wrapper
+[rank1]:     return fn(self, state, *args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/verlet.py", line 95, in step
+[rank1]:     _, atom_forces = self._compute_force(dist_state, model)
+[rank1]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 68, in _compute_force
+[rank1]:     return model(dist_state)
+[rank1]:            ^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 339, in _model_with_drift_flag
+[rank1]:     return self.model(dist_state, *args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/potential.py", line 24, in wrapper
+[rank1]:     return fn(self, distributed_state, *args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 679, in __call__
+[rank1]:     outputs = self.runtime(graph.batch_dict)
+[rank1]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 360, in forward
+[rank1]:     node_feats, sc = interaction(
+[rank1]:                      ^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 791, in forward
+[rank1]:     mji = self.conv_tp(
+[rank1]:           ^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 529, in forward
+[rank1]:     return self._compiled_main_left_right(x, y, real_weight)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: RuntimeError: The following operation failed in the TorchScript interpreter.
+[rank1]: Traceback of TorchScript, serialized code (most recent call last):
+[rank1]:   File "code/__torch__/torch/fx/graph_module/___torch_mangle_11.py", line 97, in forward
+[rank1]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank1]:     mul_1 = torch.mul(_w3j_1_2_1, 1.7320508075688772)
+[rank1]:     tensordot = _0(einsum_11, mul_1, ([4, 3], [1, 0]), None, )
+[rank1]:                 ~~ <--- HERE
+[rank1]:     einsum_12 = torch.einsum("dbca,dbc->dba", [tensordot, reshape_21])
+[rank1]:     reshape_22 = torch.reshape(einsum_12, [getitem_4, 384])
+[rank1]:   File "code/__torch__/torch/functional/___torch_mangle_0.py", line 9, in tensordot
+[rank1]:   dims_a, dims_b, = dims1
+[rank1]:   if torch.__is__(out, None):
+[rank1]:     _1 = torch.tensordot(a, b, dims_a, dims_b)
+[rank1]:          ~~~~~~~~~~~~~~~ <--- HERE
+[rank1]:     _0 = _1
+[rank1]:   else:
+
+[rank1]: Traceback of TorchScript, original code (most recent call last):
+[rank1]:   File "<eval_with_key>.127", line 75, in forward
+[rank1]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank1]:     mul_1 = _w3j_1_2_1 * 1.7320508075688772;  _w3j_1_2_1 = None
+[rank1]:     tensordot = torch.functional.tensordot(einsum_11, mul_1, ([4, 3], [1, 0]), out = None);  mul_1 = None
+[rank1]:                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+[rank1]:     einsum_12 = torch.functional.einsum('dbca,dbc->dba', tensordot, reshape_21);  tensordot = reshape_21 = None
+[rank1]:     reshape_22 = einsum_12.reshape(getitem_4, 384);  einsum_12 = None
+[rank1]:   File "/home/dpk25/miniconda3/envs/SPICE/lib/python3.9/site-packages/torch/functional.py", line 1064, in tensordot
+
+[rank1]:     if out is None:
+[rank1]:         return _VF.tensordot(a, b, dims_a, dims_b)  # type: ignore[attr-defined]
+[rank1]:                ~~~~~~~~~~~~~ <--- HERE
+[rank1]:     else:
+[rank1]:         return _VF.tensordot(a, b, dims_a, dims_b, out=out)  # type: ignore[attr-defined]
+[rank1]: RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:1 and cpu! (when checking argument for argument mat2 in method wrapper_CUDA_mm)
+
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 132, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 120, in main
+[rank2]:     sim.run()
+[rank2]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 437, in run
+[rank2]:     energy = self.step(self.config.timestep_fs)
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 23, in step
+[rank2]:     result = super().step(step_size)
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 331, in step
+[rank2]:     out = self.integrator.step(
+[rank2]:           ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 20, in wrapper
+[rank2]:     return fn(self, state, *args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/verlet.py", line 95, in step
+[rank2]:     _, atom_forces = self._compute_force(dist_state, model)
+[rank2]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 68, in _compute_force
+[rank2]:     return model(dist_state)
+[rank2]:            ^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 339, in _model_with_drift_flag
+[rank2]:     return self.model(dist_state, *args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/potential.py", line 24, in wrapper
+[rank2]:     return fn(self, distributed_state, *args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 679, in __call__
+[rank2]:     outputs = self.runtime(graph.batch_dict)
+[rank2]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 360, in forward
+[rank2]:     node_feats, sc = interaction(
+[rank2]:                      ^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 791, in forward
+[rank2]:     mji = self.conv_tp(
+[rank2]:           ^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 529, in forward
+[rank2]:     return self._compiled_main_left_right(x, y, real_weight)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: RuntimeError: The following operation failed in the TorchScript interpreter.
+[rank2]: Traceback of TorchScript, serialized code (most recent call last):
+[rank2]:   File "code/__torch__/torch/fx/graph_module/___torch_mangle_11.py", line 97, in forward
+[rank2]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank2]:     mul_1 = torch.mul(_w3j_1_2_1, 1.7320508075688772)
+[rank2]:     tensordot = _0(einsum_11, mul_1, ([4, 3], [1, 0]), None, )
+[rank2]:                 ~~ <--- HERE
+[rank2]:     einsum_12 = torch.einsum("dbca,dbc->dba", [tensordot, reshape_21])
+[rank2]:     reshape_22 = torch.reshape(einsum_12, [getitem_4, 384])
+[rank2]:   File "code/__torch__/torch/functional/___torch_mangle_0.py", line 9, in tensordot
+[rank2]:   dims_a, dims_b, = dims1
+[rank2]:   if torch.__is__(out, None):
+[rank2]:     _1 = torch.tensordot(a, b, dims_a, dims_b)
+[rank2]:          ~~~~~~~~~~~~~~~ <--- HERE
+[rank2]:     _0 = _1
+[rank2]:   else:
+
+[rank2]: Traceback of TorchScript, original code (most recent call last):
+[rank2]:   File "<eval_with_key>.127", line 75, in forward
+[rank2]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank2]:     mul_1 = _w3j_1_2_1 * 1.7320508075688772;  _w3j_1_2_1 = None
+[rank2]:     tensordot = torch.functional.tensordot(einsum_11, mul_1, ([4, 3], [1, 0]), out = None);  mul_1 = None
+[rank2]:                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+[rank2]:     einsum_12 = torch.functional.einsum('dbca,dbc->dba', tensordot, reshape_21);  tensordot = reshape_21 = None
+[rank2]:     reshape_22 = einsum_12.reshape(getitem_4, 384);  einsum_12 = None
+[rank2]:   File "/home/dpk25/miniconda3/envs/SPICE/lib/python3.9/site-packages/torch/functional.py", line 1064, in tensordot
+
+[rank2]:     if out is None:
+[rank2]:         return _VF.tensordot(a, b, dims_a, dims_b)  # type: ignore[attr-defined]
+[rank2]:                ~~~~~~~~~~~~~ <--- HERE
+[rank2]:     else:
+[rank2]:         return _VF.tensordot(a, b, dims_a, dims_b, out=out)  # type: ignore[attr-defined]
+[rank2]: RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:2 and cpu! (when checking argument for argument mat2 in method wrapper_CUDA_mm)
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 132, in <module>
+[rank0]:     main()
+[rank0]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 120, in main
+[rank0]:     sim.run()
+[rank0]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 437, in run
+[rank0]:     energy = self.step(self.config.timestep_fs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 23, in step
+[rank0]:     result = super().step(step_size)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 331, in step
+[rank0]:     out = self.integrator.step(
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 20, in wrapper
+[rank0]:     return fn(self, state, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/verlet.py", line 95, in step
+[rank0]:     _, atom_forces = self._compute_force(dist_state, model)
+[rank0]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 68, in _compute_force
+[rank0]:     return model(dist_state)
+[rank0]:            ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 339, in _model_with_drift_flag
+[rank0]:     return self.model(dist_state, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/potential.py", line 24, in wrapper
+[rank0]:     return fn(self, distributed_state, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 679, in __call__
+[rank0]:     outputs = self.runtime(graph.batch_dict)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 360, in forward
+[rank0]:     node_feats, sc = interaction(
+[rank0]:                      ^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 791, in forward
+[rank0]:     mji = self.conv_tp(
+[rank0]:           ^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 529, in forward
+[rank0]:     return self._compiled_main_left_right(x, y, real_weight)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: RuntimeError: The following operation failed in the TorchScript interpreter.
+[rank0]: Traceback of TorchScript, serialized code (most recent call last):
+[rank0]:   File "code/__torch__/torch/fx/graph_module/___torch_mangle_11.py", line 97, in forward
+[rank0]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank0]:     mul_1 = torch.mul(_w3j_1_2_1, 1.7320508075688772)
+[rank0]:     tensordot = _0(einsum_11, mul_1, ([4, 3], [1, 0]), None, )
+[rank0]:                 ~~ <--- HERE
+[rank0]:     einsum_12 = torch.einsum("dbca,dbc->dba", [tensordot, reshape_21])
+[rank0]:     reshape_22 = torch.reshape(einsum_12, [getitem_4, 384])
+[rank0]:   File "code/__torch__/torch/functional/___torch_mangle_0.py", line 9, in tensordot
+[rank0]:   dims_a, dims_b, = dims1
+[rank0]:   if torch.__is__(out, None):
+[rank0]:     _1 = torch.tensordot(a, b, dims_a, dims_b)
+[rank0]:          ~~~~~~~~~~~~~~~ <--- HERE
+[rank0]:     _0 = _1
+[rank0]:   else:
+
+[rank0]: Traceback of TorchScript, original code (most recent call last):
+[rank0]:   File "<eval_with_key>.127", line 75, in forward
+[rank0]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank0]:     mul_1 = _w3j_1_2_1 * 1.7320508075688772;  _w3j_1_2_1 = None
+[rank0]:     tensordot = torch.functional.tensordot(einsum_11, mul_1, ([4, 3], [1, 0]), out = None);  mul_1 = None
+[rank0]:                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+[rank0]:     einsum_12 = torch.functional.einsum('dbca,dbc->dba', tensordot, reshape_21);  tensordot = reshape_21 = None
+[rank0]:     reshape_22 = einsum_12.reshape(getitem_4, 384);  einsum_12 = None
+[rank0]:   File "/home/dpk25/miniconda3/envs/SPICE/lib/python3.9/site-packages/torch/functional.py", line 1064, in tensordot
+
+[rank0]:     if out is None:
+[rank0]:         return _VF.tensordot(a, b, dims_a, dims_b)  # type: ignore[attr-defined]
+[rank0]:                ~~~~~~~~~~~~~ <--- HERE
+[rank0]:     else:
+[rank0]:         return _VF.tensordot(a, b, dims_a, dims_b, out=out)  # type: ignore[attr-defined]
+[rank0]: RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat2 in method wrapper_CUDA_mm)
+
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 132, in <module>
+[rank3]:     main()
+[rank3]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 120, in main
+[rank3]:     sim.run()
+[rank3]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 437, in run
+[rank3]:     energy = self.step(self.config.timestep_fs)
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/mace_scripts/scaling/run_mace_off.py", line 23, in step
+[rank3]:     result = super().step(step_size)
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 331, in step
+[rank3]:     out = self.integrator.step(
+[rank3]:           ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 20, in wrapper
+[rank3]:     return fn(self, state, *args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/verlet.py", line 95, in step
+[rank3]:     _, atom_forces = self._compute_force(dist_state, model)
+[rank3]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_integrator/src/dynamis_integrator/integrator.py", line 68, in _compute_force
+[rank3]:     return model(dist_state)
+[rank3]:            ^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis/src/dynamis/simulator.py", line 339, in _model_with_drift_flag
+[rank3]:     return self.model(dist_state, *args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/potential.py", line 24, in wrapper
+[rank3]:     return fn(self, distributed_state, *args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 679, in __call__
+[rank3]:     outputs = self.runtime(graph.batch_dict)
+[rank3]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/dynamis_model/src/dynamis_model/nnp/mace.py", line 360, in forward
+[rank3]:     node_feats, sc = interaction(
+[rank3]:                      ^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/mace/modules/blocks.py", line 791, in forward
+[rank3]:     mji = self.conv_tp(
+[rank3]:           ^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/workspace/Dynamis/.venv/lib/python3.12/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 529, in forward
+[rank3]:     return self._compiled_main_left_right(x, y, real_weight)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1767, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: RuntimeError: The following operation failed in the TorchScript interpreter.
+[rank3]: Traceback of TorchScript, serialized code (most recent call last):
+[rank3]:   File "code/__torch__/torch/fx/graph_module/___torch_mangle_11.py", line 97, in forward
+[rank3]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank3]:     mul_1 = torch.mul(_w3j_1_2_1, 1.7320508075688772)
+[rank3]:     tensordot = _0(einsum_11, mul_1, ([4, 3], [1, 0]), None, )
+[rank3]:                 ~~ <--- HERE
+[rank3]:     einsum_12 = torch.einsum("dbca,dbc->dba", [tensordot, reshape_21])
+[rank3]:     reshape_22 = torch.reshape(einsum_12, [getitem_4, 384])
+[rank3]:   File "code/__torch__/torch/functional/___torch_mangle_0.py", line 9, in tensordot
+[rank3]:   dims_a, dims_b, = dims1
+[rank3]:   if torch.__is__(out, None):
+[rank3]:     _1 = torch.tensordot(a, b, dims_a, dims_b)
+[rank3]:          ~~~~~~~~~~~~~~~ <--- HERE
+[rank3]:     _0 = _1
+[rank3]:   else:
+
+[rank3]: Traceback of TorchScript, original code (most recent call last):
+[rank3]:   File "<eval_with_key>.127", line 75, in forward
+[rank3]:     _w3j_1_2_1 = self._w3j_1_2_1
+[rank3]:     mul_1 = _w3j_1_2_1 * 1.7320508075688772;  _w3j_1_2_1 = None
+[rank3]:     tensordot = torch.functional.tensordot(einsum_11, mul_1, ([4, 3], [1, 0]), out = None);  mul_1 = None
+[rank3]:                 ~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+[rank3]:     einsum_12 = torch.functional.einsum('dbca,dbc->dba', tensordot, reshape_21);  tensordot = reshape_21 = None
+[rank3]:     reshape_22 = einsum_12.reshape(getitem_4, 384);  einsum_12 = None
+[rank3]:   File "/home/dpk25/miniconda3/envs/SPICE/lib/python3.9/site-packages/torch/functional.py", line 1064, in tensordot
+
+[rank3]:     if out is None:
+[rank3]:         return _VF.tensordot(a, b, dims_a, dims_b)  # type: ignore[attr-defined]
+[rank3]:                ~~~~~~~~~~~~~ <--- HERE
+[rank3]:     else:
+[rank3]:         return _VF.tensordot(a, b, dims_a, dims_b, out=out)  # type: ignore[attr-defined]
+[rank3]: RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:3 and cpu! (when checking argument for argument mat2 in method wrapper_CUDA_mm)
+
+W1122 16:35:29.651000 1951272 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1951278 closing signal SIGTERM
+W1122 16:35:29.652000 1951272 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1951279 closing signal SIGTERM
+W1122 16:35:29.652000 1951272 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1951281 closing signal SIGTERM
+E1122 16:35:31.518000 1951272 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 2 (pid: 1951280) of binary: /workspace/Dynamis/.venv/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 896, in <module>
+    main()
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+mace_scripts/scaling/run_mace_off.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-22_16:35:29
+  host      : b2-36-s1-dgx-02-c17.cm.cluster
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 1951280)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+srun: error: b2-36-s1-dgx-02-c17: task 0: Exited with exit code 1

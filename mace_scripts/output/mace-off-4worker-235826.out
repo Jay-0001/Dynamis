@@ -1,0 +1,22 @@
+No broken requirements found.
+Python: /workspace/Dynamis/.venv/bin/python; Torch: 2.8.0a0+34c6371d24.nv25.08; CUDA: 13.0; active GPUs: 4; allocated GPUs: 4
+Downloading MACE model from 'https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off23/MACE-OFF23_medium.model'
+The model is distributed under the Academic Software License (ASL) license, see https://github.com/gabor1/ASL 
+ To use the model you accept the terms of the license.
+ASL is based on the Gnu Public License, but does not permit commercial use
+Downloading: 1.4% (0.2 MB / 17.5 MB)Downloading: 2.9% (0.5 MB / 17.5 MB)Downloading: 4.3% (0.8 MB / 17.5 MB)Downloading: 5.7% (1.0 MB / 17.5 MB)Downloading: 7.1% (1.2 MB / 17.5 MB)Downloading: 8.6% (1.5 MB / 17.5 MB)Downloading: 10.0% (1.8 MB / 17.5 MB)Downloading: 11.4% (2.0 MB / 17.5 MB)Downloading: 12.9% (2.2 MB / 17.5 MB)Downloading: 14.3% (2.5 MB / 17.5 MB)Downloading: 15.7% (2.8 MB / 17.5 MB)Downloading: 17.1% (3.0 MB / 17.5 MB)Downloading: 18.6% (3.2 MB / 17.5 MB)Downloading: 20.0% (3.5 MB / 17.5 MB)Downloading: 21.4% (3.8 MB / 17.5 MB)Downloading: 22.9% (4.0 MB / 17.5 MB)Downloading: 24.3% (4.2 MB / 17.5 MB)Downloading: 25.7% (4.5 MB / 17.5 MB)Downloading: 27.1% (4.8 MB / 17.5 MB)Downloading: 28.6% (5.0 MB / 17.5 MB)Downloading: 30.0% (5.2 MB / 17.5 MB)Downloading: 31.4% (5.5 MB / 17.5 MB)Downloading: 32.9% (5.8 MB / 17.5 MB)Downloading: 34.3% (6.0 MB / 17.5 MB)Downloading: 35.7% (6.2 MB / 17.5 MB)Downloading: 37.1% (6.5 MB / 17.5 MB)Downloading: 38.6% (6.8 MB / 17.5 MB)Downloading: 40.0% (7.0 MB / 17.5 MB)Downloading: 41.4% (7.2 MB / 17.5 MB)Downloading: 42.9% (7.5 MB / 17.5 MB)Downloading: 44.3% (7.8 MB / 17.5 MB)Downloading: 45.7% (8.0 MB / 17.5 MB)Downloading: 47.1% (8.2 MB / 17.5 MB)Downloading: 48.6% (8.5 MB / 17.5 MB)Downloading: 50.0% (8.8 MB / 17.5 MB)Downloading: 51.4% (9.0 MB / 17.5 MB)Downloading: 52.9% (9.2 MB / 17.5 MB)Downloading: 54.3% (9.5 MB / 17.5 MB)Downloading: 55.7% (9.8 MB / 17.5 MB)Downloading: 57.1% (10.0 MB / 17.5 MB)Downloading: 58.6% (10.2 MB / 17.5 MB)Downloading: 60.0% (10.5 MB / 17.5 MB)Downloading: 61.4% (10.8 MB / 17.5 MB)Downloading: 62.9% (11.0 MB / 17.5 MB)Downloading: 64.3% (11.2 MB / 17.5 MB)Downloading: 65.7% (11.5 MB / 17.5 MB)Downloading: 67.1% (11.8 MB / 17.5 MB)Downloading: 68.6% (12.0 MB / 17.5 MB)Downloading: 70.0% (12.2 MB / 17.5 MB)Downloading: 71.4% (12.5 MB / 17.5 MB)Downloading: 72.9% (12.8 MB / 17.5 MB)Downloading: 74.3% (13.0 MB / 17.5 MB)Downloading: 75.7% (13.2 MB / 17.5 MB)Downloading: 77.1% (13.5 MB / 17.5 MB)Downloading: 78.6% (13.8 MB / 17.5 MB)Downloading: 80.0% (14.0 MB / 17.5 MB)Downloading: 81.4% (14.2 MB / 17.5 MB)Downloading: 82.9% (14.5 MB / 17.5 MB)Downloading: 84.3% (14.8 MB / 17.5 MB)Downloading: 85.7% (15.0 MB / 17.5 MB)Downloading: 87.1% (15.2 MB / 17.5 MB)Downloading: 88.6% (15.5 MB / 17.5 MB)Downloading: 90.0% (15.8 MB / 17.5 MB)Downloading: 91.4% (16.0 MB / 17.5 MB)Downloading: 92.9% (16.2 MB / 17.5 MB)Downloading: 94.3% (16.5 MB / 17.5 MB)Downloading: 95.7% (16.8 MB / 17.5 MB)Downloading: 97.1% (17.0 MB / 17.5 MB)Downloading: 98.6% (17.2 MB / 17.5 MB)Downloading: 100.0% (17.5 MB / 17.5 MB)Downloading: 100.0% (17.5 MB / 17.5 MB)
+Cached MACE model to /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+MACE OFF checkpoint preloaded
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank 1 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 0 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank [Gloo] Rank 2 is connected to 33 is connected to  peer ranks. Expected number of connected peer ranks is : 33 peer ranks. Expected number of connected peer ranks is : 
+3
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model

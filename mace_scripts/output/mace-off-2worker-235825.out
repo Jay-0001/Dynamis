@@ -1,0 +1,10 @@
+No broken requirements found.
+Python: /workspace/Dynamis/.venv/bin/python; Torch: 2.8.0a0+34c6371d24.nv25.08; CUDA: 13.0; active GPUs: 2; allocated GPUs: 4
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+MACE OFF checkpoint preloaded
+Initializing distributed environment...
+Initializing distributed environment...
+[Gloo] Rank [Gloo] Rank 0 is connected to 11 is connected to  peer ranks. 1Expected number of connected peer ranks is :  peer ranks. 1Expected number of connected peer ranks is : 1
+
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model
+Using MACE-OFF23 MODEL for MACECalculator with /workspace/Dynamis/mace_scripts/output/cache/xdg/mace/MACE-OFF23_medium.model

@@ -1,0 +1,16 @@
+{"type":"meta","version":"0.1.0","date":"2026-11-22T16:35:33Z","run_id":"35ab9679716c4b0387c6e9634ef71b44","rank":1,"local_rank":1,"world_size":2,"pid":632732,"device_id":1,"host":"b2-16-s1-dgx-02-c06","clock":"steady_clock","time_unit":"ns","t0_ns":6016030914899793}
+{"type":"rec","step":0,"key":"model_forward","class":"compute","where":"host","id":9,"parent_id":8,"t_start_ns":6016032153587011,"time_ns":438676345}
+{"type":"rec","step":0,"key":"integrator_step","class":"compute","where":"host","id":8,"parent_id":7,"t_start_ns":6016032140169864,"time_ns":452104532}
+{"type":"rec","step":0,"key":"partition","class":"compute","where":"device","id":1,"parent_id":null,"t_start_ns":6016030926123697,"time_ns":62513664}
+{"type":"rec","step":0,"key":"build_graph","class":"compute","where":"device","id":3,"parent_id":2,"t_start_ns":6016030988681937,"time_ns":72430626}
+{"type":"rec","step":0,"key":"build_halo_maps","class":"compute","where":"device","id":2,"parent_id":null,"t_start_ns":6016030988674864,"time_ns":126669250}
+{"type":"rec","step":0,"key":"partition","class":"compute","where":"device","id":4,"parent_id":null,"t_start_ns":6016032132645369,"time_ns":550400}
+{"type":"rec","step":0,"key":"build_graph","class":"compute","where":"device","id":6,"parent_id":5,"t_start_ns":6016032133226302,"time_ns":1411072}
+{"type":"rec","step":0,"key":"build_halo_maps","class":"compute","where":"device","id":5,"parent_id":null,"t_start_ns":6016032133221297,"time_ns":2304832}
+{"type":"rec","step":0,"key":"halo_exchange","class":"comm","where":"device","id":10,"parent_id":9,"t_start_ns":6016032153758284,"time_ns":9230240}
+{"type":"rec","step":0,"key":"halo_exchange","class":"comm","where":"device","id":11,"parent_id":9,"t_start_ns":6016032163730208,"time_ns":92608}
+{"type":"rec","step":0,"key":"build_graph","class":"compute","where":"device","id":12,"parent_id":9,"t_start_ns":6016032176017195,"time_ns":1555904}
+{"type":"rec","step":0,"key":"halo_exchange","class":"comm","where":"device","id":13,"parent_id":9,"t_start_ns":6016032580035384,"time_ns":191008}
+{"type":"rec","step":0,"key":"model_forward","class":"compute","where":"device","id":9,"parent_id":8,"t_start_ns":6016032153582625,"time_ns":438830872}
+{"type":"rec","step":0,"key":"integrator_step","class":"compute","where":"device","id":8,"parent_id":7,"t_start_ns":6016032140166365,"time_ns":452249725}
+{"type":"call_order","order":["partition","build_graph","build_halo_maps","halo_exchange","model_forward","integrator_step"]}

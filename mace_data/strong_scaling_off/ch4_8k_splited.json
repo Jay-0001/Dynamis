@@ -1,0 +1,12 @@
+{
+  "xyz": "/workspace/Dynamis/mace_data/strong_scaling_off/ch4_8k_splited.xyz",
+  "sha256": "85836b2e9d66a9006b9c4340024d98a187011923433b659e4bcdee8022734f4b",
+  "atoms": 8001,
+  "num_ch4": 889,
+  "num_o2": 1778,
+  "box_angstrom": 60,
+  "variant": "splited",
+  "seed": 42,
+  "momenta_std": 0,
+  "generator": "experiments/exp_datasets/scripts/03_generate_ch4.py"
+}
