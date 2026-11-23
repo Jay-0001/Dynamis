@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "mp",
+    "model_name": "medium-mpa-0",
+    "head_name": "default",
+    "enable_cueq": false,
+    "cutoff_angstrom": 6.0,
+    "signature": "ce92933b28834a621c122d4998b0e48164c4d06e50ad0288de64a959520fd63f"
+  },
+  "reference": {
+    "controlled_energy_ev": -54.64357388019562,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}

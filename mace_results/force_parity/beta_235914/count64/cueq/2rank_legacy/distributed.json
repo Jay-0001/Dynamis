@@ -1,0 +1,78 @@
+{
+  "model": {
+    "family": "mp",
+    "checkpoint": "medium-mpa-0",
+    "head": "default",
+    "cueq": true,
+    "adapter_reduction": "legacy"
+  },
+  "system": {
+    "name": "organic_chain12_x64",
+    "num_atoms": 768,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -33.78478968982533,
+    "reported_local_sum_md": -33.7847900390625,
+    "raw_core_controlled_md": -33.784797197146716,
+    "error_md": 7.507321384991883e-06,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 4.895127403869992e-06,
+    "max_abs_md": 3.551319241523743e-05,
+    "close": false,
+    "atol_md": 1e-05,
+    "rtol": 1e-05,
+    "violating_components": 291,
+    "worst_component": {
+      "atom_id": 650,
+      "axis": "x",
+      "reference_md": 0.04354935884475708,
+      "distributed_md": 0.04358487203717232,
+      "abs_error_md": 3.551319241523743e-05,
+      "allowed_error_md": 1.0435493095428683e-05
+    },
+    "by_rank": [
+      {
+        "rank": 0,
+        "owned_atoms": 384,
+        "halo_atoms": 0,
+        "mae_md": 4.710446773970034e-06,
+        "max_abs_md": 3.104656934738159e-05,
+        "violating_components": 136
+      },
+      {
+        "rank": 1,
+        "owned_atoms": 384,
+        "halo_atoms": 0,
+        "mae_md": 5.07980803376995e-06,
+        "max_abs_md": 3.551319241523743e-05,
+        "violating_components": 155
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 384,
+      "halo_atoms": 0
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 384,
+      "halo_atoms": 0
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 8448,
+    "native_directed_edges": 8448,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}

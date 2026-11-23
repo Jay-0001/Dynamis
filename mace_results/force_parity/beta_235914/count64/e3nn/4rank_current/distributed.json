@@ -1,0 +1,104 @@
+{
+  "model": {
+    "family": "mp",
+    "checkpoint": "medium-mpa-0",
+    "head": "default",
+    "cueq": false,
+    "adapter_reduction": "current"
+  },
+  "system": {
+    "name": "organic_chain12_x64",
+    "num_atoms": 768,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -33.78372228030722,
+    "reported_local_sum_md": -33.78372228030722,
+    "raw_core_controlled_md": -33.78373279193738,
+    "error_md": 1.051163016541068e-05,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 4.733069999929285e-06,
+    "max_abs_md": 4.519149661064148e-05,
+    "close": false,
+    "atol_md": 1e-05,
+    "rtol": 1e-05,
+    "violating_components": 272,
+    "worst_component": {
+      "atom_id": 279,
+      "axis": "x",
+      "reference_md": -0.016850387677550316,
+      "distributed_md": -0.016895579174160957,
+      "abs_error_md": 4.519149661064148e-05,
+      "allowed_error_md": 1.0168503649765626e-05
+    },
+    "by_rank": [
+      {
+        "rank": 0,
+        "owned_atoms": 192,
+        "halo_atoms": 0,
+        "mae_md": 5.213728400121909e-06,
+        "max_abs_md": 4.519149661064148e-05,
+        "violating_components": 86
+      },
+      {
+        "rank": 1,
+        "owned_atoms": 192,
+        "halo_atoms": 0,
+        "mae_md": 4.681540758610936e-06,
+        "max_abs_md": 3.265216946601868e-05,
+        "violating_components": 65
+      },
+      {
+        "rank": 2,
+        "owned_atoms": 192,
+        "halo_atoms": 0,
+        "mae_md": 4.8815959416970145e-06,
+        "max_abs_md": 3.875419497489929e-05,
+        "violating_components": 73
+      },
+      {
+        "rank": 3,
+        "owned_atoms": 192,
+        "halo_atoms": 0,
+        "mae_md": 4.155413989792578e-06,
+        "max_abs_md": 2.613849937915802e-05,
+        "violating_components": 48
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 192,
+      "halo_atoms": 0
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 192,
+      "halo_atoms": 0
+    },
+    {
+      "rank": 2,
+      "owned_atoms": 192,
+      "halo_atoms": 0
+    },
+    {
+      "rank": 3,
+      "owned_atoms": 192,
+      "halo_atoms": 0
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 8448,
+    "native_directed_edges": 8448,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}

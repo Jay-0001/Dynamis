@@ -1,0 +1,104 @@
+{
+  "model": {
+    "family": "off",
+    "checkpoint": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head": "default",
+    "cueq": true,
+    "adapter_reduction": "legacy"
+  },
+  "system": {
+    "name": "off24_bridge",
+    "num_atoms": 24,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -82.41447469743271,
+    "reported_local_sum_md": -82.41447722911835,
+    "raw_core_controlled_md": -82.4144744800459,
+    "error_md": -2.1738681255101255e-07,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 7.373806965915719e-06,
+    "max_abs_md": 2.959812991321087e-05,
+    "close": false,
+    "atol_md": 1e-05,
+    "rtol": 1e-05,
+    "violating_components": 22,
+    "worst_component": {
+      "atom_id": 2,
+      "axis": "y",
+      "reference_md": 0.003213036572560668,
+      "distributed_md": 0.003183438442647457,
+      "abs_error_md": 2.959812991321087e-05,
+      "allowed_error_md": 1.0032130376202986e-05
+    },
+    "by_rank": [
+      {
+        "rank": 0,
+        "owned_atoms": 6,
+        "halo_atoms": 18,
+        "mae_md": 4.272177193342941e-06,
+        "max_abs_md": 1.1918367817997932e-05,
+        "violating_components": 3
+      },
+      {
+        "rank": 1,
+        "owned_atoms": 6,
+        "halo_atoms": 18,
+        "mae_md": 6.96408733347198e-06,
+        "max_abs_md": 2.4850480258464813e-05,
+        "violating_components": 4
+      },
+      {
+        "rank": 2,
+        "owned_atoms": 6,
+        "halo_atoms": 18,
+        "mae_md": 1.3837778169545345e-05,
+        "max_abs_md": 2.959812991321087e-05,
+        "violating_components": 12
+      },
+      {
+        "rank": 3,
+        "owned_atoms": 6,
+        "halo_atoms": 18,
+        "mae_md": 4.421185622049961e-06,
+        "max_abs_md": 2.0548701286315918e-05,
+        "violating_components": 3
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 6,
+      "halo_atoms": 18
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 6,
+      "halo_atoms": 18
+    },
+    {
+      "rank": 2,
+      "owned_atoms": 6,
+      "halo_atoms": 18
+    },
+    {
+      "rank": 3,
+      "owned_atoms": 6,
+      "halo_atoms": 18
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 308,
+    "native_directed_edges": 308,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}

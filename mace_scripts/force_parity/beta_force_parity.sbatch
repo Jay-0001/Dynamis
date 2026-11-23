@@ -8,7 +8,7 @@
 #SBATCH --gres=gpu:4
 #SBATCH --cpus-per-task=7
 #SBATCH --mem=64G
-#SBATCH --time=02:00:00
+#SBATCH --time=00:30:00
 #SBATCH --output=mace_scripts/output/beta-force-parity-%j.out
 #SBATCH --error=mace_scripts/output/beta-force-parity-%j.err
 set -euo pipefail

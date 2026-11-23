@@ -1,0 +1,39 @@
+{
+  "git_commit": "23538380a0f856e35b8d0ed48bd368b9d787c84a",
+  "git_status": "M .gitignore\n M mace_scripts/force_parity/beta_force_parity.sbatch\n?? mace_results/force_parity/\n?? mace_scripts/output/beta-force-parity-235913.err\n?? mace_scripts/output/beta-force-parity-235913.out\n?? mace_scripts/output/beta-force-parity-235914.err\n?? mace_scripts/output/beta-force-parity-235914.out\n?? mace_scripts/output/beta-force-parity-235915.err\n?? mace_scripts/output/beta-force-parity-235915.out\n?? mace_scripts/output/cache/",
+  "python": "3.12.3 (main, Jun 18 2025, 17:59:45) [GCC 13.3.0]",
+  "torch": "2.8.0a0+34c6371d24.nv25.08",
+  "torch_cuda": "13.0",
+  "gpu_names": [
+    "NVIDIA GB200",
+    "NVIDIA GB200",
+    "NVIDIA GB200",
+    "NVIDIA GB200"
+  ],
+  "packages": {
+    "mace-torch": "0.3.16",
+    "e3nn": "0.4.4",
+    "cuequivariance": "0.9.1",
+    "cuequivariance-torch": "0.9.1",
+    "cuequivariance-ops-cu12": null,
+    "cuequivariance-ops-torch-cu12": null,
+    "cuequivariance-ops-cu13": "0.9.1",
+    "cuequivariance-ops-torch-cu13": "0.9.1",
+    "numpy": "1.26.4",
+    "ase": "3.29.0",
+    "dynamis-model": "0.0.1",
+    "dynamis-state": "0.1.0"
+  },
+  "model_family": "off",
+  "model_name": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+  "seed": "1234",
+  "xyz_path": "/workspace/Dynamis/mace_data/off24_bridge.xyz",
+  "xyz_sha256": "7a532e76fc2a3657d1720af0f09f2dc4e3d57367a7e2cb5079f6ce0d27601a38",
+  "mace_cache_root": "/workspace/Dynamis/mace_scripts/output/cache/xdg/mace",
+  "mace_cache_sha256": {
+    "MACE-OFF23_medium.model": "4842c52ad210d6e1f84d6cf1ffa70fae25a7e0d755ed55cf223f43913f587db7",
+    "MACE-OFF24_medium.model": "e5ccf5837f685899811a68754e7c994393bfd1a81720393b03c643b46c70bc69",
+    "macempa0mediummodel": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638"
+  },
+  "slurm_job_id": "235915"
+}

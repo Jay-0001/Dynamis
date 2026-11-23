@@ -1,0 +1,245 @@
+Reference: 64 e3nn
+Adapter: 64 e3nn 2rank legacy
+Adapter: 64 e3nn 2rank current
+Adapter: 64 e3nn 4rank legacy
+Adapter: 64 e3nn 4rank current
+Reference: 64 cueq
+Adapter: 64 cueq 2rank legacy
+Adapter: 64 cueq 2rank current
+Adapter: 64 cueq 4rank legacy
+Adapter: 64 cueq 4rank current
+{
+  "cases": [
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 2,
+      "reduction": "current",
+      "reference_energy_ev": -3501.547488808632,
+      "reference_signature": "ad4b4346f7f6728679990b97925adc19e1997927b5b5024cfd47cce39a554ea0",
+      "energy_error_md": -1.3158228355791834e-06,
+      "reported_local_sum_md": -33.78479851296955,
+      "force_mae_md": 4.9705540732247755e-06,
+      "force_max_abs_md": 3.602355718612671e-05,
+      "force_violations": 298,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/cueq/2rank_current/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 2,
+      "reduction": "legacy",
+      "reference_energy_ev": -3501.547488808632,
+      "reference_signature": "ad4b4346f7f6728679990b97925adc19e1997927b5b5024cfd47cce39a554ea0",
+      "energy_error_md": 7.507321384991883e-06,
+      "reported_local_sum_md": -33.7847900390625,
+      "force_mae_md": 4.895127403869992e-06,
+      "force_max_abs_md": 3.551319241523743e-05,
+      "force_violations": 291,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/cueq/2rank_legacy/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 4,
+      "reduction": "current",
+      "reference_energy_ev": -3501.547488808632,
+      "reference_signature": "ad4b4346f7f6728679990b97925adc19e1997927b5b5024cfd47cce39a554ea0",
+      "energy_error_md": 1.2301333256914404e-05,
+      "reported_local_sum_md": -33.78478489581346,
+      "force_mae_md": 5.0385124268359505e-06,
+      "force_max_abs_md": 3.812834620475769e-05,
+      "force_violations": 310,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/cueq/4rank_current/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 4,
+      "reduction": "legacy",
+      "reference_energy_ev": -3501.547488808632,
+      "reference_signature": "ad4b4346f7f6728679990b97925adc19e1997927b5b5024cfd47cce39a554ea0",
+      "energy_error_md": -1.6497243841229192e-05,
+      "reported_local_sum_md": -33.78481483459473,
+      "force_mae_md": 4.841719601245131e-06,
+      "force_max_abs_md": 3.166496753692627e-05,
+      "force_violations": 274,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/cueq/4rank_legacy/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 2,
+      "reduction": "current",
+      "reference_energy_ev": -3501.437170982361,
+      "reference_signature": "64ac1db8f0460b1cb03ba01003ecadc7b34607a2cf8d7d987837e943684410d9",
+      "energy_error_md": -1.8416918948105376e-05,
+      "reported_local_sum_md": -33.78375120885633,
+      "force_mae_md": 4.941574843542185e-06,
+      "force_max_abs_md": 3.5860575735569e-05,
+      "force_violations": 306,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/e3nn/2rank_current/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 2,
+      "reduction": "legacy",
+      "reference_energy_ev": -3501.437170982361,
+      "reference_signature": "64ac1db8f0460b1cb03ba01003ecadc7b34607a2cf8d7d987837e943684410d9",
+      "energy_error_md": 2.1020959941608908e-05,
+      "reported_local_sum_md": -33.78371238708496,
+      "force_mae_md": 4.87187753606122e-06,
+      "force_max_abs_md": 4.054605960845947e-05,
+      "force_violations": 288,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/e3nn/2rank_legacy/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 4,
+      "reduction": "current",
+      "reference_energy_ev": -3501.437170982361,
+      "reference_signature": "64ac1db8f0460b1cb03ba01003ecadc7b34607a2cf8d7d987837e943684410d9",
+      "energy_error_md": 1.051163016541068e-05,
+      "reported_local_sum_md": -33.78372228030722,
+      "force_mae_md": 4.733069999929285e-06,
+      "force_max_abs_md": 4.519149661064148e-05,
+      "force_violations": 272,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/e3nn/4rank_current/distributed.json"
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 4,
+      "reduction": "legacy",
+      "reference_energy_ev": -3501.437170982361,
+      "reference_signature": "64ac1db8f0460b1cb03ba01003ecadc7b34607a2cf8d7d987837e943684410d9",
+      "energy_error_md": 1.5840482618045826e-05,
+      "reported_local_sum_md": -33.783719062805176,
+      "force_mae_md": 5.007508661947213e-06,
+      "force_max_abs_md": 3.857538104057312e-05,
+      "force_violations": 289,
+      "force_close": false,
+      "graph": {
+        "assembled_directed_edges": 8448,
+        "native_directed_edges": 8448,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count64/e3nn/4rank_legacy/distributed.json"
+    }
+  ],
+  "legacy_current_comparisons": [
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 2,
+      "legacy_current_force_mae_md": 3.853555881505599e-06,
+      "legacy_current_force_max_abs_md": 3.5624951124191284e-05
+    },
+    {
+      "case": "count64",
+      "backend": "cueq",
+      "ranks": 4,
+      "legacy_current_force_mae_md": 3.696809017128544e-06,
+      "legacy_current_force_max_abs_md": 3.870949149131775e-05
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 2,
+      "legacy_current_force_mae_md": 3.701915829878999e-06,
+      "legacy_current_force_max_abs_md": 2.985820174217224e-05
+    },
+    {
+      "case": "count64",
+      "backend": "e3nn",
+      "ranks": 4,
+      "legacy_current_force_mae_md": 3.8395323826989625e-06,
+      "legacy_current_force_max_abs_md": 4.222989082336426e-05
+    }
+  ]
+}
+Force parity results: /workspace/Dynamis/mace_results/force_parity/beta_235914
