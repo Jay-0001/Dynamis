@@ -1,0 +1,36 @@
+{
+  "git_commit": "a833e1e9e8573478f44a94e4857c8ff26619442d",
+  "git_status": "M .gitignore\n M mace_scripts/force_parity/beta_precision.sbatch\n?? mace_results/force_parity/precision_beta_236222/\n?? mace_results/force_parity/precision_beta_236223/\n?? mace_results/force_parity/trace_beta_236224/\n?? mace_results/force_parity/trace_beta_236225/\n?? mace_scripts/output/beta-mace-precision-236222.err\n?? mace_scripts/output/beta-mace-precision-236222.out\n?? mace_scripts/output/beta-mace-precision-236223.err\n?? mace_scripts/output/beta-mace-precision-236223.out\n?? mace_scripts/output/beta-mace-trace-236224.err\n?? mace_scripts/output/beta-mace-trace-236224.out\n?? mace_scripts/output/beta-mace-trace-236225.err\n?? mace_scripts/output/beta-mace-trace-236225.out\n?? mace_scripts/output/cache/",
+  "python": "3.12.3 (main, Jun 18 2025, 17:59:45) [GCC 13.3.0]",
+  "torch": "2.8.0a0+34c6371d24.nv25.08",
+  "torch_cuda": "13.0",
+  "gpu_names": [
+    "NVIDIA GB200"
+  ],
+  "packages": {
+    "mace-torch": "0.3.16",
+    "e3nn": "0.4.4",
+    "cuequivariance": "0.9.1",
+    "cuequivariance-torch": "0.9.1",
+    "cuequivariance-ops-cu12": null,
+    "cuequivariance-ops-torch-cu12": null,
+    "cuequivariance-ops-cu13": "0.9.1",
+    "cuequivariance-ops-torch-cu13": "0.9.1",
+    "numpy": "1.26.4",
+    "ase": "3.29.0",
+    "dynamis-model": "0.0.1",
+    "dynamis-state": "0.1.0"
+  },
+  "model_family": "mp",
+  "model_name": "medium-mpa-0",
+  "seed": "1234",
+  "xyz_path": null,
+  "xyz_sha256": null,
+  "mace_cache_root": "/workspace/Dynamis/mace_scripts/output/cache/xdg/mace",
+  "mace_cache_sha256": {
+    "MACE-OFF23_medium.model": "4842c52ad210d6e1f84d6cf1ffa70fae25a7e0d755ed55cf223f43913f587db7",
+    "MACE-OFF24_medium.model": "e5ccf5837f685899811a68754e7c994393bfd1a81720393b03c643b46c70bc69",
+    "macempa0mediummodel": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638"
+  },
+  "slurm_job_id": "236224"
+}

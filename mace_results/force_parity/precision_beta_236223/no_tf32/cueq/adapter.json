@@ -1,0 +1,94 @@
+{
+  "model": {
+    "family": "mp",
+    "checkpoint": "medium-mpa-0",
+    "head": "default",
+    "cueq": true,
+    "adapter_reduction": "current"
+  },
+  "system": {
+    "name": "organic_chain12_x64",
+    "num_atoms": 768,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -33.777093332780595,
+    "reported_local_sum_md": -33.777093332780595,
+    "raw_core_controlled_md": -33.77709344319929,
+    "error_md": 1.1041869640848745e-07,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 1.536150762149191e-08,
+    "max_abs_md": 1.424923539161682e-07,
+    "close": true,
+    "atol_md": 1e-05,
+    "rtol": 1e-05,
+    "violating_components": 0,
+    "worst_component": {
+      "atom_id": 3,
+      "axis": "y",
+      "reference_md": -0.0007243524305522442,
+      "distributed_md": -0.0007244404405355453,
+      "abs_error_md": 8.800998330116272e-08,
+      "allowed_error_md": 1.0007242963183671e-05
+    },
+    "by_rank": [
+      {
+        "rank": 0,
+        "owned_atoms": 384,
+        "halo_atoms": 0,
+        "mae_md": 1.4793450908712202e-08,
+        "max_abs_md": 1.424923539161682e-07,
+        "violating_components": 0
+      },
+      {
+        "rank": 1,
+        "owned_atoms": 384,
+        "halo_atoms": 0,
+        "mae_md": 1.5929565222450037e-08,
+        "max_abs_md": 1.2200325727462769e-07,
+        "violating_components": 0
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 384,
+      "halo_atoms": 0
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 384,
+      "halo_atoms": 0
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 8448,
+    "native_directed_edges": 8448,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "precision": {
+    "mode": "no_tf32",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "deterministic_algorithms": false,
+    "deterministic_warn_only": false,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "NVIDIA_TF32_OVERRIDE": "0",
+    "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+    "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+    "torch_cuda_version": "13.0",
+    "gpu_name": "NVIDIA GB200"
+  },
+  "benchmark": null
+}

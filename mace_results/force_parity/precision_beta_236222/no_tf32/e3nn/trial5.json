@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "organic_chain12",
+    "num_atoms": 12,
+    "model_family": "mp",
+    "model_name": "medium-mpa-0",
+    "head_name": "default",
+    "enable_cueq": false,
+    "cutoff_angstrom": 6.0,
+    "signature": "ce92933b28834a621c122d4998b0e48164c4d06e50ad0288de64a959520fd63f",
+    "precision": {
+      "mode": "no_tf32",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn_allow_tf32": false,
+      "float32_matmul_precision": "highest",
+      "deterministic_algorithms": false,
+      "deterministic_warn_only": false,
+      "cudnn_deterministic": false,
+      "cudnn_benchmark": false,
+      "CUBLAS_WORKSPACE_CONFIG": null,
+      "NVIDIA_TF32_OVERRIDE": "0",
+      "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+      "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+      "torch_cuda_version": "13.0",
+      "gpu_name": "NVIDIA GB200"
+    }
+  },
+  "reference": {
+    "controlled_energy_ev": -54.628058433532715,
+    "directed_edges": 132,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": null
+}

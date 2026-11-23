@@ -1,0 +1,209 @@
+{
+  "mode": "adapter",
+  "cases": {
+    "default": {
+      "cueq": {
+        "native_precision": {
+          "mode": "default",
+          "cuda_matmul_allow_tf32": true,
+          "cudnn_allow_tf32": true,
+          "float32_matmul_precision": "high",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": null,
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "adapter_precision": {
+          "mode": "default",
+          "cuda_matmul_allow_tf32": true,
+          "cudnn_allow_tf32": true,
+          "float32_matmul_precision": "high",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": null,
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "energy_error_md": -2.671212375560117e-05,
+        "energy_close": true,
+        "force_mae_md": 4.910913048661314e-06,
+        "force_max_abs_md": 4.363618791103363e-05,
+        "force_violating_components": 293,
+        "force_close": false,
+        "graph": {
+          "assembled_directed_edges": 8448,
+          "native_directed_edges": 8448,
+          "interior_extra": 0,
+          "interior_missing": 0,
+          "boundary_extra": 0,
+          "boundary_missing": 0,
+          "exterior_extra": 0,
+          "boundary_band_angstrom": 0.0001
+        }
+      },
+      "e3nn": {
+        "native_precision": {
+          "mode": "default",
+          "cuda_matmul_allow_tf32": true,
+          "cudnn_allow_tf32": true,
+          "float32_matmul_precision": "high",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": null,
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "adapter_precision": {
+          "mode": "default",
+          "cuda_matmul_allow_tf32": true,
+          "cudnn_allow_tf32": true,
+          "float32_matmul_precision": "high",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": null,
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "energy_error_md": 8.493038308188261e-06,
+        "energy_close": true,
+        "force_mae_md": 4.927768259221921e-06,
+        "force_max_abs_md": 3.695860505104065e-05,
+        "force_violating_components": 283,
+        "force_close": false,
+        "graph": {
+          "assembled_directed_edges": 8448,
+          "native_directed_edges": 8448,
+          "interior_extra": 0,
+          "interior_missing": 0,
+          "boundary_extra": 0,
+          "boundary_missing": 0,
+          "exterior_extra": 0,
+          "boundary_band_angstrom": 0.0001
+        }
+      }
+    },
+    "no_tf32": {
+      "cueq": {
+        "native_precision": {
+          "mode": "no_tf32",
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false,
+          "float32_matmul_precision": "highest",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": "0",
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "adapter_precision": {
+          "mode": "no_tf32",
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false,
+          "float32_matmul_precision": "highest",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": "0",
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "energy_error_md": 1.1041869640848745e-07,
+        "energy_close": true,
+        "force_mae_md": 1.536150762149191e-08,
+        "force_max_abs_md": 1.424923539161682e-07,
+        "force_violating_components": 0,
+        "force_close": true,
+        "graph": {
+          "assembled_directed_edges": 8448,
+          "native_directed_edges": 8448,
+          "interior_extra": 0,
+          "interior_missing": 0,
+          "boundary_extra": 0,
+          "boundary_missing": 0,
+          "exterior_extra": 0,
+          "boundary_band_angstrom": 0.0001
+        }
+      },
+      "e3nn": {
+        "native_precision": {
+          "mode": "no_tf32",
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false,
+          "float32_matmul_precision": "highest",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": "0",
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "adapter_precision": {
+          "mode": "no_tf32",
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false,
+          "float32_matmul_precision": "highest",
+          "deterministic_algorithms": false,
+          "deterministic_warn_only": false,
+          "cudnn_deterministic": false,
+          "cudnn_benchmark": false,
+          "CUBLAS_WORKSPACE_CONFIG": null,
+          "NVIDIA_TF32_OVERRIDE": "0",
+          "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+          "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+          "torch_cuda_version": "13.0",
+          "gpu_name": "NVIDIA GB200"
+        },
+        "energy_error_md": 2.300389212450682e-09,
+        "energy_close": true,
+        "force_mae_md": 1.516572822879425e-08,
+        "force_max_abs_md": 1.3131648302078247e-07,
+        "force_violating_components": 0,
+        "force_close": true,
+        "graph": {
+          "assembled_directed_edges": 8448,
+          "native_directed_edges": 8448,
+          "interior_extra": 0,
+          "interior_missing": 0,
+          "boundary_extra": 0,
+          "boundary_missing": 0,
+          "exterior_extra": 0,
+          "boundary_band_angstrom": 0.0001
+        }
+      }
+    }
+  }
+}

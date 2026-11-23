@@ -1,0 +1,158 @@
+{
+  "model_family": "mp",
+  "model": "medium-mpa-0",
+  "backend": "cueq",
+  "num_atoms": 768,
+  "halo_atoms": 0,
+  "precision": {
+    "mode": "no_tf32",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "deterministic_algorithms": false,
+    "deterministic_warn_only": false,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "CUBLAS_WORKSPACE_CONFIG": null,
+    "NVIDIA_TF32_OVERRIDE": "0",
+    "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE": "1",
+    "torch_version": "2.8.0a0+34c6371d24.nv25.08",
+    "torch_cuda_version": "13.0",
+    "gpu_name": "NVIDIA GB200"
+  },
+  "native_edges": 8448,
+  "adapter_edges": 8448,
+  "edge_multiset_equal": true,
+  "ordered_edges_equal": false,
+  "first_order_difference": 0,
+  "missing_edges": 0,
+  "extra_edges": 0,
+  "native_energy_ev": -3500.7421875,
+  "adapter_energy_ev": -3500.7490481138234,
+  "stage_atol": 1e-07,
+  "first_divergence": "ordered_edges",
+  "first_value_divergence": "interaction_0",
+  "comparisons": [
+    {
+      "name": "edge_displacements",
+      "shape": [
+        8448,
+        3
+      ],
+      "shape_match": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0
+    },
+    {
+      "name": "node_embedding",
+      "shape": [
+        768,
+        128
+      ],
+      "shape_match": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0
+    },
+    {
+      "name": "spherical_harmonics",
+      "shape": [
+        8448,
+        16
+      ],
+      "shape_match": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0
+    },
+    {
+      "name": "radial_embedding",
+      "shape": [
+        8448,
+        10
+      ],
+      "shape_match": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0
+    },
+    {
+      "name": "interaction_0",
+      "shape": [
+        768,
+        16,
+        128
+      ],
+      "shape_match": true,
+      "max_abs": 5.960464477539062e-07,
+      "mean_abs": 2.252025410598435e-08
+    },
+    {
+      "name": "product_0",
+      "shape": [
+        768,
+        512
+      ],
+      "shape_match": true,
+      "max_abs": 8.344650268554688e-07,
+      "mean_abs": 1.1610846506471262e-08
+    },
+    {
+      "name": "interaction_1",
+      "shape": [
+        768,
+        16,
+        128
+      ],
+      "shape_match": true,
+      "max_abs": 8.344650268554688e-07,
+      "mean_abs": 6.408018293768691e-08
+    },
+    {
+      "name": "product_1",
+      "shape": [
+        768,
+        128
+      ],
+      "shape_match": true,
+      "max_abs": 5.066394805908203e-07,
+      "mean_abs": 3.329438769128501e-08
+    },
+    {
+      "name": "readout_0",
+      "shape": [
+        768,
+        1
+      ],
+      "shape_match": true,
+      "max_abs": 1.430511474609375e-06,
+      "mean_abs": 1.3984633540076175e-07
+    },
+    {
+      "name": "readout_1",
+      "shape": [
+        768,
+        1
+      ],
+      "shape_match": true,
+      "max_abs": 1.1920928955078125e-06,
+      "mean_abs": 2.083058205926136e-07
+    },
+    {
+      "name": "scale_shift",
+      "shape": [
+        768
+      ],
+      "shape_match": true,
+      "max_abs": 1.430511474609375e-06,
+      "mean_abs": 2.2522483789089165e-07
+    },
+    {
+      "name": "position_gradients_ev_per_angstrom",
+      "shape": [
+        768,
+        3
+      ],
+      "shape_match": true,
+      "max_abs": 1.4781951904296875e-05,
+      "mean_abs": 1.5628534129064064e-06
+    }
+  ]
+}
