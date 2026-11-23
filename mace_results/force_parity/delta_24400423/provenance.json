@@ -1,0 +1,45 @@
+{
+  "git_commit": "ed5b4d7bc5a3e75aa90605f07570f2528e4e2e3f",
+  "git_status": "M mace_scripts/force_parity/delta_force_parity.sbatch\n?? mace_results/force_parity/delta_24400413/\n?? mace_results/force_parity/delta_24400423/\n?? mace_results/force_parity/delta_24400432/\n?? mace_results/off24_static_24083195/\n?? mace_scripts/outputs/delta-force-parity-24400413.err\n?? mace_scripts/outputs/delta-force-parity-24400413.out\n?? mace_scripts/outputs/delta-force-parity-24400423.err\n?? mace_scripts/outputs/delta-force-parity-24400423.out\n?? mace_scripts/outputs/delta-force-parity-24400432.err\n?? mace_scripts/outputs/delta-force-parity-24400432.out\n?? mace_scripts/outputs/mace_off24_static_24083195.out",
+  "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+  "torch": "2.8.0+cu129",
+  "torch_cuda": "12.9",
+  "gpu_names": [
+    "NVIDIA A100-SXM4-40GB",
+    "NVIDIA A100-SXM4-40GB"
+  ],
+  "packages": {
+    "mace-torch": "0.3.16",
+    "e3nn": "0.4.4",
+    "cuequivariance": "0.9.1",
+    "cuequivariance-torch": "0.9.1",
+    "cuequivariance-ops-cu12": "0.9.1",
+    "cuequivariance-ops-torch-cu12": "0.9.1",
+    "cuequivariance-ops-cu13": null,
+    "cuequivariance-ops-torch-cu13": null,
+    "numpy": "2.5.2",
+    "ase": "3.29.0",
+    "dynamis-model": "0.0.1",
+    "dynamis-state": "0.1.0"
+  },
+  "model_family": "mp",
+  "model_name": "medium-mpa-0",
+  "seed": "1234",
+  "xyz_path": null,
+  "xyz_sha256": null,
+  "mace_cache_root": "/u/jsaravananindira/.cache/mace",
+  "mace_cache_sha256": {
+    "20231203mace128L1_epoch199model": "01bfe22100139f424713cf921144e5509cbe353d67aa9fa1be9c6e1e0ed35845",
+    "20231210mace128L0_energy_epoch249model": "2ddb079cee0e131eaaf6912ba581b394551ead283e95c99cfe78c605d10b5736",
+    "MACE-OFF23_large.model": "a29e397dbf3e7a24ac50a9b0dfc919bd5a62efa346f5895a6237b0950c1d76f4",
+    "MACE-OFF23_medium.model": "4842c52ad210d6e1f84d6cf1ffa70fae25a7e0d755ed55cf223f43913f587db7",
+    "MACE-OFF23_small.model": "165cce4cfec5a34b9c64d4ebf95de15d71106bb584b7291c8470f0749977c46f",
+    "MACE-OFF24_medium.model": "e5ccf5837f685899811a68754e7c994393bfd1a81720393b03c643b46c70bc69",
+    "MACE-omol-0-extra-large-1024.model": "9b64b4fd5153ca578c694abc57806d8111050de6ff652e695c9b525bc4d36469",
+    "MACE_MPtrj_20229model": "f80e992b65ab8f88fdf26964511357c022e92704e4d9bcd086652635a8495b32",
+    "macemh1model": "a522eb7f59c7879963d41586528f4980baf33e086c94aa92e3eafdeccad3be47",
+    "macemp0b3mediummodel": "2f2be696351ac9e94fbe01cdfb6f017679acdbd2db7645209ef55fec9826b012",
+    "macempa0mediummodel": "75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638"
+  },
+  "slurm_job_id": "24400423"
+}

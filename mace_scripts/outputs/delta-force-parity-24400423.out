@@ -1,0 +1,127 @@
+Reference: 1 e3nn
+Adapter: 1 e3nn 2rank legacy
+Adapter: 1 e3nn 2rank current
+Reference: 1 cueq
+Adapter: 1 cueq 2rank legacy
+Adapter: 1 cueq 2rank current
+{
+  "cases": [
+    {
+      "case": "count1",
+      "backend": "cueq",
+      "ranks": 2,
+      "reduction": "current",
+      "reference_energy_ev": -54.62806415557861,
+      "reference_signature": "13688fadce45c6abc39a16b7b93ed11db8598f814efd93aeab514ee7000a4ce5",
+      "energy_error_md": -4.600779202057481e-09,
+      "reported_local_sum_md": -0.5270806952576094,
+      "force_mae_md": 1.7751720093883705e-08,
+      "force_max_abs_md": 8.952338248491287e-08,
+      "force_violations": 0,
+      "force_close": true,
+      "graph": {
+        "assembled_directed_edges": 132,
+        "native_directed_edges": 132,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count1/cueq/2rank_current/distributed.json"
+    },
+    {
+      "case": "count1",
+      "backend": "cueq",
+      "ranks": 2,
+      "reduction": "legacy",
+      "reference_energy_ev": -54.62806415557861,
+      "reference_signature": "13688fadce45c6abc39a16b7b93ed11db8598f814efd93aeab514ee7000a4ce5",
+      "energy_error_md": 2.070350613170291e-08,
+      "reported_local_sum_md": -0.5270806849002838,
+      "force_mae_md": 1.6700747451636744e-08,
+      "force_max_abs_md": 9.417999535799026e-08,
+      "force_violations": 0,
+      "force_close": true,
+      "graph": {
+        "assembled_directed_edges": 132,
+        "native_directed_edges": 132,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count1/cueq/2rank_legacy/distributed.json"
+    },
+    {
+      "case": "count1",
+      "backend": "e3nn",
+      "ranks": 2,
+      "reduction": "current",
+      "reference_energy_ev": -54.62806046009064,
+      "reference_signature": "ce92933b28834a621c122d4998b0e48164c4d06e50ad0288de64a959520fd63f",
+      "energy_error_md": -4.600779091035179e-09,
+      "reported_local_sum_md": -0.5270806596015709,
+      "force_mae_md": 1.7986975464623356e-08,
+      "force_max_abs_md": 1.019798219203949e-07,
+      "force_violations": 0,
+      "force_close": true,
+      "graph": {
+        "assembled_directed_edges": 132,
+        "native_directed_edges": 132,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count1/e3nn/2rank_current/distributed.json"
+    },
+    {
+      "case": "count1",
+      "backend": "e3nn",
+      "ranks": 2,
+      "reduction": "legacy",
+      "reference_energy_ev": -54.62806046009064,
+      "reference_signature": "ce92933b28834a621c122d4998b0e48164c4d06e50ad0288de64a959520fd63f",
+      "energy_error_md": 3.4505843737875352e-09,
+      "reported_local_sum_md": -0.5270806550979614,
+      "force_mae_md": 1.7204406788096094e-08,
+      "force_max_abs_md": 9.825453162193298e-08,
+      "force_violations": 0,
+      "force_close": true,
+      "graph": {
+        "assembled_directed_edges": 132,
+        "native_directed_edges": 132,
+        "interior_extra": 0,
+        "interior_missing": 0,
+        "boundary_extra": 0,
+        "boundary_missing": 0,
+        "exterior_extra": 0,
+        "boundary_band_angstrom": 0.0001
+      },
+      "result": "count1/e3nn/2rank_legacy/distributed.json"
+    }
+  ],
+  "legacy_current_comparisons": [
+    {
+      "case": "count1",
+      "backend": "cueq",
+      "ranks": 2,
+      "legacy_current_force_mae_md": 3.883744437160885e-09,
+      "legacy_current_force_max_abs_md": 2.0489096641540527e-08
+    },
+    {
+      "case": "count1",
+      "backend": "e3nn",
+      "ranks": 2,
+      "legacy_current_force_mae_md": 5.102871458717573e-09,
+      "legacy_current_force_max_abs_md": 1.862645149230957e-08
+    }
+  ]
+}
+Force parity results: /u/jsaravananindira/Dynamis/mace_results/force_parity/delta_24400423

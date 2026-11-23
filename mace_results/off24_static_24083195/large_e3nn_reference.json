@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "artifact_version": 5,
+    "system_name": "off24_bridge_x50",
+    "num_atoms": 1200,
+    "model_family": "off",
+    "model_name": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head_name": "Default",
+    "enable_cueq": false,
+    "cutoff_angstrom": 6.0,
+    "signature": "d1d0c367750299e14d64fa584f2cbb53885b590c9e34270cbcb7e56a271edd95"
+  },
+  "reference": {
+    "controlled_energy_ev": -427082.842250824,
+    "directed_edges": 15400,
+    "model_parameter_dtype": "torch.float32",
+    "position_dtype": "torch.float32",
+    "energy_accumulator_dtype": "torch.float64"
+  },
+  "benchmark": {
+    "median_ms_per_step": 117.96068960102275,
+    "samples_ms": [
+      120.55232679704204,
+      117.92724690167233,
+      118.48945439560339,
+      117.96068960102275,
+      117.91509409667924
+    ]
+  }
+}

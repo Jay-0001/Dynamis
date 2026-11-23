@@ -1,0 +1,10 @@
+Lmod Warning:
+'cray-mpich' requires a network targeting module to be loaded.
+Try 'module avail craype-network' to list the available network
+ targeting modules. 
+While processing the following module(s):
+    Module fullname   Module Filename
+    ---------------   ---------------
+    PrgEnv-gnu/8.7.0  /opt/cray/pe/lmod/modulefiles/core/PrgEnv-gnu/8.7.0.lua
+    default-rh96      /sw/rh9.4/user/modules/default-rh96.lua
+

@@ -7,7 +7,7 @@
 #SBATCH --gpus-per-node=2
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64g
-#SBATCH --time=02:00:00
+#SBATCH --time=00:45:00
 #SBATCH --job-name=delta-force-parity
 #SBATCH --output=mace_scripts/outputs/delta-force-parity-%j.out
 #SBATCH --error=mace_scripts/outputs/delta-force-parity-%j.err

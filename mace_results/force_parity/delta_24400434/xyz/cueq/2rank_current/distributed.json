@@ -1,0 +1,78 @@
+{
+  "model": {
+    "family": "off",
+    "checkpoint": "https://raw.githubusercontent.com/ACEsuit/mace-off/main/mace_off24/MACE-OFF24_medium.model",
+    "head": "default",
+    "cueq": true,
+    "adapter_reduction": "current"
+  },
+  "system": {
+    "name": "off24_bridge",
+    "num_atoms": 24,
+    "cutoff_angstrom": 6.0
+  },
+  "energy": {
+    "distributed_md": -82.4144599576865,
+    "reported_local_sum_md": -82.41445995768649,
+    "raw_core_controlled_md": -82.41445997148884,
+    "error_md": 1.3802335274704092e-08,
+    "close": true
+  },
+  "forces": {
+    "mae_md": 5.214436438194525e-09,
+    "max_abs_md": 2.9802322387695312e-08,
+    "close": true,
+    "atol_md": 1e-05,
+    "rtol": 1e-05,
+    "violating_components": 0,
+    "worst_component": {
+      "atom_id": 19,
+      "axis": "y",
+      "reference_md": 0.0014462403487414122,
+      "distributed_md": 0.001446225680410862,
+      "abs_error_md": 1.4668330550193787e-08,
+      "allowed_error_md": 1.0014462532126345e-05
+    },
+    "by_rank": [
+      {
+        "rank": 0,
+        "owned_atoms": 12,
+        "halo_atoms": 12,
+        "mae_md": 4.650145157825136e-09,
+        "max_abs_md": 2.2351741790771484e-08,
+        "violating_components": 0
+      },
+      {
+        "rank": 1,
+        "owned_atoms": 12,
+        "halo_atoms": 12,
+        "mae_md": 5.778727274474704e-09,
+        "max_abs_md": 2.9802322387695312e-08,
+        "violating_components": 0
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "rank": 0,
+      "owned_atoms": 12,
+      "halo_atoms": 12
+    },
+    {
+      "rank": 1,
+      "owned_atoms": 12,
+      "halo_atoms": 12
+    }
+  ],
+  "graph": {
+    "assembled_directed_edges": 308,
+    "native_directed_edges": 308,
+    "interior_extra": 0,
+    "interior_missing": 0,
+    "boundary_extra": 0,
+    "boundary_missing": 0,
+    "exterior_extra": 0,
+    "boundary_band_angstrom": 0.0001
+  },
+  "benchmark": null
+}
