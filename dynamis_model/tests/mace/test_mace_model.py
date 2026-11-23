@@ -32,11 +32,13 @@ if __package__:
         ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
     from .mace_test_systems import DEFAULT_SEED, OFF24_BRIDGE_PATH, load_xyz_structure, organic_molecules
+    from .precision_settings import configure_precision, precision_snapshot
 else:
     from mace_standalone_reference import (
         ARTIFACT_VERSION, load_raw_structure, reference_signature,
     )
     from mace_test_systems import DEFAULT_SEED, OFF24_BRIDGE_PATH, load_xyz_structure, organic_molecules
+    from precision_settings import configure_precision, precision_snapshot
 
 ENERGY_ATOL_MD = 1e-3
 FORCE_ATOL_MD = 1e-5
@@ -73,6 +75,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--model", default=None)
     run.add_argument("--head-name", default="")
     run.add_argument("--enable-cueq", action="store_true")
+    run.add_argument("--precision-mode", choices=("default", "no_tf32"), default="default")
     run.add_argument("--ghost-cutoff-buffer", type=float, default=0.5)
     run.add_argument("--reference-artifact", type=Path, required=True)
     run.add_argument("--strict-parity", action="store_true")
@@ -254,6 +257,7 @@ def benchmark_adapter(adapter, state, device, args):
 def run_distributed(args: argparse.Namespace):
     if int(os.environ.get("WORLD_SIZE", "1")) < 2:
         raise RuntimeError("Launch the distributed MACE test with at least two torchrun ranks.")
+    configure_precision(args.precision_mode)
     args.model = resolve_mace_model_name(args.model_family, args.model)
     torch_env = TorchDistEnv(is_distributed=True)
     device = torch_env.device
@@ -261,6 +265,7 @@ def run_distributed(args: argparse.Namespace):
     model = load_raw_mace_model(
         args.model_family, args.model, str(device), enable_cueq=args.enable_cueq
     ).to(device=device).eval()
+    configure_precision(args.precision_mode)
     adapter = MACEModel(model, head_name=args.head_name or None)
     if args.adapter_reduction == "legacy":
         adapter.runtime._reduce_owned_energy = MethodType(legacy_reduce_owned_energy, adapter.runtime)
@@ -269,6 +274,10 @@ def run_distributed(args: argparse.Namespace):
         raise ValueError("Simulation halo cutoff differs from checkpoint r_max.")
     adapter.initialize_buffers(state.local_partition_info, device, dist.get_world_size())
     artifact = load_reference(args.reference_artifact, raw, args, adapter.head_name, adapter.cutoff)
+    precision = precision_snapshot(args.precision_mode)
+    reference_precision = artifact["metadata"].get("precision")
+    if reference_precision is not None and reference_precision != precision:
+        raise ValueError("Reference and adapter precision settings differ.")
 
     energy, forces, components = adapter(state, return_energy_components=True)
     owned = state.local_partition_info.partition_indices.long().cpu()
@@ -352,6 +361,7 @@ def run_distributed(args: argparse.Namespace):
         "ranks": [{"rank": item["rank"], "owned_atoms": len(item["atom_ids"]),
                    "halo_atoms": item["halo_atoms"]} for item in records],
         "graph": graph,
+        "precision": precision,
         "benchmark": ({"distributed": timing, "raw_core": artifact["benchmark"]}
                       if timing else None),
     }

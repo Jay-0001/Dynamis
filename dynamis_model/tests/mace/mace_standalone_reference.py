@@ -21,8 +21,10 @@ from dynamis_model.nnp.mace import (
 )
 if __package__:
     from .mace_test_systems import DEFAULT_SEED, load_xyz_structure, organic_molecules, structure_signature
+    from .precision_settings import configure_precision, precision_snapshot
 else:
     from mace_test_systems import DEFAULT_SEED, load_xyz_structure, organic_molecules, structure_signature
+    from precision_settings import configure_precision, precision_snapshot
 
 ARTIFACT_VERSION = 5
 
@@ -133,6 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model", default=None)
     parser.add_argument("--head-name", default="")
     parser.add_argument("--enable-cueq", action="store_true")
+    parser.add_argument("--precision-mode", choices=("default", "no_tf32"), default="default")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--output-json", type=Path)
     parser.add_argument("--benchmark", action="store_true")
@@ -144,14 +147,17 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
+    configure_precision(args.precision_mode)
     raw = load_raw_structure(args)
     model_name = resolve_mace_model_name(args.model_family, args.model)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = load_raw_mace_model(
         args.model_family, model_name, str(device), enable_cueq=args.enable_cueq
     ).to(device=device, dtype=COMPUTE_DTYPE).eval()
+    configure_precision(args.precision_mode)
     head_name = resolve_model_head_name(model, args.head_name or None)
     reference = evaluate_raw_core(raw, model, device, head_name)
+    precision = precision_snapshot(args.precision_mode)
     metadata = {
         "artifact_version": ARTIFACT_VERSION,
         "system_name": raw["name"],
@@ -162,6 +168,7 @@ def main() -> None:
         "enable_cueq": args.enable_cueq,
         "cutoff_angstrom": float(model.r_max.detach().cpu()),
         "signature": reference_signature(raw, args.model_family, model_name, head_name, args.enable_cueq),
+        "precision": precision,
     }
     benchmark = (
         benchmark_raw_core(raw, model, device, head_name, args.benchmark_warmup,
